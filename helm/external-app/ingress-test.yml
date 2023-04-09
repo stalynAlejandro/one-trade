@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: onetrade-test-external-app
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/proxy-body-size: 20m
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/send-timeout: "3600"
+spec:
+  ingressClassName: external
+  rules:
+    - host: external-app.onetrade-tests.projects.flowable.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: onetrade-external-app-tests
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - external-app.onetrade-tests.projects.flowable.io
+      secretName: external-app-onetrade-tests-pagonxt-onetradefinance-gallant-maxwell-projects.flowable.io

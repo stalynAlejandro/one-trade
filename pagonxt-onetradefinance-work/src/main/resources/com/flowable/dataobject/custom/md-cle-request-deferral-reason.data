@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-request-deferral-reason",
+  "name": "Export Collection Request Deferral reason",
+  "description": "CLE Request Deferral reasons",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "deferral reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "deferralReasonId",
+  "idField": "deferralReasonId",
+  "nameField": "deferralReason"
+}

@@ -1,0 +1,27 @@
+{
+  "key": "tasks-active-not-mine-operations-query",
+  "sourceIndex": "tasks",
+  "type": "query",
+  "version": 1,
+  "parameters": {
+    "assignee": "string"
+  },
+  "sortParameters": {
+  },
+  "customFilter": {
+    "bool": {
+      "must_not": [
+        {
+          "term": {
+            "assignee": "{assignee}"
+          }
+        },
+        {
+          "exists": {
+            "field": "endTime"
+          }
+        }
+      ]
+    }
+  }
+}

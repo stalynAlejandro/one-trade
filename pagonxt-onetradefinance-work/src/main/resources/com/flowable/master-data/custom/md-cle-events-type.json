@@ -1,0 +1,66 @@
+{
+  "dataObjectDefinitionKey": "md-cle-event-type",
+  "overwrite": true,
+  "masterData": [
+    {
+      "eventTypeId": "REQUEST",
+      "eventType": "New Export",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "eventType": "Alta de la Remesa"
+        }
+      }
+    },
+    {
+      "eventTypeId": "MODIFICATION",
+      "eventType": "Modification",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "eventType": "Modificación"
+        }
+      }
+    },
+    {
+      "eventTypeId": "ADVANCE",
+      "eventType": "Advance",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "eventType": "Anticipo"
+        }
+      }
+    },
+    {
+      "eventTypeId": "ADVANCE_MODIFICATION",
+      "eventType": "Advance Modification",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "eventType": "Modificación de Anticipo"
+        }
+      }
+    },
+    {
+      "eventTypeId": "ADVANCE_CANCELLATION",
+      "eventType": "Advance Cancellation",
+      "sortOrder": 5,
+      "translations": {
+        "es_es": {
+          "eventType": "Cancelación de Anticipo"
+        }
+      }
+    },
+    {
+      "eventTypeId": "OTHER_OPERATIONS",
+      "eventType": "Other Operations",
+      "sortOrder": 6,
+      "translations": {
+        "es_es": {
+          "eventType": "Otras Gestiones y consultas"
+        }
+      }
+    }
+  ]
+}

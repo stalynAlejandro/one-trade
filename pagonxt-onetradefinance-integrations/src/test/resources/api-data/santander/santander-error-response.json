@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "code": "code",
+      "message": "message",
+      "level": "level",
+      "description": "description"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <include file="classpath:/liquibase/changelog/2022-09-08-1600-create-pgn-cle-request.xml"/>
+    <include file="classpath:/liquibase/changelog/2022-08-23-0930-create-pgn-cle-modification.xml"/>
+    <include file="classpath:/liquibase/changelog/2022-10-19-1218-create-pgn-cle.xml"/>
+    <include file="classpath:/liquibase/changelog/2022-09-12-1500-create-pgn-cle-advance-request.xml"/>
+    <include file="classpath:/liquibase/changelog/2022-09-01-1100-increase-comment-field-size-in-pgn-tables.xml"/>
+    <include file="classpath:/liquibase/changelog/2022-10-19-1300-create-pgn-cle-advance.xml"/>
+    <include file="classpath:/liquibase/changelog/2022-09-20-1947-create-pgn-cle-advance-modification.xml"/>
+    <include file="classpath:/liquibase/changelog/2022-10-19-1315-create-pgn-cle-advance-cancellation.xml"/>
+    <include file="classpath:/liquibase/changelog/2022-10-13-1531-create-pgn-cle-other-operations.xml"/>
+    <include file="classpath:/liquibase/changelog/2022-12-29-1745-create-pgn-offices.xml"/>
+    <include file="classpath:/liquibase/changelog/2023-01-11-1337-create-pgn-cli-request.xml"/>
+    <include file="classpath:/liquibase/changelog/2023-01-19-1154-create-pgn-cli-modification.xml"/>
+    <include file="classpath:/liquibase/changelog/2023-01-11-1349-create-pgn-cli.xml"/>
+</databaseChangeLog>

@@ -1,0 +1,27 @@
+{
+  "key": "tasks-active-all-query",
+  "sourceIndex": "tasks",
+  "type": "query",
+  "version": 1,
+  "parameters": {
+  },
+  "sortParameters": {
+  },
+  "customFilter": {
+    "bool": {
+      "must": [
+        {
+          "bool": {
+            "must_not": [
+              {
+                "exists": {
+                  "field": "endTime"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

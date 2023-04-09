@@ -1,0 +1,16 @@
+{
+  "key": "md-document-type",
+  "name": "Document type",
+  "description": "Document types",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "document type",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "documentTypeId",
+  "idField": "documentTypeId",
+  "nameField": "documentType"
+}

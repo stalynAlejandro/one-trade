@@ -1,0 +1,15 @@
+{
+  "key": "cmmn-user-event-listener",
+  "name": "Execute user event listener",
+  "botKey": "cmmn-user-event-listener-bot",
+  "description": "",
+  "ignoreConfirmationMessage": true,
+  "icon": "play",
+  "scopeType": "cmmn",
+  "mappedStates": [],
+  "mappedSubTypes": [],
+  "channels": [
+    "menu",
+    "quick-actions"
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "from": 0,
+  "size": 10,
+  "sort" : [
+    {
+      "variables.textValueKeyword" : {
+        "order" : "desc",
+        "nested": {
+          "path": "variables",
+          "filter": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "variables.name": "operationCode"
+                  }
+                },
+                {
+                  "term": {
+                    "variables.scopeHierarchyType": "root"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "bool": {
+            "must_not": [
+              {
+                "nested": {
+                  "path": "variables",
+                  "query": {
+                    "bool": {
+                      "must": [
+                        {
+                          "term": {
+                            "variables.name": "registrationCancelled"
+                          }
+                        },
+                        {
+                          "term": {
+                            "variables.scopeHierarchyType": "root"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+,        {
+          "bool": {
+            "must_not": {
+              "exists": {
+                "field": "endTime"
+              }
+            }
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "isExternalTask"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.textValueKeyword": "true"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "operationRequesterId"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.textValueKeyword": "backoffice"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "operationCode"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.scopeHierarchyType": "root"
+                    }
+                  },
+                  {
+                    "wildcard": {
+                      "variables.textValueKeyword": "*CLE-001*"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

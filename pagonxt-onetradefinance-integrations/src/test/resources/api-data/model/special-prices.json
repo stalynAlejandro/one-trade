@@ -1,0 +1,79 @@
+[
+  {
+    "conceptName": "GASTOS COURRIER",
+    "periodicity": "99999 D",
+    "percentage" : null,
+    "amount" : "36,00",
+    "currencyCode":"EUR"
+  },
+  {
+    "conceptName": "COM.MOND.ESTRA.",
+    "periodicity": "99999 D",
+    "percentage" : "0,20",
+    "amount" : "15,00",
+    "currencyCode":"EUR"
+  },
+  {
+    "conceptName": "COM.ACEP.REM.IM",
+    "periodicity": "99999 D",
+    "percentage" : "0,15",
+    "amount" : "30,00",
+    "currencyCode":"EUR"
+  },
+  {
+    "conceptName": "COM.APLA.PRO.DE",
+    "periodicity": "99999 D",
+    "percentage" : "0,10",
+    "amount" : "30,00",
+    "currencyCode":"EUR"
+  },
+  {
+    "conceptName": "COM.TRA.OTR.ENT",
+    "periodicity": "99999 D",
+    "percentage" : null,
+    "amount" : "50,00",
+    "currencyCode":"EUR"
+  },
+  {
+    "conceptName": "GAS.TIM.REM.IMP",
+    "periodicity": "99999 D",
+    "percentage" : null,
+    "amount" : "0,00",
+    "currencyCode":"EUR"
+  },
+  {
+    "conceptName": "COM.DEV.EFE.REM",
+    "periodicity": "99999 D",
+    "percentage" : "4,50",
+    "amount" : "50,00",
+    "currencyCode":"EUR"
+  },
+  {
+    "conceptName": "COM.TRA.CAR.LI.",
+    "periodicity": "99999 D",
+    "percentage": "0,75",
+    "amount": "75,00",
+    "currencyCode":"EUR"
+  },
+  {
+    "conceptName": "COM.COBR.CA.LI.",
+    "periodicity": "99999 D",
+    "percentage" : "0,25",
+    "amount" : "24,00",
+    "currencyCode":"EUR"
+  },
+  {
+    "conceptName": "COM.PROT.EFE.RE",
+    "periodicity": "99999 D",
+    "percentage" : null,
+    "amount" : "50,00",
+    "currencyCode":"EUR"
+  },
+  {
+    "conceptName": "GTOS. SWIFT",
+    "periodicity": "99999 D",
+    "percentage" : null,
+    "amount" : "18 718,50",
+    "currencyCode":"EUR"
+  }
+]

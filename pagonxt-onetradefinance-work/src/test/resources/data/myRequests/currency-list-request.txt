@@ -1,0 +1,97 @@
+{
+  "from": 0,
+  "size": 10,
+  "sort" : [
+    {
+      "variables.textValueKeyword" : {
+        "order" : "desc",
+        "nested": {
+          "path": "variables",
+          "filter": {
+            "term": {
+              "variables.name": "operationCode"
+            }
+          }
+        }
+      }
+    }
+  ]
+,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "bool": {
+            "must_not": [
+              {
+                "nested": {
+                  "path": "variables",
+                  "query": {
+                    "bool": {
+                      "must": [
+                        {
+                          "term": {
+                            "variables.name": "registrationCancelled"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+,        {
+          "bool": {
+            "should": [
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "operationCurrency"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.textValueKeyword": "EUR"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "operationCurrency"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.textValueKeyword": "GBP"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

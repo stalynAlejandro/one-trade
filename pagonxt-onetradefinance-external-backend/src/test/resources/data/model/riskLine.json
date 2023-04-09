@@ -1,0 +1,10 @@
+{
+  "riskLineId": "1",
+  "client": "client-id-1",
+  "iban": "0049 3295 2020 15792",
+  "status": "approved",
+  "limitAmount": "1020",
+  "availableAmount": "1020",
+  "expires": 1591394400000,
+  "currency": "EUR"
+}

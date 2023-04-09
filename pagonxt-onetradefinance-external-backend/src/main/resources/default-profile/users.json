@@ -1,0 +1,52 @@
+[
+  {
+    "userId": "backOffice",
+    "userDisplayedName": "backOffice",
+    "userType": "USER,BACKOFFICE"
+  },
+  {
+    "userId": "middleOffice",
+    "userDisplayedName": "middleOffice",
+    "userType": "USER,MIDDLE_OFFICE"
+  },
+  {
+    "userId": "office",
+    "userDisplayedName": "office",
+    "userType": "USER,OFFICE"
+  },
+  {
+    "userId": "customer",
+    "userDisplayedName": "customer",
+    "userType": "USER,CUSTOMER"
+  },
+  {
+    "userId": "admin",
+    "userDisplayedName": "test",
+    "userType": "USER,ADMIN,OFFICE"
+  },
+  {
+    "userId": "marta",
+    "userDisplayedName": "marta",
+    "userType": "USER,MIDDLE_OFFICE"
+  },
+  {
+    "userId": "manuel",
+    "userDisplayedName": "manuel",
+    "userType": "USER,MIDDLE_OFFICE"
+  },
+  {
+    "userId": "olivia",
+    "userDisplayedName": "olivia",
+    "userType": "USER,OFFICE"
+  },
+  {
+    "userId": "omar",
+    "userDisplayedName": "omar",
+    "userType": "USER,OFFICE"
+  },
+  {
+    "userId": "oscar",
+    "userDisplayedName": "oscar",
+    "userType": "USER,OFFICE"
+  }
+]

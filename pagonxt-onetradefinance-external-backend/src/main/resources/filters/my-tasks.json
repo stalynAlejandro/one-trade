@@ -1,0 +1,106 @@
+{
+  "code": {
+    "type": "text"
+  },
+  "customerName": {
+    "type": "text"
+  },
+  "customerPersonNumber": {
+    "type": "text"
+  },
+  "customerTaxId": {
+    "type": "text"
+  },
+  "requesterName": {
+    "type": "text"
+  },
+  "productId": {
+    "type": "select",
+    "options": [
+      {
+        "description": "Export Collection",
+        "code": "CLE"
+      },
+      {
+        "description": "Import Collection",
+        "code": "CLI"
+      }
+    ]
+  },
+  "eventId": {
+    "type": "select",
+    "options": [
+      {
+        "description": "Request",
+        "code": "REQUEST"
+      },
+      {
+        "description": "Modification",
+        "code": "MODIFICATION"
+      },
+      {
+        "description": "Advance",
+        "code": "ADVANCE"
+      },
+      {
+        "description": "Advance",
+        "code": "ADVANCE_MODIFICATION"
+      },
+      {
+        "description": "Advance",
+        "code": "ADVANCE_CANCELLATION"
+      }
+    ]
+  },
+  "taskId": {
+    "type": "select",
+    "options": [
+      {
+        "description": "External Request Draft",
+        "code": "EXTERNAL_REQUEST_DRAFT"
+      },
+      {
+        "description": "Complete Information",
+        "code": "COMPLETE_INFORMATION"
+      }
+    ]
+  },
+  "priority": {
+    "type": "select",
+    "options": [
+      {
+        "description": "Normal",
+        "code": "normal"
+      },
+      {
+        "description": "Urgent",
+        "code": "urgent"
+      }
+    ]
+  },
+  "currency": {
+    "type": "select",
+    "options": [
+      {
+        "description": "currency_EUR",
+        "code": "EUR"
+      },
+      {
+        "description": "currency_GBP",
+        "code": "GBP"
+      }
+    ]
+  },
+  "fromDate": {
+    "type": "date"
+  },
+  "toDate": {
+    "type": "date"
+  },
+  "fromAmount": {
+    "type": "number"
+  },
+  "toAmount": {
+    "type": "number"
+  }
+}

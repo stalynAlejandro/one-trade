@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.pagonxt.onetradefinance</groupId>
+    <artifactId>pagonxt-onetradefinance-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencyManagement>
+                <dependencies>
+                    <!-- Imports the bill-of-materials POM. -->
+                    <dependency>
+                        <groupId>com.flowable</groupId>
+                        <artifactId>flowable-platform-bom</artifactId>
+                        <version>${com.flowable.platform.version}</version>
+                        <type>pom</type>
+                        <scope>import</scope>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+            <modules>
+                <module>pagonxt-onetradefinance-frontend-customizations</module>
+                <module>pagonxt-onetradefinance-external-frontend</module>
+                <module>pagonxt-onetradefinance-external-backend</module>
+                <module>pagonxt-onetradefinance-work</module>
+                <module>pagonxt-onetradefinance-design</module>
+                <module>pagonxt-onetradefinance-control</module>
+                <module>pagonxt-onetradefinance-integrations</module>
+                <module>pagonxt-onetradefinance-logger</module>
+            </modules>
+            <repositories>
+                <repository>
+                    <id>flowable-repo</id>
+                    <url>https://artifacts.flowable.com/artifactory/maven-all</url>
+                </repository>
+            </repositories>
+        </profile>
+        <profile>
+            <id>only-external-app</id>
+            <!-- this profile does not include the bill-of-materials POM dependency, nor the flowable repository definition -->
+            <modules>
+                <module>pagonxt-onetradefinance-external-frontend</module>
+                <module>pagonxt-onetradefinance-external-backend</module>
+                <module>pagonxt-onetradefinance-integrations</module>
+                <module>pagonxt-onetradefinance-logger</module>
+            </modules>
+        </profile>
+    </profiles>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.reporting.outputDirectory>${project.build.directory}/site</project.reporting.outputDirectory>
+        <java.version>11</java.version>
+        <com.flowable.platform.version>3.12.4</com.flowable.platform.version>
+        <liquibase.skip>false</liquibase.skip>
+        <jib-maven-plugin.version>3.2.0</jib-maven-plugin.version>
+        <jasper-reports.version>6.19.1</jasper-reports.version>
+        <itext.version>2.1.7</itext.version>
+        <jasperreports-fonts-version>6.19.1</jasperreports-fonts-version>
+        <jacoco.version>0.8.4</jacoco.version>
+        <skipTests>false</skipTests>
+        <skipUTs>${skipTests}</skipUTs>
+        <skipITs>${skipTests}</skipITs>
+    </properties>
+
+   <build>
+       <plugins>
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-surefire-plugin</artifactId>
+               <configuration>
+                   <!-- Sets the VM argument line used when unit tests are run. -->
+                   <argLine>${surefireArgLine}</argLine>
+                   <skipTests>${skipUTs}</skipTests>
+                   <!-- Excludes integration tests when unit tests are run. -->
+                   <excludes>
+                       <exclude>**/*IT.*</exclude>
+                   </excludes>
+               </configuration>
+           </plugin>
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-failsafe-plugin</artifactId>
+               <version>3.0.0-M7</version>
+               <executions>
+                   <!--
+                   Ensures that both integration-test and verify goals of the Failsafe Maven
+                  plugin are executed.
+                   -->
+                   <execution>
+                       <id>run-integration-tests</id>
+                       <phase>integration-test</phase>
+                       <goals>
+                           <goal>integration-test</goal>
+                           <goal>verify</goal>
+                       </goals>
+                   </execution>
+               </executions>
+               <configuration>
+                   <!-- Sets the VM argument line used when integration tests are run. -->
+                   <argLine>${failsafeArgLine}</argLine>
+                   <skipTests>${skipTests}</skipTests>
+                   <skipITs>${skipITs}</skipITs>
+                   <excludes>
+                       <exclude>**/*Test.*</exclude>
+                   </excludes>
+                   <includes>
+                       <include>**/*IT.*</include>
+                   </includes>
+               </configuration>
+           </plugin>
+           <plugin>
+               <groupId>org.jacoco</groupId>
+               <artifactId>jacoco-maven-plugin</artifactId>
+               <version>${jacoco.version}</version>
+               <executions>
+                   <!--
+                       Prepares the property pointing to the JaCoCo runtime agent which
+                       is passed as VM argument when Maven the Surefire plugin is executed.
+                   -->
+                   <execution>
+                       <id>pre-unit-test</id>
+                       <goals>
+                           <goal>prepare-agent</goal>
+                       </goals>
+                       <configuration>
+                           <output>file</output>
+                           <!-- Sets the path to the file which contains the execution data. -->
+                           <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+                           <!--
+                               Sets the name of the property containing the settings
+                               for JaCoCo runtime agent.
+                           -->
+                           <propertyName>surefireArgLine</propertyName>
+                       </configuration>
+                   </execution>
+                   <!--
+                       Ensures that the code coverage report for unit tests is created after
+                       unit tests have been run.
+                   -->
+                   <execution>
+                       <id>post-unit-test</id>
+                       <phase>test</phase>
+                       <goals>
+                           <goal>report</goal>
+                       </goals>
+                       <configuration>
+                           <!-- Sets the path to the file which contains the execution data. -->
+                           <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+                           <!-- Sets the output directory for the code coverage report. -->
+                           <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+                       </configuration>
+                   </execution>
+                   <!--
+                        Prepares the property pointing to the JaCoCo runtime agent which
+                        is passed as VM argument when Maven the Failsafe plugin is executed.
+                    -->
+                   <execution>
+                       <id>pre-integration-test</id>
+                       <phase>pre-integration-test</phase>
+                       <goals>
+                           <goal>prepare-agent</goal>
+                       </goals>
+                       <configuration>
+                           <!-- Sets the path to the file which contains the execution data. -->
+                           <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
+                           <!--
+                               Sets the name of the property containing the settings
+                               for JaCoCo runtime agent.
+                           -->
+                           <propertyName>failsafeArgLine</propertyName>
+                       </configuration>
+                   </execution>
+                   <!--
+                       Ensures that the code coverage report for integration tests after
+                       integration tests have been run.
+                   -->
+                   <execution>
+                       <id>post-integration-test</id>
+                       <phase>post-integration-test</phase>
+                       <goals>
+                           <goal>report</goal>
+                       </goals>
+                       <configuration>
+                           <!-- Sets the path to the file which contains the execution data. -->
+                           <dataFile>${project.build.directory}/coverage-reports/jacoco-it.exec</dataFile>
+                           <!-- Sets the output directory for the code coverage report. -->
+                           <outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
+                       </configuration>
+                   </execution>
+               </executions>
+           </plugin>
+       </plugins>
+   </build>
+
+</project>

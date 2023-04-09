@@ -1,0 +1,5 @@
+        {
+          "term": {
+            "field": "exact-text"
+          }
+        }

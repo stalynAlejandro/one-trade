@@ -1,0 +1,1815 @@
+swagger: '2.0'
+info:
+  title: "Accounts"
+  version: 2.3.0
+  description: "This API retrieves a list of the current, savings, and credit accounts that the customer or Santander staff is allowed to access, and provides details about the accounts, such as balances, transactions, and statements. \n\nThe API can also be used to validate whether an account has enough funds for a purchase, and to create and cancel account limits."
+  contact:
+    name: Common APIs
+    email: commonapisgovernance@gruposantander.com
+  license:
+    name: Copyright
+    url: 'https://santanderglobaltech.com/aviso-legal/'
+  x-santander-mode: L
+  x-santander-catalogation:
+    bian-landscape-version: "8"
+    bian-business-area: "Operations and Execution"
+    bian-business-domain: "Loans and Deposits"
+    bian-service-domain: "Current Account" 
+schemes:
+  - "https"
+basePath: "/v2/accounts"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+securityDefinitions:
+  JWTProfile:
+    type: "oauth2"
+    description: 'OAuth Grant type, JWT Profile'
+    flow: "implicit"
+    scopes:
+      acclistcid.read: "Accessing a list of accounts"
+      accdetcid.read: "Reading information on an account"
+      acctrancid.read: "Accessing transaction information for an account"
+      accvalcid: "Validating details for an account"
+      acclimit: "Creating a limit for an account"
+      acccanlim: "Removing an account limit"
+      accountstat.read: "Accessing a list of account statements"
+    authorizationUrl: "$(authorization-url)"
+    x-tokenIntrospect:
+      url: "$(sca-security-url)"
+  X-Santander-Client-Id:
+    type: "apiKey"
+    in: "header"
+    name: "X-Santander-Client-Id"
+    description: "Client ID header"
+security:
+  - X-Santander-Client-Id: []
+paths:
+  /:
+    get:
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/accountsListResponse"
+        204:
+          description: "No data response"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Retrieves the account list of a Santander customer."
+      description: "Retrieves a list of current, savings, and credit accounts of a customer. This operation is available to Santander staff, in addition to physical and business customers.\n\nTo use this operation:\n- With physical customers, the 'Document-Type' and 'Document-Number' parameters are not needed.\n- With representatives of business customers, the 'Document-Type' and 'Document-Number' parameters can be used to identify the company whose information is going to be retrieved.\n- With all customers, if the customer has a channel access agreement, the 'Channel-Access-Agreement-Id' parameter can be used to restrict the retrieved information only to data that the channel access agreement authorises the logged-in person to access.\n- With Santander staff, the 'Document-Number' or 'customer_id' parameter is required to identify the customer whose data they are authorized to access."
+      parameters:
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - $ref: "#/parameters/X-Santander-Device"
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - name: "Document-Type"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Type of the official identification document that has been used in the bank to uniquely and legally identify the customer. \n\nThe possible values are:\n- national_id_card \n- passport \n- childs_id_card \n- social_security_number\n- foreign_resident_id_card\n- driving_license_number\n- tax_id\n\nThe document type depends on the customer type (for example, only 'tax_id' is applicable for a business customer)."
+          x-example: "tax_id"
+        - name: "Document-Number"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Identification document number. \n\nThe value is country-dependent. \n\nIf the 'Document-Type' parameter is provided, this parameter is mandatory, and the retrieved account must be linked to the customer identified by the document. \n\nIn case of a business customer, the company identification can also be included in this value, and the accounts are retrieved only if the logged-in company representative is authorized to access the company accounts."
+          x-example: "B86561412 "
+        - name: "Channel-Access-Agreement-Id"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Channel access agreement ID.\n\nIf a value is provided for this parameter, the requested data is retrieved only if the defined channel access agreement authorises the logged-in person to access that data."
+          x-example: "004910015200000090"
+        - name: "Access-Channel"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Access channel or operating channel the customer is using. \n\nIf a value is provided for this parameter, the response includes the alias for the specific channel. \n\nThe possible values are:\n- web\n- mobile\n- back office"
+          x-example: "web"
+        - name: "_offset"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Number of pages to be omitted from the beginning of the response.\n\nThe number of rows on each omitted page is determined by the '_limit' parameter.\n\nThe default value is 0, in which case the first page is shown."
+          x-example: "1"
+        - name: "_limit"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Maximum number of rows to be included on each page in the response.\n\nFewer rows can be returned, if the query does not yield that many.\n\nThe default value is 5."
+          x-example: "3"
+        - name: "_expand"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Whether balances are to be included in the response.\n\nIf the value is 'balances', the response includes the following balance types:\n- Available balance\n- Pending balance\n- Withholding balance\n- Overdraft limit\n- Overdraft used\n- Available without authorized\n\nThe default value is empty and returns no balances."
+          x-example: "balances"
+        - name: "status"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Status of the accounts to be included in the response.\n\nThe possible values are:\n- Open = Account is open and movements are restricted only by the customer's available balance and account contract attributes. This includes accounts with warnings.\n- Closed = Account is closed.\n- Pending Closure = Account is being closed.\n- Open with Severe Lock = Account is open but there is a lock on some or all account movements."
+          x-example: "Open"
+        - name: "historical"
+          type: "boolean"
+          required: false
+          in: "query"
+          description: "Whether closed accounts are included in the response.\n\nThe possible values are:\n- true = Accounts with closed status are included\n- false = Accounts with closed status are not included\n\nThe default value is true.\n\nIf the 'status' parameter is provided, this parameter must not be used."
+          x-example: true
+        - name: "accounts_list"
+          type: "string"
+          required: false
+          in: "query"
+          description: "List of accounts to be included in the response. \n\nThe accounts must be defined with comma-separated account numbers without blank spaces. All accounts must be identified using the account number format defined in the 'account_id_type' parameter. \n\nThe maximum number of included accounts is 20. If you want data about more than 20 accounts, call the API multiple times, for 20 accounts at a time."
+          x-example: "account1,account2,account3,account4,account5"
+        - name: "account_id_type"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Format used for the account numbers in the 'accounts_list' parameter. \n\nThe possible values are:\n- IBA = IBAN code\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \n\nFor example: \n- In UK, the BBAN format is: Sort code(6) + Account(8)\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)\n\nThe default value is BBA."
+          x-example: "IBA"
+        - name: "product_type"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Product family type that can be associated with the accounts. Each account can have a specific product type associated with it, and only accounts that can be associated with the defined product type are included in the response.\nThe possible values are:\n- Acquirement\n- loan\n- Assurance"
+          x-example: "Acquirement"
+        - name: "product_id_list"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Product ID list of products that can be associated with the accounts.\n\nThe value is freely defined, and is a comma-separated product ID list without blank spaces.\n\nThe maximum number of included products is 20. If you want data about more than 20 products, call the API multiple times, for 20 products at a time.\n\nIf this parameter is provided, the 'product_type' parameter must not be provided."
+          x-example: "6546080000001,6546020000002,6546010000003"
+        - name: "customer_id"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Customer ID of the customer whose accounts are to be included in the response. Applies only when Santander staff wants to access data on the customer's behalf."
+          x-example: "F000223141"
+      security:
+        - JWTProfile:
+            - "acclistcid.read"
+  /{account_id}:
+    get:
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/accountDetailsResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Retrieves basic information about a Santander customer's account."
+      description: "Retrieves basic information about a specific savings, current, or credit account. This operation is available to Santander staff, in addition to physical and business customers.\n\nTo send this request, you must provide an account number in the request path. The number uses the BBAN format by default. To use another format, define the format in the 'account_id_type' parameter."
+      parameters:
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - $ref: "#/parameters/X-Santander-Device"
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - name: "Channel-Access-Agreement-Id"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Channel access agreement ID.\n\nIf a value is provided for this parameter, the requested data is retrieved only if the defined channel access agreement authorises the logged-in person to access that data."
+          x-example: "004910015200000090"
+        - name: "Access-Channel"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Access channel or operating channel the customer is using. \n\nIf a value is provided for this parameter, the response includes the alias for the specific channel. \n\nThe possible values are:\n- web\n- mobile\n- back office"
+          x-example: "web"
+        - name: "account_id"
+          type: "string"
+          required: true
+          in: "path"
+          description: "Number of the account to be used in the query. \n\nThe number format is defined in the 'account_id_type' parameter."
+          x-example: "32180000118359700"
+        - name: "_expand"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Whether a list of cards related to the account is to be included in the response.\n\nIf the value is 'cards', the response includes the card list.\n\nThe default value is empty and returns no card list."
+          x-example: "cards"
+        - name: "include_last_transactions"
+          type: "boolean"
+          required: false
+          in: "query"
+          description: "Whether latest transactions are to be included in the response. \n\nThe default value is false and returns an empty 'latestTransactions' data structure. If the value is set to true, the response includes the 5 latest transactions."
+          x-example: true
+        - name: "account_id_type"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Format used for the account number in the 'account_id' parameter.\n\nThe possible values are:\n- IBA = IBAN code\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \n\nFor example: \n- In UK, the BBAN format is: Sort code(6) + Account(8)\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)\n\nThe default value is BBA."
+          x-example: "IBA"
+      security:
+        - JWTProfile:
+            - "accdetcid.read"
+  /{account_id}/transactions:
+    get:
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/transactionsListResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        409:
+          description: "Conflict.\n\nSCA required."
+          headers:
+            Token-Request:
+              type: "string"
+              description: "This element is returned when the error code is 409 (Conflict). It indicates that SCA authentication is required by the operation."
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Retrieves the account transaction list of a Santander customer."
+      description: "Retrieves a list of transactions for a specific savings, current, or credit account. This operation is available to Santander staff, in addition to physical and business customers.\n\nTo send this request, you must provide an account number in the request path. The number uses the BBAN format by default. To use another format, define the format in the 'account_id_type' parameter.\n\nThe transactions included in the response can be filtered by a time period (start and end dates), transaction type, currency, and amount. You can also sort them in descending or ascending order by date.\n\nThe maximum available time period depends on the local bank."
+      parameters:
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - $ref: "#/parameters/X-Santander-Device"
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - name: "Channel-Access-Agreement-Id"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Channel access agreement ID.\n\nIf a value is provided for this parameter, the requested data is retrieved only if the defined channel access agreement authorises the logged-in person to access that data."
+          x-example: "004910015200000090"
+        - name: "Access-Channel"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Access channel or operating channel the customer is using. \n\nIf a value is provided for this parameter, the response includes the alias for the specific channel. \n\nThe possible values are:\n- web\n- mobile\n- back office"
+          x-example: "web"
+        - name: "Sca-Token"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Strong Customer Authentication (SCA) token.\n\nThe token contains the SCA evidence to confirm that the operation is validated by the SCA regulation system. The token is validated by the local system."
+          x-example: "08945089345089345345adfgñjdfgñklñjkl34etñjkldfgñhklfbvñnkl345ldfgpio"
+        - name: "account_id"
+          type: "string"
+          required: true
+          in: "path"
+          description: "Number of the account to be used in the query. \n\nThe number format is defined in the 'account_id_type' parameter."
+          x-example: "00491500051234567892"
+        - name: "_offset"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Number of pages to be omitted from the beginning of the response.\n\nThe number of rows on each omitted page is determined by the '_limit' parameter.\n\nThe default value is 0, in which case the first page is shown."
+          x-example: "1"
+        - name: "_limit"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Maximum number of rows to be included on each page in the response.\n\nFewer rows can be returned, if the query does not yield that many.\n\nThe default value is 20."
+          x-example: "3"
+        - name: "from_date"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Start date for the time period from which transactions are to be retrieved, based on the date when the transactions have been originally created. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+          x-example: "20190314T014319060+0100"
+        - name: "to_date"
+          type: "string"
+          required: false
+          in: "query"
+          description: "End date for the time period from which transactions are to be retrieved, based on the date when the transactions have been originally created. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+          x-example: "20190314T014319060+0100"
+        - name: "from_processed_date"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Start date for the time period from which transactions are to be retrieved, based on the date when the transactions have been processed in the system. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+          x-example: "20190314T014319060+0100"
+        - name: "to_processed_date"
+          type: "string"
+          required: false
+          in: "query"
+          description: "End date for the time period from which transactions are to be retrieved, based on the date when the transactions have been processed in the system. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+          x-example: "20190314T014319060+0100"
+        - name: "from_accounting_date"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Start date for the time period from which transactions are to be retrieved, based on the accounting date of the transactions (the date used to calculate the profit and loss). \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+          x-example: "20190314T014319060+0100"
+        - name: "to_accounting_date"
+          type: "string"
+          required: false
+          in: "query"
+          description: "End date for the time period from which transactions are to be retrieved, based on the accounting date of the transactions (the date used to calculate the profit and loss). \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+          x-example: "20190314T014319060+0100"
+        - name: "from_amount"
+          type: "number"
+          format: "double"
+          required: false
+          in: "query"
+          description: "Minimum monetary transaction value required for the transaction to be included in the response.\n\nBoth negative and positive values are allowed."
+          x-example: 100.0
+        - name: "to_amount"
+          type: "number"
+          format: "double"
+          required: false
+          in: "query"
+          description: "Maximum monetary transaction value required for the transaction to be included in the response.\n\nBoth negative and positive values are allowed."
+          x-example: 200.0
+        - name: "_sort"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Sorting order for the retrieved transactions, based on the transaction date type defined in the 'date_movements' parameter. \n\nThe possible values are:\n- +date = ascending\n- -date = descending"
+          x-example: "+date"
+        - name: "transaction_type"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Types of transaction to be included in the response, based on how the transaction affects the account balance. \n\nThe possible values are:\n- credit or C = balance increased\n- debit or D = balance decreased\n- reverse credit or RC = balance decreased\n- reverse debit or RD = balance increased\n\nIf this value is empty, all transaction types are included. This parameter is not compatible with the 'from_amount' and 'to_amount' parameters. If you have defined values for those, leave this parameter empty."
+          x-example: "credit"
+        - name: "date_movements"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Date type used to sort the transactions in the response. \n\nThe possible values are:\n- creation = creation dates are used\n- processed = processing dates are used\n- accounting = accounting dates are used\n\nIf the value is omitted, the default value is 'creation'."
+          x-example: "processed"
+        - name: "account_id_type"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Format used for the account number in the 'account_id' parameter.\n\nThe possible values are:\n- IBA = IBAN code\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \n\nFor example: \n- In UK, the BBAN is: Sort code(6) + Account(8)\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)\n\nThe default value is BBA."
+          x-example: "IBA"
+      security:
+        - JWTProfile:
+            - "acctrancid.read"
+  /{account_id}/transactions/{transaction_id}:
+    get:
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/transactionDetailsResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Retrieves basic information about an account transaction."
+      description: "Retrieves the details of a specific account transaction. This operation is available to Santander staff, in addition to physical and business customers.\n\nTo send this request, you must provide an account number and a unique transaction ID in the request path. The account number uses the BBAN format by default. To use another format, define the format in the 'account_id_type' parameter."
+      parameters:
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - $ref: "#/parameters/X-Santander-Device"
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - name: "account_id"
+          type: "string"
+          required: true
+          in: "path"
+          description: "Number of the account to be used in the query. \n\nThe number format is defined in the 'account_id_type' parameter."
+          x-example: "00491500051234567892"
+        - name: "transaction_id"
+          type: "string"
+          required: true
+          in: "path"
+          description: "ID of the transaction to be included in the response"
+          x-example: "3840"
+        - name: "account_id_type"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Format used for the account number in the 'account_id' parameter.\n\nThe possible values are:\n- IBA = IBAN code\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \n\nFor example: \n- In UK, the BBAN format is: Sort code(6) + Account(8)\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)\n\nThe default value is BBA."
+          x-example: "IBA"
+        - name: "Channel-Access-Agreement-Id"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Channel access agreement ID.\n\nIf a value is provided for this parameter, the requested data is retrieved only if the defined channel access agreement authorises the logged-in person to access that data."
+          x-example: "004910015200000090"
+        - name: "Access-Channel"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Access channel or operating channel the customer is using. \n\nIf a value is provided for this parameter, the response includes the alias for the specific channel. \n\nThe possible values are:\n- web\n- mobile\n- back office"
+          x-example: "web"
+      security:
+        - JWTProfile:
+            - "acctrancid.read"
+  /{account_id}/validate_information:
+    post:
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/accountValidateResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        415:
+          description: "Unsupported media type"
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Validates the customer's account status, product type that can be associated with the account, and amount of funds in the account."
+      description: "Validates the customer and status of a specific account. The validation also determines whether the account can be associated with a specific product type and contains enough funds for a specific purchase. This operation is available to Santander staff, in addition to physical and business customers.\n\nTo send this request, you must provide an account number in the request path. The number uses the BBAN format by default. To use another format, define the format in the 'account_id_type' parameter."
+      parameters:
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - $ref: "#/parameters/X-Santander-Device"
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - name: "Access-Channel"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Access channel or operating channel the customer is using. \n\nIf a value is provided for this parameter, the response includes the alias for the specific channel. \n\nThe possible values are:\n- web\n- mobile\n- back office"
+          x-example: "web"
+        - name: "Channel-Access-Agreement-Id"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Channel access agreement ID.\n\nIf a value is provided for this parameter, the requested data is retrieved only if the defined channel access agreement authorises the logged-in person to access that data."
+          x-example: "004910015200000090"
+        - name: "account_id"
+          type: "string"
+          required: true
+          in: "path"
+          description: "Number of the account to be used in the query. \n\nThe number format is defined in the 'account_id_type' parameter."
+          x-example: "00491500051234567892"
+        - name: "accountValidateRequest"
+          required: false
+          in: "body"
+          description: "Data structure containing request details for account validation"
+          schema:
+            $ref: "#/definitions/accountValidateRequest"
+        - name: "account_id_type"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Format used for the account number in the 'account_id' parameter.\n\nThe possible values are:\n- IBA = IBAN code\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \n\nFor example: \n- In UK, the BBAN format is: Sort code(6) + Account(8)\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)\n\nThe default value is BBA."
+          x-example: "IBA"
+      security:
+        - JWTProfile:
+            - "accvalcid"
+  /{account_id}/limits:
+    post:
+      responses:
+        201:
+          description: "Created"
+          schema:
+            $ref: "#/definitions/accountLimitResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        415:
+          description: "Unsupported media type"
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Creates a new limit for an account."
+      description: "Creates a limit for a specific account. This operation is available for Santander staff only.\n\nTo send this request, you must provide an account number in the request path. The number uses the BBAN format by default. To use another format, define the format in the 'account_id_type' parameter.\n\nWhen an account credit movement is expected, but not yet booked, a limit can be used to temporarily approve a specific overdraft limit for the account.\n\nThe created limit has an impact on the overdraft limit of the account, and consequently also on the available balance. The limit is removed:\n- When the limit amount is booked on the account using a matching limit ID\n- Automatically after its validity period ends"
+      parameters:
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - $ref: "#/parameters/X-Santander-Device"
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - name: "account_id"
+          type: "string"
+          required: true
+          in: "path"
+          description: "Number of the account for which a limit is created. \n\nThe number format is defined in the 'account_id_type' parameter."
+          x-example: "00491500051234567892"
+        - name: "accountLimitRequest"
+          required: true
+          in: "body"
+          description: "Data structure containing request details for account limit creation"
+          schema:
+            $ref: "#/definitions/accountLimitRequest"
+        - name: "account_id_type"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Format used for the account number in the 'account_id' parameter.\n\nThe possible values are:\n- IBA = IBAN code\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \n\nFor example: \n- In UK, the BBAN format is: Sort code(6) + Account(8)\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)\n\nThe default value is BBA."
+          x-example: "IBA"
+      security:
+        - JWTProfile:
+            - "acclimit"
+  /{account_id}/limits/{limit_id}:
+    delete:
+      responses:
+        204:
+          description: "No content"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Removes an account limit."
+      description: "Removes a specific limit from a specific account. This operation is available for Santander staff only.\n\nTo send this request, you must provide an account number and a unique limit ID in the request path. The account number uses the BBAN format by default. To use another format, define the format in the 'account_id_type' parameter."
+      parameters:
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - $ref: "#/parameters/X-Santander-Device"
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - name: "account_id"
+          type: "string"
+          required: true
+          in: "path"
+          description: "Number of the account from which a limit is removed. \n\nThe number format is defined in the 'account_id_type' parameter."
+          x-example: "00491500051234567892"
+        - name: "limit_id"
+          type: "string"
+          required: true
+          in: "path"
+          description: "ID of the limit to be removed"
+          x-example: "2231231124124"
+        - name: "account_id_type"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Format used for the account number in the 'account_id' parameter.\n\nThe possible values are:\n- IBA = IBAN code\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \n\nFor example: \n- In UK, the BBAN format is: Sort code(6) + Account(8)\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)\n\nThe default value is BBA."
+          x-example: "IBA"
+      security:
+        - JWTProfile:
+            - "acccanlim"
+  /{account_id}/statements:
+    get:
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/statementsListResponse"
+        204:
+          description: "No data response"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Retrieves a list of statements for an account."
+      description: "Retrieves a list of statements for an account.\n\nTo send this request, you must provide an account number in the request path. The account number uses the BBAN format by default. To use another format, define the format in the 'account_id_type' parameter.\n\nThe statements included in the response can be filtered by a time period (start and end dates). They are returned in descending order, with the most recent statement appearing first."
+      parameters:
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - $ref: "#/parameters/X-Santander-Device"
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - name: "Access-Channel"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Access channel or operating channel the customer is using. \n\nIf a value is provided for this parameter, the response includes the alias for the specific channel. \n\nThe possible values are:\n- web\n- mobile\n- back office"
+          x-example: "web"
+        - name: "account_id"
+          type: "string"
+          required: true
+          in: "path"
+          description: "Number of the account to be used in the query. \n\nThe number format is defined in the 'account_id_type' parameter."
+          x-example: " 2313726917672140515\n"
+        - name: "account_id_type"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Format used for the account number in the 'account_id' parameter.\n\nThe possible values are:\n- IBA = IBAN code\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \n\nFor example: \n- In UK, the BBAN format is: Sort code(6) + Account(8)\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)\n\nThe default value is BBA."
+          x-example: "IBA"
+        - name: "from_date"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Start date for the time period from which statements are to be retrieved. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds. If the time zone is not relevant, replace it with 0000."
+          x-example: "20190314T014319060+0100"
+        - name: "to_date"
+          type: "string"
+          required: false
+          in: "query"
+          description: "End date for the time period from which statements are to be retrieved. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds. If the time zone is not relevant, replace it with 0000."
+          x-example: "20190314T014319060+0100"
+        - name: "_offset"
+          type: "string"
+          required: true
+          in: "query"
+          description: "Number of pages to be omitted from the beginning of the response.\n\nThe number of rows on each omitted page is determined by the '_limit' parameter.\n\nThe default value is 0, in which case the first page is shown."
+          x-example: "5"
+        - name: "_limit"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Maximum number of rows to be included on each page in the response.\n\nFewer rows can be returned, if the query does not yield that many.\n\nThe default value is 20."
+          x-example: "20"
+      security:
+        - JWTProfile:
+            - "accountstat.read"
+definitions:
+  country:
+    description: "Data structure containing details of the country where the bank is located"
+    properties:
+      code:
+        type: "string"
+        description: "Country code.\n\nThe value is based on the ISO 3166-1 alpha-2 (https://www.iso.org/obp/ui/#search/code/)."
+        example: "ES"
+      name:
+        type: "string"
+        description: "Name of a country.\n\nThe value is usually the country name linked to the ISO 20022 country code."
+        example: "SPAIN"
+  bankInformation:
+    description: "Data structure containing details of the local bank for an account"
+    properties:
+      localBankId:
+        type: "string"
+        description: "Unique local bank ID.\n\nThe value is in the local format defined by the central bank of the country where the bank is located."
+        example: "0030"
+      country:
+        description: "Data structure containing details of the country where the bank is located"
+        allOf:
+          - $ref: "#/definitions/country"
+  marketPackageItem:
+    description: "Data structure containing market package details"
+    properties:
+      packageType:
+        type: "string"
+        description: "Package type.\n\nThe possible value is:\n- fee_plan"
+        example: "fee_plan"
+      packageId:
+        type: "string"
+        description: "Identification of the package"
+        example: "SPLS"
+  marketPackages:
+    type: "array"
+    items:
+      $ref:  "#/definitions/marketPackageItem"
+    description: "Array of market packages. \n\nThe market package used when an account was set up can define the specific prices managed by the account."
+  mainBalance:
+    description: "Data structure containing the balance recorded in the account at the date of the query"
+    properties:
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount. \n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 12000.50000
+      currencyCode:
+        type: "string"
+        description: "Currency code.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "EUR"
+      lastUpdate:
+        type: "string"
+        description: "Date of the last update. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+  availableBalance:
+    description: "Data structure containing the balance that can be used at the time of the query.\n\nThe available balance is calculated to include any balance to be consolidated, withholdings, and overdrafts:\n'availableBalance = mainBalance - pendingBalance - withholding + overdraftLimit + credit limit'"
+    properties:
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount. \n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 12000.50000
+      currencyCode:
+        type: "string"
+        description: "Currency code.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "EUR"
+      lastUpdate:
+        type: "string"
+        description: "Date of the last update. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+  pendingBalance:
+    description: "Data structure containing the balance to be consolidated, because it has a different valuation from that of the day of the query"
+    properties:
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount. \n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 100.00000
+      currencyCode:
+        type: "string"
+        description: "Currency code.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "EUR"
+      lastUpdate:
+        type: "string"
+        description: "Date of the last update. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+  withholdingBalance:
+    description: "Data structure containing the part of the main balance that the customer cannot temporarily dispose of.\n\nA withholding balance can be caused by a cash deposit made by an ATM when the contents of the envelope have not yet been validated, or a deposit of a check that has not yet been cashed."
+    properties:
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount. \n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 100.00000
+      currencyCode:
+        type: "string"
+        description: "Currency code.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "EUR"
+      lastUpdate:
+        type: "string"
+        description: "Date of the last update. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+  overdraftLimit:
+    description: "Data structure containing the amount that the available balance can be exceeded by without going into tactical overdraft, if the available balance is defined as:\n'availableBalance = mainBalance - pendingBalance - withholding + credit limit'"
+    properties:
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount. \n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 150.00
+      currencyCode:
+        type: "string"
+        description: "Currency code.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "EUR"
+      lastUpdate:
+        type: "string"
+        description: "Date of the last update. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+  overdraftUsed:
+    description: "Data structure containing the amount of overdraft consumed. Applies only to accounts that have an overdraft limit."
+    properties:
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount. \n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 120.00
+      currencyCode:
+        type: "string"
+        description: "Currency code.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "EUR"
+      lastUpdate:
+        type: "string"
+        description: "Date of the last update. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+  availableWithoutAuthorized:
+    description: "Data structure containing the authorized balance amount.\n\nThe amount is the available balance, not including any overdraft authorized by the local bank."
+    properties:
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount.\n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 120.00
+      currencyCode:
+        type: "string"
+        description: "Currency code.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "EUR"
+      lastUpdate:
+        type: "string"
+        description: "Date of the last update.\n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+  accountsListLinks:
+    description: "Data structure containing the links for moving between the account and transaction detail pages"
+    properties:
+      accountDetailsLink:
+        type: "string"
+        description: "Link to the account details.\n\nThe exact value depends on the data to be accessed."
+        example: "/v2/accounts/00491500051234567892"
+      transactionsListLink:
+        type: "string"
+        description: "Link to the account transactions list.\n\nThe exact value depends on the data to be accessed."
+        example: "/v2/accounts/00491500051234567892/transactions"
+  accountDataDetails:
+    description: "Data structure containing account details"
+    properties:
+      displayNumber:
+        type: "string"
+        description: "Account number to be displayed"
+        example: "ES6000491500051234567892"
+      accountId:
+        type: "string"
+        description: "Account number shown using the account number format defined in the 'accountIdType' property"
+        example: "ES6000491500051234567892"
+      accountIdType:
+        type: "string"
+        description: "Format used for the account number in the 'accountId' property.\n\nThe possible values are:\n- IBA = IBAN code\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \n\nFor example: \n- In UK, the BBAN format is: Sort code(6) + Account(8)\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)\n\nThe default value is BBA."
+        example: "IBA"
+      alias:
+        type: "string"
+        description: "Name (alias) the customer has assigned to the account for easy identification. Applies only when the operation is used by a physical or business customer, not when used by Santander staff."
+        example: "My chequing account"
+      mainItem:
+        type: "boolean"
+        description: "Whether the account is the customer's main account. Applies only when the operation is used by a physical or business customer, not when used by Santander staff. \n\nThe possible values are:\n- TRUE = Main account\n- FALSE = Secondary account"
+        example: "true"
+      type:
+        type: "string"
+        description: "Account type.\n\nThe possible values are: \n- Current Account\n- Saving Account\n- Credit Account"
+        example: "Current Account"
+      description:
+        type: "string"
+        description: "Account description"
+        example: "Cuenta 123 joven"
+      status:
+        type: "string"
+        description: "Account status.\n\nThe possible values are:\n- Open = Account is open and movements are restricted only by the customer's available balance and account contract attributes. This includes accounts with warnings.\n- Closed = Account is closed.\n- Pending Closure = Account is being closed.\n- Open with Severe Lock = Account is open but there is a lock on some or all account movements."
+        example: "Open"
+      customerId:
+        type: "string"
+        description: "Customer ID of the main participant of the account"
+        example: "F000223141"
+      bankInformation:
+        description: "Data structure containing details of the local bank for an account"
+        allOf:
+          - $ref: "#/definitions/bankInformation"
+      marketPackages:
+        description: "Array of market packages. \n\nThe market package used when an account was set up can define the specific prices managed by the account."
+        allOf:
+          - $ref: "#/definitions/marketPackages"
+      costCenter:
+        type: "string"
+        description: "Branch office that manages the customer account. \n\nThe value is max. 20 char long.\n\nIn case of migrated accounts from other banks or closed offices, the branch office usually does not match with the branch that the customer knows and that appears in the account number. Each migrated account has both a real open, operational, accounting branch that manages them and a branch included in this property."
+        example: "EEEEBBBB"
+      mainBalance:
+        description: "Data structure containing the balance recorded in the account at the date of the query"
+        allOf:
+          - $ref: "#/definitions/mainBalance"
+      availableBalance:
+        description: "Data structure containing the balance that can be used at the time of the query.\n\nThe available balance is calculated to include any balance to be consolidated, withholdings, and overdrafts:\n'availableBalance = mainBalance - pendingBalance - withholding + overdraftLimit + credit limit'"
+        allOf:
+          - $ref: "#/definitions/availableBalance"
+      pendingBalance:
+        description: "Data structure containing the balance to be consolidated, because it has a different valuation from that of the day of the query"
+        allOf:
+          - $ref: "#/definitions/pendingBalance"
+      withholdingBalance:
+        description: "Data structure containing the part of the main balance that the customer cannot temporarily dispose of.\n\nA withholding balance can be caused by a cash deposit made by an ATM when the contents of the envelope have not yet been validated, or a deposit of a check that has not yet been cashed."
+        allOf:
+          - $ref: "#/definitions/withholdingBalance"
+      overdraftLimit:
+        description: "Data structure containing the amount that the available balance can be exceeded by without going into tactical overdraft, if the available balance is defined as:\n'availableBalance = mainBalance - pendingBalance - withholding + credit limit'"
+        allOf:
+          - $ref: "#/definitions/overdraftLimit"
+      overdraftUsed:
+        description: "Data structure containing the amount of overdraft consumed. Applies only to accounts that have an overdraft limit."
+        allOf:
+          - $ref: "#/definitions/overdraftUsed"
+      availableWithoutAuthorized:
+        description: "Data structure containing the authorized balance amount.\n\nThe amount is the available balance, not including any overdraft authorized by the local bank."
+        allOf:
+          - $ref: "#/definitions/availableWithoutAuthorized"
+      _links:
+        description: "Data structure containing the links for moving between the account and transaction detail pages"
+        allOf:
+          - $ref: "#/definitions/accountsListLinks"
+  accountsDataList:
+    type: "array"
+    items:
+      $ref:  "#/definitions/accountDataDetails"
+    description: "Array of customer's accounts"
+  paginationLinks:
+    description: "Data structure containing the links for moving between the account list pages"
+    properties:
+      _first:
+        type: "string"
+        description: "Link to the first page of the account list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "/v2/accounts?_offset=0"
+      _prev:
+        type: "string"
+        description: "Link to the previous page of the account list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "/v2/accounts?_offset=0"
+      _next:
+        type: "string"
+        description: "Link to the next page of the account list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "/v2/accounts?_offset=1"
+  accountsListResponse:
+    description: "Response to a request to retrieve a list of accounts"
+    properties:
+      accountsDataList:
+        description: "Array of customer's accounts"
+        allOf:
+          - $ref: "#/definitions/accountsDataList"
+      _links:
+        description: "Data structure containing the links for moving between the account list pages"
+        allOf:
+          - $ref: "#/definitions/paginationLinks"
+  relatedCard:
+    description: "Data structure containing the details of a related card"
+    properties:
+      displayNumber:
+        type: "string"
+        description: "Card number"
+        example: "5498-9882-8676-9373"
+      cardLink:
+        type: "string"
+        description: "Link to the card details.\n\nThe exact value depends on the data to be accessed."
+        example: "/cards/5498988286769373"
+  relatedCards:
+    type: "array"
+    items:
+      $ref:  "#/definitions/relatedCard"
+    description: "Array of cards related to an account"
+  amountOnly:
+    description: "Data structure containing the amount data"
+    properties:
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount. \n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 123.45000
+      currencyCode:
+        type: "string"
+        description: "Currency code.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "EUR"
+  lastesTransctionsListAccountsItem:
+    description: "Data structure containing the details of the last transaction on an account"
+    properties:
+      transactionId:
+        type: "string"
+        description: "Unique transaction ID"
+        example: "3840"
+      creationDate:
+        type: "string"
+        description: "Date when the transaction was originally created. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+      processedDate:
+        type: "string"
+        description: "Date when the transaction was processed in the system. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+      accountingDate:
+        type: "string"
+        description: "Accounting date of the transaction (the date used to calculate the profit and loss). \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+      description:
+        type: "string"
+        description: "Transaction description"
+        example: "Cuenta 123 joven"
+      transactionType:
+        type: "string"
+        description: "Transaction type. \n\nThe possible values are:\n- credit or C = balance increased\n- debit or D = balance decreased\n- reverse credit or RC = balance decreased\n- reverse debit or RD = balance increased"
+        example: "debit"
+      transactionCategory:
+        type: "string"
+        description: "Transaction category"
+        example: "Withdraw money"
+      amount:
+        description: "Data structure containing the amount data"
+        allOf:
+          - $ref: "#/definitions/amountOnly"
+      transactionDetailsLink:
+        type: "string"
+        description: "Link to the transaction details.\n\nThe exact value depends on the data to be accessed."
+        example: "/v2/accounts/00491500051234567892/transactions/3840"
+  lastesTransctionsListAccounts:
+    type: "array"
+    items:
+      $ref:  "#/definitions/lastesTransctionsListAccountsItem"
+    description: "Array of latest transactions"
+  accountDetailsResponse:
+    description: "Response to a request to retrieve the details of a specific account"
+    properties:
+      displayNumber:
+        type: "string"
+        description: "Account number to be displayed"
+        example: "ES6000491500051234567892"
+      accountId:
+        type: "string"
+        description: "Account number in the format defined in the 'accountIdType' property"
+        example: "00491500051234567892"
+      accountIdType:
+        type: "string"
+        description: "Format used for the account number in the 'accountId' property.\n\nThe possible values are:\n- IBA = IBAN code\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \n\nFor example: \n- In UK, the BBAN format is: Sort code(6) + Account(8)\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)\n\nThe default value is BBA."
+        example: "BBA"
+      alias:
+        type: "string"
+        description: "Name (alias) the customer has assigned to the account for easy identification. Applies only when the operation is used by a physical or business customer, not when used by Santander staff."
+        example: "My chequing account"
+      mainItem:
+        type: "boolean"
+        description: "Whether the account is the customer's main account. Applies only when the operation is used by a physical or business customer, not when used by Santander staff. \n\nThe possible values are:\n- TRUE = Main account\n- FALSE = Secondary account"
+        example: "true"
+      type:
+        type: "string"
+        description: "Account type.\n\nThe possible values are: \n- Current Account\n- Saving Account\n- Credit Account"
+        example: "Current Account"
+      description:
+        type: "string"
+        description: "Account description"
+        example: "Cuenta 123 joven"
+      status:
+        type: "string"
+        description: "Account status.\n\nThe possible values are:\n- Open = Account is open and movements are restricted only by the customer's available balance and account contract attributes. This includes accounts with warnings.\n- Closed = Account is closed.\n- Pending Closure = Account is being closed.\n- Open with Severe Lock = Account is open but there is a lock on some or all account movements."
+        example: "Open"
+      customerId:
+        type: "string"
+        description: "Customer ID of the main participant of the account"
+        example: "1234-5678-90"
+      lastTransactionDate:
+        type: "string"
+        description: "Date of the last transaction.\n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+      relatedCards:
+        description: "Array of cards related to an account"
+        allOf:
+          - $ref: "#/definitions/relatedCards"
+      bankInformation:
+        description: "Data structure containing details of the local bank for an account"
+        allOf:
+          - $ref: "#/definitions/bankInformation"
+      marketPackages:
+        description: "Array of market packages. \n\nThe market package used when an account was set up can define the specific prices managed by the account."
+        allOf:
+          - $ref: "#/definitions/marketPackages"
+      costCenter:
+        type: "string"
+        description: "Branch office that manages the customer account. \n\nThe value is max. 20 char long.\n\nIn case of migrated accounts from other banks or closed offices, the branch office usually does not match with the branch that the customer knows and that appears in the account number. Each migrated account has both a real open, operational, accounting branch that manages them and a branch included in this property."
+        example: "EEEEBBBB"
+      mainBalance:
+        description: "Data structure containing the balance recorded in the account at the date of the query"
+        allOf:
+          - $ref: "#/definitions/mainBalance"
+      availableBalance:
+        description: "Data structure containing the balance that can be used at the time of the query.\n\nThe available balance is calculated to include any balance to be consolidated, withholdings, and overdrafts:\n'availableBalance = mainBalance - pendingBalance - withholding + overdraftLimit + credit limit'"
+        allOf:
+          - $ref: "#/definitions/availableBalance"
+      pendingBalance:
+        description: "Data structure containing the balance to be consolidated, because it has a different valuation from that of the day of the query"
+        allOf:
+          - $ref: "#/definitions/pendingBalance"
+      withholdingBalance:
+        description: "Data structure containing the part of the main balance that the customer cannot temporarily dispose of.\n\nA withholding balance can be caused by a cash deposit made by an ATM when the contents of the envelope have not yet been validated, or a deposit of a check that has not yet been cashed."
+        allOf:
+          - $ref: "#/definitions/withholdingBalance"
+      overdraftLimit:
+        description: "Data structure containing the amount that the available balance can be exceeded by without going into tactical overdraft, if the available balance is defined as:\n'availableBalance = mainBalance - pendingBalance - withholding + credit limit'"
+        allOf:
+          - $ref: "#/definitions/overdraftLimit"
+      overdraftUsed:
+        description: "Data structure containing the amount of overdraft consumed. Applies only to accounts that have an overdraft limit."
+        allOf:
+          - $ref: "#/definitions/overdraftUsed"
+      availableWithoutAuthorized:
+        description: "Data structure containing the authorized balance amount.\n\nThe amount is the available balance, not including any overdraft authorized by the local bank."
+        allOf:
+          - $ref: "#/definitions/availableWithoutAuthorized"
+      latestTransactions:
+        description: "Array of latest transactions"
+        allOf:
+          - $ref: "#/definitions/lastesTransctionsListAccounts"
+      transactionsListLink:
+        type: "string"
+        description: "Link to the account transactions list.\n\nThe exact value depends on the data to be accessed."
+        example: "/v2/accounts/00491500051234567892/transactions"
+  amount:
+    description: "Data structure containing the amount data"
+    properties:
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount. \n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 123.45000
+      currencyCode:
+        type: "string"
+        description: "Currency code.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "EUR"
+  balanceResult:
+    description: "Data structure containing the account balance after the transaction has been booked"
+    properties:
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount. \n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 123.45000
+      currencyCode:
+        type: "string"
+        description: "Currency code.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "EUR"
+  localOperation:
+    description: "Data structure containing the local operation details"
+    properties:
+      ltcCode:
+        type: "string"
+        description: "Local transaction code defining the type of transaction in the local entity.\n\nLocal transaction codes are used to facilitate multi-local reconciliation without using SWIFT transaction codes."
+        example: "645"
+      ltcDescription:
+        type: "string"
+        description: "Description of a local transaction code"
+        example: "credit check"
+      aditionalInformation:
+        type: "string"
+        description: "Additional information related to the transaction, such as its beneficiary, sender, or concept"
+        example: "Transmediterranea 234/11"
+  customerOperation:
+    description: "Data structure containing the customer operation details"
+    properties:
+      customerTCode:
+        type: "string"
+        description: "Customized transaction code defining the type of transaction in the local entity.\n\nCustomized transaction codes are used to facilitate multi-local reconciliation without using SWIFT transaction codes."
+        example: "A30"
+      customerTDescription:
+        type: "string"
+        description: "Description of a customized transaction code"
+        example: "credit sbf"
+      customerAditionalInformation:
+        type: "string"
+        description: "Additional customized information related to the transaction, such as its beneficiary, sender, or concept"
+        example: "credit check // Transmediterranea 234/11"
+  operation:
+    description: "Data structure containing the transaction operation details"
+    properties:
+      localOperation:
+        description: "Data structure containing the local operation details"
+        allOf:
+          - $ref: "#/definitions/localOperation"
+      customerOperation:
+        description: "Data structure containing the customer operation details"
+        allOf:
+          - $ref: "#/definitions/customerOperation"
+      swiftCode:
+        type: "string"
+        description: "SWIFT transaction code.\n\nFor the possible values, see the SWIFT code table (https://marketplace.sandigital.innaacc.corp/resources/swift-code-table-reference)."
+        example: "CHK"
+  references:
+    description: "Data structure containing the transaction references"
+    properties:
+      transactionClientReference:
+        type: "string"
+        description: "[16x] Client transaction identification (customer reference included in a domestic electronic statement).\n\nIf the 'client transaction identification' field is not used in the report for the banking system supervisor for this particular entry, 'NONREF' must be used."
+        example: "CF44-312-1234ABC197"
+      transactionBatchReference:
+        type: "string"
+        description: "[16x] Transaction identification (customer reference included in a domestic electronic batch).\n\nIf the 'client batch identification' field is not used in the report for the banking system supervisor for this particular entry, 'NONREF' must be used."
+        example: "20180605-CONF135"
+      transactionInternalReference:
+        type: "string"
+        description: "[16x] Internal reference of the account servicing institution. \n\nIf there is no information, 'NONREF' must be used."
+        example: "1500CF321006HSK1"
+  transactionDetails:
+    description: "Data structure containing the transaction details"
+    properties:
+      transactionId:
+        type: "string"
+        description: "Unique transaction ID"
+        example: "3840"
+      creationDate:
+        type: "string"
+        description: "Date when the transaction was originally created. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+      processedDate:
+        type: "string"
+        description: "Date when the transaction was processed in the system. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+      accountingDate:
+        type: "string"
+        description: "Accounting date of the transaction (the date used to calculate the profit and loss). \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+      description:
+        type: "string"
+        description: "Transaction description"
+        example: "payment"
+      transactionType:
+        type: "string"
+        description: "Transaction type. \n\nThe possible values are:\n- credit or C = balance increased\n- debit or D = balance decreased\n- reverse credit or RC = balance decreased\n- reverse debit or RD = balance increased"
+        example: "debit"
+      transactionCategory:
+        type: "string"
+        description: "Transaction category"
+        example: "withdraw money"
+      amount:
+        description: "Data structure containing the amount data"
+        allOf:
+          - $ref: "#/definitions/amount"
+      balanceResult:
+        description: "Data structure containing the account balance after the transaction has been booked"
+        allOf:
+          - $ref: "#/definitions/balanceResult"
+      operation:
+        description: "Data structure containing the transaction operation details"
+        allOf:
+          - $ref: "#/definitions/operation"
+      references:
+        description: "Data structure containing the transaction references"
+        allOf:
+          - $ref: "#/definitions/references"
+  transactionsDataListItem:
+    description: "Data structure containing the transaction data"
+    properties:
+      transactionDetails:
+        description: "Data structure containing the transaction details"
+        allOf:
+          - $ref: "#/definitions/transactionDetails"
+      transactionDetailsLink:
+        type: "string"
+        description: "Link to the transaction details.\n\nThe exact value depends on the data to be accessed."
+        example: "/v2/accounts/00491500051234567892/transactions/3840"
+  transactionsDataList:
+    type: "array"
+    items:
+      $ref:  "#/definitions/transactionsDataListItem"
+    description: "Array of transactions"
+  _links:
+    description: "Data structure containing the links for moving between the account details and transaction list pages"
+    properties:
+      accountDetailsLink:
+        type: "string"
+        description: "Link to the account details.\n\nThe exact value depends on the data to be accessed."
+        example: "/v2/accounts/00491500051234567892"
+      _first:
+        type: "string"
+        description: "Link to the first page of the transaction list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "/v2/accounts/00491500051234567892/transactions"
+      _prev:
+        type: "string"
+        description: "Link to the previous page of the transaction list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "/v2/accounts/00491500051234567892/transactions?offset=1"
+      _next:
+        type: "string"
+        description: "Link to the next page of the transaction list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "/v2/accounts/00491500051234567892/transactions?offset=3"
+      _last:
+        type: "string"
+        description: "Link to the last page of the transaction list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "/v2/accounts/00491500051234567892/transactions?offset=99"
+  transactionsListResponse:
+    description: "Response to a request to retrieve a list of transactions"
+    properties:
+      displayNumber:
+        type: "string"
+        description: "Account number to be displayed"
+        example: "ES6000491500051234567892"
+      accountId:
+        type: "string"
+        description: "Account number in the format defined in the 'accountIdType' property"
+        example: "00491500051234567892"
+      accountIdType:
+        type: "string"
+        description: "Format used for the account number in the 'accountId' property.\n\nThe possible values are:\n- IBA = IBAN code\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \n\nFor example: \n- In UK, the BBAN format is: Sort code(6) + Account(8)\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)\n\nThe default value is BBA."
+        example: "BBA"
+      alias:
+        type: "string"
+        description: "Name (alias) the customer has assigned to the account for easy identification. Applies only when the operation is used by a physical or business customer, not when used by Santander staff."
+        example: "My chequing account"
+      transactionsDataList:
+        description: "Array of transactions"
+        allOf:
+          - $ref: "#/definitions/transactionsDataList"
+      _links:
+        description: "Data structure containing the links for moving between the account details and transaction list pages"
+        allOf:
+          - $ref: "#/definitions/_links"
+  transactionDetailsResponse:
+    description: "Response to a request to retrieve the details of a specific transaction"
+    properties:
+      displayNumber:
+        type: "string"
+        description: "Account number to be displayed"
+        example: "ES6000491500051234567892"
+      accountId:
+        type: "string"
+        description: "Account number in the format defined in the 'accountIdType' property"
+        example: "00491500051234567892"
+      accountIdType:
+        type: "string"
+        description: "Format used for the account number in the 'accountId' property.\n\nThe possible values are:\n- IBA = IBAN code\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \n\nFor example: \n- In UK, the BBAN format is: Sort code(6) + Account(8)\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)\n\nThe default value is BBA."
+        example: "BBA"
+      alias:
+        type: "string"
+        description: "Name (alias) the customer has assigned to the account for easy identification. Applies only when the operation is used by a physical or business customer, not when used by Santander staff."
+        example: "My chequing account"
+      transactionDetails:
+        description: "Data structure containing the transaction details"
+        allOf:
+          - $ref: "#/definitions/transactionDetails"
+      accountDetailsLink:
+        type: "string"
+        description: "Link to the account details.\n\nThe exact value depends on the data to be accessed."
+        example: "/v2/accounts/00491500051234567892"
+  accountValidateRequest:
+    description: "Data structure containing request details for account validation"
+    properties:
+      customerId:
+        type: "string"
+        description: "Customer ID you want to verify to match the account"
+        example: "F000034332"
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount of available funds you want to verify to exist in the account.\n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 12345.00000
+      currencyCode:
+        type: "string"
+        description: "Currency code of the amount to be verified.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "MXN"
+      status:
+        type: "string"
+        description: "Status you want to verify to be the current account status.\n\nThe possible values are:\n- Open = Account is open and movements are restricted only by the customer's available balance and account contract attributes. This includes accounts with warnings.\n- Closed = Account is closed.\n- Pending Closure = Account is being closed.\n- Open with Severe Lock = Account is open but there is a lock on some or all account movements."
+        example: "Open"
+      productType:
+        type: "string"
+        description: "Product type that you want to verify can be associated with the account. \nThe possible values are:\n- Acquirement\n- loan\n- Assurance"
+        example: "Acquirement"
+  customerIdResult:
+    description: "Data structure containing the result of the customer ID validation"
+    properties:
+      customerId:
+        type: "string"
+        description: "Customer ID to be validated, as defined in the request"
+        example: "F00002123"
+      result:
+        type: "string"
+        description: "Result of the validation.\n\nThe value is OK, if the requested customer ID matches with the one stored in the account; otherwise KO."
+        example: "OK"
+  amountResult:
+    description: "Data structure containing the result of the amount validation"
+    properties:
+      amount:
+        type: "string"
+        description: "Amount to be validated, as defined in the request. \n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: "12345.00000"
+      result:
+        type: "string"
+        description: "Result of the validation.\n\nThe value is OK, if the available amount is greater than the requested one; otherwise KO."
+        example: "KO"
+  currencyCodeResult:
+    description: "Data structure containing the result of the currency code validation"
+    properties:
+      currencyCode:
+        type: "string"
+        description: "Currency code to be validated, as defined in the request"
+        example: "EUR"
+      result:
+        type: "string"
+        description: "Result of the validation.\n\nThe value is OK, if the requested currency code matches with the one stored in the account; otherwise KO."
+        example: "OK"
+  statusResult:
+    description: "Data structure containing the result of the account status validation"
+    properties:
+      status:
+        type: "string"
+        description: "Account status to be validated, as defined in the request"
+        example: "Open"
+      result:
+        type: "string"
+        description: "Result of the validation.\n\nThe value is OK, if the requested status matches with the current account status; otherwise KO."
+        example: "OK"
+  balance:
+    description: "Data structure containing the result of the product type association validation"
+    properties:
+      productType:
+        type: "string"
+        description: "Product type association to be validated, as defined in the request"
+        example: "Acquirement"
+      result:
+        type: "string"
+        description: "Result of the validation.\n\nThe value is OK, if the requested product type can be associated with the account; otherwise KO."
+        example: "KO"
+  accountValidateResponse:
+    description: "Response to a request to validate the account customer and status, product type that can be associated with the account, and amount of funds in the account"
+    properties:
+      customerIdResult:
+        description: "Data structure containing the result of the customer ID validation"
+        allOf:
+          - $ref: "#/definitions/customerIdResult"
+      amountResult:
+        description: "Data structure containing the result of the amount validation"
+        allOf:
+          - $ref: "#/definitions/amountResult"
+      currencyCodeResult:
+        description: "Data structure containing the result of the currency code validation"
+        allOf:
+          - $ref: "#/definitions/currencyCodeResult"
+      statusResult:
+        description: "Data structure containing the result of the account status validation"
+        allOf:
+          - $ref: "#/definitions/statusResult"
+      productTypeResult:
+        description: "Data structure containing the result of the product type association validation"
+        allOf:
+          - $ref: "#/definitions/balance"
+  amountLimit:
+    description: "Data structure containing the amount of the limit"
+    properties:
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount. \n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 123.45000
+      currencyCode:
+        type: "string"
+        description: "Currency code.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "EUR"
+  accountLimitRequest:
+    description: "Data structure containing account limit creation details"
+    properties:
+      amountLimit:
+        description: "Data structure containing the amount of the limit"
+        allOf:
+          - $ref: "#/definitions/amountLimit"
+      limitType:
+        type: "string"
+        description: "Type of the limit. \n\nThe possible value is:\n- Overdraft"
+        example: "Overdraft"
+      reasonType:
+        type: "string"
+        description: "General reason for the limit.\n\nThe possible values are:\n- Domiciled salary or periodical income\n- Credit limit preattached\n- Balances to be consolidated\n- Credits for specific treatments, sweeps of balances or collecting accounts\n- Other excesses on operational limits"
+        example: "Credit limit preattached"
+      reasonDescription:
+        type: "string"
+        description: "Detailed reason for the limit"
+        example: "OVERDRAFT AUTHORIZED BY RECURRING REVENUE"
+      startDate:
+        type: "string"
+        description: "Date when the limit validity starts. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+      endDate:
+        type: "string"
+        description: "Date when the limit validity ends. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+  accountLimitResponse:
+    description: "Response to a request to create an account limit"
+    properties:
+      accountId:
+        type: "string"
+        description: "Account number.\n\nThe value is the account number in the request path."
+        example: "00491500051234567892"
+      limitId:
+        type: "string"
+        description: "Unique limit ID"
+        example: "2231231124124"
+      amountLimit:
+        description: "Data structure containing the amount of the limit"
+        allOf:
+          - $ref: "#/definitions/amountLimit"
+      limitType:
+        type: "string"
+        description: "Type of the limit.\n\nThe possible values are:\n- Overdraft"
+        example: "Overdraft"
+      reasonType:
+        type: "string"
+        description: "General reason for the limit.\n\nThe possible values are:\n- Domiciled salary or periodical income\n- Credit limit preattached\n- Balances to be consolidated\n- Credits for specific treatments, sweeps of balances or collecting accounts\n- Other excesses on operational limits"
+        example: "Credit limit preattached"
+      reasonDescription:
+        type: "string"
+        description: "Detailed reason for the limit"
+        example: "OVERDRAFT AUTHORIZED BY RECURRING REVENUE"
+      startDate:
+        type: "string"
+        description: "Date when the limit validity starts. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+      endDate:
+        type: "string"
+        description: "Date when the limit validity ends. \n\nThe date format is 'yyyyMMddThhmmssfff±timezone', where fff are milliseconds."
+        example: "20190314T014319060+0100"
+  statementDocument:
+    description: "Data structure containing the statement document details"
+    properties:
+      documentId:
+        type: "string"
+        description: "Unique document ID"
+        example: "2139j3ndfuiofnk23jkduiog"
+      repositoryId:
+        type: "string"
+        description: "Document storage location"
+        example: "SCConDemand"
+      documentType:
+        type: "string"
+        description: "Document type"
+        example: "statements"
+      statementDocumentLink:
+        type: "string"
+        description: "Link to the account contract PDF file"
+        example: "/documents/2139j3ndfuiofnk23jkduiog?repository_id=SCConDemand&document_type=statements"
+  accountStatement:
+    description: "Data structure containing the account statement details"
+    properties:
+      statementId:
+        type: "string"
+        description: "Unique statement ID.\n\nThe statement applies to the entire account contract, not only to an individual account included in the contract."
+        example: "123243"
+      statementDescription:
+        type: "string"
+        description: "Statement description. \n\nThe value can be freely defined."
+        example: "Extracto conta octubre 2019"
+      statementIssueDate:
+        type: "string"
+        description: "Date when the statement was issued. \n\nThe value uses the complete data format defined in ISO 8601:\n\n'YYYY-MM-DD' \n\nWhere: \n- YYYY: 4-digit year\n- MM: 2-digit month (for example, 01 = January)\n- DD: 2-digit day of the month (01 through 31)"
+        example: "2019-10-20"
+      statementDocument:
+        description: "Data structure containing the statement document details"
+        allOf:
+          - $ref: "#/definitions/statementDocument"
+  accountStatementsList:
+    type: "array"
+    items:
+      $ref:  "#/definitions/accountStatement"
+    description: "Array of statements for an account"
+  _linksStatement:
+    description: "Data structure containing the links for moving between the account details and statement list pages"
+    properties:
+      _first:
+        type: "string"
+        description: "Link to the first page of the statement list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "v2/accounts/00491500051234567892/statements?_offset=0"
+      _prev:
+        type: "string"
+        description: "Link to the previous page of the statement list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "v2/accounts/00491500051234567892/statements?_offset=0"
+      _next:
+        type: "string"
+        description: "Link to the next page of the statement list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "v2/accounts/00491500051234567892/statements?_offset=1"
+      accountDetailsLink:
+        type: "string"
+        description: "Link to the account details.\n\nThe exact value depends on the data to be accessed."
+        example: "v2/accounts/00491500051234567892"
+  statementsListResponse:
+    description: "Response to a request to retrieve a list of statements for an account"
+    properties:
+      accountId:
+        type: "string"
+        description: "Account number.\n\nThe value is the account number in the request path."
+        example: "2313726917672140515"
+      accountStatementsList:
+        description: "Array of statements for an account"
+        allOf:
+          - $ref: "#/definitions/accountStatementsList"
+      _links:
+        description: "Data structure containing the links for moving between the account details and statement list pages"
+        allOf:
+          - $ref: "#/definitions/_linksStatement"
+  errors:
+    description: "Data structure containing the details for errors"
+    properties:
+      errors:
+        type: "array"
+        items:
+          $ref: "#/definitions/error"
+        description: "Array of errors"
+  error:
+    properties:
+      code:
+        type: "string"
+        description: "Unique alphanumeric human readable error code"
+        example: "XXX"
+      message:
+        type: "string"
+        description: "Brief summary of the reported issue"
+        example: "Message"
+      level:
+        type: "string"
+        description: "Level of the reported issue. \n\n The possible values are: \n - info \n - warning \n - error"
+        example: "error"
+      description:
+        type: "string"
+        description: "Detailed description of the reported issue"
+        example: "Description"
+    description: "Data structure containing the error details"
+parameters:
+  X-Santander-Client-Id:
+    name: "X-Santander-Client-Id"
+    type: "string"
+    required: true
+    in: "header"
+    description: "Client ID header"
+    x-example: "a1b30a84-7bf3-442e-84a0-e935d8163b5a"
+  Authorization:
+    name: "Authorization"
+    type: "string"
+    required: true
+    in: "header"
+    description: "Authorization security header"
+    x-example: "Bearer 923ioh89r23ohwedh823ohdn9hite89yyugfsdf"
+  X-B3-TraceId:
+    name: "X-B3-TraceId"
+    type: "string"
+    required: false
+    in: "header"
+    description: "Overall ID of the trace, shared by every span in the trace. \n\nThe value is 64 or 128 bits long."
+    x-example: "80f198ee56343ba864fe8b2a57d3eff7"
+  X-B3-ParentSpanId:
+    name: "X-B3-ParentSpanId"
+    type: "string"
+    required: false
+    in: "header"
+    description: "Position of the parent operation in the trace tree.\n\nThe value is 64 bits long. \n\nThe value is omitted when the span is the root of the trace tree."
+    x-example: "05e3ac9a4f6e3b90"
+  X-B3-SpanId:
+    name: "X-B3-SpanId"
+    type: "string"
+    required: false
+    in: "header"
+    description: "Position of the current operation in the trace tree.\n\nThe value is 64 bits long.\n\nDo not interpret the value: it may or may not be derived from the value of the TraceId."
+    x-example: "e457b5a2e4d86bd1"
+  X-B3-Sampled:
+    name: "X-B3-Sampled"
+    type: "string"
+    required: false
+    in: "header"
+    description: "Sampling decision.\n\nSampling is a mechanism to reduce the volume of data in the tracing system. In B3, sampling applies consistently per-trace: once the sampling decision is made, the same value must be consistently sent downstream. This means that either all or no spans share a trace ID.\n\nThe possible values are: \n- 0 = Deny\n- 1 = Accept\n- d = Debug"
+    x-example: "1"
+  X-Santander-Device:
+    name: "X-Santander-Device"
+    type: "string"
+    required: false
+    in: "header"
+    description: "Device information permitted for the data query. \n\nYou can use this parameter to apply an experience base to optimize data collection."
+    x-example: "mobile"

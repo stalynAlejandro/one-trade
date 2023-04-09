@@ -1,0 +1,78 @@
+{
+  "code": "Code 1",
+  "customer": {
+    "customerId": "customerId1",
+    "name": "Coca Cola S.L.",
+    "taxId": "B1234567",
+    "office": "2345",
+    "personNumber": "BUC-1234567",
+    "segment": "SME",
+    "email": "mock email"
+  },
+  "documentation": {
+    "files": [
+      {
+        "id": "id doc 1",
+        "name": "miercoles.jpg",
+        "uploadedDate": "2022-05-27T06:54:53.741+02:00",
+        "documentType": "letter",
+        "data": "your file contents"
+      }
+    ],
+    "priority": "urgent"
+  },
+  "request": {
+    "exportCollectionAdvance": {
+      "code" : "code exportCollectionAdvance",
+      "customer": {
+        "customerId": "customerId1",
+        "name": "Coca Cola S.L.",
+        "taxId": "B1234567",
+        "office": 2345,
+        "personNumber": "BUC-1234567",
+        "segment": "SME",
+        "email": "mock email"
+      },
+      "creationDate" : "2022-05-30T18:14:53.741+02:00",
+      "approvalDate" : "2022-05-30T18:14:53.741+02:00",
+      "requestExpiration" : "2022-05-30T18:14:53.741+02:00",
+      "contractReference": "ref1",
+      "amount": 123.45,
+      "currency": "EUR",
+      "exportCollection": {
+        "code" : "code exportCollection",
+        "customer": {
+          "customerId": "customerId1",
+          "name": "Coca Cola S.L.",
+          "taxId": "B1234567",
+          "office": 2345,
+          "personNumber": "BUC-1234567",
+          "segment": "SME",
+          "email": "mock email"
+        },
+        "creationDate" : "2022-05-30T18:14:53.741+02:00",
+        "approvalDate" : "2022-05-30T18:14:53.741+02:00",
+        "contractReference": "ref1",
+        "amount": 123.45,
+        "currency": "EUR",
+        "nominalAccount": {
+          "id": "account-id-1",
+          "iban": "PT50 0002 0123 5678 9015 1",
+          "currency": "EUR"
+        }
+      }
+    },
+    "riskLine": {
+      "riskLineId": "1",
+      "client": "client-id-1",
+      "iban": "0049 3295 2020 15792",
+      "status": "approved",
+      "limitAmount": "1020",
+      "availableAmount": "1020",
+      "expires": "2020-06-06T00:00:00.000+02:00",
+      "currency": "EUR"
+    },
+    "office": "requestingOffice1",
+    "comments": "Mis comentarios"
+  }
+}

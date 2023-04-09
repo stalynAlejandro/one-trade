@@ -1,0 +1,16 @@
+{
+  "key": "md-cli-modification-return-reason",
+  "name": "Import Collection Modification Return reason",
+  "description": "CLI Modification Return reasons",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "return reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "returnReasonId",
+  "idField": "returnReasonId",
+  "nameField": "returnReason"
+}

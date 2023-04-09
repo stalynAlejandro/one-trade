@@ -1,0 +1,96 @@
+{
+  "from": 0,
+  "size": 10,
+  "sort" : [
+    {
+      "variables.textValueKeyword" : {
+        "order" : "desc",
+        "nested": {
+          "path": "variables",
+          "filter": {
+            "term": {
+              "variables.name": "operationCode"
+            }
+          }
+        }
+      }
+    }
+  ]
+,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "bool": {
+            "must_not": [
+              {
+                "nested": {
+                  "path": "variables",
+                  "query": {
+                    "bool": {
+                      "must": [
+                        {
+                          "term": {
+                            "variables.name": "registrationCancelled"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "operationCreationDate"
+                    }
+                  },
+                  {
+                    "range": {
+                      "variables.dateValue": {
+                        "gte": "20220719T000000.000+0200",
+                        "format": "basic_date_time"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "operationCreationDate"
+                    }
+                  },
+                  {
+                    "range": {
+                      "variables.dateValue": {
+                        "lte": "20220721T235959.999+0200",
+                        "format": "basic_date_time"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

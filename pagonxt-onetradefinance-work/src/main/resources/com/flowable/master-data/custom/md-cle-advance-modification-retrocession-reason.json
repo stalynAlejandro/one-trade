@@ -1,0 +1,75 @@
+{
+  "dataObjectDefinitionKey": "md-cle-advance-modification-retrocession-reason",
+  "masterData": [
+    {
+      "retrocessionReason": "Amount",
+      "retrocessionReasonId": "amount",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Importe"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Currency",
+      "retrocessionReasonId": "currency",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Divisa"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Payment method",
+      "retrocessionReasonId": "paymentMethod",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Forma de pago"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Payment date",
+      "retrocessionReasonId": "paymentDate",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Fecha de pago"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Fees",
+      "retrocessionReasonId": "fees",
+      "sortOrder": 5,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Comisiones"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Expenses",
+      "retrocessionReasonId": "expenses",
+      "sortOrder": 6,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Gastos"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Others",
+      "retrocessionReasonId": "others",
+      "sortOrder": 99,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Otros"
+        }
+      }
+    }
+  ]
+}

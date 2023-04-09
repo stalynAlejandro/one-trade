@@ -1,0 +1,10 @@
+{
+  "from": 0,
+  "size": 5,
+  "query": {
+    "bool": {
+      "must": [
+"condition1","condition2","condition3"      ]
+    }
+  }
+}

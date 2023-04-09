@@ -1,0 +1,92 @@
+{
+  "accountsDataList": [{
+    "displayNumber": "ES6000491500051234567892",
+    "accountId": "00491500051234567892",
+    "accountIdType": "BBA",
+    "type": "Current Account",
+    "description": "CUENTA CORRIENTE SANTANDER",
+    "status": "Open with Severe Lock",
+    "customerId": "BUC-1234567",
+    "costCenter": "00490001",
+    "mainBalance": {
+      "amount": 0,
+      "currencyCode": "EUR"
+    },
+    "_links": {
+      "accountDetailsLink": "/accounts/00490001542216259677",
+      "transactionsListLink": "/accounts/00490001542216259677/transactions"
+    }
+  }, {
+    "displayNumber": "ES8500490001562016259685",
+    "accountId": "00490001562016259685",
+    "accountIdType": "BBA",
+    "type": "Current Account",
+    "description": "CUENTA CORRIENTE SANTANDER",
+    "status": "Open",
+    "customerId": "BUC-1234567",
+    "costCenter": "00490001",
+    "mainBalance": {
+      "amount": 938636.34,
+      "currencyCode": "EUR"
+    },
+    "_links": {
+      "accountDetailsLink": "/accounts/00490001562016259685",
+      "transactionsListLink": "/accounts/00490001562016259685/transactions"
+    }
+  }, {
+    "displayNumber": "ES4400490001582916259693",
+    "accountId": "00490001582916259693",
+    "accountIdType": "BBA",
+    "type": "Current Account",
+    "description": "CUENTA CORRIENTE SANTANDER",
+    "status": "Open",
+    "customerId": "BUC-1234567",
+    "costCenter": "00490001",
+    "mainBalance": {
+      "amount": 2000,
+      "currencyCode": "EUR"
+    },
+    "_links": {
+      "accountDetailsLink": "/accounts/00490001582916259693",
+      "transactionsListLink": "/accounts/00490001582916259693/transactions"
+    }
+  }, {
+    "displayNumber": "ES7900750014920606584546",
+    "accountId": "00750014920606584546",
+    "accountIdType": "BBA",
+    "type": "Current Account",
+    "description": "CUENTA 123 PROFESIONAL PREMIUM P.J.",
+    "status": "Open",
+    "customerId": "BUC-1234567",
+    "costCenter": "00490001",
+    "mainBalance": {
+      "amount": 9992035.63,
+      "currencyCode": "EUR"
+    },
+    "_links": {
+      "accountDetailsLink": "/accounts/00750014920606584546",
+      "transactionsListLink": "/accounts/00750014920606584546/transactions"
+    }
+  }, {
+    "displayNumber": "ES3800490001552116259723",
+    "accountId": "00490001552116259723",
+    "accountIdType": "BBA",
+    "type": "Current Account",
+    "description": "CUENTA CORRIENTE VISTA EN MONEDA",
+    "status": "Open",
+    "customerId": "BUC-1234567",
+    "costCenter": "00490001",
+    "mainBalance": {
+      "amount": 3969154.27,
+      "currencyCode": "USD"
+    },
+    "_links": {
+      "accountDetailsLink": "/accounts/00490001552116259723",
+      "transactionsListLink": "/accounts/00490001552116259723/transactions"
+    }
+  }
+  ],
+  "_links": {
+    "_next": "/accounts?_limit=5&_offset=004900013200541586&customer_id=J101660825"
+  }
+}

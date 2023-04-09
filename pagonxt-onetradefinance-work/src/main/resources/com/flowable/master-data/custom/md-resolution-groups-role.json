@@ -1,0 +1,35 @@
+{
+  "dataObjectDefinitionKey": "md-resolution-groups-role",
+  "masterData": [
+    {
+      "resolutionGroupsRoleId": "user",
+      "resolutionGroupsRole": "User",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "resolutionGroupsRole": "Usuario"
+        }
+      }
+    },
+    {
+      "resolutionGroupsRoleId": "supervisor",
+      "resolutionGroupsRole": "Supervisor",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "resolutionGroupsRole": "Supervisor"
+        }
+      }
+    },
+    {
+      "resolutionGroupsRoleId": "administrator",
+      "resolutionGroupsRole": "Administrator",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "resolutionGroupsRole": "Administrador"
+        }
+      }
+    }
+  ]
+}

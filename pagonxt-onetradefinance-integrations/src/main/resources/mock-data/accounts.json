@@ -1,0 +1,86 @@
+[
+  {
+    "accountId": "001001",
+    "customerId": "BUC-1234567",
+    "iban": "PT50 0002 0123 5678 9015 1",
+    "costCenter": "00490001",
+    "currency": "EUR"
+  },
+  {
+    "accountId": "001002",
+    "customerId": "BUC-1234567",
+    "iban": "PT50 0002 0123 5678 9015 2",
+    "costCenter": "00490001",
+    "currency": "PLN"
+  },
+  {
+    "accountId": "001003",
+    "customerId": "BUC-1234567",
+    "iban": "PT50 0002 0123 5678 9015 3",
+    "costCenter": "00490001",
+    "currency": "GBP"
+  },
+  {
+    "accountId": "001004",
+    "customerId": "BUC-1234567",
+    "iban": "PT50 0002 0123 5678 9015 4",
+    "costCenter": "00490001",
+    "currency": "EUR"
+  },
+  {
+    "accountId": "002001",
+    "customerId": "BUC-1234568",
+    "iban": "PT50 0002 0123 5678 9016 1",
+    "costCenter": "00490001",
+    "currency": "EUR"
+  },
+  {
+    "accountId": "002002",
+    "customerId": "BUC-1234568",
+    "iban": "PT50 0002 0123 5678 9016 2",
+    "costCenter": "00490001",
+    "currency": "PLN"
+  },
+  {
+    "accountId": "002003",
+    "customerId": "BUC-1234568",
+    "iban": "PT50 0002 0123 5678 9016 3",
+    "costCenter": "00490001",
+    "currency": "GBP"
+  },
+  {
+    "accountId": "002004",
+    "customerId": "BUC-1234568",
+    "iban": "PT50 0002 0123 5678 9016 4",
+    "costCenter": "00490001",
+    "currency": "EUR"
+  },
+  {
+    "accountId": "001001",
+    "customerId": "J101684201",
+    "iban": "PT50 0002 0123 5678 9015 1",
+    "costCenter": "00490001",
+    "currency": "EUR"
+  },
+  {
+    "accountId": "001002",
+    "customerId": "J101684201",
+    "iban": "PT50 0002 0123 5678 9015 2",
+    "costCenter": "00490001",
+    "currency": "PLN"
+  },
+  {
+    "accountId": "001003",
+    "customerId": "J101684201",
+    "iban": "PT50 0002 0123 5678 9015 3",
+    "costCenter": "00490001",
+    "currency": "GBP"
+  },
+  {
+    "accountId": "001004",
+    "customerId": "J101684201",
+    "iban": "PT50 0002 0123 5678 9015 4",
+    "costCenter": "00490001",
+    "currency": "EUR"
+  }
+]

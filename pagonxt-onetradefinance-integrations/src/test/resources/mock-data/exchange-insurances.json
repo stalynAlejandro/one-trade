@@ -1,0 +1,25 @@
+[
+  {
+    "exchangeInsuranceId": "7763095",
+    "type": "Forward USA",
+    "useDate": 1656540000000,
+    "sellAmount": 2364.61,
+    "sellCurrency": "EUR",
+    "buyAmount": 2000,
+    "buyCurrency": "GBP",
+    "exchangeRate": 1.1623,
+    "useAmount": null
+  },
+  {
+    "exchangeInsuranceId": "7763446",
+    "type": "Standard",
+    "useDate": 1652133600000,
+    "sellAmount": 12162.11,
+    "sellCurrency": "EUR",
+    "buyAmount": 12000,
+    "buyCurrency": "GBP",
+    "exchangeRate": 1.1621,
+    "useAmount": null
+  }
+]
+

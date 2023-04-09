@@ -1,0 +1,106 @@
+{
+  "key": "tasks-other-operations-mapping-extension",
+  "extends": "tasks",
+  "version": 1,
+  "variableExtractors": [
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C006"
+      },
+      "path": "/code",
+      "to": "operationCode",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C006"
+      },
+      "path": "/creationDate",
+      "to": "operationCreationDate",
+      "type": "date"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C006"
+      },
+      "path": "/customerCode",
+      "to": "operationCustomerCode",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C006"
+      },
+      "path": "/customerFullName",
+      "to": "operationCustomerFullName",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C006"
+      },
+      "path": "/customerID",
+      "to": "operationCustomerID",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C006"
+      },
+      "path": "/middleOffice",
+      "to": "operationMiddleOffice",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C006"
+      },
+      "path": "/office",
+      "to": "operationOffice",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C006"
+      },
+      "path": "/priority",
+      "to": "operationPriority",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C006"
+      },
+      "path": "/requesterDisplayedName",
+      "to": "operationRequesterDisplayedName",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C006"
+      },
+      "path": "/requesterId",
+      "to": "operationRequesterId",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C006"
+      },
+      "path": "/displayedStatus",
+      "to": "operationDisplayedStatus",
+      "type": "string"
+    }
+  ]
+}

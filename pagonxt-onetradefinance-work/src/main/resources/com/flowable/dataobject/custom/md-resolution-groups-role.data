@@ -1,0 +1,16 @@
+{
+  "key": "md-resolution-groups-role",
+  "name": "Resolution groups role",
+  "description": "Resolution groups role",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "groups role",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "resolutionGroupsRoleId",
+  "idField": "resolutionGroupsRoleId",
+  "nameField": "resolutionGroupsRole"
+}

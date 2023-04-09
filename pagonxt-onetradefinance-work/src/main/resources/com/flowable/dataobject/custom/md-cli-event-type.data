@@ -1,0 +1,16 @@
+{
+  "key": "md-cli-event-type",
+  "name": "CLI Event type",
+  "description": "CLI Events types",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "CLI events type",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "eventTypeId",
+  "idField": "eventTypeId",
+  "nameField": "eventType"
+}

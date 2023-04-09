@@ -1,0 +1,33 @@
+{
+  "dataObjectDefinitionKey": "md-document-visibility",
+  "overwrite": true,
+  "masterData": [{
+    "documentVisibilityId": "INTERNAL_BO",
+    "documentVisibility": "Internal back-office",
+    "sortOrder": 1,
+    "translations": {
+      "es_es": {
+        "documentVisibility": "Interno de Back Office"
+      }
+    }
+  }, {
+    "documentVisibilityId": "PUBLIC_OFFICE",
+    "documentVisibility": "Public for office",
+    "sortOrder": 2,
+    "translations": {
+      "es_es": {
+        "documentVisibility": "Público para oficina"
+      }
+    }
+  }, {
+    "documentVisibilityId": "PUBLIC_OFFICE_AND_CUSTOMER",
+    "documentVisibility": "Public for office and customer",
+    "sortOrder": 3,
+    "translations": {
+      "es_es": {
+        "documentVisibility": "Público para oficina y cliente"
+      }
+    }
+  }
+  ]
+}

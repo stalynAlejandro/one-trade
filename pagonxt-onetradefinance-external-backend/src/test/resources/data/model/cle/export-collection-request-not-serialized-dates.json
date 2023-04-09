@@ -1,0 +1,19 @@
+{
+  "requester": {
+    "user": {}
+  },
+  "slaEnd": 1653457293741,
+  "creationDate": 1653627593741,
+  "documents": [
+    {
+      "uploadedDate": 1653627293741
+    }
+  ],
+  "nominalAccount": {},
+  "commissionAccount": {},
+  "advanceRiskLine": {
+    "expires": 1591394400000
+  },
+  "advanceExpiration": 1691394400000,
+  "customer": {}
+}

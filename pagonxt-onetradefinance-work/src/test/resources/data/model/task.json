@@ -1,0 +1,65 @@
+{
+  "id": "TSK-46e4ff3c-23a2-11ed-8c9e-f257a6c05b8e",
+  "variables": [
+    {
+      "name": "operationCode",
+      "type": "string",
+      "scopeHierarchyType": "root",
+      "textValue": "requestCodeValue"
+    },
+    {
+      "name": "operationContractReference",
+      "type": "string",
+      "scopeHierarchyType": "root",
+      "textValue": "contractReferenceValue"
+    },
+    {
+      "name": "operationCreationDate",
+      "type": "date",
+      "scopeHierarchyType": "root",
+      "rawValue": "2022-07-19T09:19:29.399Z",
+      "dateValue": "2022-07-19T09:19:29.399Z"
+    },
+    {
+      "name": "product",
+      "type": "string",
+      "scopeHierarchyType": "root",
+      "textValue": "productValue"
+    },
+    {
+      "name": "event",
+      "type": "string",
+      "scopeHierarchyType": "root",
+      "textValue": "eventValue"
+    },
+    {
+      "name": "operationCustomerFullName",
+      "type": "string",
+      "scopeHierarchyType": "root",
+      "textValue": "Coca Cola S.L."
+    },
+    {
+      "name": "operationPriority",
+      "type": "string",
+      "scopeHierarchyType": "root",
+      "textValue": "requestPriorityValue"
+    },
+    {
+      "name": "operationDisplayedStatus",
+      "type": "string",
+      "scopeHierarchyType": "root",
+      "textValue": "displayedStatusValue"
+    },
+    {
+      "name": "operationRequesterDisplayedName",
+      "type": "string",
+      "scopeHierarchyType": "root",
+      "textValue": "backoffice"
+    },
+    {
+      "name": "externalTaskType",
+      "type": "string",
+      "textValue": "REVIEW"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "key": "md-cli-request-return-reason",
+  "name": "Import Collection Request Return reason",
+  "description": "CLI Request Return reasons",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "return reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "returnReasonId",
+  "idField": "returnReasonId",
+  "nameField": "returnReason"
+}

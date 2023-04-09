@@ -1,0 +1,20 @@
+{
+  "key": "md-resolution-group",
+  "name": "Resolution group",
+  "description": "Resolution groups",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "permissions",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "resolutionGroup",
+  "idField": "resolutionGroup",
+  "nameField": "resolutionGroup",
+
+  "variables": {
+    "string": "tasks"
+  }
+}

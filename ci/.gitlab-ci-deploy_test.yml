@@ -1,0 +1,86 @@
+include:
+  - local: ci/ci-scripts.yaml
+
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  JIB_AUTH: -Djib.from.auth.username=$REPO_DOCKER_USER_MMC -Djib.from.auth.password=$REPO_DOCKER_PASS_MMC -Djib.to.tags=testing -Djib.to.auth.username=$CI_REGISTRY_USER -Djib.to.auth.password=$CI_REGISTRY_PASSWORD
+
+# Generate docker images for deployment
+dockerize:
+  stage: dockerize
+  image: maven:3-jdk-11
+  rules:
+    - if: '$OTF_BUILD_TEST_IMAGE != "false"'
+  cache:
+    key: ${CI_PROJECT_PATH}-m2
+    paths:
+      - .m2/repository
+  before_script:
+    #    - !reference [ .scripts, npm, prepare ]
+    - cp ${REPO_NPMRC_MMC} ./pagonxt-onetradefinance-frontend-customizations/src/main/frontend/.npmrc
+  script:
+    #    - !reference [ .scripts, app, dockerize ]
+    - mvn $MAVEN_CLI_OPTS -s $REPO_MVN_SETTINGS_MMC -P jib,default $JIB_AUTH -Dmaven.test.skip=true clean package
+
+# Deploy the test environment
+deploy-k8s-test:
+  image: dtzar/helm-kubectl:3.5.4
+  stage: deploy
+  before_script:
+    #    - !reference [ .scripts, external_app_test, undeploy ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-tests-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete service onetrade-external-app-tests || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete deployment onetrade-external-app-tests || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete configmap onetrade-external-app-configmap-tests || true
+    #    - !reference [ .scripts, flowable_test, undeploy ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall $OTF_HELM_TEST_NAME || true
+    #    - !reference [ .scripts, pg_admin, undeploy ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-tests-pga-pgadmin4 || true
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall onetrade-tests-pga || true
+    #    - !reference [ .scripts, flowable_test, delete_secrets ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_TEST_NAME-flowable-regcred || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_TEST_NAME-flowable-license || true
+    #    - !reference [ .scripts, pg_admin, delete_secrets ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret pgadmin4-password || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret pgadmin4-pgpassfile || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret pgadmin4-servers || true
+    #    - !reference [ .scripts, flowable_test, create_secrets ]
+    - ARTIFACTS_AUTH_TEST=`echo -n "${REPO_MVN_USER_FLW_ALLREAD}:${REPO_MVN_PASS_FLW_ALLREAD}" | base64`
+    - CODE_REGISTRY_AUTH_TEST=`echo -n "${CI_REGISTRY_USER}:${OTF_REGISTRY_TOKEN}" | base64`
+    - |
+      cat > "docker_credentials_tests.json" << EOM
+      {
+        "auths": {
+          "artifacts.flowable.com": {
+            "auth": "${ARTIFACTS_AUTH_TEST}"
+          },
+          "code-registry.flowable.com": {
+            "auth": "${CODE_REGISTRY_AUTH_TEST}"
+          }
+        }
+      }
+      EOM
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE create secret generic $OTF_HELM_TEST_NAME-flowable-regcred --from-file=.dockerconfigjson=docker_credentials_tests.json --type=kubernetes.io/dockerconfigjson
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE create secret generic $OTF_HELM_TEST_NAME-flowable-license --from-file=flowable.license=license/flowable_dev.license
+    #    - !reference [ .scripts, pg_admin, create_secrets ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/pgadmin/password-secret.yml
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/pgadmin/pgpass-secret.yml
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/pgadmin/servers-secret.yml
+    #    - !reference [ .scripts, flowable_test, add_helm_repo ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL repo add flowable-helm $REPO_HELM_URL_ALL --username $REPO_HELM_USER_MMC --password $REPO_HELM_PASS_MMC
+    #    - !reference [ .scripts, pg_admin, add_helm_repo ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL repo add runix https://helm.runix.net
+    #    - !reference [ .scripts, helm, repo_update ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL repo update
+  script:
+    #    - !reference [ .scripts, flowable_test, deploy ]
+    - helm --version $OTF_FLOWABLE_HELM_VERSION --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE install --values helm/flowable/test-environment.yml --set work.springProfiles=saml --set work.image.tag=testing $OTF_HELM_TEST_NAME flowable-helm/flowable
+    #    - !reference [ .scripts, pg_admin, deploy ]
+    - helm --version $OTF_PGADMIN4_HELM_VERSION --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE install --values helm/pgadmin/values.yml onetrade-tests-pga runix/pgadmin4
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/pgadmin/ingress.yml
+    #    - !reference [ .scripts, external_app_test, deploy ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/external-app/external-app-test.yml
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/external-app/ingress-test.yml

@@ -1,0 +1,16 @@
+.flw__piecesCounter {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: #7f9ccb;
+    width: 100%;
+    justify-content: center;
+    height: 45px;
+}
+
+.flw__piecesCounter__value {
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: white;
+}

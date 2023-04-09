@@ -1,0 +1,26 @@
+  "sort" : [
+    {
+      "variables.textValueKeyword" : {
+        "order" : "desc",
+        "nested": {
+          "path": "variables",
+          "filter": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "variables.name": "variable"
+                  }
+                },
+                {
+                  "term": {
+                    "variables.scopeHierarchyType": "root"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]

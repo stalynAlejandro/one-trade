@@ -1,0 +1,5 @@
+        {
+          "wildcard": {
+            "null": "*some-text*"
+          }
+        }

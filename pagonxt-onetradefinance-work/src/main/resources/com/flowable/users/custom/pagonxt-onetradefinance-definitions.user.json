@@ -1,0 +1,176 @@
+[
+  {
+    "key": "admin-flowable",
+    "name": "Flowable Administration User",
+    "description": "Creates Flowable administration user.",
+    "initialUserSubType": "admin",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "flowableAdministrator",
+      "oneTradeFinanceUser",
+      "oneTradeFinanceAdministrator"
+    ],
+    "lookupGroups":[
+      "oneTradeFinanceUser"
+    ],
+    "actionPermissions": {
+      "create": [
+        "flowableAdministrator"
+      ],
+      "edit": [
+        "flowableAdministrator"
+      ],
+      "deactivate": [
+        "flowableAdministrator"
+      ],
+      "activate": [
+        "flowableAdministrator"
+      ]
+    },
+    "initialVariables": {
+      "adminUser": true,
+      "description": "Admin"
+    },
+    "conversationFilters": [
+      "all"
+    ],
+    "contactFilters": [
+      "all",
+      "active",
+      "inactive"
+    ],
+    "allowedFeatures": [
+      "contacts",
+      "editContactAvatar",
+      "changeOwnPassword",
+      "createUser",
+      "impersonateUser",
+      "changeContactPassword",
+      "user-mgmt",
+      "work",
+      "createWork",
+      "reports",
+      "reportsMetrics",
+      "tasks",
+      "templateManagement",
+      "themeManagement",
+      "editContactAvatar",
+      "registerDevice",
+      "documents",
+      "lastReadAvatars",
+      "compliance",
+      "search-api",
+      "workobject-api",
+      "actuators"
+    ]
+  },
+  {
+    "key": "admin-oneTradeFinance",
+    "name": "PagoNxt One Trade Finance Administration User",
+    "description": "Creates a new One Trade Finance Administration user.",
+    "initialUserSubType": "admin",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "flowableAdministrator",
+      "oneTradeFinanceUser",
+      "oneTradeFinanceAdministrator"
+    ],
+    "lookupGroups":[
+      "oneTradeFinanceUser"
+    ],
+    "actionPermissions": {
+      "create": [
+        "oneTradeFinanceAdministrator"
+      ],
+      "edit": [
+        "oneTradeFinanceAdministrator"
+      ],
+      "deactivate": [
+        "oneTradeFinanceAdministrator"
+      ],
+      "activate": [
+        "oneTradeFinanceAdministrator"
+      ]
+    },
+    "initialVariables": {
+      "adminUser": true,
+      "description": "Admin"
+    },
+    "conversationFilters": [
+      "all"
+    ],
+    "contactFilters": [
+      "all",
+      "active",
+      "inactive"
+    ],
+    "allowedFeatures": [
+      "contacts",
+      "editContactAvatar",
+      "changeOwnPassword",
+      "createUser",
+      "impersonateUser",
+      "changeContactPassword",
+      "user-mgmt",
+      "work",
+      "createWork",
+      "reports",
+      "reportsMetrics",
+      "tasks",
+      "templateManagement",
+      "themeManagement",
+      "editContactAvatar",
+      "registerDevice",
+      "documents",
+      "lastReadAvatars",
+      "compliance",
+      "search-api",
+      "workobject-api",
+      "actuators"
+    ]
+  },
+  {
+    "key": "user-oneTradeFinance",
+    "name": "PagoNxt One Trade Finance User",
+    "description": "One Trade Finance basic User, where groups are chosen and managed via the Group management Page",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "oneTradeFinanceUser"
+    ],
+    "lookupGroups":[
+      "oneTradeFinanceUser"
+    ],
+    "actionPermissions": {
+      "create": [ "oneTradeFinanceAdministrator" ],
+      "edit": [ "oneTradeFinanceAdministrator" ],
+      "deactivate": [ "oneTradeFinanceAdministrator" ],
+      "activate": [ "oneTradeFinanceAdministrator" ]
+    },
+    "contactFilters": [ "active" ],
+    "allowedFeatures": [
+      "editContactAvatar",
+      "changeOwnPassword"
+    ]
+  }
+]

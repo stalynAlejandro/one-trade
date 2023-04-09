@@ -1,0 +1,20 @@
+[
+  {
+    "product": "CLE",
+    "id": "1",
+    "name": "Impagados",
+    "key": "exportUnpaid"
+  },
+  {
+    "product": "CLE",
+    "id": "2",
+    "name": "Reliquidaciones",
+    "key": "exportReliquidations"
+  },
+  {
+    "product": "CLE",
+    "id": "3",
+    "name": "Otras gestiones",
+    "key": "exportOtherProcedures"
+  }
+]

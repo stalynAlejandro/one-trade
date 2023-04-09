@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd" logicalFilePath="CLE_DOS005">
+    <property name="datetime.type" value="datetime2" dbms="mssql"/>
+    <property name="datetime.type" value="datetime"/>
+    <property name="varchar.type" value="nvarchar" dbms="mssql"/>
+    <property name="varchar.type" value="varchar"/>
+    <property name="serviceDefinitionReferences" value="CLE_S005"/>
+    <changeSet author="flowable" id="1">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="PGN_CLE_ADVANCE_PGN_CLE"/>
+        </preConditions>
+        <dropTable tableName="PGN_CLE_ADVANCE_PGN_CLE"/>
+    </changeSet>
+    <changeSet author="flowable" id="2">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="PGN_CLE_ADVANCE"/>
+        </preConditions>
+        <dropTable tableName="PGN_CLE_ADVANCE"/>
+    </changeSet>
+    <changeSet id="3" author="flowable">
+        <createTable tableName="PGN_CLE_ADVANCE">
+            <column name="CODE" type="${varchar.type}(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ADVANCE_AMOUNT" type="double"/>
+            <column name="ADVANCE_CURRENCY" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_DUE_DATE" type="date"/>
+            <column name="ADVANCE_RISK_LINE_IBAN" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_RISK_LINE_CURRENCY" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_RISK_LINE_AVAILABLE_AMOUNT" type="double"/>
+            <column name="APPROVAL_DATE" type="${datetime.type}(6)"/>
+            <column name="CUSTOMER_FULL_NAME" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_CODE" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_ID" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_SEGMENT" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_EMAIL" type="${varchar.type}(255)"/>
+            <column name="EXCHANGE_INSURANCE_USE_DATE" type="date"/>
+            <column name="EXCHANGE_INSURANCE_AMOUNT_TO_USE" type="double"/>
+            <column name="EXCHANGE_INSURANCE_SELL_CURRENCY" type="${varchar.type}(255)"/>
+            <column name="EXCHANGE_INSURANCE_BUY_CURRENCY" type="${varchar.type}(255)"/>
+            <column name="EXCHANGE_INSURANCE_DETAILS" type="longtext"/>
+            <column name="STATUS" type="${varchar.type}(255)"/>
+            <column name="STATUS_REASON" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_CONTRACT_REFERENCE" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_RISK_LINE_ID" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_RISK_LINE_EXPIRATION_DATE" type="date"/>
+            <column name="CREATION_DATE" type="${datetime.type}(6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="flowable">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="PGN_CLE_ADVANCE_PGN_CLE"></tableExists>
+            </not>
+        </preConditions>
+        <createTable tableName="PGN_CLE_ADVANCE_PGN_CLE">
+            <column name="CLE_ADVANCE_CODE" type="${varchar.type}(255)"/>
+            <column name="CLE_CODE" type="${varchar.type}(255)"/>
+        </createTable>
+        <createIndex tableName="PGN_CLE_ADVANCE_PGN_CLE" indexName="FLW_IDX_PGN_CLE_ADVANCE_PGN_CLE1">
+            <column name="CLE_ADVANCE_CODE"></column>
+        </createIndex>
+        <createIndex tableName="PGN_CLE_ADVANCE_PGN_CLE" indexName="FLW_IDX_PGN_CLE_ADVANCE_PGN_CLE2">
+            <column name="CLE_CODE"></column>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

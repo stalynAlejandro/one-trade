@@ -1,0 +1,45 @@
+work:
+  enabled: true
+  # Saml2 requires ingress sticky sessions when replicas are enabled, but this helm chart does not allow customizing ingress annotations
+  # Sticky sessions: https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/
+  #  replicas: 2
+  image:
+    repository: code-registry.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance/work
+  debug:
+    enabled: true
+    suspend: "n"
+    port: 31416
+  # Uncomment to enable spring profiles, or use --set work.springProfiles=<profile> when invoking helm
+  #  springProfiles: oauth
+  #  springProfiles: saml
+  javaOpts: "-Xms1024m -Xmx1536m -Duser.timezone=\\\"Europe/Madrid\\\""
+  envVariables:
+    # Override the default flowable property, as the mail server will be specified by the client
+    flowable.mail.server.default-from: no-reply@onetradefinance.pagonxt.com
+    flowable.frontend.endpoints.external-app: https://external-app.onetrade.projects.flowable.io
+    flowable.mail.server.password: ""
+    spring.datasource.password: flowable
+    flowable.common.app.idm-admin.password: test
+    spring.datasource.jdbc-url: jdbc:postgresql://onetrade-postgres:5432/flowable
+
+engage:
+  enabled: false
+
+design:
+  image:
+    repository: code-registry.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance/design
+  javaOpts: "-Duser.timezone=\\\"Europe/Madrid\\\""
+  envVariables:
+    spring.datasource.password: flowable
+    flowable.common.app.idm-admin.password: test
+
+control:
+  image:
+    repository: code-registry.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance/control
+  javaOpts: "-Duser.timezone=\\\"Europe/Madrid\\\""
+  envVariables:
+    spring.datasource.password: flowable
+    flowable.common.app.idm-admin.password: test
+
+mailhog:
+  enabled: true

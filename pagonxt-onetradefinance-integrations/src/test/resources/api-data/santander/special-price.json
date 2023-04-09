@@ -1,0 +1,18 @@
+{
+  "conceptId": "D00",
+  "conceptName": "COM.PROT.EFE.RE",
+  "standardPrice": {
+    "standardTiersList": [
+      {
+        "standardAmountTier": 6148.99502,
+        "standardAmountTierType": "I",
+        "standardTermTier": 99999,
+        "standardTermTierType": "D",
+        "standardFixedAmountPrice": {
+          "standardFixedAmount": 12250.006,
+          "currencyCode": "EUR"
+        }
+      }
+    ]
+  }
+}

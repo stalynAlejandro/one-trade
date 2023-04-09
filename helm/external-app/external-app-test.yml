@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: onetrade-external-app-tests
+  labels:
+    app.kubernetes.io/instance: onetrade
+    app.kubernetes.io/name: onetrade-external-app-tests
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: onetrade
+      app.kubernetes.io/name: onetrade-external-app-tests
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: onetrade
+        app.kubernetes.io/name: onetrade-external-app-tests
+      annotations:
+        rollme: SD3456
+    spec:
+      imagePullSecrets:
+        - name: onetrade-tests-flowable-regcred
+      initContainers:
+        - name: check-db-ready
+          image: "postgres:12.3"
+          command: [ 'sh', '-c', 'until pg_isready -h onetrade-tests-postgres -p 5432; do echo waiting for database; sleep 2; done;' ]
+      containers:
+        - name: onetrade-external-app
+          image: "code-registry.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance/external-backend:testing"
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "1"
+              memory: 2Gi
+            requests:
+              cpu: 100m
+              memory: 2Gi
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: jvm-debug
+              containerPort: 31416
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 60
+            timeoutSeconds: 10
+            failureThreshold: 15
+          envFrom:
+            - configMapRef:
+                name: onetrade-external-app-configmap-tests
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /logs
+      volumes:
+        - name: shared-logs
+          emptyDir: { }
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: onetrade-external-app-tests
+  labels:
+    app.kubernetes.io/instance: onetrade
+    app.kubernetes.io/name: onetrade-external-app-tests
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app.kubernetes.io/instance: onetrade
+    app.kubernetes.io/name: onetrade-external-app-tests
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: jvm-debug
+      protocol: TCP
+      port: 31416
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: onetrade-external-app-configmap-tests
+data:
+  JAVA_OPTS: "-Xms1024m -Xmx1024m -Djava.security.egd=file:/dev/./urandom -Duser.timezone=\\\"Europe/Madrid\\\" -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:31416"
+  spring.profiles.active: k8s,saml-dev
+  server.port: "8080"
+  server.use-forward-headers: "true"
+  server.servlet.session.timeout: 1h
+  server.servlet.context-path: /
+  logging.level.root: info
+  logging.file.name: "logs/app.log"
+  "rest-template.flowable-work-url": "http://onetrade-tests-work:8080"
+  rest-template.password: "test"
+  "pagonxt.jasper.resource-path": "/app/resources/"
+  "pagonxt.saml2.idp-metadata-location": "https://dev-63773295.okta.com/app/exk5g09bn6ESjRnhK5d7/sso/saml/metadata"
+  "spring.security.saml2.relyingparty.registration.okta.identityprovider.entity-id": "http://www.okta.com/exk5g09bn6ESjRnhK5d7"
+  "spring.security.saml2.relyingparty.registration.okta.identityprovider.singlesignon.url": "https://dev-63773295.okta.com/app/dev-63773295_externalapptest_1/exk5g09bn6ESjRnhK5d7/sso/saml"

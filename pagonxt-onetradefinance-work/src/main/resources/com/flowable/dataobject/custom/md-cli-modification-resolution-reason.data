@@ -1,0 +1,19 @@
+{
+  "key": "md-cli-modification-resolution-reason",
+  "name": "Import Collection Modification resolution reason",
+  "description": "CLI Modification resolution reasons",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "resolution reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "resolutionReasonId",
+  "idField": "resolutionReasonId",
+  "nameField": "resolutionReason",
+  "variables": {
+    "resolutionType": "resolutionType"
+  }
+}

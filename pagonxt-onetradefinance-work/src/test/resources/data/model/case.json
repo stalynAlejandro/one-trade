@@ -1,0 +1,90 @@
+{
+  "state": "non_draft",
+  "startTime": "2022-07-19T09:19:29.399Z",
+  "variables": [
+    {
+      "name": "userId",
+      "type": "string",
+      "textValue": "userIdValue"
+    },
+    {
+      "name": "operationCustomerID",
+      "type": "string",
+      "textValue": "requestCustomerIdValue"
+    },
+    {
+      "name": "operation",
+      "type": "flowableDataObject",
+      "jsonValue": {
+        "contractReference": "contractReferenceValue",
+        "displayedStatus": "displayedStatusValue"
+      }
+    },
+    {
+      "name": "operationCode",
+      "type": "string",
+      "textValue": "requestCodeValue"
+    },
+    {
+      "name": "product",
+      "type": "string",
+      "textValue": "productValue"
+    },
+    {
+      "name": "event",
+      "type": "string",
+      "textValue": "eventValue"
+    },
+    {
+      "name": "operationPriority",
+      "type": "string",
+      "textValue": "requestPriorityValue"
+    },
+    {
+      "name": "operationAmount",
+      "type": "double",
+      "rawValue": "12.34"
+    },
+    {
+      "name": "operationCurrency",
+      "type": "string",
+      "textValue": "requestCurrencyValue"
+    },
+    {
+      "name": "operationContractReference",
+      "type": "string",
+      "textValue": "contractReferenceValue"
+    },
+    {
+      "name": "operationDisplayedStatus",
+      "type": "string",
+      "textValue": "displayedStatusValue"
+    },
+    {
+      "name": "operationCreationDate",
+      "type": "date",
+      "rawValue": "2022-07-19T09:19:29.399Z",
+      "dateValue": "2022-07-19T09:19:29.399Z"
+    },
+    {
+      "name": "operationCustomerFullName",
+      "type": "string",
+      "textValue": "operationCustomerFullNameValue"
+    },
+    {
+      "name": "operationRequesterDisplayedName",
+      "type": "string",
+      "textValue": "operationRequesterDisplayedNameValue"
+    },
+    {
+      "name": "operationOffice",
+      "type": "string",
+      "textValue": "operationOfficeValue"
+    },
+    {
+      "name": "operationResolution",
+      "type": "string",
+      "textValue": "operationResolutionValue"
+    }
+  ]
+}

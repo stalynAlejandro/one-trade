@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--    ________              ___________                  .___                __      __             __        -->
+    <!--    \_____  \   ____   ___\__    ___/___________     __| _/____           /  \    /  \___________|  | __    -->
+    <!--     /   |   \ /    \_/ __ \|    |  \_  __ \__  \   / __ |/ __ \   ______ \   \/\/   /  _ \_  __ \  |/ /    -->
+    <!--    /    |    \   |  \  ___/|    |   |  | \// __ \_/ /_/ \  ___/  /_____/  \        (  <_> )  | \/    <     -->
+    <!--    \_______  /___|  /\___  >____|   |__|  (____  /\____ |\___  >           \__/\  / \____/|__|  |__|_ \    -->
+    <!--            \/     \/     \/                    \/      \/    \/                 \/                   \/    -->
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>pagonxt-onetradefinance-work</artifactId>
+    <packaging>jar</packaging>
+
+    <name>pagonxt-onetradefinance-work</name>
+    <description>PagoNxt One Trade Finance Flowable Work</description>
+
+    <parent>
+        <groupId>com.pagonxt.onetradefinance</groupId>
+        <artifactId>pagonxt-onetradefinance-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+
+        <!-- Database -->
+        <!-- ======== -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <!-- Flowable Frontend -->
+        <!-- ================= -->
+        <dependency>
+            <groupId>com.flowable.work</groupId>
+            <artifactId>flowable-work-frontend</artifactId>
+        </dependency>
+
+        <!-- Flowable Platform -->
+        <!-- ================= -->
+        <dependency>
+            <groupId>com.flowable.platform</groupId>
+            <artifactId>flowable-spring-boot-starter-platform-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.flowable.platform</groupId>
+            <artifactId>flowable-tenant-setup</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.flowable.platform</groupId>
+            <artifactId>flowable-platform-default-models</artifactId>
+        </dependency>
+
+        <!-- Flowable Inspect -->
+        <!-- ================ -->
+        <dependency>
+            <groupId>com.flowable.inspect</groupId>
+            <artifactId>flowable-spring-boot-starter-inspect-rest</artifactId>
+        </dependency>
+
+        <!-- Flowable Actuators -->
+        <!-- ================== -->
+        <dependency>
+            <groupId>com.flowable.platform</groupId>
+            <artifactId>flowable-spring-boot-starter-platform-actuator</artifactId>
+        </dependency>
+
+        <!-- Logger -->
+        <!-- ======== -->
+        <dependency>
+            <groupId>com.pagonxt.onetradefinance</groupId>
+            <artifactId>pagonxt-onetradefinance-logger</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Spring Boot -->
+        <!-- =========== -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Azure Blob Storage -->
+        <!-- =========== -->
+        <dependency>
+            <groupId>com.flowable.core</groupId>
+            <artifactId>flowable-spring-boot-starter-azure-blob-storage</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-identity</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+
+        <!-- Spring Security SAML2 -->
+        <!-- ===================== -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-saml2-service-provider</artifactId>
+        </dependency>
+
+        <!-- Oauth2 -->
+        <!-- ====== -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+
+        <!-- Testing -->
+        <!-- ======= -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.javacrumbs.json-unit</groupId>
+            <artifactId>json-unit-assertj</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.openpojo</groupId>
+            <artifactId>openpojo</artifactId>
+            <version>0.9.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Frontend customizations module -->
+        <!-- ============================== -->
+        <dependency>
+            <groupId>com.pagonxt.onetradefinance</groupId>
+            <artifactId>pagonxt-onetradefinance-frontend-customizations</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Integrations -->
+        <!-- ============ -->
+        <dependency>
+            <groupId>com.pagonxt.onetradefinance</groupId>
+            <artifactId>pagonxt-onetradefinance-integrations</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Fix CRLF eol on bash scripts -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>ant-test</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <target>
+                                <fixcrlf srcdir="src/main/jib" eol="unix" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Build -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>jib</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>${jib-maven-plugin.version}</version>
+                        <configuration>
+                            <from>
+                                <image>artifacts.flowable.com/flowable/flowable-jre:11.0.7</image>
+                            </from>
+                            <to>
+                                <image>code-registry.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance/work</image>
+                            </to>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.google.cloud.tools</groupId>
+                            <artifactId>jib-maven-plugin</artifactId>
+                            <configuration>
+                                <container>
+                                    <appRoot>/app</appRoot>
+                                    <ports>
+                                        <port>8080</port>
+                                    </ports>
+                                    <environment>
+                                        <JAVA_OPTS>-Xmx1024M</JAVA_OPTS>
+                                        <SERVER_PORT>8080</SERVER_PORT>
+                                    </environment>
+                                    <entrypoint>
+                                        <entrypoint>/flowable-work-entrypoint.sh</entrypoint>
+                                    </entrypoint>
+                                    <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+                                </container>
+                                <extraDirectories>
+                                    <paths>src/main/jib</paths>
+                                    <permissions>
+                                        <permission>
+                                            <file>/flowable-work-entrypoint.sh</file>
+                                            <mode>544</mode> <!-- Read/execute for owner, read for group/other -->
+                                        </permission>
+                                    </permissions>
+                                </extraDirectories>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

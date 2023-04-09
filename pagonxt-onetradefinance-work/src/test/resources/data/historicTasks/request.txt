@@ -1,0 +1,45 @@
+{
+  "from": 15,
+  "size": 5,
+  "sort" : [
+      { "endTime" : "asc" }
+  ]
+,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "operationCode"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.scopeHierarchyType": "root"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.textValueKeyword": "CLE-TEST"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+,        {
+          "exists": {
+            "field": "endTime"
+          }
+        }
+      ]
+    }
+  }
+}

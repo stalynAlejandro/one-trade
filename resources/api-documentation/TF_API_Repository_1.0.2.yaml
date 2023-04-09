@@ -1,0 +1,1309 @@
+openapi: 3.0.1
+tags:
+  - name: accounts
+    description: List of accounts of a client.
+  - name: clients
+    description: Natural persons (individual) or a legal persons that are clients.
+  - name: collectionTypes
+    description: List of collection types for an export collection request.
+  - name: currencies
+    description: List of currencies to perform banking operations.
+  - name: fxDeals
+    description: Fx deals.
+  - name: operationTypes
+    description: List of operation types.
+  - name: riskLines
+    description: List of risk lines of a client.
+  - name: userInfo
+    description: User information
+info:
+  title: TF_API_Repository
+  description: This API allows obtaining data from external repositories (Santander API's) or from an internal data collection (collection type, operation type).
+  contact:
+    name: Flowable
+    url: http://www.flowable.com/
+  version: 1.0.2
+  x-santander-catalogation:
+    bian-landscape-version: Unknown
+    bian-business-area: Unknown
+    bian-business-domain: Unknown
+    bian-service-domain: Unknown
+  x-pagonxt-catalogation:
+    team: Unknown
+    domain: Unknown
+    system: Unknown
+servers:
+- url: https://{host}/tf-api-repository
+  variables:
+      host:
+        description: The environment where the API is hosted. API Version > 1 must be indicated after basepath (e.g /account-manager/v2)
+        enum:
+          # CONSUMO INTERNO
+          - core.onetrade.dub.dev.api.pagonxt.corp
+          - core.onetrade.ams.dev.api.pagonxt.corp
+          - core.onetrade.dub.pre.api.pagonxt.corp
+          - core.onetrade.ams.pre.api.pagonxt.corp
+          - core.onetrade.dub.api.pagonxt.corp
+          - core.onetrade.ams.api.pagonxt.corp
+        default: core.onetrade.ams.dev.api.pagonxt.corp
+security:
+  - JWT: []
+paths:
+  /accounts:
+    get:
+      summary: List all accounts of a client.
+      operationId: getAccountsByClientId
+      description: This method returns a list with the accounts of a client.
+      tags:
+        - accounts
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+        - $ref: '#/components/parameters/client'
+      responses:
+        '200':
+          $ref: '#/components/responses/customerAccountList'
+        '204':
+          $ref: '#/components/responses/noDataResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '414':
+          $ref: '#/components/responses/error414'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /clients:
+    get:
+      summary: Search of a customer
+      operationId: searchClients
+      description: This method search a customer and return its data.
+      tags:
+        - clients
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+        - $ref: '#/components/parameters/name'
+        - $ref: '#/components/parameters/taxId'
+        - $ref: '#/components/parameters/personNumber'
+        - $ref: '#/components/parameters/office'
+      responses:
+        '200':
+          $ref: '#/components/responses/customerList'
+        '204':
+          $ref: '#/components/responses/noDataResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '414':
+          $ref: '#/components/responses/error414'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /collection-types:
+    get:
+      summary: Get a list of collection types.
+      operationId: searchCollectionTypes
+      description: This method returns a list of collection types for an export collection request.
+      tags:
+        - collectionTypes
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+        - $ref: '#/components/parameters/productId'
+        - $ref: '#/components/parameters/currency'
+      responses:
+        '200':
+          $ref: '#/components/responses/collectionType'
+        '204':
+          $ref: '#/components/responses/noDataResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '414':
+          $ref: '#/components/responses/error414'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /currencies:
+    get:
+      summary: List all currencies
+      operationId: getCurrencies
+      description: This method allows to obtain a list of currencies to perform banking operations.
+      tags:
+        - currencies
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+        - $ref: '#/components/parameters/product'
+        - $ref: '#/components/parameters/event'
+      responses:
+        '200':
+          $ref: '#/components/responses/currencyList'
+        '204':
+          $ref: '#/components/responses/noDataResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '414':
+          $ref: '#/components/responses/error414'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /fx-deals:
+    get:
+      operationId: getExchangeInsurances
+      tags:
+       - fxDeals
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+        - $ref: '#/components/parameters/customerId'
+        - $ref: '#/components/parameters/currencyBuy'
+        - $ref: '#/components/parameters/currencySell'
+        - $ref: '#/components/parameters/buy'
+        - $ref: '#/components/parameters/amount'
+      responses:
+        '200':
+          $ref: '#/components/responses/exchangeInsurance'
+        '204':
+          $ref: '#/components/responses/noDataResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '414':
+          $ref: '#/components/responses/error414'
+        '415':
+          $ref: '#/components/responses/error415'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /operation-types:
+    get:
+      summary: Search operation types by product
+      operationId: searchOperationTypes
+      description: This method returns a list of operation types.
+      tags:
+        - operationTypes
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+        - $ref: '#/components/parameters/productId'
+      responses:
+        '200':
+          $ref: '#/components/responses/operationType'
+        '204':
+          $ref: '#/components/responses/noDataResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '413':
+          $ref: '#/components/responses/error413'
+        '414':
+          $ref: '#/components/responses/error414'
+        '415':
+          $ref: '#/components/responses/error415'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /risk-lines:
+    get:
+      summary: Retrieve risk lines
+      operationId: getRiskLinesByClientId
+      description: This method returns a list with the accounts of a client.
+      tags:
+        - riskLines
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+        - $ref: '#/components/parameters/client'
+        - $ref: '#/components/parameters/productId'
+        - $ref: '#/components/parameters/expirationDate'
+        - $ref: '#/components/parameters/operationAmount'
+        - $ref: '#/components/parameters/operationCurrency'
+      responses:
+        '200':
+          $ref: '#/components/responses/riskLine'
+        '204':
+          $ref: '#/components/responses/noDataResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '413':
+          $ref: '#/components/responses/error413'
+        '414':
+          $ref: '#/components/responses/error414'
+        '415':
+          $ref: '#/components/responses/error415'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /user-info:
+    get:
+      summary: Retrieve user info
+      operationId: getUserInfo
+      description: Retrieve user info
+      tags:
+        - userInfo
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/controllerResponse'
+        '204':
+          $ref: '#/components/responses/noDataResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '413':
+          $ref: '#/components/responses/error413'
+        '414':
+          $ref: '#/components/responses/error414'
+        '415':
+          $ref: '#/components/responses/error415'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+components:
+  schemas:
+    AccountDto:
+      type: object
+      description: Account details.
+      properties:
+        id:
+          type: string
+          description: Account id.
+          example: '001001'
+        iban:
+          type: string
+          description: IBAN, international bank account number.
+          example: PT50 0002 0123 5678 9015 1
+        currency:
+          type: string
+          description: Type of currency associated to the account.
+          example: EUR
+    CollectionTypeDto:
+      type: object
+      description: Collection Type details.
+      properties:
+        id:
+          type: string
+          description: Collection type id.
+          pattern: '^[0-9]*$'
+          minLength: 13
+          maxLength: 13
+          example: '6556010000001'
+        label:
+          type: string
+          description: Name of the collection type.
+          pattern: '^[a-zA-Zá-ú-_0-9 ]*$'
+          minLength: 1
+          maxLength: 255
+          example: Electronic Managament
+        product:
+          type: string
+          description: Product id.
+          pattern: '^[A-Z]*$'
+          minLength: 3
+          maxLength: 3
+          example: CLE
+        key:
+          type: string
+          description: Key to identify the collection type.
+          pattern: '^[a-zA-Z0-9_]*$'
+          minLength: 1
+          maxLength: 255
+          example: electronicManagament
+    ControllerResponse:
+      type: object
+      description: Response received in the external app.
+      properties:
+        type:
+          type: string
+          description: Response type.
+          example: 'success'
+        key:
+          type: string
+          description: Response key.
+          example: userInfoFound
+        message:
+          type: string
+          description: Response message.
+          example: message
+        arguments:
+          type: array
+          description: Response arguments.
+          items:
+            type: string
+          maxItems: 50
+        entity:
+          $ref: '#/components/schemas/UserInfoDto'
+    CurrencyList:
+      type: array
+      description: List with currencies.
+      items:
+        $ref: '#/components/schemas/CurrencyDto'
+      maxItems: 500
+    CurrencyDto:
+      type: object
+      description: Currency details.
+      properties:
+        id:
+          type: string
+          description: Currency id.
+          pattern: '^[A-Z]*$'
+          minLength: 3
+          maxLength: 3
+          example: EUR
+        currency:
+          type: string
+          description: Currency name.
+          pattern: '^[A-Z]*$'
+          minLength: 3
+          maxLength: 3
+          example: EUR
+    CustomerAccountList:
+      type: object
+      description: List with the customer accounts.
+      properties:
+        client:
+          type: string
+          description: Client id.
+          example: BUC-1234567
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountDto'
+          maxItems: 50
+    CustomerDto:
+      type: object
+      description: Customer details.
+      properties:
+        customerId:
+          type: string
+          description: customer id.
+          example: '001'
+        name:
+          type: string
+          description: Customer name.
+          example: customer S.L.
+        taxId:
+          type: string
+          description: The Tax Identification Number.
+          example: B1234567
+        office:
+          type: string
+          description: Office id.
+          example: '1234'
+        personNumber:
+          type: string
+          description: Internal identification assigned to the customer.
+          example: BUC-1234567
+        segment:
+          type: string
+          description: Customer segment.
+          example: SME
+        email:
+          type: string
+          description: Customer email.
+          example: customer@domain.com
+    ExchangeInsuranceDto:
+      type: object
+      description: Exchange Insurace details.
+      properties:
+        exchangeInsuranceId:
+          type: string
+          description: Exchange Insurance Id.
+          example: '7763095'
+        type:
+          type: string
+          description: Type.
+          example: forward_usa
+        useDate:
+          type: string
+          description: Use Date.
+          example: '2022-06-30T00:00:00.000+02:00'
+        sellAmount:
+          type: string
+          description: Sell Amount.
+          example: '2364.61'
+        sellCurrency:
+          type: string
+          description: Sell Currency.
+          example: EUR
+        buyAmount:
+          type: string
+          description: Buy Amount.
+          example: '2000.00'
+        buyCurrency:
+          type: string
+          description: Buy Currency.
+          example: 'GBP'
+        exchangeRate:
+          type: string
+          description: Exchange Rate.
+          example: '1.1623'
+        useAmount:
+          type: string
+          description: Use Amount.
+          example: '10.00'
+    OperationTypeDto:
+      type: object
+      description: operation type details
+      properties:
+        id:
+          type: string
+          description: Internal identifier for an operation type.
+          pattern: '^[0-9]*$'
+          minLength: 1
+          maxLength: 13
+          example: '1'
+        label:
+          type: string
+          description: Name of the operation type.
+          pattern: '^[a-zA-Zá-ú-_0-9 ]*$'
+          minLength: 1
+          maxLength: 255
+          example: Reliquidations
+        product:
+          type: string
+          description: Product id.
+          pattern: '^[A-Z]*$'
+          minLength: 3
+          maxLength: 3
+          example: CLE
+        key:
+          type: string
+          description: Key to identify the operation type.
+          pattern: '^[a-zA-Z0-9_]*$'
+          minLength: 1
+          maxLength: 255
+          example: exportReliquidations
+    RiskLineDto:
+      type: object
+      description: Risk line details.
+      properties:
+        riskLineId:
+          type: string
+          description: Risk line identifier.
+          example: '001'
+        client:
+          type: string
+          description: Client identifier.
+          example: BUC-1234567
+        iban:
+          type: string
+          description: IBAN, international bank account number.
+          example: PT50 0002 0123 5678 9015 1
+        status:
+          type: string
+          description: Risk line status.
+          example: approved
+        limitAmount:
+          type: string
+          description: limit amount
+          example: '1020'
+        availableAmount:
+          type: string
+          description: available amount
+          example: '1020'
+        expires:
+          type: string
+          description: expiration date
+          example: '2020-06-26T00:00:00.000+02:00'
+        currency:
+          type: string
+          description: risk line currency
+          example: EUR
+    UserInfoDto:
+      type: object
+      description: Requester info
+      properties:
+        userId:
+          type: string
+          description: User id.
+          example: admin
+        userDisplayedName:
+          type: string
+          description: User displayed name.
+          example: Admin
+        userType:
+          type: string
+          description: User type.
+          example: OFFICE
+        country:
+          type: string
+          description: Country.
+          example: ES
+        middleOffice:
+          type: string
+          description: Middle Office Id.
+          example: '8911'
+        office:
+          type: string
+          description: Office Id.
+          example: '1234'
+        email:
+          type: string
+          description: User email.
+          example: customer@domain.com
+    Error:
+      type: object
+      description: Data structure containing the error details
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: Unique alphanumeric human readable error code
+          example: XXX
+          pattern: '^[a-zA-Z_0-9 ]*$'
+          maxLength: 25
+          minLength: 1
+        message:
+          type: string
+          description: Brief summary of the reported issue
+          example: Message
+          pattern: '^[a-zA-Z0-9. /_-]*$'
+          maxLength: 255
+          minLength: 1
+        level:
+          type: string
+          description: |-
+            Level of the reported issue.
+            The possible values are.
+            - ERROR
+            - FATAL
+            - INFO
+            - WARNING
+          enum:
+            - ERROR
+            - FATAL
+            - INFO
+            - WARNING
+          example: ERROR
+        description:
+          type: string
+          description: Detailed description of the reported issue
+          example: Description
+          pattern: '^[a-zA-Z0-9. /_-]*$'
+          maxLength: 255
+          minLength: 1
+      required:
+        - code
+        - message
+        - level
+        - description
+    Errors:
+      type: object
+      description: Data structure containing the details for errors
+      properties:
+        errors:
+          type: array
+          description: Array of errors
+          items:
+            $ref: '#/components/schemas/Error'
+          maxItems: 50
+          minItems: 0
+      required:
+        - errors
+      additionalProperties: false
+  parameters:
+    header-X-B3-ParentSpanId:
+      name: x-b3-parentspanid
+      in: header
+      description: Position of the parent operation in the trace tree. The value is 64 bits long. The value is omitted when the span is the root of the trace tree.
+      example: '0020000000000001'
+      schema:
+        type: string
+        maxLength: 32
+        minLength: 0
+        pattern: '^[a-zA-Z0-9_]*$'
+    header-X-B3-Sampled:
+      name: x-b3-sampled
+      in: header
+      description: |-
+        Sampling decision. Sampling is a mechanism to reduce the volume of data in the tracing system.
+        In B3, sampling applies consistently per-trace: once the sampling decision is made,
+        the same value must be consistently sent downstream. This means that either all or no spans share a trace ID.
+        The possible values are:
+        - 0 = Deny
+        - 1 = Accept
+      example: '1'
+      schema:
+        type: string
+        maxLength: 32
+        minLength: 0
+        pattern: '^[a-zA-Z0-9_]*$'
+    header-X-B3-SpanId:
+      name: x-b3-spanid
+      in: header
+      description: 'Position of the current operation in the trace tree. The value is 64 bits long. Do not interpret the value: it may or may not be derived from the value of the TraceId.'
+      example: a2fb4a1d1a96d312
+      schema:
+        type: string
+        maxLength: 32
+        minLength: 0
+        pattern: '^[a-zA-Z0-9_]*$'
+    header-X-B3-TraceId:
+      name: x-b3-traceid
+      in: header
+      description: 'Overall ID of the trace, shared by every span in the trace. The value is 64 or 128 bits long.'
+      example: 463ac35c9f6413ad48485a3953bb6124
+      schema:
+        type: string
+        maxLength: 32
+        minLength: 0
+        pattern: '^[a-zA-Z0-9_]*$'
+    header-X-Santander-Client-Id:
+      name: x-santander-client-id
+      required: true
+      in: header
+      description: Client ID header
+      example: a1b30a84-7bf3-442e-84a0-e935d8163b5a
+      schema:
+        type: string
+        maxLength: 36
+        minLength: 36
+        pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+    client:
+      in: query
+      name: client
+      description: Client id.
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 50
+      example: BUC-1234567
+    name:
+      in: query
+      name: name
+      description: Customer name.
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 50
+      example: customer S.L.
+    taxId:
+      in: query
+      name: tax_id
+      description: The Tax Identification Number (NIF, CIF,...).
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 50
+      example: B1234567
+    personNumber:
+      in: query
+      name: person_number
+      description: Internal identification assigned to the customer.
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 50
+      example: BUC-1234567
+    office:
+      in: query
+      name: office
+      description: office id.
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 10
+      example: '1234'
+    productId:
+      in: query
+      name: product_id
+      description: Product id.
+      required: true
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 3
+        pattern: '^[A-Z]{3}$'
+      example: CLE
+    currency:
+      in: query
+      name: currency
+      description: Type of currency to be used.
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 3
+        pattern: '^[A-Z]{3}$'
+      example: EUR
+    product:
+      in: query
+      name: product
+      description: Product id.
+      required: true
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 3
+        pattern: '^[A-Z]{3}$'
+      example: CLE
+    event:
+      in: query
+      name: event
+      description: Name of the started event.
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-Za-z0-9-_ ]*$'
+        minLength: 1
+        maxLength: 50
+      example: REQUEST
+    customerId:
+      in: query
+      name: customer_id
+      description: Customer id.
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 50
+      example: BUC-1234567
+    currencyBuy:
+      in: query
+      name: currency_buy
+      description: Currency buy.
+      required: true
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 3
+        pattern: '^[A-Z]{3}$'
+      example: ETB
+    currencySell:
+      in: query
+      name: currency_sell
+      description: Currency sell.
+      required: true
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 3
+        pattern: '^[A-Z]{3}$'
+      example: EUR
+    buy:
+      in: query
+      name: buy
+      description: Buy query
+      required: true
+      schema:
+        type: boolean
+      example: true
+    amount:
+      in: query
+      name: amount
+      description: Amount.
+      required: true
+      schema:
+        type: number
+        maximum: 9999999999.99
+      example: 56.113
+    expirationDate:
+      in: query
+      name: expiration_date
+      description: Expiration date.
+      required: false
+      schema:
+        type: string
+        pattern: '^\d{4}-\d{2}-\d{2}$'
+        minLength: 10
+        maxLength: 10
+      example: '2022-12-02'
+    operationAmount:
+      in: query
+      name: operation_amount
+      description: Operation amount.
+      required: false
+      schema:
+        type: number
+        maximum: 9999999999.99
+      example: 414.5
+    operationCurrency:
+      in: query
+      name: operation_currency
+      description: Operation currency.
+      required: false
+      schema:
+        type: string
+        pattern: '^[A-Z]{3}$'
+        minLength: 3
+        maxLength: 3
+      example: EUR
+  responses:
+    customerAccountList:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomerAccountList'
+    customerList:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomerDto'
+    collectionType:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CollectionTypeDto'
+    controllerResponse:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ControllerResponse'
+    currencyList:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CurrencyList'
+    exchangeInsurance:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExchangeInsuranceDto'
+    operationType:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OperationTypeDto'
+    riskLine:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RiskLineDto'
+    noDataResponse:
+      description: No content response
+    error400:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err400Example:
+              $ref: '#/components/examples/err400Example'
+    error401:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err401Example:
+              $ref: '#/components/examples/err401Example'
+    error403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err403Example:
+              $ref: '#/components/examples/err403Example'
+    error404:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err404Example:
+              $ref: '#/components/examples/err404Example'
+    error405:
+      description: Method Not Allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err405Example:
+              $ref: '#/components/examples/err405Example'
+    error406:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err406Example:
+              $ref: '#/components/examples/err406Example'
+    error413:
+      description: Payload Too Large
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err413Example:
+              $ref: '#/components/examples/err413Example'
+    error414:
+      description: URI Too Long
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err414Example:
+              $ref: '#/components/examples/err414Example'
+    error415:
+      description: Unsupported Media Type
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err415Example:
+              $ref: '#/components/examples/err415Example'
+    error422:
+      description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err422Example:
+              $ref: '#/components/examples/err422Example'
+    error429:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err429Example:
+              $ref: '#/components/examples/err429Example'
+    error500:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err500Example:
+              $ref: '#/components/examples/err500Example'
+    error503:
+      description: Service unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err503Example:
+              $ref: '#/components/examples/err503Example'
+    error504:
+      description: Gateway timeout
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err504Example:
+              $ref: '#/components/examples/err504Example'
+    errorDefault:
+      description: Default error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            errDefaultExample:
+              $ref: '#/components/examples/errDefaultExample'
+  examples:
+    errDefaultExample:
+      value:
+        errors:
+          - code: '500'
+            level: FATAL
+            message: Internal Server Error
+            description: Error description
+    err400Example:
+      value:
+        errors:
+          - code: '400'
+            level: ERROR
+            message: Bad Request
+            description: Error validating schema
+    err401Example:
+      value:
+        errors:
+          - code: '401'
+            message: Unauthorized
+            level: ERROR
+            description: Unauthorized description
+    err403Example:
+      value:
+        errors:
+          - code: '403'
+            level: ERROR
+            message: Forbidden
+            description: Forbidden description
+    err404Example:
+      value:
+        errors:
+          - code: '404'
+            level: ERROR
+            message: Not Found
+            description: Not Found description
+    err405Example:
+      value:
+        errors:
+          - code: '405'
+            level: ERROR
+            message: Method not allowed
+            description: The request method is known by the server but is not supported by the target resource.
+    err406Example:
+      value:
+        errors:
+          - code: '406'
+            level: ERROR
+            message: Not Acceptable
+            description: Not Acceptable description
+    err413Example:
+      value:
+        errors:
+          - code: '413'
+            level: FATAL
+            message: Payload Too Large
+            description: Payload Too Large description
+    err414Example:
+      value:
+        errors:
+          - code: '414'
+            level: FATAL
+            message: URI Too Long
+            description: URI Too Long description
+    err415Example:
+      value:
+        errors:
+          - code: UNSUPPORTED_MEDIA_TYPE
+            level: FATAL
+            message: Unsupported Media Type
+            description: Unsupported Media Type description
+    err422Example:
+      value:
+        errors:
+          - code: '422'
+            level: ERROR
+            message: Unprocessable Entity
+            description: Unprocessable Entity description
+    err429Example:
+      value:
+        errors:
+          - code: '429'
+            level: ERROR
+            message: Too Many Requests
+            description: Too Many Requests description
+    err500Example:
+      value:
+        errors:
+          - code: '500'
+            level: FATAL
+            message: Internal server error
+            description: Internal server error description
+    err503Example:
+      value:
+        errors:
+          - code: '503'
+            level: ERROR
+            message: Service unavailable
+            description: Service unavailable error description
+    err504Example:
+      value:
+        errors:
+          - code: '504'
+            level: ERROR
+            message: Gateway timeout
+            description: Gateway timeout error description
+
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT authentication security
+

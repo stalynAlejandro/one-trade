@@ -1,0 +1,115 @@
+{
+  "Palette-Id": "pagonxt-bpmn-palette-extension",
+  "title": "Pagonxt BPMN Palette Extension",
+  "patchPalettes": [
+    "flowable-process-palette"
+  ],
+  "groups": {
+    "pagonxt": {
+      "index": 10
+    }
+  },
+  "resourceBundles": [
+    "com/flowable/config/custom/palette/process-palette-translation"
+  ],
+  "stencils": [
+    {
+      "id": "pagoNxtFormTask",
+      "name": "PagoNxtFormTask",
+      "superId": "FormTask",
+      "groups": [
+        "pagonxt",
+        "flowable-quick-draw"
+      ],
+      "properties": [
+        {
+          "id": "disallowedUserExpression",
+          "name": "Disallowed User Expression",
+          "category": "assignment",
+          "optional": true,
+          "exportAsExtensionElement": true,
+          "index": 71
+        },
+        {
+          "id": "completionUserVariable",
+          "category": "assignment",
+          "name": "Completion User Variable",
+          "optional": true,
+          "exportAsExtensionElement": true,
+          "index": 70
+        },
+        {
+          "id": "userTaskLabels",
+          "type": "Complex",
+          "category": "classification",
+          "name": "User task labels",
+          "optional": true,
+          "exportAsExtensionElement": true,
+          "index": 131,
+          "complexItems": [{
+                "id": "label",
+                "type": "SimpleText",
+                "title": "Label"
+             }]
+        },
+        {
+          "id": "categoryL1",
+          "category": "classification",
+          "name": "Category L1",
+          "optional": true,
+          "exportAsExtensionElement": true,
+          "index": 132
+        },
+        {
+          "id": "categoryL2",
+          "category": "classification",
+          "name": "Category L2",
+          "optional": true,
+          "exportAsExtensionElement": true,
+          "index": 133
+        },
+        {
+          "id": "categoryL3",
+          "category": "classification",
+          "name": "Category L3",
+          "optional": true,
+          "exportAsExtensionElement": true,
+          "index": 134
+        }
+      ]
+    },
+    {
+        "id": "pagoNxtExternalFormTask",
+        "name": "PagoNxtExternalFormTask",
+        "superId": "pagoNxtFormTask",
+        "groups": [
+            "pagonxt",
+            "flowable-quick-draw"
+        ],
+        "properties": [
+            {
+                "id": "isExternalTask",
+                "name": "Is a external user task",
+                "category": "externalUserTask",
+                "type": "Boolean",
+                "value": true,
+                "readonly": true,
+                "runtime": true,
+                "exportAsExtensionElement": true,
+                "index": 135
+            },
+            {
+                "id": "externalTaskType",
+                "name": "External task type",
+                "category": "externalUserTask",
+                "type": "SimpleTextExpression",
+                "optional": false,
+                "readonly": false,
+                "visible": true,
+                "exportAsExtensionElement": true,
+                "index": 136
+            }
+        ]
+    }
+  ]
+}

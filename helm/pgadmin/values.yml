@@ -1,0 +1,34 @@
+
+ingress:
+  enabled: false
+
+extraSecretMounts:
+  - name: pgpassfile
+    secret: pgadmin4-pgpassfile
+    subPath: pgadmin4-pgpassfile
+    mountPath: "/var/lib/pgadmin/storage/admin.pagonxt_onetradefinance.pagonxt.com/file.pgpass"
+    readOnly: true
+  - name: serversfile
+    secret: pgadmin4-servers
+    subPath: pgadmin4-servers
+    mountPath: "/var/lib/pgadmin/storage/admin.pagonxt_onetradefinance.pagonxt.com/servers.json"
+    readOnly: true
+
+existingSecret: pgadmin4-password
+
+env:
+  email: admin.pagonxt@onetradefinance.pagonxt.com
+  pgpassfile: /var/lib/pgadmin/storage/admin.pagonxt_onetradefinance.pagonxt.com/file.pgpass
+
+VolumePermissions:
+  enabled: true
+
+extraInitContainers: |
+  - name: add-folder-for-pgpass
+    image: "dpage/pgadmin4:4.23"
+    command: ["/bin/mkdir", "-p", "/var/lib/pgadmin/storage/admin.pagonxt_onetradefinance.pagonxt.com"]
+    volumeMounts:
+      - name: pgadmin-data
+        mountPath: /var/lib/pgadmin
+    securityContext:
+      runAsUser: 5050

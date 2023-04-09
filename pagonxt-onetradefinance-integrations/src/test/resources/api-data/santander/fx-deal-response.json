@@ -1,0 +1,66 @@
+{
+  "fxDealList": [
+    {
+      "_fxDealDetailsLink": {
+        "fxDealId": "id1",
+        "fxDealType": "Forward USA",
+        "direction": "buy",
+        "sellTotalAmount": {
+          "amount": 1234.45,
+          "currency": "EUR"
+        },
+        "sellAvailableAmount": {
+          "amount": 234.45,
+          "currency": "EUR"
+        },
+        "buyTotalAmount": {
+          "amount": 1134.45,
+          "currency": "GBP"
+        },
+        "buyAvailableAmount": {
+          "amount": 134.45,
+          "currency": "GBP"
+        },
+        "exchangeRate": 1.23,
+        "signToApplyChange": "D",
+        "fxDealStartDate": "2019-10-21",
+        "fxDealExpirationDate": "2019-10-22",
+        "fxDealUseDate": "2019-10-23"
+      }
+    },
+    {
+      "_fxDealDetailsLink": {
+        "fxDealId": "id2",
+        "fxDealType": "Standard",
+        "direction": "sell",
+        "sellTotalAmount": {
+          "amount": 4321.45,
+          "currency": "EUR"
+        },
+        "sellAvailableAmount": {
+          "amount": 432.45,
+          "currency": "EUR"
+        },
+        "buyTotalAmount": {
+          "amount": 4343.45,
+          "currency": "GBP"
+        },
+        "buyAvailableAmount": {
+          "amount": 434.45,
+          "currency": "GBP"
+        },
+        "exchangeRate": 1.21,
+        "signToApplyChange": "M",
+        "fxDealStartDate": "2019-11-21",
+        "fxDealExpirationDate": "2019-11-22",
+        "fxDealUseDate": "2019-11-23"
+      }
+    }
+  ],
+  "_links": {
+    "_first": "href:/fx_deals/_offset=1&_limit=5",
+    "_prev": "href:/fx_deals?_offset=2&_limit=5",
+    "_next": "href:/fx_deals?_offset=4&_limit=5",
+    "_last": "href:/fx_deals?_offset=4&_limit=10"
+  }
+}

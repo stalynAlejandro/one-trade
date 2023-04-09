@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-other-operations-reliquidations-cancel-reason",
+  "name": "Export Collection Other Operations Reliquidations Cancel reason",
+  "description": "CLE Advance other operations reliquidations cancel reason",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "cancel reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "cancelReasonId",
+  "idField": "cancelReasonId",
+  "nameField": "cancelReason"
+}

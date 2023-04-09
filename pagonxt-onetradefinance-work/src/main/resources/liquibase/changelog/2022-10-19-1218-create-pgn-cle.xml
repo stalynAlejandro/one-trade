@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd" logicalFilePath="CLE_DOS003">
+    <property name="datetime.type" value="datetime2" dbms="mssql"/>
+    <property name="datetime.type" value="datetime"/>
+    <property name="varchar.type" value="nvarchar" dbms="mssql"/>
+    <property name="varchar.type" value="varchar"/>
+    <property name="serviceDefinitionReferences" value="CLE_S003"/>
+    <changeSet author="flowable" id="1">
+        <preConditions onFail="MARK_RAN"><tableExists tableName="PGN_CLE"/></preConditions>
+        <dropTable tableName="PGN_CLE"/>
+    </changeSet>
+    <changeSet id="2" author="flowable">
+        <createTable tableName="PGN_CLE">
+            <column name="CODE" type="${varchar.type}(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APPROVAL_DATE" type="${datetime.type}(6)"/>
+            <column name="AMOUNT" type="double"/>
+            <column name="APPLYING_FOR_ADVANCE" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_DUE_DATE" type="date"/>
+            <column name="ADVANCE_CURRENCY" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_AMOUNT" type="double"/>
+            <column name="CONTRACT_REFERENCE" type="${varchar.type}(255)"/>
+            <column name="STATUS" type="${varchar.type}(255)"/>
+            <column name="STATUS_REASON" type="${varchar.type}(255)"/>
+            <column name="COUNTRY" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_FULL_NAME" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_ID" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_CODE" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_SEGMENT" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_EMAIL" type="${varchar.type}(255)"/>
+            <column name="CURRENCY" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_HAS_ACCOUNT" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_PRICES_AGREEMENT_COLLECTED" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_RISK_LINE_ID" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_RISK_LINE_IBAN" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_RISK_LINE_AVAILABLE_AMOUNT" type="double"/>
+            <column name="ADVANCE_RISK_LINE_EXPIRATION" type="date"/>
+            <column name="NOMINAL_ACCOUNT_CURRENCY" type="${varchar.type}(255)"/>
+            <column name="NOMINAL_ACCOUNT_IBAN" type="${varchar.type}(255)"/>
+            <column name="NOMINAL_ACCOUNT_ID" type="${varchar.type}(255)"/>
+            <column name="COMMISSION_ACCOUNT_CURRENCY" type="${varchar.type}(255)"/>
+            <column name="COMMISSION_ACCOUNT_IBAN" type="${varchar.type}(255)"/>
+            <column name="COMMISSION_ACCOUNT_ID" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_REFERENCE" type="${varchar.type}(255)"/>
+            <column name="DEBTOR_NAME" type="${varchar.type}(255)"/>
+            <column name="DEBTOR_BANK" type="${varchar.type}(255)"/>
+            <column name="COLLECTION_TYPE" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_RISK_LINE_CURRENCY" type="${varchar.type}(255)"/>
+            <column name="CREATION_DATE" type="${datetime.type}(6)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

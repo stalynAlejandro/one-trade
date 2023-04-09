@@ -1,0 +1,15 @@
+  "sort" : [
+    {
+      "variables.dateValue" : {
+        "order" : "desc",
+        "nested": {
+          "path": "variables",
+          "filter": {
+            "term": {
+              "variables.name": "variable"
+            }
+          }
+        }
+      }
+    }
+  ]

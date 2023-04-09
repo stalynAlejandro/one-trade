@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="26ce422b-2245-4c12-a060-4aad93fd3ecd">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
+	<style name="Style1" mode="Opaque" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{odd}.toString().equals("false")]]></conditionExpression>
+			<style backcolor="#F2F2F2"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="Comission dataset" uuid="44734592-1968-49fa-81cc-fb5a8223f2ca">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString language="XPath">
+			<![CDATA[]]>
+		</queryString>
+		<field name="concept" class="java.lang.String"/>
+		<field name="periodicity" class="java.lang.String"/>
+		<field name="percentage" class="java.lang.Double"/>
+		<field name="value" class="java.lang.Double"/>
+		<field name="odd" class="java.lang.Boolean"/>
+	</subDataset>
+	<parameter name="OUR_REFERENCE" class="java.lang.String"/>
+	<parameter name="AMOUNT" class="java.lang.String"/>
+	<parameter name="OFFICE_ID" class="java.lang.String"/>
+	<parameter name="OFFICE_ADDRESS" class="java.lang.String"/>
+	<parameter name="OFFICE_ADDRESS_COUNTRY" class="java.lang.String"/>
+	<parameter name="CUSTOMER_NAME" class="java.lang.String"/>
+	<parameter name="CUSTOMER_ADDRESS" class="java.lang.String"/>
+	<parameter name="CUSTOMER_ADDRESS_LOCALITY" class="java.lang.String"/>
+	<parameter name="CUSTOMER_ADDRESS_PROVINCE" class="java.lang.String"/>
+	<parameter name="CUSTOMER_ADDRESS_COUNTRY" class="java.lang.String"/>
+	<parameter name="CLIENT_REFERENCE" class="java.lang.String"/>
+	<parameter name="DEBTOR" class="java.lang.String"/>
+	<parameter name="DEBTOR_BANK" class="java.lang.String"/>
+	<parameter name="BENEFICIARY" class="java.lang.String"/>
+	<parameter name="BENEFICIARY_BANK" class="java.lang.String"/>
+	<parameter name="BASE_PATH" class="java.lang.String">
+		<defaultValueExpression><![CDATA["."]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_DATE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format(new Date())]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CURRENCY_CODE" class="java.lang.String"/>
+	<queryString language="XPath">
+		<![CDATA[*]]>
+	</queryString>
+	<field name="concept" class="java.lang.String">
+		<fieldDescription><![CDATA[concept]]></fieldDescription>
+	</field>
+	<field name="periodicity" class="java.lang.String">
+		<fieldDescription><![CDATA[periodicity]]></fieldDescription>
+	</field>
+	<field name="percentage" class="java.lang.String">
+		<fieldDescription><![CDATA[percentage]]></fieldDescription>
+	</field>
+	<field name="value" class="java.lang.String">
+		<fieldDescription><![CDATA[value]]></fieldDescription>
+	</field>
+	<field name="odd" class="java.lang.Boolean"/>
+	<variable name="concept1" class="java.lang.Integer" resetType="Group" resetGroup="Reference Data" calculation="Count">
+		<variableExpression><![CDATA[$F{concept}]]></variableExpression>
+	</variable>
+	<group name="Reference Data">
+		<groupHeader>
+			<band height="370">
+				<staticText>
+					<reportElement x="23" y="266" width="455" height="30" uuid="6edc5678-dddc-4268-8821-c06fb55545a2">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<text><![CDATA[Nos ponemos en contacto con usted para infomarle de las comisiones que aplican al remesa referida más arriba.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="236" width="126" height="13" uuid="3b070347-2709-430a-816d-5089880d7edb">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<text><![CDATA[Muy Sr (es) nuestro (s):]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="310" width="116" height="20" uuid="8864c18c-6538-43b9-95b9-8af7531550a2">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<text><![CDATA[Comisiones:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="209" width="157" height="13" uuid="2cfe3557-1b26-402b-a546-c84250c45561">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<text><![CDATA[Importe:]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="190" y="157" width="126" height="13" forecolor="#000000" uuid="a28d2dec-cc72-417b-9c76-0410d8e1bc04">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="10"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{OUR_REFERENCE}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="23" y="183" width="157" height="13" uuid="26922644-272e-4d37-9387-9e6bc2ac615d">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<text><![CDATA[Beneficiario / Exportador:]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="190" y="196" width="126" height="13" forecolor="#000000" uuid="95e9bf20-3b66-48c9-8608-2b4b767b5029">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{BENEFICIARY_BANK}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="190" y="170" width="126" height="13" forecolor="#000000" uuid="06800421-81d4-463a-a476-aa58c4bd506c">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{CLIENT_REFERENCE}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="23" y="157" width="157" height="13" uuid="dd085c14-138a-4fa8-bc1e-124bae3bd277">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="10"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[Nuestra Referencia:]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="215" y="209" width="101" height="13" forecolor="#000000" uuid="f4e3defb-b71a-4bac-a408-b6cf94643a07">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{AMOUNT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="190" y="183" width="126" height="13" forecolor="#000000" uuid="88870906-6770-47e3-acf9-1c6d29d76ff3">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{BENEFICIARY}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="23" y="196" width="157" height="13" uuid="a5847402-1373-499b-b404-4e5f3cdca07e">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<text><![CDATA[Banco del beneficiario:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="170" width="157" height="13" uuid="6768e39e-877b-44f0-a64d-21e316ce48ee">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<text><![CDATA[Referencia cliente:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="71" width="126" height="13" uuid="e9bad8ae-4039-47e9-94e1-a071bd2cd533">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="10"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[Banco Santander]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="288" y="97" width="126" height="13" forecolor="#000000" uuid="664341aa-494a-4408-b867-bff7bfc8b2a5">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{CUSTOMER_ADDRESS_LOCALITY}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="23" y="97" width="126" height="13" forecolor="#000000" uuid="e7f61c02-5075-4504-92e8-9ad461eaba2a">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{OFFICE_ADDRESS}]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement x="17" y="33" width="120" height="32" uuid="01f801a9-afce-4e51-bbdd-939d2b881567">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<imageExpression><![CDATA["pagonxt-onetradefinance-external-backend/src/main/resources/jrxml/SantanderLogo.png"]]></imageExpression>
+				</image>
+				<textField>
+					<reportElement mode="Opaque" x="23" y="110" width="126" height="13" forecolor="#000000" uuid="00f817af-d60b-46e1-b2b8-0365717ddfea">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{OFFICE_ADDRESS_COUNTRY}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="23" y="84" width="126" height="13" forecolor="#000000" uuid="bffb61ad-1deb-4f0c-8a5e-bca043ab3452">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{OFFICE_ID}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="288" y="110" width="126" height="13" forecolor="#000000" uuid="9cf06983-a202-4fde-bb1f-7748bd9e52cc">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{CUSTOMER_ADDRESS_PROVINCE}+", "+$P{CUSTOMER_ADDRESS_COUNTRY}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="288" y="84" width="126" height="13" forecolor="#000000" uuid="61f49b70-b397-44a0-8c54-16f3bcd4be0c">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{CUSTOMER_ADDRESS}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="288" y="71" width="126" height="14" forecolor="#000000" uuid="42012c09-6022-4904-88b6-02741a274217">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="10"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{CUSTOMER_NAME}]]></textFieldExpression>
+				</textField>
+				<subreport>
+					<reportElement mode="Transparent" x="0" y="330" width="489" height="30" forecolor="#000000" uuid="c9464b6a-5ab8-4258-a2f5-7a229acd896f"/>
+					<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{BASE_PATH} + "jrxml/Comission-table.jasper"]]></subreportExpression>
+				</subreport>
+				<textField>
+					<reportElement mode="Opaque" x="190" y="209" width="25" height="13" forecolor="#000000" uuid="982c0bf2-cf79-4bb0-b502-9c1c35ff3384">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{CURRENCY_CODE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="323" y="48" width="100" height="21" uuid="7a06557f-05ec-44fa-b619-236d606c7020">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{REPORT_DATE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="288" y="48" width="35" height="21" uuid="95ae9f2b-c533-4b6d-8f88-0c558504d986">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Fecha: "]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Extra Info Group">
+		<groupHeader>
+			<band height="250">
+				<staticText>
+					<reportElement x="23" y="73" width="495" height="30" uuid="7dda17dd-3032-44cd-a0f0-d8286932b7f6"/>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[Las comisiones y gastos por transacciones que originen abono en cuenta se deducirán del principal. La cantidad total de la operación de cobro/pago, junto con los gastos, aparecerá por separado en la carta liquidación correspondiente.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="103" width="495" height="30" uuid="dc58816a-cc2f-4643-ad66-4f54e4b0e57c"/>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[Las comisiones por notificación y confirmación, en su caso, se percibirán en el momento de cursar el aviso correspondiente.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="10" width="495" height="20" uuid="07b3afc9-590d-4dc4-bc57-87f65e4ad2c5"/>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[(*) Estas comisiones serán de aplicación únicamente en caso de que se produzca el evento descrito]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="133" width="495" height="32" uuid="81006d1f-882e-4814-b170-714260e9e430">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[En los créditos confirmados y en función de la categoría del riesgo-país, según los criterios contenidos en la NORMA 10º de la circular 4/1991 del Banco de España se percibirá una comisión adicional trimestral de hasta el 2,00 % mínimo 54,09 €]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="225" width="495" height="20" uuid="23e54f55-ea29-4b63-aac6-06be9a9b5a90">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[La presentación de documentos de utilización implica la aceptación de las mencionadas condiciones económicas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="165" width="495" height="30" uuid="ef2f5bf9-335e-4f68-a88c-88483d050b40">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[El anticipo de los fondos requerirá del estudio previo de la solicitud del beneficiario por parte del Banco. Las correspondientes condiciones económicas se indicarán en el documento de anticipo aparte.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="43" width="495" height="30" uuid="e3af69e6-6580-4830-8659-677e1ace68b1"/>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[El contravalor de las cantidades que se dispongan en divisas se determinará con respecto al euro, conforme al cambio vigente, según precio comprador “on-line” del Banco, salvo que se hubiera concertado otro tipo de cambio.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="195" width="495" height="30" uuid="0ab76d42-4dd9-4c73-b5c0-072736f36bb6">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[El presente documento anula y sustituye cualquier otro anterior de similares características para la operación que aparece en el encabezado. Estos precios se mantendrán vigentes hasta la cancelación del contrato.]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Sign group">
+		<groupHeader>
+			<band height="92">
+				<staticText>
+					<reportElement x="23" y="10" width="495" height="30" uuid="42b1c423-3a64-4c4f-908d-a5d76958a019">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[Para cualquier consulta o aclaración, les agradeceremos consulten con el equipo de negocio internacional o a través de su sucursal o servicio de atención telefónico]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="47" width="100" height="13" uuid="b89e9fa8-4b74-4637-9dee-067c89928973"/>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[Atentamente,]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="60" width="100" height="13" uuid="58b1a67d-50fe-4e06-afa6-1f51ef8090b2"/>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[Banco Santander, S.A.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="418" y="47" width="100" height="13" uuid="d0a484cb-8d25-4861-9701-4d4920272aa4"/>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[Recibido y conforme (1)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="418" y="60" width="100" height="13" uuid="eeadb902-8a74-4fa0-aa95-e1ea8aeb1ebb"/>
+					<textElement>
+						<font fontName="DejaVu Sans Mono" size="9"/>
+					</textElement>
+					<text><![CDATA[Fdo,]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" isPrintRepeatedValues="false" x="136" y="10" width="282" height="13" isPrintInFirstWholeBand="true" uuid="0868b2cd-cc01-47cc-87da-13573892d661">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1 ? true : false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans Mono" size="6"/>
+				</textElement>
+				<text><![CDATA[Banco Santander, S.A.- Domicilio Social: Paseo de Pereda, 9-12 39004 Santander Hoja 286. Folio 6 Libro 5º de Sociedades. Inscripción 1ª]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" isPrintRepeatedValues="false" x="30" y="0" width="488" height="22" isPrintInFirstWholeBand="true" uuid="28b980b5-1d74-466f-8306-4754c4fd5291">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1 ? true : false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans Mono" size="9"/>
+				</textElement>
+				<text><![CDATA[(1)  Con la firma de este documento declaro que entiendo y confirmo mi aceptación a las condiciones económicas aplicadas a la operación cuyos datos aparecen en el encabezado de esta carta.]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,11 @@
+{
+  "exchangeInsuranceId": "7763446",
+  "type": "Standard",
+  "useDate": "2022-08-01T00:00:00.000+02:00",
+  "sellAmount": "12162.11",
+  "sellCurrency": "EUR",
+  "buyAmount": "12000.00",
+  "buyCurrency": "GBP",
+  "exchangeRate": "1.1621",
+  "useAmount": "2000.00"
+}

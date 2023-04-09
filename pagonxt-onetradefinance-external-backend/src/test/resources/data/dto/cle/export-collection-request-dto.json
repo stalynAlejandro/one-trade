@@ -1,0 +1,70 @@
+{
+  "code": "Code 1",
+  "contractReference": "contractReference1",
+  "slaEnd": "2022-08-15T22:00:00.000+02:00",
+  "savedStep": 2,
+  "customer": {
+    "customerId": "customerId1",
+    "name": "Coca Cola S.L.",
+    "taxId": "B1234567",
+    "office": "2345",
+    "personNumber": "BUC-1234567",
+    "segment": "SME",
+    "email": "mock email"
+  },
+  "documentation": {
+    "files": [
+      {
+        "id": "id doc 1",
+        "name": "miercoles.jpg",
+        "uploadedDate": "2022-05-27T06:54:53.741+02:00",
+        "documentType": "letter",
+        "data": "your file contents"
+      }
+    ],
+    "clientAcceptance": true,
+    "priority": "urgent"
+  },
+  "advance": {
+    "riskLine": {
+      "riskLineId": "1",
+      "client": "client-id-1",
+      "iban": "0049 3295 2020 15792",
+      "status": "approved",
+      "limitAmount": "1020",
+      "availableAmount": "1020",
+      "expires": "2020-06-06T00:00:00.000+02:00",
+      "currency": "EUR"
+    },
+    "advanceAmount": "565621.00",
+    "advanceCurrency": {
+      "currency": "EUR",
+      "id": "EUR"
+    },
+    "advanceExpiration": "2022-05-27T06:54:53.741+02:00"
+  },
+  "operationDetails": {
+    "collectionAmount": "546512.00",
+    "hasAccount": true,
+    "clientAccount": {
+      "currency": "EUR",
+      "iban": "PT50 0002 0123 5678 9015 1",
+      "id": "account-id-1"
+    },
+    "commissionAccount": {
+      "currency": "EUR",
+      "iban": "PT50 0002 0123 5678 9015 1",
+      "id": "account-id-1"
+    },
+    "collectionCurrency": {
+      "currency": "EUR",
+      "id": "EUR"
+    },
+    "clientReference": "Ref22399SD",
+    "debtorName": "Nombre Deudor",
+    "debtorBank": "Banco Deudor",
+    "collectionType": "DOCUMENTARY",
+    "office": "requestingOffice1",
+    "comments": "Mis comentarios"
+  }
+}

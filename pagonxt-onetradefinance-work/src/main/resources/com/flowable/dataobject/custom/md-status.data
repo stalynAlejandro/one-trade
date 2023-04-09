@@ -1,0 +1,16 @@
+{
+  "key": "md-status",
+  "name": "Status",
+  "description": "Status",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "status",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "statusId",
+  "idField": "statusId",
+  "nameField": "status"
+}

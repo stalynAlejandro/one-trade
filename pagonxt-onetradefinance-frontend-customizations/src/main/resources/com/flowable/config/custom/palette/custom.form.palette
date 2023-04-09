@@ -1,0 +1,32 @@
+{
+  "Palette-Id": "custom-form-palette",
+  "title": "Custom Palette Extension",
+  "patchPalettes": [
+    "flowable-form-palette",
+    "flowable-page-palette"
+  ],
+  "resourceBundles": [
+    "com/flowable/config/custom/palette/translation"
+  ],
+  "groups": {
+    "custom": {
+      "index": 10
+    }
+  },
+  "stencils": [
+      {
+      "id": "customPiecesCounter",
+      "superId": "base-text",
+      "xmlTag": "customPiecesCounter",
+      "groups": [
+        "custom"
+      ],
+      "properties": [
+        {
+          "id": "value",
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

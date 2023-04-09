@@ -1,0 +1,30 @@
+{
+  "customerId": "BUC-1234567",
+  "riskLines": [
+    {
+      "riskLineId": "004910010809809889093434312312",
+      "product": "656601",
+      "lineAmount": {
+        "amount": 10000000.12345,
+        "currency": "EUR"
+      },
+      "availableAmount": {
+        "amount": 9937828.12345,
+        "currency": "EUR"
+      },
+      "usedAmount": {
+        "amount": 62171.12345,
+        "currency": "EUR"
+      },
+      "openingDate": "2019-01-01",
+      "maturityDate": "2019-12-01",
+      "riskLineStatus": "active"
+    }
+  ],
+  "links": {
+    "_first": "href:/risk_lines/_offset=1&_limit=10",
+    "_prev": "href:/risk_lines/_offset=2&_limit=10",
+    "_next": "href:/risk_lines/_offset=4&_limit=10",
+    "_last": "href:/risk_lines/_offset=90&_limit=10"
+  }
+}

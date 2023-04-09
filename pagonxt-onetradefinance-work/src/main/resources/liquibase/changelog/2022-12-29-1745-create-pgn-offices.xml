@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd" logicalFilePath="PGN_DOS001">
+    <property name="datetime.type" value="datetime2" dbms="mssql"/>
+    <property name="datetime.type" value="datetime"/>
+    <property name="varchar.type" value="nvarchar" dbms="mssql"/>
+    <property name="varchar.type" value="varchar"/>
+    <property name="serviceDefinitionReferences" value="PGN_S001"/>
+    <changeSet author="flowable" id="1">
+        <preConditions onFail="MARK_RAN"><tableExists tableName="PGN_OFFICES"/></preConditions>
+        <dropTable tableName="PGN_OFFICES"/>
+    </changeSet>
+    <changeSet id="2" author="flowable">
+        <createTable tableName="PGN_OFFICES">
+            <column name="COUNTRY" type="${varchar.type}(2)"/>
+            <column name="OFFICE_CODE" type="${varchar.type}(4)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ADDRESS" type="${varchar.type}(255)"/>
+            <column name="PLACE" type="${varchar.type}(255)"/>
+            <column name="EMAIL" type="${varchar.type}(255)"/>
+            <column name="MIDDLE_OFFICE_CODE" type="${varchar.type}(4)"/>
+            <column name="REGISTRATION_DATE" type="date"/>
+            <column name="DEREGISTRATION_DATE" type="date"/>
+            <column name="REGISTER_UPDATE_DATE" type="date"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,65 @@
+{
+  "requester": null,
+  "code": "Code 1",
+  "contractReference": "contractReference1",
+  "slaEnd": 1660593600000,
+  "savedStep": 2,
+  "creationDate": null,
+  "product": null,
+  "event": null,
+  "country": null,
+  "documents": [
+    {
+      "documentId": "id doc 1",
+      "mimeType": "image/jpeg",
+      "uploadedDate": 1653627293741,
+      "data": "your file contents",
+      "filename": "miercoles.jpg",
+      "documentType": "letter"
+    }
+  ],
+  "clientAcceptance": true,
+  "priority": "urgent",
+  "office": "requestingOffice1",
+  "comment": "Mis comentarios",
+  "currency": "EUR",
+  "amount": 546512.0,
+  "customerHasAccount": true,
+  "nominalAccount": {
+    "accountId": "account-id-1",
+    "iban": "PT50 0002 0123 5678 9015 1",
+    "currency": "EUR"
+  },
+  "commissionAccount": {
+    "accountId": "account-id-1",
+    "iban": "PT50 0002 0123 5678 9015 1",
+    "currency": "EUR"
+  },
+  "applyingForAdvance": true,
+  "advanceRiskLine": {
+    "riskLineId": "1",
+    "client": "client-id-1",
+    "iban": "0049 3295 2020 15792",
+    "status": "approved",
+    "limitAmount": "1020",
+    "availableAmount": "1020",
+    "expires": 1591394400000,
+    "currency": "EUR"
+  },
+  "advanceCurrency": "EUR",
+  "advanceAmount": 565621.0,
+  "advanceExpiration": 1653627293741,
+  "clientReference": "Ref22399SD",
+  "debtorName": "Nombre Deudor",
+  "debtorBank": "Banco Deudor",
+  "collectionType": "DOCUMENTARY",
+  "customer": {
+    "customerId": "customerId1",
+    "name": "Coca Cola S.L.",
+    "taxId": "B1234567",
+    "office": "2345",
+    "personNumber": "BUC-1234567",
+    "segment": "SME",
+    "email": "mock email"
+  }
+}

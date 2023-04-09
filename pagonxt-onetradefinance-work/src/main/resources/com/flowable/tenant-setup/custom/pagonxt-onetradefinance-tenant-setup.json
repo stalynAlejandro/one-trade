@@ -1,0 +1,117 @@
+{
+  "name": "PagoNxt One Trade Finance",
+  "tenantKey": "pagonxtOneTradeFinance",
+  "groups": [
+    {
+      "key": "flowableAdministrator",
+      "name": "Flowable Administrator"
+    },
+    {
+      "key": "flowableUser",
+      "name": "Flowable Flowable User"
+    },
+    {
+      "key": "oneTradeFinanceAdministrator",
+      "name": "PagoNxt One Trade Finance Administrator"
+    },
+    {
+      "key": "oneTradeFinanceUser",
+      "name": "PagoNxt One Trade Finance User"
+    },
+    {
+      "key": "clientOfficeUser",
+      "name": "Client/Office User"
+    },
+    {
+      "key": "localOperatingUser",
+      "name": "Local Operating User"
+    },
+    {
+      "key": "business",
+      "name": "Business"
+    }
+  ],
+  "users": [
+    {
+      "firstName": "Flowable",
+      "lastName": "Admin",
+      "login": "admin",
+      "email": "admin@onetradefinance.pagonxt.com",
+      "language": "en",
+      "theme": "Santander",
+      "userDefinitionKey": "admin-flowable"
+    },
+    {
+      "firstName": "Javier",
+      "lastName": "De la Red Calvo",
+      "login": "javier.redcalvo@servexternos.pagonxt.com",
+      "email": "javier.redcalvo@servexternos.pagonxt.com",
+      "language": "es",
+      "theme": "Santander",
+      "userDefinitionKey": "admin-flowable"
+    },
+    {
+      "firstName": "Javier",
+      "lastName": "De la Red Calvo",
+      "login": "x221075@gruposantander.com",
+      "email": "javier.redcalvo@servexternos.pagonxt.com",
+      "language": "es",
+      "theme": "Santander",
+      "userDefinitionKey": "admin-flowable"
+    },
+    {
+      "firstName": "Quique",
+      "lastName": "Perez de la Blanca Meana",
+      "login": "jose.perez@servexternos.pagonxt.com",
+      "email": "jose.perez@servexternos.pagonxt.com",
+      "language": "es",
+      "theme": "Santander",
+      "userDefinitionKey": "admin-flowable"
+    },
+    {
+      "firstName": "Quique",
+      "lastName": "Perez de la Blanca Meana",
+      "login": "x953979@gruposantander.com",
+      "email": "jose.perez@servexternos.pagonxt.com",
+      "language": "es",
+      "theme": "Santander",
+      "userDefinitionKey": "admin-flowable"
+    },
+    {
+      "firstName": "Josefa",
+      "lastName": "Calvo Cabarcos",
+      "login": "josefa.calvo@servexternos.pagonxt.com",
+      "email": "josefa.calvo@servexternos.pagonxt.com",
+      "language": "es",
+      "theme": "Santander",
+      "userDefinitionKey": "admin-flowable"
+    },
+    {
+      "firstName": "Josefa",
+      "lastName": "Calvo Cabarcos",
+      "login": "x953980@gruposantander.com",
+      "email": "javier.redcalvo@servexternos.pagonxt.com",
+      "language": "es",
+      "theme": "Santander",
+      "userDefinitionKey": "admin-flowable"
+    },
+    {
+      "firstName": "Albert",
+      "lastName": "Nevado Gutierrez",
+      "login": "albert.nevado@servexternos.pagonxt.com",
+      "email": "albert.nevado@servexternos.pagonxt.com",
+      "language": "es",
+      "theme": "Santander",
+      "userDefinitionKey": "admin-flowable"
+    },
+    {
+      "firstName": "Albert",
+      "lastName": "Nevado Gutierrez",
+      "login": "x221115@gruposantander.com",
+      "email": "albert.nevado@servexternos.pagonxt.com",
+      "language": "es",
+      "theme": "Santander",
+      "userDefinitionKey": "admin-flowable"
+    }
+  ]
+}

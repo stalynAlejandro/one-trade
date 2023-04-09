@@ -1,0 +1,11 @@
+{
+  "user": {
+    "userId": "user1",
+    "userDisplayedName": "User Name",
+    "userType": "OFFICE"
+  },
+  "country": "ES",
+  "middleOffice": null,
+  "office": "1234",
+  "mail": "user1@mail.com"
+}

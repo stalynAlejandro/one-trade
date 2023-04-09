@@ -1,0 +1,80 @@
+{
+  "requester": null,
+  "code": "Code 1",
+  "contractReference": "contractReference1",
+  "office": "requestingOffice1",
+  "savedStep": 2,
+  "documents": [
+    {
+      "documentId": "id doc 1",
+      "mimeType": "image/jpeg",
+      "uploadedDate": 1653627293741,
+      "data": "your file contents",
+      "filename": "miercoles.jpg",
+      "documentType": "letter"
+    }
+  ],
+  "priority": "urgent",
+  "comment": "Mis comentarios",
+  "exportCollection": {
+    "code" : "code exportCollection",
+    "customer": {
+      "customerId": "customerId1",
+      "name": "Coca Cola S.L.",
+      "taxId": "B1234567",
+      "office": "2345",
+      "personNumber": "BUC-1234567",
+      "segment": "SME",
+      "email": "mock email"
+    },
+    "creationDate" : 1653927293741,
+    "approvalDate" : 1653927293741,
+    "contractReference": "ref1",
+    "amount": 123.45,
+    "currency": "EUR",
+    "nominalAccount": {
+      "accountId": "account-id-1",
+      "iban": "PT50 0002 0123 5678 9015 1",
+      "currency": "EUR"
+    }
+  },
+  "amount": 12.35,
+  "currency": "GBP",
+  "exchangeInsurances": [
+    {
+      "exchangeInsuranceId": "7763446",
+      "type": "Standard",
+      "useDate": 1659304800000,
+      "sellAmount": 12162.11,
+      "sellCurrency": "EUR",
+      "buyAmount": 12000,
+      "buyCurrency": "GBP",
+      "exchangeRate": 1.1621,
+      "useAmount": 2000
+    }
+  ],
+  "exchangeInsuranceUseDate" : 1659804800000,
+  "exchangeInsuranceAmountToUse": 12.35,
+  "exchangeInsuranceBuyCurrency": "GBP",
+  "exchangeInsuranceSellCurrency": "EUR",
+  "expiration": 1659650400000,
+  "riskLine": {
+    "riskLineId": "1",
+    "client": "client-id-1",
+    "iban": "0049 3295 2020 15792",
+    "status": "approved",
+    "limitAmount": "1020",
+    "availableAmount": "1020",
+    "expires": 1591394400000,
+    "currency": "EUR"
+  },
+  "customer": {
+    "customerId": "customerId1",
+    "name": "Coca Cola S.L.",
+    "taxId": "B1234567",
+    "office": "2345",
+    "personNumber": "BUC-1234567",
+    "segment": "SME",
+    "email": "mock email"
+  }
+}

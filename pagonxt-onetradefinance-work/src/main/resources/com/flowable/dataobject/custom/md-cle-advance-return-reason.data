@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-advance-return-reason",
+  "name": "Export Collection Advance Return reason",
+  "description": "CLE Advance Return reasons",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "return reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "returnReasonId",
+  "idField": "returnReasonId",
+  "nameField": "returnReason"
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "customerId": "001",
+    "countryISO": "ES",
+    "name": "Coca Cola S.L.",
+    "taxId": "B1234567",
+    "office": "1234",
+    "personNumber": "BUC-1234567",
+    "segment": "SME",
+    "email": "mock email 1"
+  },
+  {
+    "customerId": "002",
+    "countryISO": "ES",
+    "name": "Coca Cola Spain",
+    "taxId": "c1234568",
+    "office": "1234",
+    "personNumber": "BUC-1234568",
+    "segment": "SME",
+    "email": "mock email 2"
+  },
+  {
+    "customerId": "003",
+    "countryISO": "ES",
+    "name": "Viajes Account&FXDeals",
+    "taxId": "B1234568",
+    "office": "1234",
+    "personNumber": "J000104892",
+    "segment": "TUR",
+    "email": "mock email 3"
+  },
+  {
+    "customerId": "004",
+    "countryISO": "ES",
+    "name": "Cliente Test Apis",
+    "taxId": "B1234569",
+    "office": "1234",
+    "personNumber": "F038395886",
+    "segment": "TUR",
+    "email": "mock email 4"
+  }
+]

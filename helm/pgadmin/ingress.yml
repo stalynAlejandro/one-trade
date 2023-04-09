@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: onetrade-tests-pga-pgadmin4
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/proxy-body-size: 20m
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/send-timeout: "3600"
+spec:
+  ingressClassName: external
+  rules:
+    - host: pgadmin4-tests.onetrade.projects.flowable.io
+      http:
+        paths:
+          - backend:
+              service:
+                name: onetrade-tests-pga-pgadmin4
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - pgadmin4-tests.onetrade.projects.flowable.io
+      secretName: pgadmin4-tests-onetrade-pagonxt-onetradefinance-gallant-maxwell-projects.flowable.io

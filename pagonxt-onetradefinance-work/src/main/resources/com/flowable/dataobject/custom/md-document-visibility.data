@@ -1,0 +1,16 @@
+{
+  "key": "md-document-visibility",
+  "name": "Document visibility",
+  "description": "Document visibility",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "document visibility",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "documentVisibilityId",
+  "idField": "documentVisibilityId",
+  "nameField": "documentVisibility"
+}

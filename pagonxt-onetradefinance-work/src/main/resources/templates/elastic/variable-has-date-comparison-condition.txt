@@ -1,0 +1,24 @@
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "%s"
+                    }
+                  },
+                  {
+                    "range": {
+                      "variables.dateValue": {
+                        "%s": "%s",
+                        "format": "basic_date_time"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }

@@ -1,0 +1,138 @@
+#!groovy
+library 'global-alm-pipeline-library'
+/*
+mavenDevOpsPipeline arguments template
+======================================
+Template for the mavenDevOpsPipeline, with all the arguments available.
+
+Description
+-----------
+Santander provides three Jenkins CI pipeline templates: mavenDevOpsPipeline, mavenPipeline, and mavenPreProPipeline.
+By importing the 'global-alm-pipeline-library' library, we can just reference one of them, and configure it with a map of arguments.
+
+The arguments for the mavenDevOpsPipeline are provided here, along with their documentation and default values.
+
+Reference
+---------
+https://github.alm.europe.cloudcenter.corp/pages/ccc-almmulticloud-community/documentation-site/pages/components/libraries/pipeline-library.wiki/mavenDevOpsPipeline.html
+
+*/
+mavenDevOpsPipeline (
+        masterBranch: 'master', // Master branch name
+        integrationBranch: 'development', // Integration branch name
+        agent: 'maven', // Slave build agent label
+        deployArtifactId: '', // Deploy artifact id. Default: pom.xml artifact id
+        deployArtifactPackaging: '', // Deploy artifact packaging. Default: pom.xml artifact packaging
+        deployArtifactClassifier: '', // Deploy artifact classifier. Optional, e.g. bin
+        deployYmlFile: 'deployment.yaml', // Name of the deployment.yaml file to use
+        deployYml: '', // If specified, uses this deployment yaml as String defined in the Jenkinsfile
+        mail: [ // Mail options
+                recipientProviders: ['RequesterRecipientProvider', 'DevelopersRecipientProvider', 'CulpritsRecipientProvider'], // If provided, email recipients
+                subject: '$DEFAULT_SUBJECT', // If provided, email subject
+                content: '$JELLY_SCRIPT', // If provided, email content
+                replyTo: '$DEFAULT_REPLYTO', // If provided, reply to these recipients
+                attachLog: false, // If true, log is attached (by default only in failed builds)
+                keepNullResult : false, // If true, currentBuild.result == null is not considered as ‘SUCCESS’ so the build is considered to still running
+                to: '', // If provided, email is also sent to these emails (separated by ‘;’)
+                mimetype: 'html/text' // Mimetype
+        ],
+        numToKeepStr: 10, // Number of builds to keep
+        artifactNumToKeepStr: 10, // Number of artifacts to keep
+        dir: '.', // If defined assumes that the pom.xml is in that directory
+        elasticsearch: [ //
+                 apiUrl: 'https://elastic.alm.europe.cloudcenter.corp', // Optional. Elasticsearch api url
+                 userId: '', // Optional. User id to connect with Elasticsearch if needed
+                 userToken: '', // Optional. User password to connect with Elasticsearch if needed
+                 credentialsId: 'alm-one-elasticsearch-apikey', // Optional. Jenkins credentials identifier to retrieve userId and password to connect
+                                                                // to ElasticSearch if needed. Must have type “UsernamePassword”. If the site
+                                                                // is “https”, it will generate an Authorization: ApiKey header with the username
+                                                                // and password. Otherwise it will generate an Authorization: Basic header. This
+                                                                // parameter credentialsId takes precedence over the parameters userId and userToken
+                                                                // in case both are given. If no credentialsId parameter is given, and neither userId/userToken
+                                                                // and the URL is https://elastic.alm.europe.cloudcenter.corp then a default Jenkins credential
+                                                                // alm-one-elasticsearch-apikey is automatically used
+                 alias: '', // Optional. Elasticsearch alias/index where to save the data. Default: almmc-pipelines-v2 in production
+                 index: '', // This parameter should not be used anymore
+                 type: '_doc', // Optional. Elasticsearch document type where to save the data. It is not possible save data with two different types in a index.
+                               // Note: If the deprecated argument “index” is given, then the default type will be “doc”
+                 userData : null, // Optional. Data that the user needs to add to be saved in Elasticsearch.
+                                  // This parameter must have a format and it is recommended that the data to be saved begin with user (e.g. user.name)
+                 ignoreCerts: false, // Optional. Ignore validations of server certificates User id to connect with Elasticsearch, if the connection is secure
+                 err: null, // Optional. It is only necessary if the method call is made in a try/catch and we also want to save the error in Elasticsearch
+                 debugMode: false // Optional. If debugMode is true, the pipeline log shows json sent to Elasticsearch
+        ],
+        build: [
+                goal: 'clean verify', // maven goal
+                testResults: 'target/**/TEST-*.xml' // Test results to archive
+        ],
+        sonar: [
+                sonarInstanceName: 'GLOBAL', // Sonar instance name defined in Jenkins
+                sonarProperties: [ // Map of additional sonar properties
+                        projectKey: '', // Required: The project key that is unique for each project
+                        projectName: '', // Default: projectKey
+                        projectVersion: '', // Default: pom project version
+                        'coverage.jacoco.xmlReportPaths': './target/site/jacoco/jacoco.xml',
+                        'junit.reportPaths': ['./target/surefire-reports', './target/failsafe-reports'],
+                        sources: '', // All project sources
+                        'buildbreaker.break': false // false (development) true (master)
+                ]
+        ],
+        kiuwan: [
+                credentialsId: '', // Optional, credentialsId of the user that execute Kiuwan. By default the pipeline uses System Kiuwan User
+                kiuwanProperties: [ // Map of additional Kiuwan properties
+                        softwareName: '', // Required. Name that identifies the “Application” in Kiuwan
+                        additionalProperties: [:] // Optional. If given, all properties are added to command (default empty)
+                ]
+        ],
+        kiuwanInsight: [
+                credentialsId: '', // Optional. credentialsId of the user that execute Kiuwan Insight. By default the pipeline use System Kiuwan Insight User
+                softwareName: '', // Required. Name identify the “Application” in Kiuwan + “_composition”
+        ],
+        nexus: [
+                 arguments: '-Dmaven.test.skip=true' // Maven deploy arguments
+        ],
+        merge: [:], // Git Merge (Release): No additional parameters
+        deploy_cert: [
+                environment: 'cert', // Environment name in deployment.yaml
+                type: 'ose3', // Type of deploy: ose3 (Openshift), ose3Yaml (Openshift with yaml deployment file),
+                              // Ansible (Executes an ansible playbook), Azure (Deploy zip or war in an Azure App Server),
+                              // Aks (Deploy in Azure AKS (only for predefined Docker Image)). If not defined, the type by default is Openshift.
+                approve: '' // If present, the deploy must be confirm, so the pipeline stops until an user approves it.
+                            // This parameter can be with the empty value (any user can approve the pipeline or only the groups specified).
+                            // If not present, deployment credential must be specified in the deployment yaml
+        ],
+        deploy_pre:[
+                environment: 'pre', // Environment name in deployment.yaml
+                type: 'ose3', // Type of deploy: ose3 (Openshift), ose3Yaml (Openshift with yaml deployment file),
+                              // Ansible (Executes an ansible playbook), Azure (Deploy zip or war in an Azure App Server),
+                              // Aks (Deploy in Azure AKS (only for predefined Docker Image)). If not defined, the type by default is Openshift.
+                approve: '' // If present, the deploy must be confirm, so the pipeline stops until an user approves it.
+                            // This parameter can be with the empty value (any user can approve the pipeline or only the groups specified).
+                            // If not present, deployment credential must be specified in the deployment yaml
+        ],
+        deploy_pro: [
+                environment: 'pro', // Environment name in deployment.yaml
+                type: 'ose3', // Type of deploy: ose3 (Openshift), ose3Yaml (Openshift with yaml deployment file),
+                              // Ansible (Executes an ansible playbook), Azure (Deploy zip or war in an Azure App Server),
+                              // Aks (Deploy in Azure AKS (only for predefined Docker Image)). If not defined, the type by default is Openshift.
+                approve: '' // If present, the deploy must be confirm, so the pipeline stops until an user approves it.
+                            // This parameter can be with the empty value (any user can approve the pipeline or only the groups specified).
+                            // If not present, deployment credential must be specified in the deployment yaml
+        ],
+        test_cert: [
+                body: {}, // Test code to execute (optional)
+        ],
+        test_pre: [
+                body: {}, // Test code to execute (optional)
+        ],
+        publish_release_management: [
+                environments: [ // Map indicating the environment name and type of deployment associated with PRE and PRO deployments.
+                                // Environment name in deployment.yaml ([pre:[environment: ‘pre’], pro:[environment: ‘pro’]] by default)
+                                // It’s possible to define the type of deployment (e.g.: [pre:[environment: ‘pre’, deployType: ‘ose3’],
+                                // pro:[environment: ‘pro’, deployType: ‘ose3’]]). Currently deployType only have the values: ose3
+                        pre: [environment: 'pre', deployType: 'ose3'],
+                        pro: [environment: 'pro', deployType: 'ose3']
+                ],
+                instances: ['GLOBAL'] // List of Release Management instances to publish to. Currently you can only publish to one instance
+        ]
+)

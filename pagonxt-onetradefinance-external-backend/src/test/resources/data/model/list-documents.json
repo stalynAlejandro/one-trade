@@ -1,0 +1,10 @@
+[
+  {
+    "documentId": "id doc 1",
+    "mimeType": "image/jpeg",
+    "uploadedDate": 1653627293741,
+    "data": "your file contents",
+    "filename": "miercoles.jpg",
+    "documentType": "letter"
+  }
+]

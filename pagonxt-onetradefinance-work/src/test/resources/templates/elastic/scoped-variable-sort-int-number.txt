@@ -1,0 +1,26 @@
+  "sort" : [
+    {
+      "variables.numberValue" : {
+        "order" : "%s",
+        "nested": {
+          "path": "variables",
+          "filter": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "variables.name": "%s"
+                  }
+                },
+                {
+                  "term": {
+                    "variables.scopeHierarchyType": "%s"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]

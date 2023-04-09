@@ -1,0 +1,16 @@
+{
+  "key": "md-pgn-common-deferral-reason",
+  "name": "PagoNxt Common Deferral reason",
+  "description": "PagoNxt common deferral reasons",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "deferral reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "deferralReasonId",
+  "idField": "deferralReasonId",
+  "nameField": "deferralReason"
+}

@@ -1,0 +1,1273 @@
+{
+	"info": {
+		"_postman_id": "2741c323-5d4e-43ea-9c2c-37b13b33591a",
+		"name": "PagoNxt OneTradeFinance",
+		"description": "All OneTradeFinance related",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User and group creation",
+			"item": [
+				{
+					"name": "Initialize",
+					"item": [
+						{
+							"name": "Delete users",
+							"item": [
+								{
+									"name": "Delete User Isabel Blanco",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/idm-api/users/isabel",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"users",
+												"isabel"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete User Isaac Benitez",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/idm-api/users/isaac",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"users",
+												"isaac"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete User Flora Castillo",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/idm-api/users/flora",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"users",
+												"flora"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete User Fernando Castro",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/idm-api/users/fernando",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"users",
+												"fernando"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Delete groups",
+							"item": [
+								{
+									"name": "Delete Group RE_NOT_BOI_01",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RE_NOT_BOI_01",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RE_NOT_BOI_01"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Group RE_NOT_BOI_02",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RE_NOT_BOI_02",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RE_NOT_BOI_02"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Group RE_NOT_FC_01",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RE_NOT_FC_01",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RE_NOT_FC_01"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Group RE_NOT_FC_02",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RE_NOT_FC_02",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RE_NOT_FC_02"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete group RI_NOT_BOI_02",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RI_NOT_BOI_02",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RI_NOT_BOI_02"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete group RI_NOT_BOI_01",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RI_NOT_BOI_01",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RI_NOT_BOI_01"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete group RI_NOT_FC_01",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RI_NOT_FC_01",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RI_NOT_FC_01"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete group RI_NOT_FC_02",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RI_NOT_FC_02",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RI_NOT_FC_02"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Create groups",
+							"item": [
+								{
+									"name": "Create Group RE_NOT_BOI_01",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"id\": \"RE_NOT_BOI_01\",\r\n  \"url\": \"http://localhost:8090/idm-api/groups/RE_NOT_BOI_01\",\r\n  \"name\": \"Export Collection - Notification - Internal Backoffice 1\",\r\n  \"type\": \"Solver Group\",\r\n  \"key\": \"RE_NOT_BOI_01\",\r\n  \"tenantId\": \"\",\r\n  \"nameChanged\": true,\r\n  \"typeChanged\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Group RE_NOT_BOI_02",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"id\": \"RE_NOT_BOI_02\",\r\n  \"url\": \"http://localhost:8090/idm-api/groups/RE_NOT_BOI_02\",\r\n  \"name\": \"Export Collection - Notification - Internal Backoffice 2\",\r\n  \"type\": \"Solver Group\",\r\n  \"key\": \"RE_NOT_BOI_02\",\r\n  \"tenantId\": \"\",\r\n  \"nameChanged\": true,\r\n  \"typeChanged\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Group RE_NOT_FC_02",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"id\": \"RE_NOT_FC_02\",\r\n  \"url\": \"http://localhost:8090/idm-api/groups/RE_NOT_FC_02\",\r\n  \"name\": \"Export Collection - Notification - Financial Control 2\",\r\n  \"type\": \"Solver Group\",\r\n  \"key\": \"RE_NOT_FC_02\",\r\n  \"tenantId\": \"\",\r\n  \"nameChanged\": true,\r\n  \"typeChanged\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Group RI_NOT_BOI_01",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"id\": \"RI_NOT_BOI_01\",\r\n  \"url\": \"http://localhost:8090/idm-api/groups/RI_NOT_BOI_01\",\r\n  \"name\": \"Import Collection - Notification - Internal Backoffice 1\",\r\n  \"type\": \"Solver Group\",\r\n  \"key\": \"RI_NOT_BOI_01\",\r\n  \"tenantId\": \"\",\r\n  \"nameChanged\": true,\r\n  \"typeChanged\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Group RI_NOT_FC_01",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"id\": \"RI_NOT_FC_01\",\r\n  \"url\": \"http://localhost:8090/idm-api/groups/RI_NOT_FC_01\",\r\n  \"name\": \"Import Collection - Notification - Financial Control 1\",\r\n  \"type\": \"Solver Group\",\r\n  \"key\": \"RI_NOT_FC_01\",\r\n  \"tenantId\": \"\",\r\n  \"nameChanged\": true,\r\n  \"typeChanged\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Group RI_NOT_BOI_02",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"id\": \"RI_NOT_BOI_02\",\r\n  \"url\": \"http://localhost:8090/idm-api/groups/RI_NOT_BOI_02\",\r\n  \"name\": \"Import Collection - Notification - Internal Backoffice 2\",\r\n  \"type\": \"Solver Group\",\r\n  \"key\": \"RI_NOT_BOI_02\",\r\n  \"tenantId\": \"\",\r\n  \"nameChanged\": true,\r\n  \"typeChanged\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Group RE_NOT_FC_01",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"id\": \"RE_NOT_FC_01\",\r\n  \"url\": \"http://localhost:8090/idm-api/groups/RE_NOT_FC_01\",\r\n  \"name\": \"Export Collection - Notification - Financial Control 1\",\r\n  \"type\": \"Solver Group\",\r\n  \"key\": \"RE_NOT_FC_01\",\r\n  \"tenantId\": \"\",\r\n  \"nameChanged\": true,\r\n  \"typeChanged\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Group RI_NOT_FC_02",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"id\": \"RI_NOT_FC_02\",\r\n  \"url\": \"http://localhost:8090/idm-api/groups/RI_NOT_FC_02\",\r\n  \"name\": \"Import Collection - Notification - Financial Control 2\",\r\n  \"type\": \"Solver Group\",\r\n  \"key\": \"RI_NOT_FC_02\",\r\n  \"tenantId\": \"\",\r\n  \"nameChanged\": true,\r\n  \"typeChanged\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Create users",
+							"item": [
+								{
+									"name": "Create User Isabel Blanco - Internal Backoffice 1",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"firstName\": \"Isabel\",\r\n  \"lastName\": \"Blanco\",\r\n  \"displayName\": \"Isabel Blanco\",\r\n  \"loginName\": \"isabel\",\r\n  \"email\": \"isabel.blanco@onetradefinance.pagonxt.com\",\r\n  \"password\": \"onetrad3\",\r\n  \"repeatPassword\": \"onetrad3\",\r\n  \"type\": \"default\",\r\n  \"subType\": \"default\",\r\n  \"userDefinitionId\": \"\",\r\n  \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n  \"state\": \"ACTIVE\",\r\n  \"subState\": \"ACTIVE\",\r\n  \"avatarId\": \"\",\r\n  \"presence\": \"available\",\r\n  \"language\": \"en\",\r\n  \"theme\": \"pagoNxt\",\r\n  \"tenantId\": \"\",\r\n  \"returnIdentityInfo\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/users",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"users"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create User Isaac Benitez - Internal Backoffice 2",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"firstName\": \"Isaac\",\r\n  \"lastName\": \"Benitez\",\r\n  \"displayName\": \"Isaac Benitez\",\r\n  \"loginName\": \"isaac\",\r\n  \"email\": \"isaac.benitez@onetradefinance.pagonxt.com\",\r\n  \"password\": \"onetrad3\",\r\n  \"repeatPassword\": \"onetrad3\",\r\n  \"type\": \"default\",\r\n  \"subType\": \"default\",\r\n  \"userDefinitionId\": \"\",\r\n  \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n  \"state\": \"ACTIVE\",\r\n  \"subState\": \"ACTIVE\",\r\n  \"avatarId\": \"\",\r\n  \"presence\": \"available\",\r\n  \"language\": \"en\",\r\n  \"theme\": \"pagoNxt\",\r\n  \"tenantId\": \"\",\r\n  \"returnIdentityInfo\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/users",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"users"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create User Flora Castillo - Financial Control 2",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"firstName\": \"Flora\",\r\n  \"lastName\": \"Castillo\",\r\n  \"displayName\": \"Flora Castillo\",\r\n  \"loginName\": \"flora\",\r\n  \"email\": \"flora.castillo@onetradefinance.pagonxt.com\",\r\n  \"password\": \"onetrad3\",\r\n  \"repeatPassword\": \"onetrad3\",\r\n  \"type\": \"default\",\r\n  \"subType\": \"default\",\r\n  \"userDefinitionId\": \"\",\r\n  \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n  \"state\": \"ACTIVE\",\r\n  \"subState\": \"ACTIVE\",\r\n  \"avatarId\": \"\",\r\n  \"presence\": \"available\",\r\n  \"language\": \"en\",\r\n  \"theme\": \"pagoNxt\",\r\n  \"tenantId\": \"\",\r\n  \"returnIdentityInfo\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/users",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"users"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create User Fernando Castro - Financial Control 1",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"firstName\": \"Fernando\",\r\n  \"lastName\": \"Castro\",\r\n  \"displayName\": \"Fernando Castro\",\r\n  \"loginName\": \"fernando\",\r\n  \"email\": \"fernando.castro@onetradefinance.pagonxt.com\",\r\n  \"password\": \"onetrad3\",\r\n  \"repeatPassword\": \"onetrad3\",\r\n  \"type\": \"default\",\r\n  \"subType\": \"default\",\r\n  \"userDefinitionId\": \"\",\r\n  \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n  \"state\": \"ACTIVE\",\r\n  \"subState\": \"ACTIVE\",\r\n  \"avatarId\": \"\",\r\n  \"presence\": \"available\",\r\n  \"language\": \"en\",\r\n  \"theme\": \"pagoNxt\",\r\n  \"tenantId\": \"\",\r\n  \"returnIdentityInfo\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/users",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"users"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Add users to groups",
+							"item": [
+								{
+									"name": "Add user Fernando Castro to group RE_NOT_FC_01",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"fernando\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RE_NOT_FC_01/members",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RE_NOT_FC_01",
+												"members"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add user Fernando Castro to group RI_NOT_FC_01",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"fernando\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RI_NOT_FC_01/members",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RI_NOT_FC_01",
+												"members"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add user Flora Castillo to group RE_NOT_FC_02",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"flora\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RE_NOT_FC_02/members",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RE_NOT_FC_02",
+												"members"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add user Flora Castillo to group RI_NOT_FC_02",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"flora\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RI_NOT_FC_02/members",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RI_NOT_FC_02",
+												"members"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add user Isabel Blanco to group RE_NOT_BOI_01",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"isabel\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RE_NOT_BOI_01/members",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RE_NOT_BOI_01",
+												"members"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add user Isabel Blanco to group RI_NOT_BOI_01",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"isabel\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RI_NOT_BOI_01/members",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RI_NOT_BOI_01",
+												"members"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add user Isaac Benitez to group RE_NOT_BOI_02",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"isaac\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RE_NOT_BOI_02/members",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RE_NOT_BOI_02",
+												"members"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add user Isaac Benitez to group RI_NOT_BOI_02",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"isaac\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/idm-api/groups/RI_NOT_BOI_02/members",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"idm-api",
+												"groups",
+												"RI_NOT_BOI_02",
+												"members"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			],
+			"description": "Requests to create the users, when the database is new or has been cleaned."
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Reindex",
+					"item": [
+						{
+							"name": "Reindex Case instances",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/platform-api/case-instances/reindex",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"platform-api",
+										"case-instances",
+										"reindex"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reindex Activities",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/platform-api/activities/reindex",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"platform-api",
+										"activities",
+										"reindex"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reindex Content items",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/platform-api/content-items/reindex",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"platform-api",
+										"content-items",
+										"reindex"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reindex Plan items",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/platform-api/plan-items/reindex",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"platform-api",
+										"plan-items",
+										"reindex"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reindex Process instances",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/platform-api/process-instances/reindex",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"platform-api",
+										"process-instances",
+										"reindex"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reindex Tasks",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/platform-api/tasks/reindex",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"platform-api",
+										"tasks",
+										"reindex"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reindex Work",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/platform-api/work/reindex",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"platform-api",
+										"work",
+										"reindex"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Api",
+			"item": [
+				{
+					"name": "Forms",
+					"item": [
+						{
+							"name": "TemplateVariationController",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/forms/template/CLE_TPL001?languageCode=es_es&returnReasonKey=freeBankFaultAddressRestricted",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"forms",
+										"template",
+										"CLE_TPL001"
+									],
+									"query": [
+										{
+											"key": "languageCode",
+											"value": "es_es"
+										},
+										{
+											"key": "returnReasonKey",
+											"value": "freeBankFaultAddressRestricted"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "External App",
+			"item": [
+				{
+					"name": "Accounts",
+					"item": [
+						{
+							"name": "Get Accounts of client",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{external_app_url}}/accounts?client=001",
+									"host": [
+										"{{external_app_url}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "client",
+											"value": "001"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Clients",
+					"item": [
+						{
+							"name": "Get Clients by name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{external_app_url}}/clients?name=cola",
+									"host": [
+										"{{external_app_url}}"
+									],
+									"path": [
+										"clients"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "cola"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Clients by params",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{external_app_url}}/clients?name=cola&cif=B1234567&personNumber=BUC-1234567&office=1234",
+									"host": [
+										"{{external_app_url}}"
+									],
+									"path": [
+										"clients"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "cola"
+										},
+										{
+											"key": "cif",
+											"value": "B1234567"
+										},
+										{
+											"key": "personNumber",
+											"value": "BUC-1234567"
+										},
+										{
+											"key": "office",
+											"value": "1234"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Risk Lines",
+					"item": [
+						{
+							"name": "Get Risk Lines by client",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{external_app_url}}/risk-lines?client=001",
+									"host": [
+										"{{external_app_url}}"
+									],
+									"path": [
+										"risk-lines"
+									],
+									"query": [
+										{
+											"key": "client",
+											"value": "001"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Drafts",
+					"item": [
+						{
+							"name": "Save Draft",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"client\": {\r\n    \"id\": \"client-id-2\",\r\n    \"name\": \"Coca Cola S.L.\",\r\n    \"cif\": \"B1234567\",\r\n    \"office\": \"1234\",\r\n    \"personNumber\": \"BUC-1234567\",\r\n    \"segment\": \"SME\"\r\n  },\r\n  \"documentation\": {\r\n    \"files\": [\r\n      {\r\n        \"path\": \"miercoles.jpg\",\r\n        \"uploadedDate\": \"2022-05-27T06:54:53.741Z\",\r\n        \"data\": \"your file contents\"\r\n      }\r\n    ],\r\n    \"priority\": \"urgent\"\r\n  },\r\n  \"finance\": {\r\n    \"riskLine\": {\r\n      \"id\": \"1\",\r\n      \"client\": \"client-id-1\",\r\n      \"iban\": \"0049 3295 2020 15792\",\r\n      \"status\": \"approved\",\r\n      \"limitAmount\": \"1020\",\r\n      \"availableAmount\": \"1020\",\r\n      \"expires\": \"06/06/2020\",\r\n      \"currency\": \"EUR\"\r\n    },\r\n    \"financeAmount\": \"565621.00\",\r\n    \"financeCurrency\": {\r\n      \"currency\": \"EUR\",\r\n      \"id\": \"EUR\"\r\n    }\r\n  },\r\n  \"operationDetails\": {\r\n    \"collectionAmount\": \"546512.00\",\r\n    \"hasAccount\": true,\r\n    \"clientAccount\": {\r\n      \"currency\": \"EUR\",\r\n      \"iban\": \"PT50 0002 0123 5678 9015 1\",\r\n      \"id\": \"account-id-1\"\r\n    },\r\n    \"commissionAccount\": {\r\n      \"currency\": \"EUR\",\r\n      \"iban\": \"PT50 0002 0123 5678 9015 1\",\r\n      \"id\": \"account-id-1\"\r\n    },\r\n    \"collectionCurrency\": {\r\n      \"currency\": \"EUR\",\r\n      \"id\": \"EUR\"\r\n    },\r\n    \"comments\": \"Mis comentarios\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{external_app_url}}/export-collections-draft",
+									"host": [
+										"{{external_app_url}}"
+									],
+									"path": [
+										"export-collections-draft"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User Drafts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{external_app_url}}/export-collections-draft",
+									"host": [
+										"{{external_app_url}}"
+									],
+									"path": [
+										"export-collections-draft"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Check Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{external_app_url}}/actuator/health",
+							"host": [
+								"{{external_app_url}}"
+							],
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Groups",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/idm-api/groups",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"idm-api",
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/idm-api/users",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"idm-api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{auth_pass}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{auth_user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

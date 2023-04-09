@@ -1,0 +1,75 @@
+{
+  "dataObjectDefinitionKey": "md-cli-procedure-type",
+  "overwrite": true,
+  "masterData": [
+    {
+      "procedureTypeId": "IN_ANALYSIS",
+      "procedureType": "In Analysis",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "procedureType": "En Análisis"
+        }
+      }
+    },
+    {
+      "procedureTypeId": "PENDING_RELEASE",
+      "procedureType": "Pending Release",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "procedureType": "Pendiente Liberar"
+        }
+      }
+    },
+    {
+      "procedureTypeId": "PENDING_BRANCH",
+      "procedureType": "Pending Branch",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "procedureType": "Pendiente Sucursal"
+        }
+      }
+    },
+    {
+      "procedureTypeId": "PENDING_CORRESPONDENTS",
+      "procedureType": "Pending Correspondents",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "procedureType": "Pendiente Corresponsales"
+        }
+      }
+    },
+    {
+      "procedureTypeId": "PENDING_THIRD_PARTIES",
+      "procedureType": "Pending Third Parties",
+      "sortOrder": 5,
+      "translations": {
+        "es_es": {
+          "procedureType": "Pendiente Terceros"
+        }
+      }
+    },
+    {
+      "procedureTypeId": "MANAGEMENT_ERROR",
+      "procedureType": "Management Error",
+      "sortOrder": 6,
+      "translations": {
+        "es_es": {
+          "procedureType": "Error Gestión"
+        }
+      }
+    },{
+      "procedureTypeId": "DEFER_REQUEST",
+      "procedureType": "Defer Request",
+      "sortOrder": 7,
+      "translations": {
+        "es_es": {
+          "procedureType": "Diferir Solicitud"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "conceptName": "GASTOS COURRIER",
+    "periodicity": null,
+    "percentage" : null,
+    "amount" : "12,99"
+  },
+  {
+    "conceptName": "COM.MOND.ESTRA.",
+    "periodicity": null,
+    "percentage" : "0,20",
+    "amount" : "5,56"
+  },
+  {
+    "conceptName": "COM.ACEP.REM.IM",
+    "periodicity": null,
+    "percentage" : "0,15",
+    "amount" : "48,99"
+  },
+  {
+    "conceptName": "COM.APLA.PRO.DE",
+    "periodicity": null,
+    "percentage" : "0,10",
+    "amount" : "61,97"
+  },
+  {
+    "conceptName": "COM.TRA.OTR.ENT",
+    "periodicity": "Trimestral",
+    "percentage" : null,
+    "amount" : "6 148,99"
+  },
+  {
+    "conceptName": "GAS.TIM.REM.IMP",
+    "periodicity": null,
+    "percentage" : null,
+    "amount" : "8,95"
+  },
+  {
+    "conceptName": "COM.DEV.EFE.REM",
+    "periodicity": null,
+    "percentage" : "4,50",
+    "amount" : "48,99"
+  },
+  {
+    "conceptName": "COM.TRA.CAR.LI.",
+    "periodicity": null,
+    "percentage": "0,75",
+    "amount": "8,99"
+  },
+  {
+    "conceptName": "COM.COBR.CA.LI.",
+    "periodicity": null,
+    "percentage" : "0,25",
+    "amount" : "8,20"
+  },
+  {
+    "conceptName": "COM.PROT.EFE.RE",
+    "periodicity": "Semestral",
+    "percentage" : null,
+    "amount" : "5,02"
+  },
+  {
+    "conceptName": "GTOS. SWIFT",
+    "periodicity": null,
+    "percentage" : null,
+    "amount" : "0,67"
+  }
+]

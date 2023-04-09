@@ -1,0 +1,12 @@
+{
+  "files": [
+    {
+      "id": "id doc 1",
+      "name": "miercoles.jpg",
+      "uploadedDate": "2022-05-27T06:54:53.741+02:00",
+      "documentType": "letter",
+      "data": "your file contents"
+    }
+  ],
+  "priority": "urgent"
+}

@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-request-cancel-reason",
+  "name": "Export Collection Request Cancel reason",
+  "description": "CLE Request cancel reasons",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "cancel reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "cancelReasonId",
+  "idField": "cancelReasonId",
+  "nameField": "cancelReason"
+}

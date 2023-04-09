@@ -1,0 +1,31 @@
+{
+  "requester": null,
+  "code": "Code 1",
+  "product": "CLI",
+  "event": "MODIFICATION",
+  "office": "requestingOffice1",
+  "customer": {
+    "customerId": "customerId1",
+    "name": "Coca Cola S.L.",
+    "taxId": "B1234567",
+    "office": "2345",
+    "personNumber": "BUC-1234567",
+    "segment": "SME",
+    "email": "mock email"
+  },
+  "details" : {
+    "importCollection":  "code importCollection"
+  },
+  "comment": "Mis comentarios",
+  "documents": [
+    {
+      "documentId": "id doc 1",
+      "mimeType": "image/jpeg",
+      "uploadedDate": 1653627293741,
+      "data": "your file contents",
+      "documentType": "letter",
+      "filename": "miercoles.jpg"
+    }
+  ],
+  "priority": "urgent"
+}

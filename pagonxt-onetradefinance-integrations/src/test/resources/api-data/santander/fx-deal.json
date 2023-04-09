@@ -1,0 +1,26 @@
+{
+  "fxDealId": "id1",
+  "fxDealType": "Forward USA",
+  "direction": "buy",
+  "sellTotalAmount": {
+    "amount": 1234.45,
+    "currency": "EUR"
+  },
+  "sellAvailableAmount": {
+    "amount": 234.45,
+    "currency": "EUR"
+  },
+  "buyTotalAmount": {
+    "amount": 1134.45,
+    "currency": "GBP"
+  },
+  "buyAvailableAmount": {
+    "amount": 134.45,
+    "currency": "GBP"
+  },
+  "exchangeRate": 1.23,
+  "signToApplyChange": "D",
+  "fxDealStartDate": "2019-10-21",
+  "fxDealExpirationDate": "2019-10-22",
+  "fxDealUseDate": "2019-10-23"
+}

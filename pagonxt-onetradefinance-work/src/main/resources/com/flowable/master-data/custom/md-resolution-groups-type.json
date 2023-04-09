@@ -1,0 +1,55 @@
+{
+  "dataObjectDefinitionKey": "md-resolution-group-type",
+  "masterData": [
+    {
+      "resolutionGroupTypeId": "BOI",
+      "resolutionGroupType": "Back Office Intern",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "resolutionGroupType": "Back Office Interno"
+        }
+      }
+    },
+    {
+      "resolutionGroupTypeId": "BOE",
+      "resolutionGroupType": "Back Office External",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "resolutionGroupType": "Back Office Externo"
+        }
+      }
+    },
+    {
+      "resolutionGroupTypeId": "LA",
+      "resolutionGroupType": "Legal Advice",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "resolutionGroupType": "Asesoría Jurídica"
+        }
+      }
+    },
+    {
+      "resolutionGroupTypeId": "FC",
+      "resolutionGroupType": "Financial Crime",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "resolutionGroupType": "Crimen Financiero"
+        }
+      }
+    },
+    {
+      "resolutionGroupTypeId": "GR",
+      "resolutionGroupType": "Global Risk",
+      "sortOrder": 5,
+      "translations": {
+        "es_es": {
+          "resolutionGroupType": "Riesgo Global"
+        }
+      }
+    }
+  ]
+}

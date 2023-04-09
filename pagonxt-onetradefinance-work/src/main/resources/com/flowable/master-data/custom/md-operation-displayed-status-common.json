@@ -1,0 +1,45 @@
+{
+  "dataObjectDefinitionKey": "md-operation-displayed-status-common",
+  "masterData": [
+    {
+      "statusId": "DRAFT",
+      "status": "Draft",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "status": "Borrador pendiente envío a banco"
+        }
+      }
+    },
+    {
+      "statusId": "IN_PROGRESS",
+      "status": "In progress",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "status": "Operación en proceso"
+        }
+      }
+    },
+    {
+      "statusId": "AWAITING_INSTRUCTIONS",
+      "status": "Awaiting instructions",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "status": "En espera de mis instrucciones"
+        }
+      }
+    },
+    {
+      "statusId": "ISSUED",
+      "status": "Issued",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "status": "Operación emitida"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "key": "tasks-active-assignee-query",
+  "sourceIndex": "tasks",
+  "type": "query",
+  "version": 1,
+  "parameters": {
+    "assignee": "string"
+  },
+  "sortParameters": {
+  },
+  "customFilter": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "assignee": "{assignee}"
+          }
+        },
+        {
+          "bool": {
+            "must_not": [
+              {
+                "exists": {
+                  "field": "endTime"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

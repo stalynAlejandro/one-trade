@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-event-type",
+  "name": "CLE Event type",
+  "description": "CLE Events types",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "CLE events type",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "eventTypeId",
+  "idField": "eventTypeId",
+  "nameField": "eventType"
+}

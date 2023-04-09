@@ -1,0 +1,136 @@
+{
+  "dataObjectDefinitionKey": "md-cle-modification-return-reason",
+  "overwrite": true,
+  "masterData": [
+    {
+      "returnReason": "Missing documentation",
+      "returnReasonId": "missingDocumentation",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "returnReason": "Documentación en falta"
+        }
+      }
+    },
+    {
+      "returnReason": "Wrong documentation",
+      "returnReasonId": "wrongDocumentation",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "returnReason": "Documentación errónea"
+        }
+      }
+    },
+    {
+      "returnReason": "Unreadable documentation",
+      "returnReasonId": "unreadableDocumentation",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "returnReason": "Documentación ilegible"
+        }
+      }
+    },
+    {
+      "returnReason": "Currency errors",
+      "returnReasonId": "currencyErrors",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "returnReason": "Errores en divisa"
+        }
+      }
+    },
+    {
+      "returnReason": "Amount errors",
+      "returnReasonId": "amountErrors",
+      "sortOrder": 5,
+      "translations": {
+        "es_es": {
+          "returnReason": "Errores en importe"
+        }
+      }
+    },
+    {
+      "returnReason": "Payment method",
+      "returnReasonId": "paymentMethod",
+      "sortOrder": 6,
+      "translations": {
+        "es_es": {
+          "returnReason": "Forma de pago"
+        }
+      }
+    },
+    {
+      "returnReason": "Payment date",
+      "returnReasonId": "paymentDate",
+      "sortOrder": 7,
+      "translations": {
+        "es_es": {
+          "returnReason": "Fecha de pago"
+        }
+      }
+    },
+    {
+      "returnReason": "Account with warnings",
+      "returnReasonId": "accountWithWarnings",
+      "sortOrder": 8,
+      "translations": {
+        "es_es": {
+          "returnReason": "Cuenta con avisos"
+        }
+      }
+    },
+    {
+      "returnReason": "Account has no balance",
+      "returnReasonId": "accountHasNoBalance",
+      "sortOrder": 9,
+      "translations": {
+        "es_es": {
+          "returnReason": "Cuenta sin saldo"
+        }
+      }
+    },
+    {
+      "returnReason": "Account wrong",
+      "returnReasonId": "accountWrong",
+      "sortOrder": 10,
+      "translations": {
+        "es_es": {
+          "returnReason": "Cuenta errónea"
+        }
+      }
+    },
+    {
+      "returnReason": "Confirm duplicity",
+      "returnReasonId": "confirmDuplicity",
+      "sortOrder": 11,
+      "translations": {
+        "es_es": {
+          "returnReason": "Confirmar duplicidad"
+        }
+      }
+    },
+    {
+      "returnReason": "Bank without authenticator",
+      "returnReasonId": "bankWithoutAuthenticator",
+      "sortOrder": 12,
+      "translations": {
+        "es_es": {
+          "returnReason": "Banco sin autenticador"
+        }
+      }
+    },
+    {
+      "returnReason": "Others",
+      "returnReasonId": "others",
+      "sortOrder": 99,
+      "translations": {
+        "es_es": {
+          "returnReason": "Otros"
+        }
+      }
+    }
+  ]
+}

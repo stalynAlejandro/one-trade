@@ -1,0 +1,17 @@
+[
+  {
+    "keyName": "monthly",
+    "translations" : {
+      "es_es" : "mensual",
+      "en_us" : "monthly"
+    }
+  },
+  {
+    "keyName": "quarterly",
+    "translations" : {
+      "es_es" : "trimestral",
+      "en_us" : "quarterly"
+    }
+  }
+]
+

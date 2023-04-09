@@ -1,0 +1,41 @@
+{
+  "dataObjectDefinitionKey": "md-status",
+  "masterData": [
+    {
+      "statusId": "DRAFT",
+      "status": "Draft",
+      "translations": {
+        "es_es": {
+          "status": "Borrador"
+        }
+      }
+    },
+    {
+      "statusId": "APPROVED",
+      "status": "Approved",
+      "translations": {
+        "es_es": {
+          "status": "Aprobado"
+        }
+      }
+    },
+    {
+      "statusId": "REJECTED",
+      "status": "Rejected",
+      "translations": {
+        "es_es": {
+          "status": "Rechazado"
+        }
+      }
+    },
+    {
+      "statusId": "CANCELED",
+      "status": "Canceled",
+      "translations": {
+        "es_es": {
+          "status": "Cancelado"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+include:
+  - local: ci/ci-scripts.yaml
+
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  JIB_AUTH: -Djib.from.auth.username=$REPO_DOCKER_USER_MMC -Djib.from.auth.password=$REPO_DOCKER_PASS_MMC -Djib.to.auth.username=$CI_REGISTRY_USER -Djib.to.auth.password=$CI_REGISTRY_PASSWORD
+
+# Generate docker images for deployment
+dockerize:
+  stage: dockerize
+  image: maven:3-jdk-11
+  cache:
+    key: ${CI_PROJECT_PATH}-m2
+    paths:
+      - .m2/repository
+  before_script:
+#    - !reference [ .scripts, npm, prepare ]
+    - cp ${REPO_NPMRC_MMC} ./pagonxt-onetradefinance-frontend-customizations/src/main/frontend/.npmrc
+  script:
+    #    - !reference [ .scripts, app, dockerize ]
+    - mvn $MAVEN_CLI_OPTS -s $REPO_MVN_SETTINGS_MMC -P jib,default $JIB_AUTH -Dmaven.test.skip=true clean package
+
+# Deploy the dev environment
+deploy-k8s-dev:
+  image: dtzar/helm-kubectl:3.5.4
+  stage: deploy
+  before_script:
+    #    - !reference [ .scripts, external_app, undeploy ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete service onetrade-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete deployment onetrade-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete configmap onetrade-external-app-configmap || true
+    #    - !reference [ .scripts, flowable, undeploy ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall $OTF_HELM_NAME || true
+    #    - !reference [ .scripts, flowable, delete_secrets ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_NAME-flowable-regcred || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_NAME-flowable-license || true
+    #    - !reference [ .scripts, flowable, create_secrets ]
+    - ARTIFACTS_AUTH=`echo -n "${REPO_MVN_USER_FLW_ALLREAD}:${REPO_MVN_PASS_FLW_ALLREAD}" | base64`
+    - CODE_REGISTRY_AUTH=`echo -n "${CI_REGISTRY_USER}:${OTF_REGISTRY_TOKEN}" | base64`
+    - |
+      cat > "docker_credentials.json" << EOM
+      {
+        "auths": {
+          "artifacts.flowable.com": {
+            "auth": "${ARTIFACTS_AUTH}"
+          },
+          "code-registry.flowable.com": {
+            "auth": "${CODE_REGISTRY_AUTH}"
+          }
+        }
+      }
+      EOM
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE create secret generic $OTF_HELM_NAME-flowable-regcred --from-file=.dockerconfigjson=docker_credentials.json --type=kubernetes.io/dockerconfigjson
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE create secret generic $OTF_HELM_NAME-flowable-license --from-file=flowable.license=license/flowable_dev.license
+    #    - !reference [ .scripts, flowable, add_helm_repo ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL repo add flowable-helm $REPO_HELM_URL_ALL --username $REPO_HELM_USER_MMC --password $REPO_HELM_PASS_MMC
+    #    - !reference [ .scripts, helm, repo_update ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL repo update
+  script:
+    #    - !reference [ .scripts, flowable, deploy ]
+    - helm --version $OTF_FLOWABLE_HELM_VERSION --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE install --values helm/flowable/values.yml --set work.springProfiles=saml $OTF_HELM_NAME flowable-helm/flowable
+    #    - !reference [ .scripts, external_app, deploy ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/external-app/external-app.yml
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/external-app/ingress.yml

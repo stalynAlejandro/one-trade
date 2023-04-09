@@ -1,0 +1,16 @@
+{
+  "requester": {
+    "user": {}
+  },
+  "customer": {},
+  "exportCollection": {
+    "customer": {},
+    "creationDate": 1653927293741,
+    "nominalAccount": {}
+  },
+  "documents": [
+    {
+      "uploadedDate": 1653627293741
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+work:
+  enabled: true
+  storage:
+    provisioner: kubernetes.io/minikube-hostpath
+    storageClass: "standard"
+    size: 512M
+  image:
+    repository: code-registry.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance/work
+  debug:
+    enabled: true
+    suspend: "n"
+    port: 31416
+  javaOpts: "-Duser.timezone=\\\"Europe/Madrid\\\""
+  envVariables:
+    # Override the default flowable property, as the mail server will be specified by the client:
+    "flowable.mail.server.default-from": no-reply@onetradefinance.pagonxt.com
+    "flowable.frontend.endpoints.external-app": http://localhost:8094
+
+engage:
+  enabled: false
+
+design:
+  image:
+    repository: code-registry.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance/design
+  javaOpts: "-Duser.timezone=\\\"Europe/Madrid\\\""
+
+control:
+  image:
+    repository: code-registry.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance/control
+  javaOpts: "-Duser.timezone=\\\"Europe/Madrid\\\""
+
+elasticsearch:
+  storage:
+    storageClass: "standard"
+    size: 512M
+
+mailhog:
+  enabled: true
+
+postgres:
+  enabled: true
+  storage:
+    storageClass: "standard"
+    size: 512M

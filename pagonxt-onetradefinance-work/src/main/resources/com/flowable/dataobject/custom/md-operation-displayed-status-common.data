@@ -1,0 +1,16 @@
+{
+  "key": "md-operation-displayed-status-common",
+  "name": "Displayed Operation Status",
+  "description": "Operation status displayed to the customer",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "status",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "statusId",
+  "idField": "statusId",
+  "nameField": "status"
+}

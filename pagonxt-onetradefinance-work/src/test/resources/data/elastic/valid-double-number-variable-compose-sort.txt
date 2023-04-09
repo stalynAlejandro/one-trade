@@ -1,0 +1,15 @@
+  "sort" : [
+    {
+      "variables.decimalValue" : {
+        "order" : "asc",
+        "nested": {
+          "path": "variables",
+          "filter": {
+            "term": {
+              "variables.name": "variable"
+            }
+          }
+        }
+      }
+    }
+  ]

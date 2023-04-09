@@ -1,0 +1,153 @@
+{
+  "from": 0,
+  "size": 10,
+  "sort" : [
+    {
+      "variables.textValueKeyword" : {
+        "order" : "desc",
+        "nested": {
+          "path": "variables",
+          "filter": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "variables.name": "operationCode"
+                  }
+                },
+                {
+                  "term": {
+                    "variables.scopeHierarchyType": "root"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "bool": {
+            "must_not": [
+              {
+                "nested": {
+                  "path": "variables",
+                  "query": {
+                    "bool": {
+                      "must": [
+                        {
+                          "term": {
+                            "variables.name": "registrationCancelled"
+                          }
+                        },
+                        {
+                          "term": {
+                            "variables.scopeHierarchyType": "root"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+,        {
+          "bool": {
+            "must_not": {
+              "exists": {
+                "field": "endTime"
+              }
+            }
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "isExternalTask"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.textValueKeyword": "true"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+,        {
+          "bool": {
+            "should": [
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "event"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.scopeHierarchyType": "root"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.textValueKeyword": "REQUEST"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "event"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.scopeHierarchyType": "root"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.textValueKeyword": "MODIFICATION"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "requester": {
+    "user": {
+      "userId": "office",
+      "userDisplayedName": "officeName",
+      "userType": "userType"
+    }
+  },
+  "code": "Code 1",
+  "slaEnd": 1660593600000,
+  "creationDate": null,
+  "product": null,
+  "event": null,
+  "country": null,
+  "documents": [
+    {
+      "documentId": "id doc 1",
+      "mimeType": "image/jpeg",
+      "uploadedDate": 1653627293741,
+      "data": "your file contents",
+      "filename": "miercoles.jpg",
+      "documentType": "letter"
+    }
+  ],
+  "priority": "urgent",
+  "office": null,
+  "comment": "Mis comentarios"
+}

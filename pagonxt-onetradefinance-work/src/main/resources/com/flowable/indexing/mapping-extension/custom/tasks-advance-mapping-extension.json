@@ -1,0 +1,133 @@
+{
+  "key": "tasks-advance-mapping-extension",
+  "extends": "tasks",
+  "version": 1,
+  "variableExtractors": [
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/amount",
+      "to": "operationAmount",
+      "type": "double"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/code",
+      "to": "operationCode",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/creationDate",
+      "to": "operationCreationDate",
+      "type": "date"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/currency",
+      "to": "operationCurrency",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/customerCode",
+      "to": "operationCustomerCode",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/customerFullName",
+      "to": "operationCustomerFullName",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/customerID",
+      "to": "operationCustomerID",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/contractReference",
+      "to": "operationContractReference",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/middleOffice",
+      "to": "operationMiddleOffice",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/office",
+      "to": "operationOffice",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/priority",
+      "to": "operationPriority",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/requesterDisplayedName",
+      "to": "operationRequesterDisplayedName",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/requesterId",
+      "to": "operationRequesterId",
+      "type": "string"
+    },
+    {
+      "filter": {
+        "name": "operation",
+        "scopeDefinitionKey": "CLE_C003"
+      },
+      "path": "/displayedStatus",
+      "to": "operationDisplayedStatus",
+      "type": "string"
+    }
+  ]
+}

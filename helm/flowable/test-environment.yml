@@ -1,0 +1,35 @@
+work:
+  enabled: true
+  image:
+    repository: code-registry.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance/work
+    pullPolicy: Always
+  debug:
+    enabled: true
+    suspend: "n"
+    port: 31416
+  javaOpts: "-Duser.timezone=\\\"Europe/Madrid\\\""
+  envVariables:
+    # Override the default flowable property, as the mail server will be specified by the client:
+    "flowable.mail.server.default-from": no-reply-test@onetradefinance.pagonxt.com
+    flowable.mail.server.host: onetrade-mailhog
+    flowable.mail.server.port: "1025"
+    flowable.mail.server.username: ""
+    flowable.mail.server.use-ssl: "false"
+    flowable.mail.server.use-tls: "false"
+    "flowable.frontend.endpoints.external-app": https://external-app.onetrade-tests.projects.flowable.io
+    "pagonxt.saml2.idp-metadata-location": "https://dev-63773295.okta.com/app/exk5g08psinXt2WhR5d7/sso/saml/metadata"
+    "spring.security.saml2.relyingparty.registration.okta.identityprovider.entity-id": "http://www.okta.com/exk5g08psinXt2WhR5d7"
+    "spring.security.saml2.relyingparty.registration.okta.identityprovider.singlesignon.url": "https://dev-63773295.okta.com/app/dev-63773295_onetradetest_1/exk5g08psinXt2WhR5d7/sso/saml"
+    spring.datasource.jdbc-url: jdbc:postgresql://onetrade-tests-postgres:5432/flowable
+
+engage:
+  enabled: false
+
+design:
+  enabled: false
+
+control:
+  enabled: false
+
+mailhog:
+  enabled: false

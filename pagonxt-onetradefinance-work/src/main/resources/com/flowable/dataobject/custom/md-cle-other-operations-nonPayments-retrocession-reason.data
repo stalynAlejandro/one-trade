@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-other-operations-nonPayments-retrocession-reason",
+  "name": "Export Collection Other Operations nonPayments Retrocession reason",
+  "description": "CLE Advance other operations non-payments retrocession reason",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "retrocession reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "retrocessionReasonId",
+  "idField": "retrocessionReasonId",
+  "nameField": "retrocessionReason"
+}

@@ -1,0 +1,23 @@
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "%s"
+                    }
+                  },
+                  {
+                    "range": {
+                      "variables.decimalValue": {
+                        "%s": %f
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }

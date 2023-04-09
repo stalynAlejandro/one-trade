@@ -1,0 +1,9 @@
+{
+  "customerId": "customerId1",
+  "name": "Coca Cola S.L.",
+  "taxId": "B1234567",
+  "office": "2345",
+  "personNumber": "BUC-1234567",
+  "segment": "SME",
+  "email": "mock email"
+}

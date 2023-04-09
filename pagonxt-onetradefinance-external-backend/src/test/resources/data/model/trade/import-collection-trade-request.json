@@ -1,0 +1,50 @@
+{
+  "requester": null,
+  "code": "Code 1",
+  "contractReference": "contractReference1",
+  "slaEnd": 1660593600000,
+  "savedStep": 2,
+  "creationDate": null,
+  "product": "CLI",
+  "event": "REQUEST",
+  "country": null,
+  "documents": [
+    {
+      "documentId": "id doc 1",
+      "mimeType": "image/jpeg",
+      "uploadedDate": 1653627293741,
+      "data": "your file contents",
+      "filename": "miercoles.jpg",
+      "documentType": "letter"
+    }
+  ],
+  "priority": "urgent",
+  "office": "requestingOffice1",
+  "comment": "Mis comentarios",
+  "customer": {
+    "customerId": "customerId1",
+    "name": "Coca Cola S.L.",
+    "taxId": "B1234567",
+    "office": "2345",
+    "personNumber": "BUC-1234567",
+    "segment": "SME",
+    "email": "mock email"
+  },
+  "details": {
+    "amount": 546512.0,
+    "collectionType": "DOCUMENTARY",
+    "commissionAccountCurrency": "EUR",
+    "commissionAccountIBAN": "PT50 0002 0123 5678 9015 1",
+    "commissionAccountId": "account-id-1",
+    "contractReference": "contractReference1",
+    "currency": "EUR",
+    "customerHasAccount": "yes",
+    "customerPricesAgreementCollected": "yes",
+    "customerReference": "Ref22399SD",
+    "debtorBank": "Banco Deudor",
+    "debtorName": "Nombre Deudor",
+    "nominalAccountCurrency": "EUR",
+    "nominalAccountIBAN": "PT50 0002 0123 5678 9015 1",
+    "nominalAccountId": "account-id-1"
+  }
+}

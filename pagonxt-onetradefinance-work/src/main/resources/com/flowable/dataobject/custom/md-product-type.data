@@ -1,0 +1,16 @@
+{
+  "key": "md-product-type",
+  "name": "Products type",
+  "description": "Product types",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "products type",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "productTypeId",
+  "idField": "productTypeId",
+  "nameField": "productType"
+}

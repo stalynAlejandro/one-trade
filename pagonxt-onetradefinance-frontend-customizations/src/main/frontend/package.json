@@ -1,0 +1,89 @@
+{
+    "license": "UNLICENSED",
+    "scripts": {
+        "storybook": "start-storybook -s ./.storybook/static -p 6006",
+        "build-storybook": "build-storybook -s ./.storybook/static",
+        "build-suite": "rollup -c --environment BUILD:production --environment BUILDTYPE:suite",
+        "build-work": "yarn clean-work && rimraf dist && rollup -c --environment BUILD:production --environment BUILDTYPE:work",
+        "build": "yarn build-suite && yarn build-work",
+        "dev": "yarn dev-standard",
+        "dev-standard": "rimraf dist && yarn build-work && yarn copy-to-work",
+        "clean-work": "rimraf ../../../../pagonxt-onetradefinance-work/src/main/resources/static/ext",
+        "copy-to-work": "mkdirp ../../../../pagonxt-onetradefinance-work/src/main/resources/static/ext/ && cpr ../resources/static/ext/ ../../../../pagonxt-onetradefinance-work/src/main/resources/static/ext/",
+        "json-mock-server": "json-server --watch mock/flowable.json --port 13004",
+        "check-prettier": "prettier --check \"**/*.{ts,tsx,css,html,json}\"",
+        "change-prettier": "prettier --write \"**/*.{ts,tsx,css,html,json}\""
+    },
+    "dependencies": {
+        "@flowable/forms": "3.10.6",
+        "@flowable/work": "3.10.6",
+        "@flowable/work-scripts": "3.10.6",
+        "@fortawesome/fontawesome-svg-core": "^1.2.36",
+        "@fortawesome/free-regular-svg-icons": "^5.15.4",
+        "@fortawesome/free-solid-svg-icons": "^5.15.4",
+        "@fortawesome/react-fontawesome": "^0.1.15",
+        "cpr": "^3.0.1",
+        "react": "16.13.1",
+        "react-dom": "16.13.1",
+        "styled-components": "5.2.1",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "20.0.0",
+        "@rollup/plugin-node-resolve": "13.0.4",
+        "@rollup/plugin-replace": "3.0.0",
+        "@rollup/plugin-typescript": "8.2.5",
+        "@storybook/addon-cssresources": "6.2.9",
+        "@storybook/addon-essentials": "6.3.7",
+        "@storybook/addon-links": "6.3.7",
+        "@storybook/addon-storysource": "6.3.7",
+        "@storybook/react": "6.3.7",
+        "@testing-library/jest-dom": "^5.11.10",
+        "@types/jest": "^26.0.0",
+        "@typescript-eslint/eslint-plugin": "^4.31.1",
+        "@typescript-eslint/parser": "^4.31.1",
+        "babel-plugin-syntax-dynamic-import": "^6.18.0",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-react": "^7.25.2",
+        "jest": "^26.6.3",
+        "postcss": "^8.3.9",
+        "prettier": "^2.4.0",
+        "rollup": "2.56.2",
+        "rollup-plugin-polyfill-node": "^0.7.0",
+        "rollup-plugin-postcss": "^4.0.1",
+        "rollup-plugin-scss": "3.0.0",
+        "rollup-plugin-sourcemaps": "0.6.3",
+        "rollup-plugin-styles": "^3.14.1",
+        "rollup-plugin-uglify": "6.0.4",
+        "sass": "1.37.5",
+        "sass-loader": "12.1.0",
+        "ts-jest": "24.2.0",
+        "typescript": "4.3.5"
+    },
+    "lint-staged": {
+        "*.{ts,tsx,json,css}": [
+            "prettier --write"
+        ]
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not ie <= 11",
+        "not op_mini all"
+    ],
+    "compilerOptions": {
+        "jsx": "react",
+        "module": "esNext",
+        "moduleResolution": "node",
+        "preserveConstEnums": true,
+        "strict": true,
+        "strictFunctionTypes": false,
+        "target": "es5",
+        "sourceMap": true,
+        "importHelpers": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true
+    }
+}

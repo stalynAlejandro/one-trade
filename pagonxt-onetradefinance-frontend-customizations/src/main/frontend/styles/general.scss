@@ -1,0 +1,62 @@
+:root {
+    /* your variables can go here */
+  --otf-color-primary: #10447b;
+  --otf-color-primary-interaction: #1E85F1;
+  --otf-color-secondary: #7F9CCB;
+  --otf-color-secondary-variant: #10447b;
+  --otf-color-background: #F3F6FB;
+}
+
+/**
+#####################################
+  CUSTOM STYLES TO USE ON DESIGN
+#####################################
+*/
+
+.select-display-field .flw__component--disabled__input {
+  --flw-color-lightgray: transparent !important;
+  --flw-forms-muted-background-color: transparent !important;
+  --flw-forms-border-color: transparent !important;
+  --flw-forms-muted-text-color: #666 !important;
+  margin: -10px !important;
+}
+
+.select-display-field .flw__component--disabled__label {
+  font-weight: bold !important;
+  color: #666666 !important;
+  padding-top: 3mm !important;
+}
+
+.select-data-table .flw__component--disabled__input {
+  --flw-color-lightgray: transparent !important;
+  --flw-forms-muted-background-color: transparent !important;
+  --flw-forms-border-color: transparent !important;
+  --flw-forms-muted-text-color: #666 !important;
+  margin: -10px !important;
+}
+
+.flw__rest-button.flw__component--disabled__label,
+.flw__script-button.flw__component--disabled__label {
+  --flw-forms-label-text-color: transparent !important;
+  padding-top: 0 !important;
+  pointer-events: all !important;
+}
+
+.flw__rest-button.flw__component--disabled__label label.flw__component--primary__label,
+.flw__script-button.flw__component--disabled__label label.flw__script-button--primary__label {
+  height: calc(100% - 32px);
+}
+
+.map-status-ACTIVE {
+  color: forestgreen;
+}
+
+.map-status-INACTIVE {
+  color: firebrick;
+}
+
+/**
+#####################################
+  FLOWABLE OVERRIDES
+#####################################
+*/

@@ -1,0 +1,957 @@
+{
+  "info": {
+    "_postman_id": "5b7567bf-d187-44b8-9e39-779b10879c67",
+    "name": "PagoNxt User Creation",
+    "description": "Esta colección crea los usuarios de *Flowable Work* para la aplicación *PagoNxt*.\n\nSe debe ejecutar contra un entorno que apunte a *Flowable Work*.\n\nEl entorno debe tener una variable `base_url`, que incluya protocolo, host y puerto de la máquina de destino.\n\n**PagoNxt OneTradeFinance local:**\n\n*   *base_url*: `http://localhost:8090`\n    \n\n**PagoNxt OneTradeFinance dev:**\n\n*   *base_url*: `https://onetrade.projects.flowable.io`",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20793758"
+  },
+  "item": [
+    {
+      "name": "Get form id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonResponse = pm.response.json();\r",
+              "postman.setEnvironmentVariable(\"form_id\", jsonResponse.id);\r",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/form-api/form-repository/form-definitions/key/UM_P001/model",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "form-api",
+            "form-repository",
+            "form-definitions",
+            "key",
+            "UM_P001",
+            "model"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Isabel - user",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userProfile\":\"backOffice\",\r\n    \"displayName\":\"Isabel Blanco\",\r\n    \"firstName\":\"Isabel\",\r\n    \"lastName\":\"Blanco\",\r\n    \"loginName\":\"isabel\",\r\n    \"email\":\"isabel@onetradefinance.pagonxt.com\",\r\n    \"enableMessage\":false,\r\n    \"success\":\"false\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A003/execute?formId={{form_id}}&formFieldId=UM_F004_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A003",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F004_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Iasbel - country",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"_id\": \"883335902\",\r\n    \"id\": \"isabel\",\r\n    \"firstName\": \"Isabel\",\r\n    \"lastName\": \"Blanco\",\r\n    \"displayName\": \"Isabel Blanco\",\r\n    \"email\": \"isabel@onetradefinance.pagonxt.com\",\r\n    \"tenantId\": \"\",\r\n    \"type\": \"default\",\r\n    \"subType\": \"default\",\r\n    \"state\": \"ACTIVE\",\r\n    \"subState\": \"ACTIVE\",\r\n    \"theme\": \"Santander\",\r\n    \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n    \"identityInfo\": [\r\n        {\r\n            \"name\": \"userProfile\",\r\n            \"type\": \"string\",\r\n            \"value\": \"Back Office\"\r\n        }\r\n    ],\r\n    \"getStaticCountries\": [],\r\n    \"enableFnd\": false,\r\n    \"foundCountries\": [],\r\n    \"staticCountries\": false,\r\n    \"countries\": [\r\n        \"ES\"\r\n    ],\r\n    \"enableModificationCountries\": true,\r\n    \"changesMadeCountry\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A002/execute?formId={{form_id}}&formFieldId=UM_F003_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A002",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F003_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Iasbel - groups",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"_id\": \"1374041521\",\r\n    \"id\": \"isabel\",\r\n    \"firstName\": \"Isabel\",\r\n    \"lastName\": \"Blanco\",\r\n    \"displayName\": \"Isabel Blanco\",\r\n    \"email\": \"isabel@onetradefinance.pagonxt.com\",\r\n    \"tenantId\": \"\",\r\n    \"type\": \"default\",\r\n    \"subType\": \"default\",\r\n    \"state\": \"ACTIVE\",\r\n    \"subState\": \"ACTIVE\",\r\n    \"theme\": \"Santander\",\r\n    \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n    \"identityInfo\": [\r\n        {\r\n            \"name\": \"userProfile\",\r\n            \"type\": \"string\",\r\n            \"value\": \"Back Office\"\r\n        },\r\n        {\r\n            \"name\": \"countries\",\r\n            \"type\": \"json\",\r\n            \"value\": [\r\n                \"ES\"\r\n            ]\r\n        }\r\n    ],\r\n    \"getIdentityCountries\": [\r\n        {\r\n            \"name\": \"countries\",\r\n            \"type\": \"json\",\r\n            \"value\": [\r\n                \"ES\"\r\n            ]\r\n        }\r\n    ],\r\n    \"getStaticGroups\": [],\r\n    \"isEqual\": null,\r\n    \"staticCountries\": true,\r\n    \"staticGroups\": false,\r\n    \"nowMerge\": null,\r\n    \"groupsAndRoles\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_BOI_01\",\r\n            \"role\": \"user\"\r\n        }\r\n    ],\r\n    \"addedGrpAndRl\": false,\r\n    \"changesMade\": true,\r\n    \"enbldFound\": true,\r\n    \"foundGroupsAndRoles\": [],\r\n    \"refresh\": true,\r\n    \"tempShowGrNdRol\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_BOI_01\",\r\n            \"role\": \"user\"\r\n        }\r\n    ],\r\n    \"showGrNdRol\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_BOI_01\",\r\n            \"role\": \"user\"\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A001/execute?formId={{form_id}}&formFieldId=UM_F002_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A001",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F002_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Ignacio - user",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userProfile\":\"backOffice\",\r\n    \"displayName\":\"Ignacio Blasco\",\r\n    \"firstName\":\"Ignacio\",\r\n    \"lastName\":\"Blasco\",\r\n    \"loginName\":\"ignacio\",\r\n    \"email\":\"ignacio@onetradefinance.pagonxt.com\",\r\n    \"enableMessage\":false,\r\n    \"success\":\"false\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A003/execute?formId={{form_id}}&formFieldId=UM_F004_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A003",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F004_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Ignacio - country",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"_id\": \"883335903\",\r\n    \"id\": \"ignacio\",\r\n    \"firstName\": \"Ignacio\",\r\n    \"lastName\": \"Blasco\",\r\n    \"displayName\": \"Ignacio Blasco\",\r\n    \"email\": \"ignacio@onetradefinance.pagonxt.com\",\r\n    \"tenantId\": \"\",\r\n    \"type\": \"default\",\r\n    \"subType\": \"default\",\r\n    \"state\": \"ACTIVE\",\r\n    \"subState\": \"ACTIVE\",\r\n    \"theme\": \"Santander\",\r\n    \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n    \"identityInfo\": [\r\n        {\r\n            \"name\": \"userProfile\",\r\n            \"type\": \"string\",\r\n            \"value\": \"Back Office\"\r\n        }\r\n    ],\r\n    \"getStaticCountries\": [],\r\n    \"enableFnd\": false,\r\n    \"foundCountries\": [],\r\n    \"staticCountries\": false,\r\n    \"countries\": [\r\n        \"ES\"\r\n    ],\r\n    \"enableModificationCountries\": true,\r\n    \"changesMadeCountry\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A002/execute?formId={{form_id}}&formFieldId=UM_F003_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A002",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F003_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Ignacio - groups",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"_id\": \"1858126087\",\r\n    \"id\": \"ignacio\",\r\n    \"firstName\": \"Ignacio\",\r\n    \"lastName\": \"Blasco\",\r\n    \"displayName\": \"Ignacio Blasco\",\r\n    \"email\": \"ignacio@onetradefinance.pagonxt.com\",\r\n    \"tenantId\": \"\",\r\n    \"type\": \"default\",\r\n    \"subType\": \"default\",\r\n    \"state\": \"ACTIVE\",\r\n    \"subState\": \"ACTIVE\",\r\n    \"theme\": \"Santander\",\r\n    \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n    \"identityInfo\": [\r\n        {\r\n            \"name\": \"userProfile\",\r\n            \"type\": \"string\",\r\n            \"value\": \"Back Office\"\r\n        },\r\n        {\r\n            \"name\": \"countries\",\r\n            \"type\": \"json\",\r\n            \"value\": [\r\n                \"ES\"\r\n            ]\r\n        }\r\n    ],\r\n    \"getIdentityCountries\": [\r\n        {\r\n            \"name\": \"countries\",\r\n            \"type\": \"json\",\r\n            \"value\": [\r\n                \"ES\"\r\n            ]\r\n        }\r\n    ],\r\n    \"getStaticGroups\": [],\r\n    \"isEqual\": null,\r\n    \"staticCountries\": true,\r\n    \"staticGroups\": false,\r\n    \"nowMerge\": null,\r\n    \"groupsAndRoles\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_BOI_01\",\r\n            \"role\": \"user\"\r\n        }\r\n    ],\r\n    \"addedGrpAndRl\": false,\r\n    \"changesMade\": true,\r\n    \"enbldFound\": true,\r\n    \"foundGroupsAndRoles\": [],\r\n    \"refresh\": true,\r\n    \"tempShowGrNdRol\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_BOI_01\",\r\n            \"role\": \"user\"\r\n        }\r\n    ],\r\n    \"showGrNdRol\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_BOI_01\",\r\n            \"role\": \"user\"\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A001/execute?formId={{form_id}}&formFieldId=UM_F002_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A001",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F002_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Isaac - user",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userProfile\":\"backOffice\",\r\n    \"displayName\":\"Isaac Benítez\",\r\n    \"firstName\":\"Isaac\",\r\n    \"lastName\":\"Benítez\",\r\n    \"loginName\":\"isaac\",\r\n    \"email\":\"isaac@onetradefinance.pagonxt.com\",\r\n    \"enableMessage\":false,\r\n    \"success\":\"false\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A003/execute?formId={{form_id}}&formFieldId=UM_F004_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A003",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F004_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Isaac - country",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"_id\": \"883335904\",\r\n    \"id\": \"isaac\",\r\n    \"firstName\": \"Isaac\",\r\n    \"lastName\": \"Benítez\",\r\n    \"displayName\": \"Isaac Benítez\",\r\n    \"email\": \"isaac@onetradefinance.pagonxt.com\",\r\n    \"tenantId\": \"\",\r\n    \"type\": \"default\",\r\n    \"subType\": \"default\",\r\n    \"state\": \"ACTIVE\",\r\n    \"subState\": \"ACTIVE\",\r\n    \"theme\": \"Santander\",\r\n    \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n    \"identityInfo\": [\r\n        {\r\n            \"name\": \"userProfile\",\r\n            \"type\": \"string\",\r\n            \"value\": \"Back Office\"\r\n        }\r\n    ],\r\n    \"getStaticCountries\": [],\r\n    \"enableFnd\": false,\r\n    \"foundCountries\": [],\r\n    \"staticCountries\": false,\r\n    \"countries\": [\r\n        \"ES\"\r\n    ],\r\n    \"enableModificationCountries\": true,\r\n    \"changesMadeCountry\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A002/execute?formId={{form_id}}&formFieldId=UM_F003_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A002",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F003_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Isaac - groups",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"_id\": \"521013371\",\r\n    \"id\": \"isaac\",\r\n    \"firstName\": \"Isaac\",\r\n    \"lastName\": \"Benítez\",\r\n    \"displayName\": \"Isaac Benítez\",\r\n    \"email\": \"isaac@onetradefinance.pagonxt.com\",\r\n    \"tenantId\": \"\",\r\n    \"type\": \"default\",\r\n    \"subType\": \"default\",\r\n    \"state\": \"ACTIVE\",\r\n    \"subState\": \"ACTIVE\",\r\n    \"theme\": \"Santander\",\r\n    \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n    \"identityInfo\": [\r\n        {\r\n            \"name\": \"userProfile\",\r\n            \"type\": \"string\",\r\n            \"value\": \"Back Office\"\r\n        },\r\n        {\r\n            \"name\": \"countries\",\r\n            \"type\": \"json\",\r\n            \"value\": [\r\n                \"ES\"\r\n            ]\r\n        }\r\n    ],\r\n    \"getIdentityCountries\": [\r\n        {\r\n            \"name\": \"countries\",\r\n            \"type\": \"json\",\r\n            \"value\": [\r\n                \"ES\"\r\n            ]\r\n        }\r\n    ],\r\n    \"getStaticGroups\": [],\r\n    \"isEqual\": null,\r\n    \"staticCountries\": true,\r\n    \"staticGroups\": false,\r\n    \"nowMerge\": null,\r\n    \"groupsAndRoles\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_BOI_02\",\r\n            \"role\": \"user\"\r\n        }\r\n    ],\r\n    \"addedGrpAndRl\": false,\r\n    \"changesMade\": true,\r\n    \"enbldFound\": true,\r\n    \"foundGroupsAndRoles\": [],\r\n    \"refresh\": true,\r\n    \"tempShowGrNdRol\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_BOI_02\",\r\n            \"role\": \"user\"\r\n        }\r\n    ],\r\n    \"showGrNdRol\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_BOI_02\",\r\n            \"role\": \"user\"\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A001/execute?formId={{form_id}}&formFieldId=UM_F002_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A001",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F002_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Fernando - user",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userProfile\":\"backOffice\",\r\n    \"displayName\":\"Fernando Castro\",\r\n    \"firstName\":\"Fernando\",\r\n    \"lastName\":\"Castro\",\r\n    \"loginName\":\"fernando\",\r\n    \"email\":\"fernando@onetradefinance.pagonxt.com\",\r\n    \"enableMessage\":false,\r\n    \"success\":\"false\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A003/execute?formId={{form_id}}&formFieldId=UM_F004_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A003",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F004_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Fernando - country",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"_id\": \"883335905\",\r\n    \"id\": \"fernando\",\r\n    \"firstName\": \"Fernando\",\r\n    \"lastName\": \"Castro\",\r\n    \"displayName\": \"Fernando Castro\",\r\n    \"email\": \"fernando@onetradefinance.pagonxt.com\",\r\n    \"tenantId\": \"\",\r\n    \"type\": \"default\",\r\n    \"subType\": \"default\",\r\n    \"state\": \"ACTIVE\",\r\n    \"subState\": \"ACTIVE\",\r\n    \"theme\": \"Santander\",\r\n    \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n    \"identityInfo\": [\r\n        {\r\n            \"name\": \"userProfile\",\r\n            \"type\": \"string\",\r\n            \"value\": \"Back Office\"\r\n        }\r\n    ],\r\n    \"getStaticCountries\": [],\r\n    \"enableFnd\": false,\r\n    \"foundCountries\": [],\r\n    \"staticCountries\": false,\r\n    \"countries\": [\r\n        \"ES\"\r\n    ],\r\n    \"enableModificationCountries\": true,\r\n    \"changesMadeCountry\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A002/execute?formId={{form_id}}&formFieldId=UM_F003_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A002",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F003_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Fernando - groups",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"_id\": \"229858135\",\r\n    \"id\": \"fernando\",\r\n    \"firstName\": \"Fernando\",\r\n    \"lastName\": \"Castro\",\r\n    \"displayName\": \"Fernando Castro\",\r\n    \"email\": \"fernando@onetradefinance.pagonxt.com\",\r\n    \"tenantId\": \"\",\r\n    \"type\": \"default\",\r\n    \"subType\": \"default\",\r\n    \"state\": \"ACTIVE\",\r\n    \"subState\": \"ACTIVE\",\r\n    \"theme\": \"Santander\",\r\n    \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n    \"identityInfo\": [\r\n        {\r\n            \"name\": \"countries\",\r\n            \"type\": \"json\",\r\n            \"value\": [\r\n                \"ES\"\r\n            ]\r\n        },\r\n        {\r\n            \"name\": \"userProfile\",\r\n            \"type\": \"string\",\r\n            \"value\": \"Back Office\"\r\n        }\r\n    ],\r\n    \"getIdentityCountries\": [\r\n        {\r\n            \"name\": \"countries\",\r\n            \"type\": \"json\",\r\n            \"value\": [\r\n                \"ES\"\r\n            ]\r\n        }\r\n    ],\r\n    \"getStaticGroups\": [],\r\n    \"isEqual\": null,\r\n    \"staticCountries\": true,\r\n    \"staticGroups\": false,\r\n    \"nowMerge\": null,\r\n    \"groupsAndRoles\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_FC_01\",\r\n            \"role\": \"user\"\r\n        }\r\n    ],\r\n    \"addedGrpAndRl\": false,\r\n    \"changesMade\": true,\r\n    \"enbldFound\": true,\r\n    \"foundGroupsAndRoles\": [],\r\n    \"refresh\": true,\r\n    \"tempShowGrNdRol\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_FC_01\",\r\n            \"role\": \"user\"\r\n        }\r\n    ],\r\n    \"showGrNdRol\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_FC_01\",\r\n            \"role\": \"user\"\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A001/execute?formId={{form_id}}&formFieldId=UM_F002_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A001",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F002_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Flora - user",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userProfile\":\"backOffice\",\r\n    \"displayName\":\"Flora Castillo\",\r\n    \"firstName\":\"Flora\",\r\n    \"lastName\":\"Castillo\",\r\n    \"loginName\":\"flora\",\r\n    \"email\":\"flora@onetradefinance.pagonxt.com\",\r\n    \"enableMessage\":false,\r\n    \"success\":\"false\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A003/execute?formId={{form_id}}&formFieldId=UM_F004_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A003",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F004_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Flora - country",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"_id\": \"883335906\",\r\n    \"id\": \"flora\",\r\n    \"firstName\": \"Flora\",\r\n    \"lastName\": \"Castillo\",\r\n    \"displayName\": \"Flora Castillo\",\r\n    \"email\": \"flora@onetradefinance.pagonxt.com\",\r\n    \"tenantId\": \"\",\r\n    \"type\": \"default\",\r\n    \"subType\": \"default\",\r\n    \"state\": \"ACTIVE\",\r\n    \"subState\": \"ACTIVE\",\r\n    \"theme\": \"Santander\",\r\n    \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n    \"identityInfo\": [\r\n        {\r\n            \"name\": \"userProfile\",\r\n            \"type\": \"string\",\r\n            \"value\": \"Back Office\"\r\n        }\r\n    ],\r\n    \"getStaticCountries\": [],\r\n    \"enableFnd\": false,\r\n    \"foundCountries\": [],\r\n    \"staticCountries\": false,\r\n    \"countries\": [\r\n        \"ES\"\r\n    ],\r\n    \"enableModificationCountries\": true,\r\n    \"changesMadeCountry\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A002/execute?formId={{form_id}}&formFieldId=UM_F003_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A002",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F003_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Flora - groups",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"_id\": \"-524739609\",\r\n    \"id\": \"flora\",\r\n    \"firstName\": \"Flora\",\r\n    \"lastName\": \"Castillo\",\r\n    \"displayName\": \"Flora Castillo\",\r\n    \"email\": \"flora@onetradefinance.pagonxt.com\",\r\n    \"tenantId\": \"\",\r\n    \"type\": \"default\",\r\n    \"subType\": \"default\",\r\n    \"state\": \"ACTIVE\",\r\n    \"subState\": \"ACTIVE\",\r\n    \"theme\": \"Santander\",\r\n    \"userDefinitionKey\": \"user-oneTradeFinance\",\r\n    \"identityInfo\": [\r\n        {\r\n            \"name\": \"userProfile\",\r\n            \"type\": \"string\",\r\n            \"value\": \"Back Office\"\r\n        },\r\n        {\r\n            \"name\": \"countries\",\r\n            \"type\": \"json\",\r\n            \"value\": [\r\n                \"ES\"\r\n            ]\r\n        }\r\n    ],\r\n    \"getIdentityCountries\": [\r\n        {\r\n            \"name\": \"countries\",\r\n            \"type\": \"json\",\r\n            \"value\": [\r\n                \"ES\"\r\n            ]\r\n        }\r\n    ],\r\n    \"getStaticGroups\": [],\r\n    \"isEqual\": null,\r\n    \"staticCountries\": true,\r\n    \"staticGroups\": false,\r\n    \"nowMerge\": null,\r\n    \"groupsAndRoles\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_FC_02\",\r\n            \"role\": \"user\"\r\n        }\r\n    ],\r\n    \"addedGrpAndRl\": false,\r\n    \"changesMade\": true,\r\n    \"enbldFound\": true,\r\n    \"foundGroupsAndRoles\": [],\r\n    \"refresh\": true,\r\n    \"tempShowGrNdRol\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_FC_02\",\r\n            \"role\": \"user\"\r\n        }\r\n    ],\r\n    \"showGrNdRol\": [\r\n        {\r\n            \"group\": \"CLE_REQUEST_FC_02\",\r\n            \"role\": \"user\"\r\n        }\r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A001/execute?formId={{form_id}}&formFieldId=UM_F002_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A001",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F002_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Ursula - user",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userProfile\":\"userManagement\",\r\n    \"displayName\":\"Úrsula Martín\",\r\n    \"firstName\":\"Úrsula\",\r\n    \"lastName\":\"Martín\",\r\n    \"loginName\":\"ursula.martin\",\r\n    \"email\":\"ursula.martin@onetradefinance.pagonxt.com\",\r\n    \"enableMessage\":false,\r\n    \"success\":\"false\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/action-api/action-repository/action-definitions/key/UM_A003/execute?formId={{form_id}}&formFieldId=UM_F004_work-action1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "action-api",
+            "action-repository",
+            "action-definitions",
+            "key",
+            "UM_A003",
+            "execute"
+          ],
+          "query": [
+            {
+              "key": "formId",
+              "value": "{{form_id}}"
+            },
+            {
+              "key": "formFieldId",
+              "value": "UM_F004_work-action1"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

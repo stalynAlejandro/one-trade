@@ -1,0 +1,96 @@
+environments:
+  - name: CERT
+    regions:
+      - name: CERT-W
+        type: ose3
+        properties:
+          ose3Region:  https://api.ocp02.gts.dev.weu1.azure.paas.cloudcenter.corp:6443
+          ose3Project: gts-mimacom-dev
+          ose3Application: external-app
+          ose3TokenCredentialId: ocp4-gts-mimacom-dev
+          ose3OcVersion: 4.5
+          ose3Template:
+            name: javase-probes
+            process: true
+            gitRepoUrl: 'git@github.alm.europe.cloudcenter.corp:sgt-globaltradeservices/iac.gts.ocp-templates.git'
+            gitCredentialsId: templates_ocp_git_repo
+            gitFilePath: 'Generic/Immutables/javase-probes.yml'
+            gitBranch: 'v1.7'
+          ose3TemplateParams:
+            ARTIFACT_URL: ${ARTIFACT_NEXUS_URL}
+            POD_MAX_MEM: 512
+            CPU_LIMIT: 716
+            DC_REPLICAS: 1
+            DEPLOY_STRATEGY: Recreate
+            HAPROXY_TIMEOUT: 60
+            IMAGE: 'registry.gts.dev.weu.azure.paas.cloudcenter.corp/gts-mimacom-dev/external-app:${DOCKER_TAG}'
+            LIVENESS_PATH: /actuator/health
+            LIVENESS_FAILURE_THRESHOLD: 3
+            LIVENESS_INIT_DELAY: 80
+            LIVENESS_PERIOD: 10
+            LIVENESS_SUCCESS_THRESHOLD: 1
+            LIVENESS_TIMEOUT: 1
+            READINESS_PATH: /actuator/health
+            READINESS_FAILURE_THRESHOLD: 3
+            READINESS_INIT_DELAY: 40
+            READINESS_PERIOD: 10
+            READINESS_SUCCESS_THRESHOLD: 1
+            READINESS_TIMEOUT: 1
+          ose3TotalDeployments: 3
+  - name: PRE
+    regions:
+      - name: PRE-W
+        type: ose3
+        properties:
+          ose3Region:  https://api.ocp02.gts.pre.weu2.azure.paas.cloudcenter.corp:6443
+          ose3Project: gts-mimacom-dev
+          ose3Application: external-app
+          ose3TokenCredentialId: ocp4-gts-mimacom-dev
+          ose3OcVersion: 4.5
+          ose3Template:
+            name: javase-probes
+            process: true
+            gitRepoUrl: 'git@github.alm.europe.cloudcenter.corp:sgt-globaltradeservices/iac.gts.ocp-templates.git'
+            gitCredentialsId: templates_ocp_git_repo
+            gitFilePath: 'Generic/Immutables/javase-probes.yml'
+            gitBranch: 'v1.7'
+          ose3TemplateParams:
+            POD_MAX_MEM: 1024
+            DC_REPLICAS: 2
+            IMAGE: 'registry.gts.dev.weu.azure.paas.cloudcenter.corp/gts-mimacom-dev/external-app:${DOCKER_TAG}'
+            SECRET_FILE_PATH: /etc/store-cert
+            SECRET_FILE_NAME: secret-files-otfx-dev
+            JAVA_OPTS_EXT: '-Dspring.profiles.active=santander-dev
+              -DDENVIREONMENT=PRE
+              -DPLATFORM=external-app
+              -DAPPNAME=TradeFlowNxt
+              -Dhttp.proxyHost=98.158.252.164 -Dhttp.proxyPort=8080
+              -Dhttps.proxyHost=98.158.252.164 -Dhttps.proxyPort=8080
+              -Dhttp.nonProxyHosts=180.*|*.corp|172.*|107.*|*.svc.cluster.local
+              -Dobservability.bootstrapServers=broker-001.gts-obs-kafka.gts.pre.onetrade.corp:9013,broker-002.gts-obs-kafka.gts.pre.onetrade.corp:9013,broker-003.gts-obs-kafka.gts.pre.onetrade.corp:9013
+              -Dobservability.ssl.key.password=0netr4d3Fx
+              -Dobservability.ssl.keystore.location=/etc/store-cert/gts-onetradefx-obs.keystore.jks
+              -Dobservability.ssl.keystore.password=0netr4d3Fx
+              -Dobservability.ssl.truststore.location=/etc/store-cert/gts-onetradefx-obs.truststore.jks
+              -Dobservability.ssl.truststore.passowrd=0netr4d3Fx
+              -Dobservability.active=true
+              -Dsecurity.protocol=SSL
+              -Duser.timezone=GMT
+              -DLog4j.configurationFile=kafka/log4j2.yml
+              -Dspring.cloud.config.enabled=true
+              -Dspring.cloud.config.uri=http://config.service.otfx-pre.svc.cluster.local:8080
+              -DLog4j2.configuration.level=INFO
+              -DLog4j2.configuration.logging.group.app=con.santander.gtscore'
+            LIVENESS_PATH: /actuator/health
+            LIVENESS_FAILURE_THRESHOLD: 3
+            LIVENESS_INIT_DELAY: 80
+            LIVENESS_PERIOD: 10
+            LIVENESS_SUCCESS_THRESHOLD: 1
+            LIVENESS_TIMEOUT: 1
+            READINESS_PATH: /actuator/health
+            READINESS_FAILURE_THRESHOLD: 3
+            READINESS_INIT_DELAY: 40
+            READINESS_PERIOD: 10
+            READINESS_SUCCESS_THRESHOLD: 1
+            READINESS_TIMEOUT: 1
+          ose3TotalDeployments: 3

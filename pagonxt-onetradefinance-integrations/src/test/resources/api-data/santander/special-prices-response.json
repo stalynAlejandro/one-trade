@@ -1,0 +1,217 @@
+{
+  "currencyCode": "USD",
+  "currencyName": "DOLAR ESTADOUNIDENSE",
+  "productName": "REMESAS DE IMPORTACION",
+  "conceptsList": [
+    {
+      "conceptId": "AIB",
+      "conceptName": "GASTOS COURRIER",
+      "standardPrice": {
+        "standardTiersList": [
+          {
+            "standardAmountTier": 6148.99502,
+            "standardAmountTierType": "I",
+            "standardTermTier": 99999,
+            "standardTermTierType": "D",
+            "standardFixedAmountPrice": {
+              "standardFixedAmount": 36.00000,
+              "currencyCode": "EUR"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "conceptId": "BF0",
+      "conceptName": "COM.MOND.ESTRA.",
+      "standardPrice": {
+        "standardTiersList": [
+          {
+            "standardAmountTier": 6148.99502,
+            "standardAmountTierType": "I",
+            "standardTermTier": 99999,
+            "standardTermTierType": "D",
+            "standardFixedRatePrice": {
+              "standardRate": 0.200000,
+              "standardMinimumAmount": 15.00000,
+              "standardMaximumAmount": 9999999999999.99000,
+              "currencyCode": "EUR"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "conceptId": "B15",
+      "conceptName": "COM.ACEP.REM.IM",
+      "standardPrice": {
+        "standardTiersList": [
+          {
+            "standardAmountTier": 6148.99502,
+            "standardAmountTierType": "I",
+            "standardTermTier": 99999,
+            "standardTermTierType": "D",
+            "standardFixedRatePrice": {
+              "standardRate": 0.150000,
+              "standardMinimumAmount": 30.00000,
+              "standardMaximumAmount": 9999999999999.99000,
+              "currencyCode": "EUR"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "conceptId": "B16",
+      "conceptName": "COM.APLA.PRO.DE",
+      "standardPrice": {
+        "standardTiersList": [
+          {
+            "standardAmountTier": 6148.99502,
+            "standardAmountTierType": "I",
+            "standardTermTier": 99999,
+            "standardTermTierType": "D",
+            "standardFixedRatePrice": {
+              "standardRate": 0.100000,
+              "standardMinimumAmount": 30.00000,
+              "standardMaximumAmount": 9999999999999.99000,
+              "currencyCode": "EUR"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "conceptId": "B21",
+      "conceptName": "COM.TRA.OTR.ENT",
+      "standardPrice": {
+        "standardTiersList": [
+          {
+            "standardAmountTier": 6148.99502,
+            "standardAmountTierType": "I",
+            "standardTermTier": 99999,
+            "standardTermTierType": "D",
+            "standardFixedAmountPrice": {
+              "standardFixedAmount": 50.00000,
+              "currencyCode": "EUR"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "conceptId": "B22",
+      "conceptName": "GAS.TIM.REM.IMP",
+      "standardPrice": {
+        "standardTiersList": [
+          {
+            "standardAmountTier": 6148.99502,
+            "standardAmountTierType": "I",
+            "standardTermTier": 99999,
+            "standardTermTierType": "D",
+            "standardFixedAmountPrice": {
+              "standardFixedAmount": 0.00000,
+              "currencyCode": "EUR"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "conceptId": "B48",
+      "conceptName": "COM.DEV.EFE.REM",
+      "standardPrice": {
+        "standardTiersList": [
+          {
+            "standardAmountTier": 6148.99502,
+            "standardAmountTierType": "I",
+            "standardTermTier": 99999,
+            "standardTermTierType": "D",
+            "standardFixedRatePrice": {
+              "standardRate": 4.500000,
+              "standardMinimumAmount": 50.00000,
+              "standardMaximumAmount": 9999999999999.99000,
+              "currencyCode": "EUR"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "conceptId": "B91",
+      "conceptName": "COM.TRA.CAR.LI.",
+      "standardPrice": {
+        "standardTiersList": [
+          {
+            "standardAmountTier": 6148.99502,
+            "standardAmountTierType": "I",
+            "standardTermTier": 99999,
+            "standardTermTierType": "D",
+            "standardFixedRatePrice": {
+              "standardRate": 0.750000,
+              "standardMinimumAmount": 75.00000,
+              "standardMaximumAmount": 9999999999999.99000,
+              "currencyCode": "EUR"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "conceptId": "B96",
+      "conceptName": "COM.COBR.CA.LI.",
+      "standardPrice": {
+        "standardTiersList": [
+          {
+            "standardAmountTier": 6148.99502,
+            "standardAmountTierType": "I",
+            "standardTermTier": 99999,
+            "standardTermTierType": "D",
+            "standardFixedRatePrice": {
+              "standardRate": 0.250000,
+              "standardMinimumAmount": 24.00000,
+              "standardMaximumAmount": 9999999999999.99000,
+              "currencyCode": "EUR"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "conceptId": "D00",
+      "conceptName": "COM.PROT.EFE.RE",
+      "standardPrice": {
+        "standardTiersList": [
+          {
+            "standardAmountTier": 6148.99502,
+            "standardAmountTierType": "I",
+            "standardTermTier": 99999,
+            "standardTermTierType": "D",
+            "standardFixedAmountPrice": {
+              "standardFixedAmount": 50.00000,
+              "currencyCode": "EUR"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "conceptId": "546",
+      "conceptName": "GTOS. SWIFT",
+      "standardPrice": {
+        "standardTiersList": [
+          {
+            "standardAmountTier": 6148.99502,
+            "standardAmountTierType": "I",
+            "standardTermTier": 99999,
+            "standardTermTierType": "D",
+            "standardFixedAmountPrice": {
+              "standardFixedAmount": 18718.504,
+              "currencyCode": "EUR"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

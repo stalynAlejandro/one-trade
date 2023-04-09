@@ -1,0 +1,34 @@
+{
+  "key": "tasks-active-not-assigned-query",
+  "sourceIndex": "tasks",
+  "type": "query",
+  "version": 1,
+  "parameters": {
+  },
+  "sortParameters": {
+  },
+  "customFilter": {
+    "bool": {
+      "must_not": [
+        {
+          "exists": {
+            "field": "assignee"
+          }
+        }
+      ],
+      "must": [
+        {
+          "bool": {
+            "must_not": [
+              {
+                "exists": {
+                  "field": "endTime"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

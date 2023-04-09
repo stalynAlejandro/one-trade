@@ -1,0 +1,83 @@
+{
+  "key": "cases-active-open-requests-not-admin-query",
+  "name": "Active open requests for not admin users",
+  "sourceIndex": "case-instances",
+  "type": "query",
+  "version": 1,
+  "parameters": {
+    "operationCode": "string",
+    "products": "stringList",
+    "events": "stringList"
+  },
+  "sortParameters": {
+  },
+  "customFilter": {
+    "bool": {
+      "must": [
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "wildcard": {
+                      "variables.textValueKeyword": "*{operationCode}*"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "terms": {
+                      "variables.textValueKeyword": [
+                        "{products}"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "terms": {
+                      "variables.textValueKeyword": [
+                        "{events}"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "bool": {
+            "must_not": [
+              {
+                "exists": {
+                  "field": "endTime"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

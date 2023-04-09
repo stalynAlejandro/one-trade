@@ -1,0 +1,64 @@
+[
+  {
+    "product": "CLE",
+    "id": "6556010000003",
+    "name": "Gestión electrónica",
+    "key": "exportElectronicManagement",
+    "currency": [
+      "USD"
+    ]
+  },
+  {
+    "product": "CLE",
+    "id": "6556010000001",
+    "name": "Gestión simple y especial",
+    "key": "exportSimpleSpecialManagement",
+    "currency": [
+      "EUR",
+      "USD",
+      "GBP"
+    ]
+  },
+  {
+    "product": "CLE",
+    "id": "6556010000002",
+    "name": "Documentaria",
+    "key": "exportDocumentary",
+    "currency": [
+      "EUR",
+      "USD",
+      "GBP"
+
+    ]
+  },
+  {
+    "product": "CLI",
+    "id": "6546010000001",
+    "name": "Simple",
+    "key": "importSimple",
+    "currency": [
+      "EUR",
+      "USA"
+    ]
+  },
+  {
+    "product": "CLI",
+    "id": "6546010000002",
+    "name": "Documentaria",
+    "key": "importDocumentary",
+    "currency": [
+      "EUR",
+      "USA"
+    ]
+  },
+  {
+    "product": "CLI",
+    "id": "6546010000003",
+    "name": "Gestión especial",
+    "key": "importSpecialManagement",
+    "currency": [
+      "EUR",
+      "USA"
+    ]
+  }
+]

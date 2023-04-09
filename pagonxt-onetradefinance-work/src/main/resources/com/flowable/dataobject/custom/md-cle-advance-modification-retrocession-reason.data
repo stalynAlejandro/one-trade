@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-advance-modification-retrocession-reason",
+  "name": "Export Collection Advance Modification Retrocesion reason",
+  "description": "CLE Advance Modification Retrocession reasons",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "retrocession reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "retrocessionReasonId",
+  "idField": "retrocessionReasonId",
+  "nameField": "retrocessionReason"
+}

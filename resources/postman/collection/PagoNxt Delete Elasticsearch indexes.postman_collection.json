@@ -1,0 +1,555 @@
+{
+  "info": {
+    "_postman_id": "ee026876-42c0-4c86-a7ca-1498d84d7896",
+    "name": "PagoNxt Delete Elasticsearch indexes",
+    "description": "Esta colección elimina los índices de *Flowable Work* en *Elasticsearch*.\n\nSe debe ejecutar contra un entorno que apunte a *Elasticsearch*.\n\nEl entorno debe tener una variable `base_url`, que incluya protocolo, host y puerto de la máquina de destino.\n\n**Elasticsearch local:**\n\n*   *base_url*: `http://localhost:9200`\n    \n\nPara conectarse al servidor de desarrollo, es necesario hacer un port-forward:\n\n> kubectl port-forward pods/onetrade-elasticsearch-0 9200:9200  \n> Forwarding from 127.0.0.1:9200 -> 9200  \n> Forwarding from \\[::1\\]:9200 -> 9200\n\nPara cancelar el port-forward, basta pulsar `CTRL+C` para detener el proceso en ejecución",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "20793758"
+  },
+  "item": [
+    {
+      "name": "Get case instances index id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let jsonResponse = pm.response.json();\r",
+              "let indexName = Object.keys(jsonResponse)[0];\r",
+              "if(\"error\" === indexName) {\r",
+              "    console.log(\"Trying to get case instances index id returned error, skipping deletion\");\r",
+              "    postman.setNextRequest(\"Get tasks index id\");\r",
+              "} else {\r",
+              "    console.log(\"Got case instances index id \"+ indexName +\", proceeding to deletion\");\r",
+              "    postman.setEnvironmentVariable(\"case-instances-index\", indexName);\r",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "console.log(\"Trying to get case instances index id\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/onetradefinance-case-instances",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onetradefinance-case-instances"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete case instances index",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/{{case-instances-index}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "{{case-instances-index}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get tasks index id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let jsonResponse = pm.response.json();\r",
+              "let indexName = Object.keys(jsonResponse)[0];\r",
+              "if(\"error\" === indexName) {\r",
+              "    console.log(\"Trying to get tasks index id returned error, skipping deletion\");\r",
+              "    postman.setNextRequest(\"Get activities index id\");\r",
+              "} else {\r",
+              "    console.log(\"Got tasks index id \"+ indexName +\", proceeding to deletion\");\r",
+              "    postman.setEnvironmentVariable(\"tasks-index\", indexName);\r",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "console.log(\"Trying to get tasks index id\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/onetradefinance-tasks",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onetradefinance-tasks"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete tasks index",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/{{tasks-index}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "{{tasks-index}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get activities index id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let jsonResponse = pm.response.json();\r",
+              "let indexName = Object.keys(jsonResponse)[0];\r",
+              "if(\"error\" === indexName) {\r",
+              "    console.log(\"Trying to get activities index id returned error, skipping deletion\");\r",
+              "    postman.setNextRequest(\"Get content-items index id\");\r",
+              "} else {\r",
+              "    console.log(\"Got activities index id \"+ indexName +\", proceeding to deletion\");\r",
+              "    postman.setEnvironmentVariable(\"activities-index\", indexName);\r",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "console.log(\"Trying to get activities index id\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/onetradefinance-activities",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onetradefinance-activities"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete activities index",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/{{activities-index}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "{{activities-index}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get content-items index id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let jsonResponse = pm.response.json();\r",
+              "let indexName = Object.keys(jsonResponse)[0];\r",
+              "if(\"error\" === indexName) {\r",
+              "    console.log(\"Trying to get content-items index id returned error, skipping deletion\");\r",
+              "    postman.setNextRequest(\"Get plan-items index id\");\r",
+              "} else {\r",
+              "    console.log(\"Got content-items index id \"+ indexName +\", proceeding to deletion\");\r",
+              "    postman.setEnvironmentVariable(\"content-items-index\", indexName);\r",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "console.log(\"Trying to get content-items index id\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/onetradefinance-content-items",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onetradefinance-content-items"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete content-items index",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/{{content-items-index}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "{{content-items-index}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get plan-items index id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let jsonResponse = pm.response.json();\r",
+              "let indexName = Object.keys(jsonResponse)[0];\r",
+              "if(\"error\" === indexName) {\r",
+              "    console.log(\"Trying to get plan-items index id returned error, skipping deletion\");\r",
+              "    postman.setNextRequest(\"Get process-instances index id\");\r",
+              "} else {\r",
+              "    console.log(\"Got plan-items index id \"+ indexName +\", proceeding to deletion\");\r",
+              "    postman.setEnvironmentVariable(\"plan-items-index\", indexName);\r",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "console.log(\"Trying to get plan-items index id\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/onetradefinance-plan-items",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onetradefinance-plan-items"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete plan-items index",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/{{plan-items-index}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "{{plan-items-index}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get process-instances index id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let jsonResponse = pm.response.json();\r",
+              "let indexName = Object.keys(jsonResponse)[0];\r",
+              "if(\"error\" === indexName) {\r",
+              "    console.log(\"Trying to get process-instances index id returned error, skipping deletion\");\r",
+              "    postman.setNextRequest(\"Get users index id\");\r",
+              "} else {\r",
+              "    console.log(\"Got process-instances index id \"+ indexName +\", proceeding to deletion\");\r",
+              "    postman.setEnvironmentVariable(\"process-instances-index\", indexName);\r",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "console.log(\"Trying to get process-instances index id\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/onetradefinance-process-instances",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onetradefinance-process-instances"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete process-instances index",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/{{process-instances-index}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "{{process-instances-index}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get users index id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let jsonResponse = pm.response.json();\r",
+              "let indexName = Object.keys(jsonResponse)[0];\r",
+              "if(\"error\" === indexName) {\r",
+              "    console.log(\"Trying to get users index id returned error, skipping deletion\");\r",
+              "    postman.setNextRequest(\"Get work index id\");\r",
+              "} else {\r",
+              "    console.log(\"Got users index id \"+ indexName +\", proceeding to deletion\");\r",
+              "    postman.setEnvironmentVariable(\"users-index\", indexName);\r",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "console.log(\"Trying to get users index id\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/onetradefinance-users",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onetradefinance-users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete users index",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/{{users-index}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "{{users-index}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get work index id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let jsonResponse = pm.response.json();\r",
+              "let indexName = Object.keys(jsonResponse)[0];\r",
+              "if(\"error\" === indexName) {\r",
+              "    console.log(\"Trying to get work index id returned error, skipping deletion\");\r",
+              "    postman.setNextRequest(null);\r",
+              "} else {\r",
+              "    console.log(\"Got work index id \"+ indexName +\", proceeding to deletion\");\r",
+              "    postman.setEnvironmentVariable(\"work-index\", indexName);\r",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "console.log(\"Trying to get work index id\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/onetradefinance-work",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "onetradefinance-work"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete work index",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/{{work-index}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "{{work-index}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

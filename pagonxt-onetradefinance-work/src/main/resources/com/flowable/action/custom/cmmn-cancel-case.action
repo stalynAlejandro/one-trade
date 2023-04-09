@@ -1,0 +1,15 @@
+{
+  "key": "cmmn-cancel-case",
+  "name": "Terminate",
+  "botKey": "cmmn-cancel-case-bot",
+  "description": "",
+  "ignoreConfirmationMessage": false,
+  "icon": "delete",
+  "scopeType": "cmmn",
+  "mappedStates": [],
+  "mappedSubTypes": [],
+  "permissionUserIdentityLinkTypes": [],
+  "permissionGroups": [],
+  "global": true,
+  "channels": []
+}

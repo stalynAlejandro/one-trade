@@ -1,0 +1,166 @@
+{
+  "dataObjectDefinitionKey": "md-cle-advance-return-reason",
+  "overwrite": true,
+  "masterData": [
+    {
+      "returnReason": "Missing documentation",
+      "returnReasonId": "missingDocumentation",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "returnReason": "Documentación en falta"
+        }
+      }
+    },
+    {
+      "returnReason": "Wrong documentation",
+      "returnReasonId": "wrongDocumentation",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "returnReason": "Documentación errónea"
+        }
+      }
+    },
+    {
+      "returnReason": "Unreadable documentation",
+      "returnReasonId": "unreadableDocumentation",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "returnReason": "Documentación ilegible"
+        }
+      }
+    },
+    {
+      "returnReason": "Currency errors",
+      "returnReasonId": "currencyErrors",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "returnReason": "Errores en divisa"
+        }
+      }
+    },
+    {
+      "returnReason": "Amount errors",
+      "returnReasonId": "amountErrors",
+      "sortOrder": 5,
+      "translations": {
+        "es_es": {
+          "returnReason": "Errores en importe"
+        }
+      }
+    },
+    {
+      "returnReason": "Payment method",
+      "returnReasonId": "paymentMethod",
+      "sortOrder": 6,
+      "translations": {
+        "es_es": {
+          "returnReason": "Forma de pago"
+        }
+      }
+    },
+    {
+      "returnReason": "Payment date",
+      "returnReasonId": "paymentDate",
+      "sortOrder": 7,
+      "translations": {
+        "es_es": {
+          "returnReason": "Fecha de pago"
+        }
+      }
+    },
+    {
+      "returnReason": "Proposal overdrawn",
+      "returnReasonId": "proposalOverdrawn",
+      "sortOrder": 8,
+      "translations": {
+        "es_es": {
+          "returnReason": "Propuesta sobregirada"
+        }
+      }
+    },
+    {
+      "returnReason": "Proposal not printed",
+      "returnReasonId": "proposalNotPrinted",
+      "sortOrder": 9,
+      "translations": {
+        "es_es": {
+          "returnReason": "Propuesta no impresa"
+        }
+      }
+    },
+    {
+      "returnReason": "Proposal wrong",
+      "returnReasonId": "proposalWrong",
+      "sortOrder": 10,
+      "translations": {
+        "es_es": {
+          "returnReason": "Propuesta errónea"
+        }
+      }
+    },
+    {
+      "returnReason": "Proposal others",
+      "returnReasonId": "proposalOthers",
+      "sortOrder": 11,
+      "translations": {
+        "es_es": {
+          "returnReason": "Propuesta otros"
+        }
+      }
+    },
+    {
+      "returnReason": "Account with warnings",
+      "returnReasonId": "accountWithWarnings",
+      "sortOrder": 12,
+      "translations": {
+        "es_es": {
+          "returnReason": "Cuenta con avisos"
+        }
+      }
+    },
+    {
+      "returnReason": "Account has no balance",
+      "returnReasonId": "accountHasNoBalance",
+      "sortOrder": 13,
+      "translations": {
+        "es_es": {
+          "returnReason": "Cuenta sin saldo"
+        }
+      }
+    },
+    {
+      "returnReason": "Account wrong",
+      "returnReasonId": "accountWrong",
+      "sortOrder": 14,
+      "translations": {
+        "es_es": {
+          "returnReason": "Cuenta errónea"
+        }
+      }
+    },
+    {
+      "returnReason": "Confirm duplicity",
+      "returnReasonId": "confirmDuplicity",
+      "sortOrder": 15,
+      "translations": {
+        "es_es": {
+          "returnReason": "Confirmar duplicidad"
+        }
+      }
+    },
+    {
+      "returnReason": "Others",
+      "returnReasonId": "others",
+      "sortOrder": 99,
+      "translations": {
+        "es_es": {
+          "returnReason": "Otros"
+        }
+      }
+    }
+  ]
+}

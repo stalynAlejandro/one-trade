@@ -1,0 +1,26 @@
+  "sort" : [
+    {
+      "variables.booleanValue" : {
+        "order" : "asc",
+        "nested": {
+          "path": "variables",
+          "filter": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "variables.name": "variable"
+                  }
+                },
+                {
+                  "term": {
+                    "variables.scopeHierarchyType": "root"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]

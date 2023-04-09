@@ -1,0 +1,1468 @@
+swagger: '2.0'
+info:
+  title: "Customers"
+  version: 2.2.0
+  description: "This API retrieves the basic and financial data and the associated managers for a physical or business customer.\n\nThe API can also be used to create and retrieve contact methods for a customer."
+  contact:
+    name: Common APIs
+    email: commonapisgovernance@gruposantander.com
+  license:
+    name: Copyright
+    url: 'https://santanderglobaltech.com/aviso-legal/'
+  x-santander-mode: L
+  x-santander-catalogation:
+    bian-landscape-version: "8"
+    bian-business-area: "Sales and Service"
+    bian-business-domain: "Customer Management"
+    bian-service-domain: "Customer Reference Data Management"
+schemes:
+  - "https"
+basePath: "/v2/customers/"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+securityDefinitions:
+  JWTProfile:
+    type: "oauth2"
+    description: 'OAuth Grant type, JWT Profile'
+    flow: "implicit"
+    scopes:
+      cusaddcontact.write: "Creating and modifying contact methods"
+      cusaddcontact.read: "Accessing a list of contact methods"
+      custeconom.read: "Reading customer economic information"
+      cusbasic.read: "Reading customer basic information"
+      cusmanagers.read: "Accessing a list of managers"
+    authorizationUrl: "$(authorization-url)"
+  X-Santander-Client-Id:
+    type: "apiKey"
+    in: "header"
+    name: "X-Santander-Client-Id"
+    description: "Client ID header"
+security:
+  - X-Santander-Client-Id: []
+paths:
+  /{customer_id}/contacts:
+    post:
+      responses:
+        201:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/createContactCustomerResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        415:
+          description: "Unsupported media type"
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Creates new contact methods for a physical or business customer."
+      description: "Creates new contact methods for a physical or business customer. These can be a landline phone number, a mobile phone number, an email address, and a fax number, as defined in the local bank.\n\nTo send this request, you must provide a customer ID in the request path.\n\nWhere a contact method already exists, you can modify its preference, use type, and availability details.\n\nIf the logged-in person is acting on behalf of a customer, the local bank is responsible for verifying whether that person is allowed to modify the contact information.\n\nIf the logged-in person is a company representative, the operation creates new contact methods for the company."
+      parameters:
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - name: "customer_id"
+          type: "string"
+          required: true
+          in: "path"
+          description: "Customer ID (in local format) to be used in the query"
+          x-example: "F000000172"
+        - name: "createContactCustomerRequest"
+          required: true
+          in: "body"
+          description: "Data structure containing customer contact information"
+          schema:
+            $ref: "#/definitions/createContactCustomerRequest"
+      security:
+        - JWTProfile:
+            - "cusaddcontact.write"
+  /contacts:
+    get:
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/getCustomerContactsResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Retrieves a list of contact methods for a customer"
+      description: "Retrieves a list of contact methods for a customer.\n\nThe contact methods included in the response can be filtered by global or local data, device type, purpose, and whether they are the preferred contact methods.\n\nYou can also retrieve the contact method for a specific contact ID. If you do this, you must omit the other filters; otherwise the response is a '400 - Bad request' code."
+      parameters:
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - name: "accept-CH"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Whether contact methods from local or global data are to be included in the response.\n\nThe possible values are:\n- Local\n- Global\n\nThe default value is 'Global'."
+          x-example: "local"
+        - name: "customer_id"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Customer ID (in local format) to be used in the query"
+          x-example: "F171"
+        - name: "device_type"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Device type for the contact methods to be included in the response.\n\nThe global possible values are:\n- mobile\n- phone\n- email\n- fax\n\nThere can also be documents with local values, depending on the country.\n\nMultiple values can be provided as a comma-separated list."
+          x-example: "mobile,email"
+        - name: "purpose"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Purpose for the contact methods to be included in the response.\n\nThe global possible values are:\n- GENERIC\n- ALERTS\n- OTP\n\nThere can also be documents with local values, depending on the country."
+          x-example: "otp"
+        - name: "prefer_indicator"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Whether the contact methods to be included in the response are preferred contact methods.\n\nThe possible values are:\n- yes\n- no"
+          x-example: "no"
+        - name: "contact_id"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Contact ID to be used in the query.\n\nIf a value is provided for this parameter, the 'accept-CH', 'device_type', 'purpose', and 'prefer_indicator' parameters must be omitted."
+          x-example: "3"
+        - name: "_offset"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Number of pages to be omitted from the beginning of the response.\n\nThe number of rows on each omitted page is determined by the '_limit' parameter.\n\nThe default value is 0, in which case the first page is shown."
+          x-example: "1"
+        - name: "_limit"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Maximum number of rows to be included on each page in the response.\n\nFewer rows can be returned if the query does not yield that many.\n\nThe default value is 20."
+          x-example: "10"
+      security:
+        - JWTProfile:
+            - "cusaddcontact.read"
+  /economic_data:
+    get:
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/getEconomicResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Retrieves the financial details for a customer."
+      description: "Retrieves the financial details for a customer.\n\nThe retrieved data depends on the type of the logged-in user. For physical customers, this is their personal financial information. For representatives of business customers, this is the financial information for their associated company."
+      parameters:
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - name: "Customer-Id"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Customer ID (in local format) to be used in the query"
+          x-example: "F171"
+      security:
+        - JWTProfile:
+            - "custeconom.read"
+  /basic_data:
+    get:
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/enquireCustomerResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Retrieves the basic data for a physical or business customer."
+      description: "Retrieves the basic data for a physical or business customer.\n\nIf a customer is a 'VIP customer', restrictions may be placed on the customer's data and Santander staff may not have access to all of the data. If the Santander staff does not have the required confidentiality level, the operation returns the 'highConfidentiallyFlag' property as 'TRUE' and includes in the response only the properties necessary to identify the customer (as defined by each country).\n\nIf the logged-in user is a physical customer, the 'Customer-Id', 'Document-Type', and 'Document-Number' parameters are not required.\n\nIf the logged-in user is the representative of a business customer, the 'Document-Type' and 'Document-Number' parameters are required, and the data retrieved is for the company, not the representative.\n\nIf the logged-in user is Santander staff, either a 'Customer-Id' parameter or both the 'Document-Type' and 'Document-Number' parameters must be used. If the same document is used for more than 1 customer, Santander staff must use the 'Customer-Id' parameter."
+      parameters:
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - name: "X-Company-San"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Company ID that identifies the company legal name.\n\nIf this parameter is not provided, the GW policy generates the JWT without the company claim.\n\nIf a value is provided, it must be sent to platform user security and uniquely identify the customer."
+          x-example: "CocaCola Inc."
+        - name: "X-Traceduser-San"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Global user ID.\n\nIf a value is provided, it must be sent to platform user security."
+          x-example: ""
+        - name: "Customer-Id"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Customer ID (in local format) to be used in the query"
+          x-example: "F171"
+        - name: "Document-Type"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Type of the official identification document that has been used in the bank to uniquely and legally identify the customer.\n\nThe possible values are:\n- national_id_card\n- passport\n- childs_id_card\n- social_security_card\n- foreign_resident_id_card\n- driving_license\n- identity_documents_not_belonging_to_the_country\n(This value applies in Spain only.)\n- tax_id\n\nThe document type depends on the customer type (for example, 'childs_id_card' is only applicable for a physical customer)."
+          x-example: "tax_id"
+        - name: "Document-Number"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Identification document number.\n\nIf the 'Document-Type' parameter is provided, this parameter is mandatory.\n\nThe value is country-dependent."
+          x-example: "6765398"
+      security:
+        - JWTProfile:
+            - "cusbasic.read"
+  /managers:
+    get:
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/enquireCustomerManagerResponse"
+        400:
+          description: "Bad request"
+          schema:
+            $ref: "#/definitions/errors"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/errors"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/errors"
+        404:
+          description: "Not found"
+          schema:
+            $ref: "#/definitions/errors"
+        500:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/errors"
+        503:
+          description: "Service unavailable"
+          schema:
+            $ref: "#/definitions/errors"
+        504:
+          description: "Gateway timeout"
+          schema:
+            $ref: "#/definitions/errors"
+      summary: "Retrieves a list of a managers for a customer."
+      description: "Retrieves a list of a managers for a customer.\n\nTo identify the customer in the query, you must use either the 'Customer-ID' parameter or both the 'Document-Number' and 'Document-Type' parameters.\n\nEach customer can be associated with multiple managers, based on the portfolios the customer is associated with. Some customers have no managers associated with them.\n\nThe list of managers included in the response can be filtered by the modality of portfolios (group of portfolios the customer is associated with) and whether the manager is the priority manager for that modality."
+      parameters:
+        - $ref: "#/parameters/X-Santander-Client-Id"
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/X-B3-TraceId"
+        - $ref: "#/parameters/X-B3-ParentSpanId"
+        - $ref: "#/parameters/X-B3-SpanId"
+        - $ref: "#/parameters/X-B3-Sampled"
+        - name: "Customer-Id"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Customer ID (in local format) to be used in the query"
+          x-example: "F171"
+        - name: "Document-Type"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Type of the official identification document that has been used in the bank to uniquely and legally identify the customer.\n\nThe possible values are:\n- national_id_card \n- passport \n- childs_id_card \n- social_security_card\n- foreign_resident_id_card\n- driving_license\n- identity_documents_not_belonging_to_the_country\n (This value applies in Spain only.)\n- tax_id\n\nThe document type depends on the customer type (for example, 'childs_id_card' is only applicable for a physical customer)."
+          x-example: "tax_id"
+        - name: "Document-Number"
+          type: "string"
+          required: false
+          in: "header"
+          description: "Identification document number.\n\nIf the 'Document-Type' parameter is provided, this parameter is mandatory. \n\nThe value is country-dependent."
+          x-example: "6765398"
+        - name: "modality_portfolio"
+          type: "string"
+          required: false
+          in: "query"
+          description: "Modality of portfolios whose managers associated with the customer are to be included in the response.\n\nThe possible values are:\n- commercial\n- risk\n- private_banking\n(This value applies in Spain only.)\n\nIf no value is provided, the managers for all the customer's portfolios are retrieved.\n\nIf the 'ind_priority_manager' parameter is set to true, this parameter is mandatory."
+          x-example: "commercial"
+        - name: "ind_priority_manager"
+          type: "boolean"
+          required: false
+          in: "query"
+          description: "Whether only the priority manager for the portfolio modality defined in the 'modality_portfolio' parameter is to be included in the response.\n\nThe possible values are:\n- true = Only the priority manager is retrieved\n- false = Managers for all the customer's portfolios are retrieved"
+          x-example: true
+      security:
+        - JWTProfile:
+            - "cusmanagers.read"
+definitions:
+  contactAvailability:
+    description: "Data structure containing the preferred time period when the bank can contact the customer on working days"
+    properties:
+      fromTime:
+        type: "string"
+        format: "date-time"
+        description: "Start time of the contact period.\n\nThe time format is 'HH:MM'."
+        example: "00:00"
+      toTime:
+        type: "string"
+        format: "date-time"
+        description: "End time of the contact period.\n\nThe time format is 'HH:MM'."
+        example: "23:59"
+  phoneDetails:
+    description: "Data structure containing the customer's landline phone number data"
+    properties:
+      purpose:
+        type: "string"
+        description: "Contact method purpose.\n\nThe possible values are:\n- GENERIC\n- ALERTS"
+        example: "GENERIC"
+      internationalCode:
+        type: "string"
+        description: "International country code of the phone number.\n\nThe value is defined in the complement to ITU-T recommendation E.164 (https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.pdf)."
+        example: "44"
+      areaCode:
+        type: "string"
+        description: "Area code of the phone number"
+        example: "0114"
+      number:
+        type: "string"
+        description: "Subscriber-specific part of the phone number"
+        example: "2726444"
+      extension:
+        type: "string"
+        description: "Extension of the phone number"
+        example: "6444"
+      use:
+        type: "string"
+        description: "Whether the phone number is personal or for work.\n\nThe possible values are:\n- NONE INDICATED\n- INDIVIDUAL\n- WORK"
+        example: "WORK"
+      informationSource:
+        type: "string"
+        description: "Phone information source.\n\nThe possible values are:\n- CONVERSION = Internal process in a local bank\n- CUSTOMER\n- SANTANDER\n- THIRD PARTY"
+        example: "CUSTOMER"
+      preferredPhone:
+        type: "boolean"
+        description: "Whether the phone number is the preferred phone number.\n\nThe possible values are:\n- TRUE\n- FALSE\n\nOnly 1 landline phone number can be the preferred landline phone number."
+        example: "true"
+      contactAvailability:
+        description: "Data structure containing the preferred time period when the bank can contact the customer on working days"
+        allOf:
+          - $ref: "#/definitions/contactAvailability"
+  mobileDetails:
+    description: "Data structure containing the customer's mobile phone number data"
+    properties:
+      purpose:
+        type: "string"
+        description: "Contact method purpose. \n\nThe possible values are:\n- GENERIC \n- ALERTS"
+        example: "GENERIC"
+      internationalCode:
+        type: "string"
+        description: "International country code of the phone number. \n\nThe value is defined in the complement to ITU-T recommendation E.164 (https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.pdf)."
+        example: "44"
+      number:
+        type: "string"
+        description: "Subscriber-specific part of the phone number"
+        example: "935965"
+      use:
+        type: "string"
+        description: "Whether the phone number is personal or for work.\n\nThe possible values are:\n- NONE INDICATED\n- INDIVIDUAL\n- WORK"
+        example: "WORK"
+      informationSource:
+        type: "string"
+        description: "Mobile phone number information source.\n\nThe possible values are:\n- CONVERSION\n- CUSTOMER\n- SANTANDER\n- THIRD PARTY"
+        example: "CUSTOMER"
+      preferredMobile:
+        type: "boolean"
+        description: "Whether the phone number is the preferred phone number.\n\nThe possible values are:\n- TRUE\n- FALSE\n\nOnly 1 mobile phone number can be the preferred mobile phone number."
+        example: "true"
+      contactAvailability:
+        description: "Data structure containing the preferred time period when the bank can contact the customer on working days"
+        allOf:
+          - $ref: "#/definitions/contactAvailability"
+  emailDetails:
+    description: "Data structure containing the customer's email address data"
+    properties:
+      purpose:
+        type: "string"
+        description: "Contact method purpose.\n\nThe possible values are:\n- GENERIC\n- ALERTS"
+        example: "GENERIC"
+      address:
+        type: "string"
+        description: "Email address"
+        example: "pruebasApi@isban.com"
+      use:
+        type: "string"
+        description: "Whether the email address is personal or for work.\n\nThe possible values are:\n- NONE INDICATED\n- INDIVIDUAL\n- WORK"
+        example: "WORK"
+      informationSource:
+        type: "string"
+        description: "Email information source.\n\nThe possible values are:\n- CONVERSION\n- CUSTOMER\n- SANTANDER\n- THIRD PARTY"
+        example: "CUSTOMER"
+      preferredEmail:
+        type: "boolean"
+        description: "Whether the email address is the preferred email address.\n\nThe possible values are:\n- TRUE\n- FALSE\n\nOnly 1 email address can be the preferred email address."
+        example: "true"
+  faxDetails:
+    description: "Data structure containing the customer's fax number data"
+    properties:
+      purpose:
+        type: "string"
+        description: "Contact method purpose.\n\nThe possible values are:\n- GENERIC\n- ALERTS"
+        example: "GENERIC"
+      internationalCode:
+        type: "string"
+        description: "International country code of the fax number.\n\nThe value is defined in the complement to ITU-T recommendation E.164 (https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.pdf)."
+        example: "44"
+      areaCode:
+        type: "string"
+        description: "Area code of the fax number"
+        example: "07340"
+      number:
+        type: "string"
+        description: "Subscriber-specific part of the fax number"
+        example: "935965"
+      extension:
+        type: "string"
+        description: "Fax extension number"
+        example: "5965"
+      use:
+        type: "string"
+        description: "Whether the fax number is personal or for work.\n\nThe possible values are:\n- NONE INDICATED\n- INDIVIDUAL\n- WORK"
+        example: "WORK"
+      informationSource:
+        type: "string"
+        description: "Fax number information source.\n\nThe possible values are:\n- CONVERSION\n- CUSTOMER\n- SANTANDER\n- THIRD PARTY"
+        example: "CUSTOMER"
+      preferredFax:
+        type: "boolean"
+        description: "Whether the fax number is the preferred fax number.\n\nThe possible values are:\n- TRUE\n- FALSE\n\nOnly 1 fax number can be the preferred fax number."
+        example: "true"
+      contactAvailability:
+        description: "Data structure containing the preferred time period when the bank can contact the customer on working days"
+        allOf:
+          - $ref: "#/definitions/contactAvailability"
+  createContactCustomerRequest:
+    description: "Data structure containing customer contact information"
+    properties:
+      phoneDetails:
+        description: "Data structure containing the customer's landline phone number data"
+        allOf:
+          - $ref: "#/definitions/phoneDetails"
+      mobileDetails:
+        description: "Data structure containing the customer's mobile phone number data"
+        allOf:
+          - $ref: "#/definitions/mobileDetails"
+      emailDetails:
+        description: "Data structure containing the customer's email address data"
+        allOf:
+          - $ref: "#/definitions/emailDetails"
+      faxDetails:
+        description: "Data structure containing the customer's fax number data"
+        allOf:
+          - $ref: "#/definitions/faxDetails"
+  contactNewCustomerResponse:
+    description: "Data structure containing contact method data"
+    properties:
+      contactId:
+        type: "number"
+        format: "double"
+        description: "Unique contact ID"
+        example: 3
+      phoneDetails:
+        description: "Data structure containing the customer's landline phone number data"
+        allOf:
+          - $ref: "#/definitions/phoneDetails"
+      mobileDetails:
+        description: "Data structure containing the customer's mobile phone number data"
+        allOf:
+          - $ref: "#/definitions/mobileDetails"
+      emailDetails:
+        description: "Data structure containing the customer's email address data"
+        allOf:
+          - $ref: "#/definitions/emailDetails"
+      faxDetails:
+        description: "Data structure containing the customer's fax number data"
+        allOf:
+          - $ref: "#/definitions/faxDetails"
+  createContactCustomerResponse:
+    description: "Response to a request to create new contact methods"
+    properties:
+      customerId:
+        type: "string"
+        description: "Customer ID in local format"
+        example: "F171"
+      contactNewCustomerResponse:
+        description: "Data structure containing contact method data"
+        allOf:
+          - $ref: "#/definitions/contactNewCustomerResponse"
+  _links:
+    description: "Data structure containing the links for moving between the list pages"
+    properties:
+      _first:
+        type: "string"
+        description: "Link to the first page of the list.\n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "https://hostname/customers/{customer_id}/contacts"
+      _prev:
+        type: "string"
+        description: "Link to the previous page of the list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "https://hostname/customers/{customer_id}/contacts?_offset=3&_limit=10'"
+      _next:
+        type: "string"
+        description: "Link to the next page of the list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "https://hostname/customers/{customer_id}/contacts?_offset=5&_limit=10"
+      _last:
+        type: "string"
+        description: "Link to the last page of the list. \n\nThe exact value depends on the data to be accessed.\n\nThe exact content of the page depends on the input parameters provided in the request, such as the offset."
+        example: "https://hostname/customers/{customer_id}/contacts?_offset=10&_limit=10"
+  purposeDeviceObject:
+    description: "Data structure containing details of the contact method purpose"
+    properties:
+      purpose:
+        type: "string"
+        description: "Contact method purpose"
+        example: "GENERIC"
+  purposeListDevices:
+    type: "array"
+    items:
+      $ref:  "#/definitions/purposeDeviceObject"
+    description: "Array of purposes for the contact method"
+  deviceData:
+    description: "Data structure containing contact method details"
+    properties:
+      contactId:
+        type: "string"
+        description: "Unique contact ID"
+        example: "3"
+      deviceType:
+        type: "string"
+        description: "Device type of the contact method"
+        example: "mobile"
+      purposeListDevices:
+        description: "Array of purposes for the contact method"
+        allOf:
+          - $ref: "#/definitions/purposeListDevices"
+      internationalCode:
+        type: "string"
+        description: "International country code of the phone, mobile, or fax number.\n\nThe value is defined in the complement to ITU-T recommendation E.164 (https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.pdf)."
+        example: "44"
+      areaCode:
+        type: "string"
+        description: "Area code of the phone or fax number"
+        example: "0114"
+      number:
+        type: "string"
+        description: "Subscriber-specific part of the phone, mobile, or fax number"
+        example: "2726444"
+      extension:
+        type: "string"
+        description: "Extension of the phone or fax number"
+        example: "6444"
+      emailAddress:
+        type: "string"
+        description: "Email address"
+        example: "pruebasApi@isban.com"
+      use:
+        type: "string"
+        description: "Whether the contact method is personal or for work.\n\nThe possible values are:\n- NONE INDICATED\n- INDIVIDUAL\n- WORK"
+        example: "WORK"
+      informationSource:
+        type: "string"
+        description: "Information source for the contact method"
+        example: "CUSTOMER"
+      preferredIndicator:
+        type: "boolean"
+        description: "Whether the contact method is the preferred contact method"
+        example: "true"
+      contactAvailability:
+        description: "Data structure containing the preferred time period when the bank can contact the customer on working days"
+        allOf:
+          - $ref: "#/definitions/contactAvailability"
+  contactsList:
+    type: "array"
+    items:
+      $ref:  "#/definitions/deviceData"
+    description: "Array of contact methods"
+  getCustomerContactsResponse:
+    description: "Response to a request to retrieve a list of contact methods for a customer"
+    properties:
+      _links:
+        description: "Data structure containing the links for moving between the list pages"
+        allOf:
+          - $ref: "#/definitions/_links"
+      customerId:
+        type: "string"
+        description: "Customer ID in local format"
+        example: "F171"
+      contactsList:
+        description: "Array of contact methods"
+        allOf:
+          - $ref: "#/definitions/contactsList"
+  amounts:
+    description: "Data structure containing the customer's income amount. Applies to physical customers only.\n\nThe amount is the sum of the fixed, variable, and unjustifiable income."
+    properties:
+      amount:
+        type: "number"
+        format: "double"
+        description: "Amount.\n\nThe value uses the data format defined in ISO 20022 and has a maximum of 18 digits, of which 5 can be decimals, separated by a point."
+        example: 123.78567
+      currency:
+        type: "string"
+        description: "Currency code.\n\nThe value is the alpha-3 format defined in ISO 4217 (https://www.iso.org/iso-4217-currency-codes.html)."
+        example: "EUR"
+  temporalPeriod:
+    description: "Data structure containing the customer's income period data"
+    properties:
+      periodIdentifier:
+        type: "string"
+        description: "Income period.\n\nThe possible values are:\n- SEMESTRAL\n- DAY(S)\n- YEAR(S)\n- MONTH(S)\n- WEEK(S)\n- HOUR(S)\n- QUARTERLY\n- QUINCENAL"
+        example: "MONTH(S)"
+      periodNumber:
+        type: "number"
+        format: "double"
+        description: "Income frequency.\n\nFor example, if the value is 2 and 'periodIdentifier' has the value 'QUARTERLY', the income is every 2 quarters."
+        example: 1
+  economicDataParticular:
+    description: "Data structure containing a physical customer's financial data.\n\nThis data structure is not included in a business customer response."
+    properties:
+      nameEmployer:
+        type: "string"
+        description: "Employer name. Applies to physical customers only."
+        example: "BRITISH AIRWAYS S.L"
+      employerAddress:
+        type: "string"
+        description: "Employer address. Applies to physical customers only."
+        example: "3 Tower St Penrith Manchester M1 1PW"
+      startDateEmployee:
+        type: "string"
+        format: "date"
+        description: "Date when the customer began working for their employer. Applies to physical customers only.\n\nThe value uses the complete data format defined in ISO 8601:\n\n'YYYY-MM-DD'\n\nWhere:\n- YYYY: 4-digit year\n- MM: 2-digit month (for example, 01 = January)\n- DD: 2-digit day of the month (01 through 31)"
+        example: "2016-01-02"
+      periodIncome:
+        description: "Data structure containing the customer's income amount. Applies to physical customers only.\n\nThe amount is the sum of the fixed, variable, and unjustifiable income."
+        allOf:
+          - $ref: "#/definitions/amounts"
+      temporalPeriod:
+        description: "Data structure containing the customer's income period data"
+        allOf:
+          - $ref: "#/definitions/temporalPeriod"
+  economicDataBussines:
+    description: "Data structure containing a business customer's financial data.\n\nThis data structure is not included in a physical customer response."
+    properties:
+      shareCapital:
+        description: "Data structure containing the share capital amount. Applies to business customers only."
+        allOf:
+          - $ref: "#/definitions/amounts"
+      actualTurnover:
+        description: "Data structure containing the turnover amount. Applies to business customers only."
+        allOf:
+          - $ref: "#/definitions/amounts"
+      balanceAmount:
+        description: "Data structure containing the balance amount. Applies to business customers only."
+        allOf:
+          - $ref: "#/definitions/amounts"
+      ownsFunds:
+        description: "Data structure containing the owned funds. Applies to business customers only."
+        allOf:
+          - $ref: "#/definitions/amounts"
+      estimatedTurnover:
+        description: "Data structure containing the estimated turnover. Applies to business customers only."
+        allOf:
+          - $ref: "#/definitions/amounts"
+      numberEmployee:
+        type: "number"
+        format: "double"
+        description: "Number of employees that work for the company. Applies to business customers only."
+        example: 500
+      monthClose:
+        type: "string"
+        description: "Closing month of the company's fiscal year. Applies to business customers only."
+        example: "SEPTEMBER"
+      crossBorderSales:
+        type: "number"
+        format: "double"
+        description: "Percentage of sales generated from international operations. Applies to business customers only.\n\nThe value is provided with 2 decimals."
+        example: 3
+  getEconomicResponse:
+    description: "Response to a request to retrieve financial details for a customer"
+    properties:
+      dateEconomicInformation:
+        type: "string"
+        format: "date"
+        description: "Date when the request is made.\n\nThe value uses the complete data format defined in ISO 8601:\n\n'YYYY-MM-DD'\n\nWhere:\n- YYYY: 4-digit year\n- MM: 2-digit month (for example, 01 = January)\n- DD: 2-digit day of the month (01 through 31)"
+        example: "2019-05-19"
+      customerId:
+        type: "string"
+        description: "Customer ID in local format"
+        example: "F171"
+      economicDataParticular:
+        description: "Data structure containing a physical customer's financial data.\n\nThis data structure is not included in a business customer response."
+        allOf:
+          - $ref: "#/definitions/economicDataParticular"
+      economicDataBussines:
+        description: "Data structure containing a business customer's financial data.\n\nThis data structure is not included in a physical customer response."
+        allOf:
+          - $ref: "#/definitions/economicDataBussines"
+  documentId:
+    description: "Data structure containing the computed value of the type and ID of the identification document used in the bank to uniquely and legally identify the customer"
+    properties:
+      documentType:
+        type: "string"
+        description: "Type of the official identification document that has been used in the bank to uniquely and legally identify the customer.\n\nThe possible values are:\n- national_id_card\n- passport\n- childs_id_card\n- social_security_card\n- foreign_resident_id_card\n- driving_license\n- identity_documents_not_belonging_to_the_country\n(This value applies in Spain only.)\n- tax_id\n\nThe document type depends on the customer type (for example, 'childs_id_card' is only applicable for a physical customer)."
+        example: "national_id_card"
+      documentNumber:
+        type: "string"
+        description: "Identification document number"
+        example: "QQ123456C"
+  documentList:
+    type: "array"
+    items:
+      $ref:  "#/definitions/documentId"
+    description: "Array of documents associated with the customer"
+  customerPersonalsData:
+    description: "Data structure containing a customer's personal data"
+    properties:
+      title:
+        type: "string"
+        description: "Title to be used when communicating with the customer, for example, 'Mr', 'Mrs', 'Miss', or 'Dr'. Applies to physical customers only."
+        example: "MRS"
+      firstName:
+        type: "string"
+        description: "Customer's first name. Applies to physical customers only."
+        example: "JOHN"
+      middleName:
+        type: "string"
+        description: "Customer's middle name. Applies to physical customers only."
+        example: "ALAN"
+      lastName:
+        type: "string"
+        description: "Customer's last name. Applies to physical customers only."
+        example: "SMITH"
+      suffix:
+        type: "string"
+        description: "Customer's name suffix, for example, 'Junior', 'Senior', or 'III'. Applies to physical customers only."
+        example: "JUNIOR"
+      knowAs:
+        type: "string"
+        description: "Customer's alias. Applies to physical customers only."
+        example: "JIMI"
+      countryBirth:
+        type: "string"
+        description: "Customer's country of birth. Applies to physical customers only.\n\nThe value is a 2-letter country code defined in ISO 3166-1 alpha-2 (https://www.iso.org/obp/ui/#search/code/)."
+        example: "GB"
+      birthDate:
+        type: "string"
+        format: "date"
+        description: "Customer's birth date. Applies to physical customers only.\n\nThe value uses the complete data format defined in ISO 8601:\n'YYYY-MM-DD'\n\nWhere:\n- YYYY: 4-digit year\n- MM: 2-digit month (for example, 01 = January)\n- DD: 2-digit day of the month (01 through 31)"
+        example: "1982-02-19"
+      gender:
+        type: "string"
+        description: "Customer's gender. Applies to physical customers only.\n\nThe possible values are:\n- MALE\n- FEMALE"
+        example: "MALE"
+      civilStatus:
+        type: "string"
+        description: "Customer's civil status. Applies to physical customers only.\n\nThe possible values are:\n- divorced_civil_part_dissolved\n- living_with_partner\n- married_community_property\n- married_separation_of_property_regime\n- married_joint_ownership_of_property\n- not_informed_by_customer\n- separated\n- single\n- married\n- widower"
+        example: "married_community_property"
+      documentList:
+        description: "Array of documents associated with the customer"
+        allOf:
+          - $ref: "#/definitions/documentList"
+      countryResidence:
+        type: "string"
+        description: "Customer's country of residence. Applies to physical customers only.\n\nThe value is a 2-letter country code defined in ISO 3166-1 alpha-2 (https://www.iso.org/obp/ui/#search/code/)."
+        example: "GB"
+      nationality:
+        type: "string"
+        description: "Nationality of the customer.\n\nThe value is a 2-letter country code defined in ISO 3166-1 alpha-2 (https://www.iso.org/obp/ui/#search/code/)."
+        example: "GB"
+      secondNationality:
+        type: "string"
+        description: "Second nationality of the customer. Applies to physical customers only.\n\nThe value is a 2-letter country code defined in ISO 3166-1 alpha-2 (https://www.iso.org/obp/ui/#search/code/)."
+        example: "AD"
+      employmentStatus:
+        type: "string"
+        description: "Customer's employment status. Applies to physical customers only.\n\nThe possible values are:\n- EMPLOYED\n- NOT EMPLOYED - HOMEMAKER\n- RETIRED\n- SELF-EMPLOYED\n- NOT EMPLOYED - STUDENT\n- NOT EMPLOYED - UNEMPLOYED"
+        example: "EMPLOYED"
+      educationalLevel:
+        type: "string"
+        description: "Customer's education level. Applies to physical customers only.\n\nThe possible values are:\n- POST-GRADUATE STUDIES\n- SECONDARY OR TRADE SCHOOL\n- PRIMARY\n- NO STUDIES\n- NONE INDICATED\n- UNDERGRAD. UNIVERSITY STUDIES"
+        example: "PRIMARY"
+      occupation:
+        type: "string"
+        description: "Customer's occupation. Applies to physical customers only.\n\nThe value is defined in the International Standard Classification of Occupation (ISCO) 08 (https://www.ilo.org/public/english/bureau/stat/isco/isco08/)."
+        example: "Managing director"
+      activity:
+        type: "string"
+        description: "Business that a physical customer works in or a business customer is involved in.\n\nThe value is defined in the International Standard Industrial Classification of All Economic Activities (ISIC)."
+        example: "Construction"
+      companyName:
+        type: "string"
+        description: "Legal name of the company. Applies to business customers only."
+        example: "BRITISH AIRWAYS S.L"
+      companyStartDate:
+        type: "string"
+        format: "date"
+        description: "Date when the company was established. Applies to business customers only.\n\nThe value uses the complete data format defined in ISO 8601:\n'YYYY-MM-DD'\n\nWhere:\n- YYYY: 4-digit year\n- MM: 2-digit month (for example, 01 = January)\n- DD: 2-digit day of the month (01 through 31)"
+        example: "2000-01-09"
+      companyEndDate:
+        type: "string"
+        format: "date"
+        description: "Date when the company closed. Applies to business customers only.\n\nThe value uses the complete data format defined in ISO 8601:\n'YYYY-MM-DD'\n\nWhere:\n- YYYY: 4-digit year\n- MM: 2-digit month (for example, 01 = January)\n- DD: 2-digit day of the month (01 through 31)"
+        example: "2016-01-01"
+      countryIncorporation:
+        type: "string"
+        description: "Country where the company was established. Applies to business customers only.\n\nThe value is a 2-letter country code defined in ISO 3166-1 alpha-2 (https://www.iso.org/obp/ui/#search/code/)."
+        example: "GB"
+      tradeName:
+        type: "string"
+        description: "Familiar or trade name of the company. Applies to business customers only."
+        example: "COCA COLA COMPANY"
+      staff:
+        type: "string"
+        description: "Whether the customer is a bank employee. Applies to physical customers only.\n\nThe possible values are:\n- YES\n- NO"
+        example: "NO"
+      dateDeceased:
+        type: "string"
+        format: "date"
+        description: "Date of death. Applies to physical customers only.\n\nThe value uses the complete data format defined in ISO 8601:\n'YYYY-MM-DD'\n\nWhere:\n- YYYY: 4-digit year\n- MM: 2-digit month (for example, 01 = January)\n- DD: 2-digit day of the month (01 through 31)"
+        example: "2090-12-03"
+      confidentialityLevel:
+        type: "number"
+        format: "double"
+        description: "Customer's confidentiality level"
+        example: 04
+      informationSource:
+        type: "string"
+        description: "Information source for the customer data"
+        example: "SANTANDER"
+      companyCustomer:
+        type: "string"
+        description: "Bank where the customer is registered"
+        example: "SANTANDER UK RETAIL"
+      customerPreferredLanguage:
+        type: "string"
+        description: "Customer's preferred language.\n\nThe value is a 2-letter country code defined in ISO 639-1 alpha-2 plus a 2-letter language code defined in ISO 3166-1 alpha-2."
+        example: "En-GB"
+      structuralSegment:
+        type: "string"
+        description: "Customer's category, as defined by the bank"
+        example: "PERSON DEFAULT"
+      highConfidentialityFlag:
+        type: "boolean"
+        description: "Whether the confidentiality level of the Santander staff who sent the query allows them to view all of the information.\n\nIf the level of confidentiality of the customer is greater than the level of confidentiality of the Santander staff who sent the query, all information is included in the response.\n\nThe possible values are:\n- TRUE = Some information is not included in the response\n- FALSE = All information is included in the response"
+        example: "true"
+      countryFiscalResidence:
+        type: "string"
+        description: "Customer's country of fiscal residence.\n\nThe value is a 2-letter country code defined in ISO 3166-1 alpha-2 (https://www.iso.org/obp/ui/#search/code/)."
+        example: "GB"
+  residentialAddress:
+    description: "Data structure containing the customer's residential address.\n\nThe address is defined as a 'Postal Address' in ISO 20022 (https://www.iso20022.org/standardsrepository/public/wqt/Content/mx/dico/bc/_FN9rs8TGEeChad0JzLk7QA_-1512507243)."
+    properties:
+      streetName:
+        type: "string"
+        description: "Name of a street or thoroughfare"
+        example: "AVENIDA DE TOLEDO"
+      streetBuildingIdentification:
+        type: "string"
+        description: "Number that identifies the position of a building on a street"
+        example: "22"
+      postCodeIdentification:
+        type: "string"
+        description: "Postal code.\n\nThe value consists of a group of letters and/or numbers that is added to a postal address to assist in sorting the mail."
+        example: "28660"
+      townName:
+        type: "string"
+        description: "Name of a built-up area with defined boundaries and a local government.\n\nThe value is based on the ISO 3166-2, according to the country defined within the address details."
+        example: "MADRID"
+      state:
+        type: "string"
+        description: "Name of an organized political community or area forming a part of a federation.\n\nThe value is based on the ISO 3166-2, according to the country defined within the address details."
+        example: "MADRID"
+      buildingName:
+        type: "string"
+        description: "Name of a building or house.\n\nThe value can be freely defined."
+        example: "RESIDENCIAL LOS PINOS"
+      floor:
+        type: "string"
+        description: "Floor or story within a building"
+        example: "3"
+      districtName:
+        type: "string"
+        description: "Name of a district, for example, a part of a town or region.\n\nThe value can be freely defined."
+        example: "CHAMARTIN"
+      regionIdentification:
+        type: "string"
+        description: "Name of an administrative division of a country, state, or territory.\n\nThe value is based on the ISO 3166-2, according to the country defined within the address details."
+        example: "MADRID"
+      countyIdentification:
+        type: "string"
+        description: "Name of a county.\n\nThe value is based on the ISO 3166-2, according to the country defined within the address details."
+        example: "COUNTY NAME"
+      postOfficeBox:
+        type: "string"
+        description: "Number of a box in a post office, assigned to a person or organization.\n\nLetters are stored in the box until called for."
+        example: "08080"
+      province:
+        type: "string"
+        description: "Name of a territory governed as an administrative or political unit of a country.\n\nThe value is based on the ISO 3166-2, according to the country defined within the address details."
+        example: "MADRID"
+      department:
+        type: "string"
+        description: "Name of a division within a large organization or building.\n\nThe value can be freely defined."
+        example: "GENERIC DEPARTMENT NAME"
+      subDepartment:
+        type: "string"
+        description: "Name of a sub-division within a large organization or building.\n\nThe value can be freely defined."
+        example: "GENERIC SUBDEPARTMENT NAME"
+      location:
+        type: "string"
+        description: "Generic location name that specifies a place.\n\nThe value can be freely defined."
+        example: "GENERIC LOCATION NAME"
+      country:
+        type: "string"
+        description: "Name of a country.\n\nThe value is based on the ISO 3166-1 alpha-2 (https://www.iso.org/obp/ui/#search/code/)."
+        example: "SPAIN"
+  availibilityPhone:
+    description: "Data structure containing the preferred time period when the bank can contact the customer"
+    properties:
+      fromTimePhone:
+        type: "string"
+        format: "date-time"
+        description: "Start time of the contact period.\n\nThe time format is 'HH:MM'."
+        example: "00:00"
+      toTimePhone:
+        type: "string"
+        format: "date-time"
+        description: "End time of the contact period.\n\nThe time format is 'HH:MM'."
+        example: "23:59"
+  preferedPhoneDetails:
+    description: "Data structure containing the customer's preferred landline phone number data"
+    properties:
+      phone:
+        type: "string"
+        description: "Phone number"
+        example: "+44-01142726444"
+      use:
+        type: "string"
+        description: "Whether the phone number is personal or for work.\n\nThe possible values are:\n- NONE INDICATED\n- INDIVIDUAL\n- WORK"
+        example: "WORK"
+      availibilityPhone:
+        description: "Data structure containing the preferred time period when the bank can contact the customer"
+        allOf:
+          - $ref: "#/definitions/availibilityPhone"
+  availibilityMobile:
+    description: "Data structure containing the preferred time period when the bank can contact the customer on working days"
+    properties:
+      fromTimeMobile:
+        type: "string"
+        format: "date-time"
+        description: "Start time of the contact period.\n\nThe time format is 'HH:MM'."
+        example: "00:00"
+      toTimeMobile:
+        type: "string"
+        format: "date-time"
+        description: "End time of the contact period.\n\nThe time format is 'HH:MM'."
+        example: "23:59"
+  preferedMobileDetails:
+    description: "Data structure containing the customer's preferred mobile phone number data"
+    properties:
+      use:
+        type: "string"
+        description: "Whether the phone number is personal or for work.\n\nThe possible values are:\n- NONE INDICATED\n- INDIVIDUAL\n- WORK"
+        example: "WORK"
+      mobile:
+        type: "string"
+        description: "Mobile phone number"
+        example: "+44-07519437844"
+      availibilityMobile:
+        description: "Data structure containing the preferred time period when the bank can contact the customer on working days"
+        allOf:
+          - $ref: "#/definitions/availibilityMobile"
+  availibilityEmail:
+    description: "Data structure containing the preferred time period when the bank can contact the customer on working days"
+    properties:
+      fromTimeEmail:
+        type: "string"
+        format: "date-time"
+        description: "Start time of the contact period.\n\nThe time format is 'HH:MM'."
+        example: "00:00"
+      toTimeEmail:
+        type: "string"
+        format: "date-time"
+        description: "End time of the contact period.\n\nThe time format is 'HH:MM'."
+        example: "23:59"
+  preferedEmailDetails:
+    description: "Data structure containing the customer's preferred email address data"
+    properties:
+      address:
+        type: "string"
+        description: "Email address"
+        example: "testjulicert@test2.co"
+      use:
+        type: "string"
+        description: "Whether the email address is personal or for work.\n\nThe possible values are:\n- NONE INDICATED\n- INDIVIDUAL\n- WORK"
+        example: "WORK"
+      availibilityEmail:
+        description: "Data structure containing the preferred time period when the bank can contact the customer on working days"
+        allOf:
+          - $ref: "#/definitions/availibilityEmail"
+  preferedContactDetails:
+    description: "Data structure containing the customer's preferred contact details"
+    properties:
+      preferedPhoneDetails:
+        description: "Data structure containing the customer's preferred landline phone number data"
+        allOf:
+          - $ref: "#/definitions/preferedPhoneDetails"
+      preferedMobileDetails:
+        description: "Data structure containing the customer's preferred mobile phone number data"
+        allOf:
+          - $ref: "#/definitions/preferedMobileDetails"
+      preferedEmailDetails:
+        description: "Data structure containing the customer's preferred email address data"
+        allOf:
+          - $ref: "#/definitions/preferedEmailDetails"
+  enquireCustomerResponse:
+    description: "Response to a request to retrieve the basic data for a customer"
+    properties:
+      customerId:
+        type: "string"
+        description: "Customer ID in local format"
+        example: "F171"
+      customerPersonalsData:
+        description: "Data structure containing a customer's personal data"
+        allOf:
+          - $ref: "#/definitions/customerPersonalsData"
+      residentialAddress:
+        description: "Data structure containing the customer's residential address.\n\nThe address is defined as a 'Postal Address' in ISO 20022 (https://www.iso20022.org/standardsrepository/public/wqt/Content/mx/dico/bc/_FN9rs8TGEeChad0JzLk7QA_-1512507243)."
+        allOf:
+          - $ref: "#/definitions/residentialAddress"
+      preferedContactDetails:
+        description: "Data structure containing the customer's preferred contact details"
+        allOf:
+          - $ref: "#/definitions/preferedContactDetails"
+  contactPhoneSchedule:
+    description: "Data structure containing the schedule information.\n\nIf the schedule applies to 1 day only, the same day is defined in both the 'fromDayPhone' and 'toDayPhone' properties."
+    properties:
+      fromTimePhone:
+        type: "string"
+        format: "date-time"
+        description: "Starting time for a time period during which phone calls are answered.\n\nThe time format is 'HH:MM'."
+        example: "08:00"
+      toTimePhone:
+        type: "string"
+        format: "date-time"
+        description: "Ending time for a time period during which phone calls are answered.\n\nThe time format is 'HH:MM'."
+        example: "18:00"
+      fromDayPhone:
+        type: "string"
+        description: "Starting day for a time period during which phone calls are answered.\n\nThe possible values are:\n- monday\n- tuesday\n- wednesday\n- thursday\n- friday\n- saturday\n- sunday"
+        example: "monday"
+      toDayPhone:
+        type: "string"
+        description: "Ending day for a time period during which phone calls are answered.\n\nThe possible values are:\n- monday\n- tuesday\n- wednesday\n- thursday\n- friday\n- saturday\n- sunday"
+        example: "friday"
+  phoneListSchedule:
+    type: "array"
+    items:
+      $ref:  "#/definitions/contactPhoneSchedule"
+    description: "Array of schedules that define the business hours during which phone calls are answered on a specific day (or a period of days) of the week"
+  contactMobileSchedule:
+    description: "'Data structure containing the schedule information.\n\nIf the schedule applies to 1 day only, the same day is defined in both the 'fromDayMobile' and 'toDayMobile' properties."
+    properties:
+      fromTimeMobile:
+        type: "string"
+        format: "date-time"
+        description: "Starting time for a time period during which mobile phone calls are answered.\n\nThe time format is 'HH:MM'."
+        example: "08:00"
+      toTimeMobile:
+        type: "string"
+        format: "date-time"
+        description: "Ending time for a time period during which mobile phone calls are answered.\n\nThe time format is 'HH:MM'."
+        example: "18:00"
+      fromDayMobile:
+        type: "string"
+        description: "Starting day for a time period during which mobile phone calls are answered.\n\nThe possible values are:\n- monday\n- tuesday\n- wednesday\n- thursday\n- friday\n- saturday\n- sunday"
+        example: "monday"
+      toDayMobile:
+        type: "string"
+        description: "Ending day for a time period during which mobile phone calls are answered.\n\nThe possible values are:\n- monday\n- tuesday\n- wednesday\n- thursday\n- friday\n- saturday\n- sunday"
+        example: "friday"
+  mobileListSchedule:
+    type: "array"
+    items:
+      $ref:  "#/definitions/contactMobileSchedule"
+    description: "Array of schedules that define the business hours during which mobile phone calls are answered on a specific day (or a period of days) of the week"
+  contactEmailSchedule:
+    description: "Data structure containing the schedule information.\n\nThe schedule defines the business hours during which emails are answered on a specific day (or a period of days) of the week.\n\nIf the schedule applies to 1 day only, the same day is defined in both the 'fromDayEmail' and 'toDayEmail' properties."
+    properties:
+      fromTimeEmail:
+        type: "string"
+        format: "date-time"
+        description: "Starting time for a time period during which emails are checked.\n\nThe time format is 'HH:MM'."
+        example: "08:00"
+      toTimeEmail:
+        type: "string"
+        format: "date-time"
+        description: "Ending time for a time period during which emails are checked.\n\nThe time format is 'HH:MM'."
+        example: "18:00"
+      fromDayEmail:
+        type: "string"
+        description: "Starting day for a time period during which emails are checked.\n\nThe possible values are:\n- monday\n- tuesday\n- wednesday\n- thursday\n- friday\n- saturday\n- sunday"
+        example: "monday"
+      toDayEmail:
+        type: "string"
+        description: "Ending day for a time period during which emails are checked.\n\nThe possible values are:\n- monday\n- tuesday\n- wednesday\n- thursday\n- friday\n- saturday\n- sunday"
+        example: "friday"
+  contactBranchMangerSchedule:
+    description: "Data structure containing the schedule information.\n\nThe schedule defines the business hours during which the manager is available on a specific day (or a period of days) of the week.\n\nIf the schedule applies to 1 day only, the same day is defined in both the 'fromDayBranchManager' and 'toDayBranchManager' properties."
+    properties:
+      fromTimeBranchManager:
+        type: "string"
+        format: "date-time"
+        description: "Starting time for a time period during which the manager is available.\n\nThe time format is 'HH:MM'."
+        example: "10:00"
+      toTimeBranchManager:
+        type: "string"
+        format: "date-time"
+        description: "Ending time for a time period during which the manager is available.\n\nThe time format is 'HH:MM'."
+        example: "14:00"
+      fromDayBranchManager:
+        type: "string"
+        description: "Starting day for a time period during which the manager is available.\n\nThe possible values are:\n- monday\n- tuesday\n- wednesday\n- thursday\n- friday\n- saturday\n- sunday"
+        example: "monday"
+      toDayBranchManager:
+        type: "string"
+        description: "Ending day for a time period during which the manager is available.\n\nThe possible values are:\n- monday\n- tuesday\n- wednesday\n- thursday\n- friday\n- saturday\n- sunday"
+        example: "wednesday"
+  managerListSchedule:
+    type: "array"
+    items:
+      $ref:  "#/definitions/contactBranchMangerSchedule"
+    description: "Array of manager's schedules"
+  centerAddresses:
+    description: "Data structure containing the branch information"
+    properties:
+      streetName:
+        type: "string"
+        description: "Name of a street or thoroughfare"
+        example: "AVENIDA DE TOLEDO"
+      streetBuildingIdentification:
+        type: "string"
+        description: "Number that identifies the position of a building on a street"
+        example: "22"
+      postCodeIdentification:
+        type: "string"
+        description: "Postal code.\n\nThe value consists of a group of letters and/or numbers that is added to a postal address to assist in sorting the mail."
+        example: "28660"
+      townName:
+        type: "string"
+        description: "Name of a built-up area with defined boundaries and a local government.\n\nThe value is based on the ISO 3166-2, according to the country defined within the address details."
+        example: "MADRID"
+      state:
+        type: "string"
+        description: "Name of an organized political community or area forming a part of a federation.\n\nThe value is based on the ISO 3166-2, according to the country defined within the address details."
+        example: "MADRID"
+      buildingName:
+        type: "string"
+        description: "Name of a building or house.\n\nThe value can be freely defined."
+        example: "RESIDENCIAL LOS PINOS"
+      floor:
+        type: "string"
+        description: "Floor or story within a building"
+        example: "3"
+      districtName:
+        type: "string"
+        description: "Name of a district, for example, a part of a town or region.\n\nThe value can be freely defined."
+        example: "CHAMARTIN"
+      regionIdentification:
+        type: "string"
+        description: "Name of an administrative division of a country, state, or territory.\n\nThe value is based on the ISO 3166-2, according to the country defined within the address details."
+        example: "MADRID"
+      countyIdentification:
+        type: "string"
+        description: "Name of a county.\n\nThe value is based on the ISO 3166-2, according to the country defined within the address details."
+        example: "COUNTY NAME"
+      postOfficeBox:
+        type: "string"
+        description: "Number of a box in a post office, assigned to a person or organization.\n\nLetters are stored in the box until called for."
+        example: "08080"
+      province:
+        type: "string"
+        description: "Name of a territory governed as an administrative or political unit of a country.\n\nThe value is based on the ISO 3166-2, according to the country defined within the address details."
+        example: "MADRID"
+      department:
+        type: "string"
+        description: "Name of a division within a large organization or building.\n\nThe value can be freely defined."
+        example: "GENERIC DEPARTMENT NAME"
+      subDepartment:
+        type: "string"
+        description: "Name of a sub-division within a large organization or building.\n\nThe value can be freely defined."
+        example: "GENERIC SUBDEPARTMENT NAME"
+      location:
+        type: "string"
+        description: "Generic location name that specifies a place.\n\nThe value can be freely defined."
+        example: "GENERIC LOCATION NAME"
+      country:
+        type: "string"
+        description: "Name of a country.\n\nThe value is based on the ISO 3166-1 alpha-2 (https://www.iso.org/obp/ui/#search/code/)."
+        example: "SPAIN"
+      managerListSchedule:
+        description: "Array of manager's schedules"
+        allOf:
+          - $ref: "#/definitions/managerListSchedule"
+  branchesList:
+    type: "array"
+    items:
+      $ref:  "#/definitions/centerAddresses"
+    description: "Array of branches where the manager can meet the customer in person"
+  contactsManager:
+    description: "Data structure containing the manager's contact information"
+    properties:
+      phone:
+        type: "string"
+        description: "Phone number"
+        example: "+44-01142726444"
+      phoneListSchedule:
+        description: "Array of schedules that define the business hours during which phone calls are answered on a specific day (or a period of days) of the week"
+        allOf:
+          - $ref: "#/definitions/phoneListSchedule"
+      mobile:
+        type: "string"
+        description: "Mobile phone number"
+        example: "+44-07519437844"
+      mobileListSchedule:
+        description: "Array of schedules that define the business hours during which mobile phone calls are answered on a specific day (or a period of days) of the week"
+        allOf:
+          - $ref: "#/definitions/mobileListSchedule"
+      emailAddress:
+        type: "string"
+        description: "Email address"
+        example: "testjulicert@test2.co"
+      contactEmailSchedule:
+        description: "Data structure containing the schedule information.\n\nThe schedule defines the business hours during which emails are answered on a specific day (or a period of days) of the week.\n\nIf the schedule applies to 1 day only, the same day is defined in both the 'fromDayEmail' and 'toDayEmail' properties."
+        allOf:
+          - $ref: "#/definitions/contactEmailSchedule"
+      branchesList:
+        description: "Array of branches where the manager can meet the customer in person"
+        allOf:
+          - $ref: "#/definitions/branchesList"
+  managerInformation:
+    description: "Data structure containing the manager's information"
+    properties:
+      firstName:
+        type: "string"
+        description: "First name"
+        example: "Juan"
+      lastName:
+        type: "string"
+        description: "Last name"
+        example: "Costes fernandez"
+      staff:
+        type: "string"
+        description: "Whether the manager is a bank employee.\n\nThe possible values are:\n- YES\n- NO"
+        example: "NO"
+      modalityPortfolio:
+        type: "string"
+        description: "Modality of the portfolios the manager is in charge of.\n\nThe possible values are:\n- commercial\n- risk\n- private_banking\n(This value applies in Spain only.)"
+        example: "commercial"
+      contactsManager:
+        description: "Data structure containing the manager's contact information"
+        allOf:
+          - $ref: "#/definitions/contactsManager"
+  managersList:
+    type: "array"
+    items:
+      $ref:  "#/definitions/managerInformation"
+    description: "Array of managers"
+  enquireCustomerManagerResponse:
+    description: "Response to a request to retrieve a list of managers for a customer"
+    properties:
+      customerId:
+        type: "string"
+        description: "Customer ID in local format"
+        example: "F171"
+      managersList:
+        description: "Array of managers"
+        allOf:
+          - $ref: "#/definitions/managersList"
+  errors:
+    description: "Data structure containing the details for errors"
+    properties:
+      errors:
+        type: "array"
+        items:
+          $ref: "#/definitions/error"
+        description: "Array of errors"
+  error:
+    properties:
+      code:
+        type: "string"
+        description: "Unique alphanumeric human-readable error code"
+        example: "XXX"
+      message:
+        type: "string"
+        description: "Brief summary of the reported issue"
+        example: "Message"
+      level:
+        type: "string"
+        description: "Level of the reported issue. \n\n The possible values are: \n - info \n - warning \n - error"
+        example: "error"
+      description:
+        type: "string"
+        description: "Detailed description of the reported issue"
+        example: "Description"
+    description: "Data structure containing the error details"
+parameters:
+  X-Santander-Client-Id:
+    name: "X-Santander-Client-Id"
+    type: "string"
+    required: true
+    in: "header"
+    description: "Client ID header"
+    x-example: "a1b30a84-7bf3-442e-84a0-e935d8163b5a"
+  Authorization:
+    name: "Authorization"
+    type: "string"
+    required: true
+    in: "header"
+    description: "Authorization security header"
+    x-example: "Bearer 923ioh89r23ohwedh823ohdn9hite89yyugfsdf"
+  X-B3-TraceId:
+    name: "X-B3-TraceId"
+    type: "string"
+    required: false
+    in: "header"
+    description: "Overall ID of the trace, shared by every span in the trace. \n\nThe value is 64 or 128 bits long."
+    x-example: "80f198ee56343ba864fe8b2a57d3eff7"
+  X-B3-ParentSpanId:
+    name: "X-B3-ParentSpanId"
+    type: "string"
+    required: false
+    in: "header"
+    description: "Position of the parent operation in the trace tree.\n\nThe value is 64 bits long. \n\nThe value is omitted when the span is the root of the trace tree. "
+    x-example: "05e3ac9a4f6e3b90"
+  X-B3-SpanId:
+    name: "X-B3-SpanId"
+    type: "string"
+    required: false
+    in: "header"
+    description: "Position of the current operation in the trace tree.\n\nThe value is 64 bits long.\n\nDo not interpret the value: it may or may not be derived from the value of 'TraceId'."
+    x-example: "e457b5a2e4d86bd1"
+  X-B3-Sampled:
+    name: "X-B3-Sampled"
+    type: "string"
+    required: false
+    in: "header"
+    description: "Sampling decision.\n\nSampling is a mechanism to reduce the volume of data in the tracing system. In B3, sampling applies consistently per trace: once the sampling decision is made, the same value must be consistently sent downstream. This means that either all or no spans share a trace ID.\n\nThe possible values are: \n- 0 = Deny\n- 1 = Accept\n- d = Debug"
+    x-example: "1"

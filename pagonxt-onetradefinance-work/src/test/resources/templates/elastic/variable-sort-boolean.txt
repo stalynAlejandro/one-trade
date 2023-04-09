@@ -1,0 +1,15 @@
+  "sort" : [
+    {
+      "variables.booleanValue" : {
+        "order" : "%s",
+        "nested": {
+          "path": "variables",
+          "filter": {
+            "term": {
+              "variables.name": "%s"
+            }
+          }
+        }
+      }
+    }
+  ]

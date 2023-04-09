@@ -1,0 +1,45 @@
+{
+  "dataObjectDefinitionKey": "md-product-type",
+  "masterData": [
+    {
+      "productTypeId": "CLE",
+      "productType": "Export Collection",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "productType": "Remesa de Exportación"
+        }
+      }
+    },
+    {
+      "productTypeId": "CLI",
+      "productType": "Import Collection",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "productType": "Remesa de Importación"
+        }
+      }
+    },
+    {
+      "productTypeId": "ILC",
+      "productType": "Import product Credit",
+      "sortOrder": 6,
+      "translations": {
+        "es_es": {
+          "productType": "Crédito producto Importación"
+        }
+      }
+    },
+    {
+      "productTypeId": "ELC",
+      "productType": "Export product Credit",
+      "sortOrder": 7,
+      "translations": {
+        "es_es": {
+          "productType": "Crédito producto Exportación"
+        }
+      }
+    }
+  ]
+}

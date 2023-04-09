@@ -1,0 +1,105 @@
+{
+  "dataObjectDefinitionKey": "md-cle-other-operations-nonPayments-return-reason",
+  "masterData": [
+    {
+      "returnReason": "Confirm commissions",
+      "returnReasonId": "confirmCommissions",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "returnReason": "Confirmar comisiones"
+        }
+      }
+    },
+    {
+      "returnReason": "Confirm expenses",
+      "returnReasonId": "confirmExpenses",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "returnReason": "Confirmar gastos"
+        }
+      }
+    },
+    {
+      "returnReason": "Confirm payment free",
+      "returnReasonId": "confirmPaymentFree",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "returnReason": "Confirmar libre de pago"
+        }
+      }
+    },
+    {
+      "returnReason": "Account with warnings",
+      "returnReasonId": "accountWithWarnings",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "returnReason": "Cuenta con avisos"
+        }
+      }
+    },
+    {
+      "returnReason": "Account has no balance",
+      "returnReasonId": "accountHasNoBalance",
+      "sortOrder": 5,
+      "translations": {
+        "es_es": {
+          "returnReason": "Cuenta sin saldo"
+        }
+      }
+    },
+    {
+      "returnReason": "Account wrong",
+      "returnReasonId": "accountWrong",
+      "sortOrder": 6,
+      "translations": {
+        "es_es": {
+          "returnReason": "Cuenta errónea"
+        }
+      }
+    },
+    {
+      "returnReason": "Wrong data",
+      "returnReasonId": "wrongData",
+      "sortOrder": 7,
+      "translations": {
+        "es_es": {
+          "returnReason": "Datos erroneos"
+        }
+      }
+    },
+    {
+      "returnReason": "Unreadable data",
+      "returnReasonId": "unreadableData",
+      "sortOrder": 8,
+      "translations": {
+        "es_es": {
+          "returnReason": "Datos ilegibles"
+        }
+      }
+    },
+    {
+      "returnReason": "Data inconsistency",
+      "returnReasonId": "dataInconsistency",
+      "sortOrder": 9,
+      "translations": {
+        "es_es": {
+          "returnReason": "Incongruencia de datos"
+        }
+      }
+    },
+    {
+      "returnReason": "Others",
+      "returnReasonId": "others",
+      "sortOrder": 99,
+      "translations": {
+        "es_es": {
+          "returnReason": "Otros"
+        }
+      }
+    }
+  ]
+}

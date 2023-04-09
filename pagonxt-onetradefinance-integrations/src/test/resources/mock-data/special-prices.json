@@ -1,0 +1,68 @@
+[
+  {
+    "conceptName": "GASTOS COURRIER",
+    "periodicity": "99999 D",
+    "percentage" : null,
+    "amount" : "6148.99502"
+  },
+  {
+    "conceptName": "COM.MOND.ESTRA.",
+    "periodicity": "99999 D",
+    "percentage" : "0.200000",
+    "amount" : "6148.99502"
+  },
+  {
+    "conceptName": "COM.ACEP.REM.IM",
+    "periodicity": "99999 D",
+    "percentage" : "0.150000",
+    "amount" : "6148.99502"
+  },
+  {
+    "conceptName": "COM.APLA.PRO.DE",
+    "periodicity": "99999 D",
+    "percentage" : "0.100000",
+    "amount" : "6148.99502"
+  },
+  {
+    "conceptName": "COM.TRA.OTR.ENT",
+    "periodicity": "99999 D",
+    "percentage" : null,
+    "amount" : "6148.99502"
+  },
+  {
+    "conceptName": "GAS.TIM.REM.IMP",
+    "periodicity": "99999 D",
+    "percentage" : null,
+    "amount" : "6148.99502"
+  },
+  {
+    "conceptName": "COM.DEV.EFE.REM",
+    "periodicity": "99999 D",
+    "percentage" : "4.500000",
+    "amount" : "6148.99502"
+  },
+  {
+    "conceptName": "COM.TRA.CAR.LI.",
+    "periodicity": "99999 D",
+    "percentage": "0.750000",
+    "amount": "6148.99502"
+  },
+  {
+    "conceptName": "COM.COBR.CA.LI.",
+    "periodicity": "99999 D",
+    "percentage" : "0.250000",
+    "amount" : "6148.99502"
+  },
+  {
+    "conceptName": "COM.PROT.EFE.RE",
+    "periodicity": "99999 D",
+    "percentage" : null,
+    "amount" : "6148.99502"
+  },
+  {
+    "conceptName": "GTOS. SWIFT",
+    "periodicity": "99999 D",
+    "percentage" : null,
+    "amount" : "6148.99502"
+  }
+]

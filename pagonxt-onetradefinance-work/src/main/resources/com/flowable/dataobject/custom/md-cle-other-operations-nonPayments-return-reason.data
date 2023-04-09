@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-other-operations-nonPayments-return-reason",
+  "name": "Export Collection Other Operations nonPayments Return reason",
+  "description": "CLE Advance other operations non-payments return reason",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "return reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "returnReasonId",
+  "idField": "returnReasonId",
+  "nameField": "returnReason"
+}

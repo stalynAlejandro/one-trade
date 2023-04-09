@@ -1,0 +1,16 @@
+{
+  "key": "md-cli-procedure-type",
+  "name": "Import Collection Procedure type",
+  "description": "CLI procedure types",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "procedure type",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "procedureTypeId",
+  "idField": "procedureTypeId",
+  "nameField": "procedureType"
+}

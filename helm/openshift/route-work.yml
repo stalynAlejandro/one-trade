@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: onetrade-work
+spec:
+  host: onetrade-work-default.apps-crc.testing
+  path: /
+  to:
+    kind: Service
+    name: onetrade-work
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None

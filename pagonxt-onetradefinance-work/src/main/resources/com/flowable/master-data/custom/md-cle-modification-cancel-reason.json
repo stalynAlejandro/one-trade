@@ -1,0 +1,55 @@
+{
+  "dataObjectDefinitionKey": "md-cle-modification-cancel-reason",
+  "masterData": [
+    {
+      "cancelReason": "Duplicated",
+      "cancelReasonId": "duplicated",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "cancelReason": "Duplicado"
+        }
+      }
+    },
+    {
+      "cancelReason": "Management does not correspond",
+      "cancelReasonId": "managementDoesNotCorrespond",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "cancelReason": "Gestion no corresponde"
+        }
+      }
+    },
+    {
+      "cancelReason": "AML",
+      "cancelReasonId": "aml",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "cancelReason": "AML"
+        }
+      }
+    },
+    {
+      "cancelReason": "Office instructions",
+      "cancelReasonId": "officeInstructions",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "cancelReason": "Instrucciones de la oficina"
+        }
+      }
+    },
+    {
+      "cancelReason": "Others",
+      "cancelReasonId": "others",
+      "sortOrder": 5,
+      "translations": {
+        "es_es": {
+          "cancelReason": "Otros"
+        }
+      }
+    }
+  ]
+}

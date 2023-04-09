@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-other-operations-queries-return-reason",
+  "name": "Export Collection Other Operations Queries Return reason",
+  "description": "CLE Advance other operations queries return reason",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "return reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "returnReasonId",
+  "idField": "returnReasonId",
+  "nameField": "returnReason"
+}

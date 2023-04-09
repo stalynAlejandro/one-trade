@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-modification-deferral-reason",
+  "name": "Export Collection Modification Deferral reason",
+  "description": "CLE Modification Deferral reasons",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "deferral reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "deferralReasonId",
+  "idField": "deferralReasonId",
+  "nameField": "deferralReason"
+}

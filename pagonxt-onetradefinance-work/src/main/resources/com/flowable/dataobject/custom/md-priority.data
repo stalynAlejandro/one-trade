@@ -1,0 +1,16 @@
+{
+  "key": "md-priority",
+  "name": "Priority",
+  "description": "Priorities.",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "priority",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "priorityId",
+  "idField": "priorityId",
+  "nameField": "priority"
+}

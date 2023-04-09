@@ -1,0 +1,8 @@
+        {
+          "range": {
+            "%s": {
+              "%s": "%s",
+              "format": "basic_date_time"
+            }
+          }
+        }

@@ -1,0 +1,86 @@
+{
+  "dataObjectDefinitionKey": "md-cle-advance-modification-return-reason",
+  "overwrite": true,
+  "masterData": [
+    {
+      "returnReason": "Missing documentation",
+      "returnReasonId": "missingDocumentation",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "returnReason": "Documentación en falta"
+        }
+      }
+    },
+    {
+      "returnReason": "Wrong documentation",
+      "returnReasonId": "wrongDocumentation",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "returnReason": "Documentación errónea"
+        }
+      }
+    },
+    {
+      "returnReason": "Unreadable documentation",
+      "returnReasonId": "unreadableDocumentation",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "returnReason": "Documentación ilegible"
+        }
+      }
+    },
+    {
+      "returnReason": "Proposal overdrawn",
+      "returnReasonId": "proposalOverdrawn",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "returnReason": "Propuesta sobregirada"
+        }
+      }
+    },
+    {
+      "returnReason": "Proposal not printed",
+      "returnReasonId": "proposalNotPrinted",
+      "sortOrder": 5,
+      "translations": {
+        "es_es": {
+          "returnReason": "Propuesta no impresa"
+        }
+      }
+    },
+    {
+      "returnReason": "Proposal wrong",
+      "returnReasonId": "proposalWrong",
+      "sortOrder": 6,
+      "translations": {
+        "es_es": {
+          "returnReason": "Propuesta errónea"
+        }
+      }
+    },
+    {
+      "returnReason": "Proposal others",
+      "returnReasonId": "proposalOthers",
+      "sortOrder": 7,
+      "translations": {
+        "es_es": {
+          "returnReason": "Propuesta otros"
+        }
+      }
+    },
+    {
+      "returnReason": "Others",
+      "returnReasonId": "others",
+      "sortOrder": 99,
+      "translations": {
+        "es_es": {
+          "returnReason": "Otros"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "var"
+                    }
+                  },
+                  {
+                    "wildcard": {
+                      "variables.textValueKeyword": "*some-text*"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }

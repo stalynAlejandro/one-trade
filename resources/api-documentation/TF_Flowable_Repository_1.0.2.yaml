@@ -1,0 +1,1440 @@
+openapi: 3.0.1
+info:
+  title: TF_Flowable_Repository
+  description: This API allows obtaining data from the different requests.
+  contact:
+    name: Flowable
+    url: http://www.flowable.com/
+  version: 1.0.2
+  x-santander-catalogation:
+    bian-landscape-version: Unknown
+    bian-business-area: Unknown
+    bian-business-domain: Unknown
+    bian-service-domain: Unknown
+  x-pagonxt-catalogation:
+    team: Unknown
+    domain: Unknown
+    system: Unknown
+servers:
+- url: https://{host}/tf-flowable-repository
+  variables:
+      host:
+        description: The environment where the API is hosted. API Version > 1 must be indicated after basepath (e.g /account-manager/v2)
+        enum:
+          # CONSUMO-INTERNO  
+          # DEV AWS ORIGIN (APP/Microservices that makes the request is deployed in AWS)  
+            - core.onetrade.dub.dev.api.pagonxt.corp
+          # DEV AZURE ORIGIN (APP/Microservices that makes the request is deployed in AZURE)  
+            - core.onetrade.ams.dev.api.pagonxt.corp
+          # PRE AWS ORIGIN (APP/Microservices that makes the request is deployed in AWS)  
+            - core.onetrade.dub.pre.api.pagonxt.corp
+          # PRE AZURE ORIGIN (APP/Microservices that makes the request is deployed in AZURE)  
+            - core.onetrade.ams.pre.api.pagonxt.corp
+          # PRO AWS ORIGIN (APP/Microservices that makes the request is deployed in AWS)  
+            - core.onetrade.dub.api.pagonxt.corp
+          # PRO AZURE ORIGIN (APP/Microservices that makes the request is deployed in AZURE) 
+            - core.onetrade.ams.api.pagonxt.corp
+        default: core.onetrade.dub.dev.api.pagonxt.corp
+security:
+  - JWT: []
+tags:
+  - name: historicTasks
+    description: Task history of a case.
+  - name: myRequests
+    description: List with user requests.
+  - name: filters
+    description: Filters to search requests or tasks.
+  - name: myTaks
+    description: List with user tasks.
+  - name: comments.
+    description: Comments of a case.
+  - name: exportCollectionAdvance
+    description: Data from an advance request.
+  - name: exportCollection
+    description: Data from an export collection request.
+paths:
+  /case-data/{case_id}/comments:
+    get:
+      summary: Get comments from a case
+      operationId: getComments
+      description: This method allows to obtain the comments of a case.
+      tags:
+        - comments.
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+        - $ref: '#/components/parameters/path-case-id'
+        - $ref: '#/components/parameters/locale'
+      responses:
+        '200':
+          $ref: '#/components/responses/controllerResponse'
+        '204':
+          $ref: '#/components/responses/noContentResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '413':
+          $ref: '#/components/responses/error413'  
+        '414':
+          $ref: '#/components/responses/error414'
+        '415':
+          $ref: '#/components/responses/error415'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /export-collection-advances:
+    get:
+      summary: Get advances by customer.
+      operationId: getExportCollectionsAdvancesByCustomer
+      description: This method allows to get a list of requests of advance by customer.
+      tags:
+        - exportCollectionAdvance
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+        - $ref: '#/components/parameters/customer'
+      responses:
+        '200':
+          $ref: '#/components/responses/exportCollectionAdvance'
+        '204':
+          $ref: '#/components/responses/noContentResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '414':
+          $ref: '#/components/responses/error414'
+        '415':
+          $ref: '#/components/responses/error415'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /export-collections:
+    get:
+      summary: Get export collections by customer.
+      operationId: getExportCollectionsByCustomer
+      description: This method allows to get a list of request of export collections by customer.
+      tags:
+        - exportCollection
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+        - $ref: '#/components/parameters/customer'
+      responses:
+        '200':
+          $ref: '#/components/responses/exportCollection'
+        '204':
+          $ref: '#/components/responses/noContentResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'  
+        '414':
+          $ref: '#/components/responses/error414'
+        '415':
+          $ref: '#/components/responses/error415'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /retrieve-historic-tasks:
+    post:
+      summary: Retrieve the task history of a case
+      operationId: getHistoricTasks
+      description: This method allows to get the task history of a case.
+      tags:
+        - historicTasks
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+        - $ref: '#/components/parameters/case_id'    
+        - $ref: '#/components/parameters/locale'
+      requestBody:
+        $ref: '#/components/requestBodies/listRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/historicTasks'
+        '204':
+          $ref: '#/components/responses/noContentResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '413':
+          $ref: '#/components/responses/error413'  
+        '414':
+          $ref: '#/components/responses/error414'
+        '415':
+          $ref: '#/components/responses/error415'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /retrieve-my-requests:
+    post:
+      summary: Retrieve my requests
+      operationId: getMyRequests
+      description: This method allows to get the list of requests of a user.
+      tags:
+        - myRequests
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+      requestBody:
+        $ref: '#/components/requestBodies/listRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/myRequests'
+        '204':
+          $ref: '#/components/responses/noContentResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '413':
+          $ref: '#/components/responses/error413'  
+        '414':
+          $ref: '#/components/responses/error414'
+        '415':
+          $ref: '#/components/responses/error415'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /retrieve-my-requests/filters:
+    get:
+      summary: Retrieve request filters
+      operationId: getRequestFilters
+      description: This method allows to get a list of filters to search requests.
+      tags:
+        - filters
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/filterDefinition'
+        '204':
+          $ref: '#/components/responses/noContentResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406' 
+        '414':
+          $ref: '#/components/responses/error414'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /retrieve-my-tasks:
+    post:
+      summary: Retrieve my tasks
+      operationId: getMyTasks
+      description: This method allows to get the list of tasks of a user.
+      tags:
+        - myTaks
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+        - $ref: '#/components/parameters/scope'
+      requestBody:
+        $ref: '#/components/requestBodies/listRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/myTasks'
+        '204':
+          $ref: '#/components/responses/noContentResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '413':
+          $ref: '#/components/responses/error413'  
+        '414':
+          $ref: '#/components/responses/error414'
+        '415':
+          $ref: '#/components/responses/error415'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+  /retrieve-my-tasks/filters:
+    get:
+      summary: Retrieve task filters
+      operationId: getTaskFilters
+      description: This method allows to get a list of filters to search requests.
+      tags:
+        - filters
+      parameters:
+        - $ref: '#/components/parameters/header-X-Santander-Client-Id'
+        - $ref: '#/components/parameters/header-X-B3-ParentSpanId'
+        - $ref: '#/components/parameters/header-X-B3-Sampled'
+        - $ref: '#/components/parameters/header-X-B3-SpanId'
+        - $ref: '#/components/parameters/header-X-B3-TraceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/filterDefinition'
+        '204':
+          $ref: '#/components/responses/noContentResponse'
+        '400':
+          $ref: '#/components/responses/error400'
+        '401':
+          $ref: '#/components/responses/error401'
+        '403':
+          $ref: '#/components/responses/error403'
+        '404':
+          $ref: '#/components/responses/error404'
+        '405':
+          $ref: '#/components/responses/error405'
+        '406':
+          $ref: '#/components/responses/error406'
+        '414':
+          $ref: '#/components/responses/error414'
+        '422':
+          $ref: '#/components/responses/error422'
+        '429':
+          $ref: '#/components/responses/error429'
+        '500':
+          $ref: '#/components/responses/error500'
+        '503':
+          $ref: '#/components/responses/error503'
+        '504':
+          $ref: '#/components/responses/error504'
+        default:
+          $ref: '#/components/responses/errorDefault'
+components:
+  schemas:
+    AccountDto:
+      type: object
+      description: Account details.
+      properties:
+        id:
+          type: string
+          description: Account id.
+          example: '001001'
+        iban:
+          type: string
+          description: IBAN, or international bank account number.
+          example: PT50 0002 0123 5678 9015 1
+        currency:
+          type: string
+          description: Type of currency associated to the account.
+          example: EUR
+    CommentDto:
+      type: object
+      description : Comment. 
+      properties:
+        timestamp:
+          type: string
+          description: Time stamp.
+          example: '2022-12-21T12:13:09.367Z'
+        content:
+          type: string
+          description: Comment.
+          example: The account number is incorrect
+        taskName:
+          type: string
+          description: Task Name.
+          example: Review Request
+        userDisplayedName:
+          type: string
+          description: User displayed name.
+          example: Admin
+    CommentList:
+      type: array
+      description: List with comments.
+      items:
+        $ref: '#/components/schemas/CommentDto'
+      maxItems: 50
+    ControllerResponse:
+      type: object
+      description: Controller Response details.
+      properties:
+        type:
+          type: string
+          description: Response type.
+          example: success
+        key:
+          type: string
+          description: Response key
+          example: getComments
+        message:
+          type: string
+          description: Response message
+          example: message
+        arguments:
+          type: array
+          description: Response arguments
+          items:
+            type: string
+          maxItems: 50
+        entity:
+          $ref: '#/components/schemas/CommentList'
+    CustomerDto:
+      type: object
+      description: Customer details.
+      properties:
+        customerId:
+          type: string
+          description: Customer id.
+          example: '001'
+        name:
+          type: string
+          description: Customer name.
+          example: customer S.L.
+        taxId:
+          type: string
+          description: The Tax Identification Number (NIF, CIF..).
+          example: B1234567
+        office:
+          type: string
+          description: Office id. Office assigned to the customer.
+          example: '1234'
+        personNumber:
+          type: string
+          description: Internal identification assigned to the customer.
+          example: BUC-1234567
+        segment:
+          type: string
+          description: Customer segment.
+          example: SME
+        email:
+          type: string
+          description: Customer email.
+          example: customer@domain.com
+    ExportCollectionAdvanceDto:
+      type: object
+      description: Request details.
+      properties:
+        code:
+          type: string
+          description: Code.
+          pattern: '^[A-Z0-9-]*$'
+          minLength: 5
+          maxLength: 50
+          example: CLE-ADV-6
+        customer:
+          $ref: '#/components/schemas/CustomerDto'
+        creationDate:
+          type: string
+          description: creation date
+          example: '2022-11-30T10:30:32.111+01:00'
+        approvalDate:
+          type: string
+          description: approval date
+          example: '2022-11-30T14:00:00.177+01:00'
+        contractReference:
+          type: string
+          description: Contract reference.
+          minLength: 14
+          maxLength: 14
+          example: '12345678901234'
+        amount:
+          type: string
+          description: Amount.
+          pattern: '^[0-9]{0,10}\.?[0-9]?[0-9]?$'
+          minLength: 1
+          maxLength: 13
+          example: '1000.0'
+        currency:
+          type: string
+          description: Currency
+          pattern: '^[A-Z]*$'
+          minLength: 3
+          maxLength: 3
+          example: EUR
+        exportCollection:
+          $ref: '#/components/schemas/ExportCollectionDto'
+        requestExpiration:
+          type: string
+          description: Request Expiration.
+          example: '2022-12-01T00:00:00.000+01:00'
+    ExportCollectionDto:
+      type: object
+      description: Request details.
+      properties:
+        code:
+          type: string
+          description: Code.
+          pattern: '^[A-Z0-9-]*$'
+          minLength: 5
+          maxLength: 50
+          example: CLE-6
+        customer:
+          $ref: '#/components/schemas/CustomerDto'
+        creationDate:
+          type: string
+          description: creation date
+          example: '2022-11-30T10:30:32.111+01:00'
+        approvalDate:
+          type: string
+          description: approval date
+          example: '2022-11-30T14:00:00.177+01:00'
+        contractReference:
+          type: string
+          description: Contract reference.
+          minLength: 14
+          maxLength: 14
+          example: '12345678901234'
+        amount:
+          type: string
+          description: Amount.
+          pattern: '^[0-9]{0,10}\.?[0-9]?[0-9]?$'
+          minLength: 1
+          maxLength: 13
+          example: '1000.0'
+        currency:
+          type: string
+          description: Currency
+          pattern: '^[A-Z]*$'
+          minLength: 3
+          maxLength: 3
+          example: EUR
+        nominalAccount:
+          $ref: '#/components/schemas/AccountDto'
+    Filter:
+      type: object
+      description: filter details.
+      properties:
+        type:
+          type: string
+          description: filter type
+        value:
+          type: string
+          description: filter value
+        values:
+          type: array
+          description: filter values
+          items:
+            type: string
+          maxItems: 50
+        int:
+          type: integer
+          description: int
+          format: int32
+        double:
+          type: number
+          description: double
+          format: double
+        string:
+          type: string
+          description: string
+        jsondate:
+          type: string
+          description: json date
+          format: date-time
+        stringList:
+          type: array
+          description: String list.
+          items:
+            type: string
+          maxItems: 50
+    FilterDefinition:
+      type: object
+      properties:
+        type:
+          type: string
+          description: filter definition type
+          example: select
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterDefinitionItem'
+          maxItems: 50
+    FilterDefinitionItem:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of filter definition item.
+          example: Request
+        code:
+          type: string
+          description: Code of filter definition item
+          example: REQUEST
+    HistoricTasksList:
+      type: object
+      description: List of tasks.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PagoNxtHistoricTaskItem'
+          maxItems: 50
+        total:
+          type: integer
+          format: int64
+          description: Total number of tasks.
+          example: 2
+    ListRequest:
+      type: object
+      description: List of parameters.
+      properties:
+        filters:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Filter'
+        sortField:
+          type: string
+          description: Sort Field.
+          example: endDate
+        sortOrder:
+          type: integer
+          format: int32
+          description: Sort Order.
+          example: -1
+        fromPage:
+          type: integer
+          format: int32
+          description: From Page.
+          example: 0
+        pageSize:
+          type: integer
+          format: int32
+          description: Page Size (Number of elements).
+          example: 5
+    MyRequestsList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PagoNxtRequestItem'
+          maxItems: 50
+        total:
+          type: integer
+          format: int64
+          description: Total number of requests.
+          example: 2
+    MyTasksList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PagoNxtTaskItem'
+          maxItems: 50
+        total:
+          type: integer
+          format: int64
+          description: Total number of tasks.
+          example: 2
+    PagoNxtHistoricTaskItem:
+      type: object
+      description: List item.
+      properties:
+        rowId:
+          type: string
+          description: Row id.
+          pattern: '^[A-Za-z0-9-]*$'
+          minLength: 36
+          maxLength: 36
+          example: 7ed63e1c-e1c3-47dc-91ee-d087185125db
+        startDate:
+          type: string
+          format: date-time
+          description: start date of the task. 
+          example: '2022-11-30T15:04:44.479Z'
+        endDate:
+          type: string
+          format: date-time
+          description: end date of the task. 
+          example: '2022-11-30T15:05:10.599Z'
+        taskName:
+          type: string
+          description: Task Name.
+          pattern: '^[A-Za-z0-9-_ ]*$'
+          minLength: 0
+          maxLength: 255
+          example: Review request
+        userName:
+          type: string
+          description: User Name
+          example: Isabel@onetradefinance.pagonxt.com
+    PagoNxtRequestItem:
+      type: object
+      description: List item.
+      properties:
+        rowId:
+          type: string
+          description: row id.
+          pattern: '^[A-Za-z0-9-]*$'
+          minLength: 36
+          maxLength: 36
+          example: 55b9786e-e72c-48c3-976e-54542faa522b
+        mercuryRef:
+          type: string
+          description: Mercury Ref.
+          example: mercuryRef
+        operationId:
+          type: string
+          description: operation id (case code).
+          pattern: '^[A-Z0-9-]*$'
+          minLength: 5
+          maxLength: 50
+          example: CLE-MOD-2
+        issuanceDate:
+          type: string
+          format: date-time
+          description: Issuance date.
+          example: '2022-11-29T15:26:12.172Z'
+        product:
+          type: string
+          description: Product.
+          pattern: '^[A-Z]*$'
+          minLength: 3
+          maxLength: 3
+          example: CLE
+        event:
+          type: string
+          description: Event.
+          pattern: '^[A-Za-z0-9-_ ]*$'
+          minLength: 0
+          maxLength: 255
+          example: MODIFICATION
+        task:
+          type: string
+          description: Task.
+          pattern: '^[A-Za-z0-9-_ ]*$'
+          minLength: 0
+          maxLength: 255
+          example: review
+        priority:
+          type: string
+          description: Priority.
+          pattern: '^[A-Za-z0-9-_ ]*$'
+          minLength: 0
+          maxLength: 255
+          example: urgent
+        status:
+          type: string
+          description: Case status.
+          pattern: '^[A-Za-z0-9-_ ]*$'
+          minLength: 0
+          maxLength: 255
+          example: Issued
+        amount:
+          type: number
+          format: double
+          description: Amount.
+          maximum: 9999999999.99
+          example: 10000.01
+        currency:
+          type: string
+          description: Currency.
+          pattern: '^[A-Z]*$'
+          minLength: 3
+          maxLength: 3
+          example: EUR
+        contractReference:
+          type: string
+          description: Contract Reference.
+          minLength: 14
+          maxLength: 14
+          example: '12345678909876'
+        requestedDate:
+          type: string
+          format: date-time
+          description: Request date.
+          example: '2022-11-30T15:04:44.192Z'
+        client:
+          type: string
+          description: Client Name.
+          example: Customer S.L.
+        requesterName:
+          type: string
+          description: Requester Name.
+          example: Isabel@onetradefinance.pagonxt.com
+        office:
+          type: string
+          description: Office id.
+          example: '1234'
+        resolution:
+          type: string
+          description: Resolution.
+          pattern: '^[A-Za-z0-9-_ ]*$'
+          minLength: 0
+          maxLength: 255
+          example: APPROVED
+    PagoNxtTaskItem:
+      type: object
+      description: List item.
+      properties:
+        rowId:
+          type: string
+          description: row id.
+          pattern: '^[A-Za-z0-9-]*$'
+          minLength: 36
+          maxLength: 36
+          example: 55b9786e-e72c-48c3-976e-54542faa522b
+        operationId:
+          type: string
+          description: operation id (case code).
+          pattern: '^[A-Z0-9-]*$'
+          minLength: 5
+          maxLength: 50
+          example: CLE-MOD-2
+        taskId:
+          type: string
+          description: Task Id.
+          maxLength: 40
+          minLength: 40
+          pattern: '^TSK-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$'
+          example: TSK-c3c33742-70dc-11ed-a329-967337bea149
+        mercuryRef:
+          type: string
+          description: Mercury Ref.
+          example: '01234567898765'
+        issuanceDate:
+          type: string
+          format: date-time
+          description: Issuance date.
+          example: '2022-11-29T15:26:12.172Z'
+        product:
+          type: string
+          description: Product.
+          pattern: '^[A-Z]*$'
+          minLength: 3
+          maxLength: 3
+          example: CLE
+        event:
+          type: string
+          description: Event.
+          pattern: '^[A-Za-z0-9-_ ]*$'
+          minLength: 0
+          maxLength: 255
+          example: MODIFICATION
+        client:
+          type: string
+          description: Client Name.
+          example: Customer S.L.
+        task:
+          type: string
+          description: Task.
+          pattern: '^[A-Za-z0-9-_ ]*$'
+          minLength: 0
+          maxLength: 255
+          example: COMPLETE_INFORMATION
+        priority:
+          type: string
+          description: Priority.
+          pattern: '^[A-Za-z0-9-_ ]*$'
+          minLength: 0
+          maxLength: 255
+          example: urgent
+        status:
+          type: string
+          description: Case status.
+          pattern: '^[A-Za-z0-9-_ ]*$'
+          minLength: 0
+          maxLength: 255
+          example: AWAITING_INSTRUCTIONS
+        requesterName:
+          type: string
+          description: Requester Name.
+          example: Isabel@onetradefinance.pagonxt.com
+    Error:
+      type: object
+      description: Data structure containing the error details
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: Unique alphanumeric human readable error code
+          example: XXX
+          pattern: '^[a-zA-Z_0-9 ]*$'
+          maxLength: 25
+          minLength: 1
+        message:
+          type: string
+          description: Brief summary of the reported issue
+          example: Message
+          pattern: '^[a-zA-Z0-9. /_-]*$'
+          maxLength: 255
+          minLength: 1
+        level:
+          type: string
+          description: |-
+            Level of the reported issue.
+            The possible values are.
+            - ERROR
+            - FATAL
+            - INFO
+            - WARNING
+          enum:
+            - ERROR
+            - FATAL
+            - INFO
+            - WARNING
+          example: ERROR
+        description:
+          type: string
+          description: Detailed description of the reported issue
+          example: Description
+          pattern: '^[a-zA-Z0-9. /_-]*$'
+          maxLength: 255
+          minLength: 1
+      required:
+        - code
+        - message
+        - level
+        - description
+    Errors:
+      type: object
+      description: Data structure containing the details for errors
+      properties:
+        errors:
+          type: array
+          description: Array of errors
+          items:
+            $ref: '#/components/schemas/Error'
+          maxItems: 50
+          minItems: 0
+      required:
+        - errors
+      additionalProperties: false
+  parameters:
+    header-X-B3-ParentSpanId:
+      name: x-b3-parentspanid
+      in: header
+      description: Position of the parent operation in the trace tree. The value is 64 bits long. The value is omitted when the span is the root of the trace tree.
+      example: '0020000000000001'
+      schema:
+        type: string
+        maxLength: 32
+        minLength: 0
+        pattern: '^[a-zA-Z0-9_]*$'
+    header-X-B3-Sampled:
+      name: x-b3-sampled
+      in: header
+      description: |-
+        Sampling decision. Sampling is a mechanism to reduce the volume of data in the tracing system.
+        In B3, sampling applies consistently per-trace: once the sampling decision is made,
+        the same value must be consistently sent downstream. This means that either all or no spans share a trace ID.
+        The possible values are:
+        - 0 = Deny
+        - 1 = Accept
+      example: '1'
+      schema:
+        type: string
+        maxLength: 32
+        minLength: 0
+        pattern: '^[a-zA-Z0-9_]*$'
+    header-X-B3-SpanId:
+      name: x-b3-spanid
+      in: header
+      description: 'Position of the current operation in the trace tree. The value is 64 bits long. Do not interpret the value: it may or may not be derived from the value of the TraceId.'
+      example: a2fb4a1d1a96d312
+      schema:
+        type: string
+        maxLength: 32
+        minLength: 0
+        pattern: '^[a-zA-Z0-9_]*$'
+    header-X-B3-TraceId:
+      name: x-b3-traceid
+      in: header
+      description: 'Overall ID of the trace, shared by every span in the trace. The value is 64 or 128 bits long.'
+      example: 463ac35c9f6413ad48485a3953bb6124
+      schema:
+        type: string
+        maxLength: 32
+        minLength: 0
+        pattern: '^[a-zA-Z0-9_]*$'
+    header-X-Santander-Client-Id:
+      name: x-santander-client-id
+      required: true
+      in: header
+      description: Client ID header
+      example: a1b30a84-7bf3-442e-84a0-e935d8163b5a
+      schema:
+        type: string
+        maxLength: 36
+        minLength: 36
+        pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+    path-case-id:
+      in: path
+      name: case_id
+      description: Code id if the case
+      required: true
+      schema:
+          type: string
+          pattern: '^[A-Z0-9-]*$'
+          maxLength: 50
+          minLength: 5
+      example: CLE-9  
+    locale:
+      in: query
+      name: locale
+      description: language
+      required: true
+      schema:
+          type: string
+          pattern: '^[a-zA-Z]{2}-[a-zA-Z]{2}$'
+          maxLength: 5
+          minLength: 5
+      example: en-us
+    customer:
+      in: query
+      name: customer
+      description: customer id.
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 50
+      example: BUC-1234567
+    case_id:
+      in: query
+      name: case_id
+      description: case id.
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-Z0-9-]*$'
+        maxLength: 50
+        minLength: 5
+      example: CLE-9
+    scope:
+      in: query
+      name: scope
+      description: Scope query
+      required: false
+      schema:
+        type: string
+      example: scope  
+  requestBodies:
+    listRequest:  
+      description: 'List request'
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListRequest'
+  responses:
+    exportCollection:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExportCollectionDto'
+    exportCollectionAdvance:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ExportCollectionAdvanceDto'
+    historicTasks:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HistoricTasksList'
+    myRequests:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MyRequestsList'
+    myTasks:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MyTasksList'   
+    filterDefinition:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FilterDefinition'   
+    controllerResponse:
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ControllerResponse'
+    noContentResponse:
+      description: No content
+    error400:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err400Example:
+              $ref: '#/components/examples/err400Example'
+    error401:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err401Example:
+              $ref: '#/components/examples/err401Example'
+    error403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err403Example:
+              $ref: '#/components/examples/err403Example'
+    error404:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err404Example:
+              $ref: '#/components/examples/err404Example'
+    error405:
+      description: Method Not Allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err405Example:
+              $ref: '#/components/examples/err405Example'
+    error406:
+      description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err406Example:
+              $ref: '#/components/examples/err406Example'
+    error413:
+      description: Payload Too Large
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err413Example:
+              $ref: '#/components/examples/err413Example'
+    error414:
+      description: URI Too Long
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err414Example:
+              $ref: '#/components/examples/err414Example'
+    error415:
+      description: Unsupported Media Type
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err415Example:
+              $ref: '#/components/examples/err415Example'
+    error422:
+      description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err422Example:
+              $ref: '#/components/examples/err422Example'
+    error429:
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err429Example:
+              $ref: '#/components/examples/err429Example'
+    error500:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err500Example:
+              $ref: '#/components/examples/err500Example'
+    error503:
+      description: Service unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err503Example:
+              $ref: '#/components/examples/err503Example'
+    error504:
+      description: Gateway timeout
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            err504Example:
+              $ref: '#/components/examples/err504Example'
+    errorDefault:
+      description: Default error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          examples:
+            errDefaultExample:
+              $ref: '#/components/examples/errDefaultExample'
+  examples:
+    errDefaultExample:
+      value:
+        errors:
+          - code: '500'
+            level: FATAL
+            message: Internal Server Error
+            description: Error description
+    err400Example:
+      value:
+        errors:
+          - code: '400'
+            level: ERROR
+            message: Bad Request
+            description: Error validating schema
+    err401Example:
+      value:
+        errors:
+          - code: '401'
+            message: Unauthorized
+            level: ERROR
+            description: Unauthorized description
+    err403Example:
+      value:
+        errors:
+          - code: '403'
+            level: ERROR
+            message: Forbidden
+            description: Forbidden description
+    err404Example:
+      value:
+        errors:
+          - code: '404'
+            level: ERROR
+            message: Not Found
+            description: Not Found description
+    err405Example:
+      value:
+        errors:
+          - code: '405'
+            level: ERROR
+            message: Method not allowed
+            description: The request method is known by the server but is not supported by the target resource.
+    err406Example:
+      value:
+        errors:
+          - code: '406'
+            level: ERROR
+            message: Not Acceptable
+            description: Not Acceptable description
+    err413Example:
+      value:
+        errors:
+          - code: '413'
+            level: FATAL
+            message: Payload Too Large
+            description: Payload Too Large description
+    err414Example:
+      value:
+        errors:
+          - code: '414'
+            level: FATAL
+            message: URI Too Long
+            description: URI Too Long description
+    err415Example:
+      value:
+        errors:
+          - code: '415'
+            level: FATAL
+            message: Unsupported Media Type
+            description: Unsupported Media Type description
+    err422Example:
+      value:
+        errors:
+          - code: '422'
+            level: ERROR
+            message: Unprocessable Entity
+            description: Unprocessable Entity description
+    err429Example:
+      value:
+        errors:
+          - code: '429'
+            level: ERROR
+            message: Too Many Requests
+            description: Too Many Requests description
+    err500Example:
+      value:
+        errors:
+          - code: '500'
+            level: FATAL
+            message: Internal server error
+            description: Internal server error description
+    err503Example:
+      value:
+        errors:
+          - code: '503'
+            level: ERROR
+            message: Service unavailable
+            description: Service unavailable error description
+    err504Example:
+      value:
+        errors:
+          - code: '504'
+            level: ERROR
+            message: Gateway timeout
+            description: Gateway timeout error description  
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT authentication security

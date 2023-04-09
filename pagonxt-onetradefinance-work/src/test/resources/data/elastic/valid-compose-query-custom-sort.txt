@@ -1,0 +1,11 @@
+{
+  "from": 0,
+  "size": 5,
+customSort,
+  "query": {
+    "bool": {
+      "must": [
+"condition1","condition2","condition3"      ]
+    }
+  }
+}

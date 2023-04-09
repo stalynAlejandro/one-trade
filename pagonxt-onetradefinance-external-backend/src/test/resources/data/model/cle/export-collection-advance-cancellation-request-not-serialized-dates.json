@@ -1,0 +1,20 @@
+{
+  "requester": {
+    "user": {}
+  },
+  "documents": [
+    {
+      "uploadedDate": 1653627293741
+    }
+  ],
+  "exportCollectionAdvance": {
+    "customer": {},
+    "creationDate": 1653927293741,
+    "exportCollection": {
+      "customer": {},
+      "creationDate": 1653927293741,
+      "nominalAccount": {}
+    }
+  },
+  "customer": {}
+}

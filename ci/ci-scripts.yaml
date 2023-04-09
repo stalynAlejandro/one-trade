@@ -1,0 +1,187 @@
+# Use the 'include' and '!reference' directives to reuse these script fragments along the CI system.
+#
+# https://docs.gitlab.com/ee/ci/yaml/index.html#include
+# https://docs.gitlab.com/ee/ci/yaml/yaml_optimization.html#reference-tags
+
+.scripts:
+
+  npm:
+    prepare:
+      - cp ${REPO_NPMRC_MMC} ./pagonxt-onetradefinance-frontend-customizations/src/main/frontend/.npmrc
+
+  helm:
+    repo_update:
+      - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL repo update
+
+  app:
+    build:
+      - mvn $MAVEN_CLI_OPTS -s ${REPO_MVN_SETTINGS_MMC} -Dmaven.test.skip=true clean install
+    prepare_test:
+      - export TZ="Europe/Madrid"
+    test:
+      - mvn $MAVEN_CLI_OPTS -s ${REPO_MVN_SETTINGS_MMC} -Ptest clean test
+    dockerize:
+      - mvn $MAVEN_CLI_OPTS -s $REPO_MVN_SETTINGS_MMC -P jib $JIB_AUTH -Dmaven.test.skip=true clean package
+
+  flowable:
+    undeploy:
+      - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall $OTF_HELM_NAME || true
+    delete_secrets:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_NAME-flowable-regcred || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_NAME-flowable-license || true
+    delete_ingress_secret:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_NAME-pagonxt-onetradefinance-gallant-maxwell-projects.flowable.io || true
+    delete_pvcs:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc $OTF_HELM_NAME-elasticsearch-$OTF_HELM_NAME-elasticsearch-0 || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc $OTF_HELM_NAME-postgres-$OTF_HELM_NAME-postgres-0 || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc $OTF_HELM_NAME-work-content-storage-nfs || true
+    create_secrets:
+      - ARTIFACTS_AUTH=`echo -n "${REPO_MVN_USER_FLW_ALLREAD}:${REPO_MVN_PASS_FLW_ALLREAD}" | base64`
+      - CODE_REGISTRY_AUTH=`echo -n "${CI_REGISTRY_USER}:${OTF_REGISTRY_TOKEN}" | base64`
+      - |
+        cat > "docker_credentials.json" << EOM
+        {
+          "auths": {
+            "artifacts.flowable.com": {
+              "auth": "${ARTIFACTS_AUTH}"
+            },
+            "code-registry.flowable.com": {
+              "auth": "${CODE_REGISTRY_AUTH}"
+            }
+          }
+        }
+        EOM
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE create secret generic $OTF_HELM_NAME-flowable-regcred --from-file=.dockerconfigjson=docker_credentials.json --type=kubernetes.io/dockerconfigjson
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE create secret generic $OTF_HELM_NAME-flowable-license --from-file=flowable.license=license/flowable_dev.license
+    add_helm_repo:
+      - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL repo add flowable-helm $REPO_HELM_URL_ALL --username $REPO_HELM_USER_MMC --password $REPO_HELM_PASS_MMC
+    deploy:
+      - helm --version $OTF_FLOWABLE_HELM_VERSION --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE install --values helm/flowable/values.yml --set work.springProfiles=saml $OTF_HELM_NAME flowable-helm/flowable
+
+  external_app:
+    undeploy:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-external-app || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete service onetrade-external-app || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete deployment onetrade-external-app || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete configmap onetrade-external-app-configmap || true
+    delete_ingress_secret:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret external-app-onetrade-auth-pagonxt-onetradefinance-gallant-maxwell-projects.flowable.io || true
+    deploy:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/external-app/external-app.yml
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/external-app/ingress.yml
+
+  pg_admin:
+    undeploy:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-tests-pga-pgadmin4 || true
+      - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall onetrade-tests-pga || true
+    delete_secrets:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret pgadmin4-password || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret pgadmin4-pgpassfile || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret pgadmin4-servers || true
+    delete_ingress_secret:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret pgadmin4-tests-onetrade-pagonxt-onetradefinance-gallant-maxwell-projects.flowable.io || true
+    delete_pvcs:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc onetrade-tests-pga-pgadmin4 || true
+    create_secrets:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/pgadmin/password-secret.yml
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/pgadmin/pgpass-secret.yml
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/pgadmin/servers-secret.yml
+    add_helm_repo:
+      - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL repo add runix https://helm.runix.net
+    deploy:
+      - helm --version $OTF_PGADMIN4_HELM_VERSION --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE install --values helm/pgadmin/values.yml onetrade-tests-pga runix/pgadmin4
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/pgadmin/ingress.yml
+
+  flowable_test:
+    undeploy:
+      - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall $OTF_HELM_TEST_NAME || true
+    delete_secrets:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_TEST_NAME-flowable-regcred || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_TEST_NAME-flowable-license || true
+    delete_ingress_secret:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_TEST_NAME-pagonxt-onetradefinance-gallant-maxwell-projects.flowable.io || true
+    delete_pvcs:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc $OTF_HELM_TEST_NAME-elasticsearch-$OTF_HELM_TEST_NAME-elasticsearch-0 || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc $OTF_HELM_TEST_NAME-postgres-$OTF_HELM_TEST_NAME-postgres-0 || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc $OTF_HELM_TEST_NAME-work-content-storage-nfs || true
+    create_secrets:
+      - ARTIFACTS_AUTH_TEST=`echo -n "${REPO_MVN_USER_FLW_ALLREAD}:${REPO_MVN_PASS_FLW_ALLREAD}" | base64`
+      - CODE_REGISTRY_AUTH_TEST=`echo -n "${CI_REGISTRY_USER}:${OTF_REGISTRY_TOKEN}" | base64`
+      - |
+        cat > "docker_credentials_tests.json" << EOM
+        {
+          "auths": {
+            "artifacts.flowable.com": {
+              "auth": "${ARTIFACTS_AUTH_TEST}"
+            },
+            "code-registry.flowable.com": {
+              "auth": "${CODE_REGISTRY_AUTH_TEST}"
+            }
+          }
+        }
+        EOM
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE create secret generic $OTF_HELM_TEST_NAME-flowable-regcred --from-file=.dockerconfigjson=docker_credentials_tests.json --type=kubernetes.io/dockerconfigjson
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE create secret generic $OTF_HELM_TEST_NAME-flowable-license --from-file=flowable.license=license/flowable_dev.license
+    add_helm_repo:
+      - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL repo add flowable-helm $REPO_HELM_URL_ALL --username $REPO_HELM_USER_MMC --password $REPO_HELM_PASS_MMC
+    deploy:
+      - helm --version $OTF_FLOWABLE_HELM_VERSION --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE install --values helm/flowable/values.yml --set work.springProfiles=saml $OTF_HELM_TEST_NAME flowable-helm/flowable
+
+  external_app_test:
+    undeploy:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-tests-external-app || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete service onetrade-external-app-tests || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete deployment onetrade-external-app-tests || true
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete configmap onetrade-external-app-configmap-tests || true
+    delete_ingress_secret:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret external-app-onetrade-tests-pagonxt-onetradefinance-gallant-maxwell-projects.flowable.io || true
+    deploy:
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/external-app/external-app-test.yml
+      - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE apply -f helm/external-app/ingress-test.yml
+
+  app-models:
+    prepare-backup:
+      # Install curl:
+      - apk --no-cache add curl
+    backup:
+      # Configure git:
+      - git config --global user.email "${GITLAB_USER_EMAIL}"
+      - git config --global user.name "${GITLAB_USER_NAME}"
+      # Prepare target project folder:
+      - echo "Backups project url='${BACKUPS_PROJECT_URL}'"
+      - git clone "${BACKUPS_PROJECT_URL}" "${TEMPORAL_FOLDER}_backups"
+      # Download project source code:
+      - echo "Project url='${PROJECT_URL}'"
+      - git clone "${PROJECT_URL}" "${TEMPORAL_FOLDER}"
+      # Run download scripts:
+      - cd "${TEMPORAL_FOLDER}"
+      - cd resources/design/dev
+      - chmod +x *.sh
+      - sh pagonxt-dashboard-app.sh
+      - sh pgn-cle-app.sh
+      - sh pgn-common-app.sh
+      - sh users-management-app.sh
+      - sh miniTrade-app.sh
+      - cd ../../../..
+      # Copy files to backups folder
+      - ls -lah
+      - cd "${TEMPORAL_FOLDER}_backups"
+      - mkdir -p work
+      - cp -f ../${TEMPORAL_FOLDER}/pagonxt-onetradefinance-work/src/main/resources/com/flowable/app/custom/* ./work/
+      - mkdir -p design
+      - cp -f ../${TEMPORAL_FOLDER}/resources/design/zip/* ./design/
+      # Add downloaded files to git:
+      - |
+        if [ $OTF_FORCE_BACKUP = "yes" ]; then
+        echo "Forcing backup of downloaded files..."
+        touch work/*.zip
+        touch design/*.zip
+        fi
+      - git add work/*.zip
+      - git add design/*.zip
+      - git status
+      # Commit changes:
+      - export OTF_CURRENT_TIMESTAMP=$(date)
+      - git commit -m "${COMMIT_TEXT} - ${OTF_CURRENT_TIMESTAMP}" || echo "No changes to commit"
+      - git status
+      - git push

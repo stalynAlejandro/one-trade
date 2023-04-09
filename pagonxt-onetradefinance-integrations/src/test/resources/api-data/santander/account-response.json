@@ -1,0 +1,107 @@
+{
+  "displayNumber": "ES6000491500051234567892",
+  "accountId": "00491500051234567892",
+  "accountIdType": "BBA",
+  "alias": "My chequing account",
+  "mainItem": false,
+  "type": "Current Account",
+  "description": "Cuenta 123 joven",
+  "status": "Open",
+  "customerId": "BUC-1234567",
+  "lastTransactionDate": "20190314T014319060+0100",
+  "relatedCards": [
+    {
+      "displayNumber": "5498-9882-8676-9373",
+      "cardLink": "/cards/5498988286769373"
+    },
+    {
+      "displayNumber": "5498-9882-8676-9373",
+      "cardLink": "/cards/5498988286769373"
+    }
+  ],
+  "bankInformation": {
+    "localBankId": "0030",
+    "country": {
+      "code": "ES",
+      "name": "SPAIN"
+    }
+  },
+  "marketPackages": [
+    {
+      "packageType": "fee_plan",
+      "packageId": "SPLS"
+    },
+    {
+      "packageType": "fee_plan",
+      "packageId": "SPLS"
+    }
+  ],
+  "costCenter": "00490001",
+  "mainBalance": {
+    "amount": 12000.5,
+    "currencyCode": "EUR",
+    "lastUpdate": "20190314T014319060+0100"
+  },
+  "availableBalance": {
+    "amount": 12000.5,
+    "currencyCode": "EUR",
+    "lastUpdate": "20190314T014319060+0100"
+  },
+  "pendingBalance": {
+    "amount": 100,
+    "currencyCode": "EUR",
+    "lastUpdate": "20190314T014319060+0100"
+  },
+  "withholdingBalance": {
+    "amount": 100,
+    "currencyCode": "EUR",
+    "lastUpdate": "20190314T014319060+0100"
+  },
+  "overdraftLimit": {
+    "amount": 150,
+    "currencyCode": "EUR",
+    "lastUpdate": "20190314T014319060+0100"
+  },
+  "overdraftUsed": {
+    "amount": 120,
+    "currencyCode": "EUR",
+    "lastUpdate": "20190314T014319060+0100"
+  },
+  "availableWithoutAuthorized": {
+    "amount": 120,
+    "currencyCode": "EUR",
+    "lastUpdate": "20190314T014319060+0100"
+  },
+  "latestTransactions": [
+    {
+      "transactionId": "3840",
+      "creationDate": "20190314T014319060+0100",
+      "processedDate": "20190314T014319060+0100",
+      "accountingDate": "20190314T014319060+0100",
+      "description": "Cuenta 123 joven",
+      "transactionType": "debit",
+      "transactionCategory": "Withdraw money",
+      "amount": {
+        "amount": 123.45,
+        "currencyCode": "EUR",
+        "lastUpdate": "20190314T014319060+0100"
+      },
+      "transactionDetailsLink": "/v2/accounts/00491500051234567892/transactions/3840"
+    },
+    {
+      "transactionId": "3840",
+      "creationDate": "20190314T014319060+0100",
+      "processedDate": "20190314T014319060+0100",
+      "accountingDate": "20190314T014319060+0100",
+      "description": "Cuenta 123 joven",
+      "transactionType": "debit",
+      "transactionCategory": "Withdraw money",
+      "amount": {
+          "amount": 123.45,
+          "currencyCode": "EUR"
+      },
+      "transactionDetailsLink": "/v2/accounts/00491500051234567892/transactions/3840"
+    }
+  ],
+  "transactionsListLink": "/v2/accounts/00491500051234567892/transactions"
+}

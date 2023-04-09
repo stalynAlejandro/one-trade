@@ -1,0 +1,37 @@
+
+engage:
+  enabled: false
+
+work:
+  enabled: true
+  storage:
+    storageClass: "slow"
+    size: 512M
+  image:
+    repository: code-registry.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance/work
+  javaOpts: "-Duser.timezone=\\\"Europe/Madrid\\\""
+
+design:
+  image:
+    repository: code-registry.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance/design
+  javaOpts: "-Duser.timezone=\\\"Europe/Madrid\\\""
+
+control:
+  image:
+    repository: code-registry.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance/control
+  javaOpts: "-Duser.timezone=\\\"Europe/Madrid\\\""
+
+elasticsearch:
+  storage:
+    storageClass: "slow"
+    size: 512M
+
+postgres:
+  enabled: true
+  storage:
+    storageClass: "slow"
+    size: 512M
+
+ingress:
+  ingressClass: openshift-default
+  domain: apps-crc.testing

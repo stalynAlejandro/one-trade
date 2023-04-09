@@ -1,0 +1,268 @@
+include:
+  - local: ci/ci-scripts.yaml
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  MAVEN_CLI_OPTS: -Dmaven.repo.local=.m2/repository --batch-mode
+  NPMRC_VALUE: ${REPO_NPMRC_MMC}
+
+# Builds the application
+build:
+  stage: build
+  image: maven:3-jdk-11
+  cache:
+    key: ${CI_PROJECT_PATH}-m2
+    paths:
+      - .m2/repository
+  except:
+    - schedules
+  before_script:
+    # - !reference [ .scripts, npm, prepare ]
+    - cp ${REPO_NPMRC_MMC} ./pagonxt-onetradefinance-frontend-customizations/src/main/frontend/.npmrc
+  script:
+    # - !reference [ .scripts, app, build ]
+    - mvn $MAVEN_CLI_OPTS -s ${REPO_MVN_SETTINGS_MMC} -Dmaven.test.skip=true clean install
+
+sonar-scan:
+  stage: build
+  image: maven:3-jdk-11
+  cache:
+    key: ${CI_PROJECT_PATH}-m2
+    paths:
+      - .m2/repository
+  except:
+    - schedules
+  variables:
+    GIT_DEPTH: 0
+  before_script:
+    # - !reference [ .scripts, npm, prepare ]
+    - cp ${REPO_NPMRC_MMC} ./pagonxt-onetradefinance-frontend-customizations/src/main/frontend/.npmrc
+    # - !reference [ .scripts, app, prepare_test ]
+    - export TZ="Europe/Madrid"
+  script:
+    - mvn $MAVEN_CLI_OPTS -s ${REPO_MVN_SETTINGS_MMC} clean verify sonar:sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=mmc-ibe_pagonxt-onetradefinance_pagonxt
+  allow_failure: true
+  only:
+    - merge_requests
+    - master
+
+# Tests the application
+test:
+  stage: test
+  image: maven:3-jdk-11
+  cache:
+    key: ${CI_PROJECT_PATH}-m2
+    paths:
+      - .m2/repository
+  except:
+    - schedules
+  before_script:
+    # - !reference [ .scripts, npm, prepare ]
+    - cp ${REPO_NPMRC_MMC} ./pagonxt-onetradefinance-frontend-customizations/src/main/frontend/.npmrc
+    # - !reference [ .scripts, app, prepare_test ]
+    - export TZ="Europe/Madrid"
+  script:
+    # - !reference [ .scripts, app, test ]
+    - mvn $MAVEN_CLI_OPTS -s ${REPO_MVN_SETTINGS_MMC} -Ptest clean test
+
+# Manually deploys the dev environment
+deploy-k8s-dev:
+  stage: deploy
+  when: manual
+  except:
+    - schedules
+  trigger:
+    include: ci/.gitlab-ci-deploy_dev.yml
+    strategy: depend
+
+# Manually deploys the test environment
+deploy-k8s-test:
+  stage: deploy
+  when: manual
+  except:
+    - schedules
+  trigger:
+    include: ci/.gitlab-ci-deploy_test.yml
+    strategy: depend
+
+# Manually undeploys the dev environment
+undeploy-k8s-dev:
+  image: dtzar/helm-kubectl:3.5.4
+  stage: deploy
+  when: manual
+  except:
+    - schedules
+  script:
+    # - !reference [ .scripts, external_app, undeploy ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete service onetrade-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete deployment onetrade-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete configmap onetrade-external-app-configmap || true
+    # - !reference [ .scripts, flowable, undeploy ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall $OTF_HELM_NAME || true
+
+# Manually undeploys the test environment
+undeploy-k8s-test:
+  image: dtzar/helm-kubectl:3.5.4
+  stage: deploy
+  when: manual
+  except:
+    - schedules
+  script:
+    # - !reference [ .scripts, external_app_test, undeploy ]
+    - kubectl  --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-tests-external-app || true
+    - kubectl  --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete service onetrade-external-app-tests || true
+    - kubectl  --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete deployment onetrade-external-app-tests || true
+    - kubectl  --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete configmap onetrade-external-app-configmap-tests || true
+    # - !reference [ .scripts, pg_admin, undeploy ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-tests-pga-pgadmin4 || true
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall onetrade-tests-pga || true
+    # - !reference [ .scripts, flowable_test, undeploy ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall $OTF_HELM_TEST_NAME || true
+
+# Scheduled deploy of the dev environment
+scheduled-deploy-k8s-dev:
+  stage: deploy
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULED_ACTION == "startup"'
+  trigger:
+    include: ci/.gitlab-ci-deploy_dev.yml
+    strategy: depend
+
+# Scheduled deploy of the test environment
+scheduled-deploy-k8s-test:
+  stage: deploy
+  # To re-enable this job, remove the 'when: manual' and uncomment the 'rules'
+  when: manual
+  #  rules:
+  #    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULED_ACTION == "startup"'
+  trigger:
+    include: ci/.gitlab-ci-deploy_test.yml
+    strategy: depend
+    forward:
+      pipeline_variables: true
+
+# Scheduled undeploy of the dev environment
+scheduled-undeploy-k8s-dev:
+  image: dtzar/helm-kubectl:3.5.4
+  stage: deploy
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULED_ACTION == "shutdown"'
+  script:
+    # - !reference [ .scripts, external_app, undeploy ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete service onetrade-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete deployment onetrade-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete configmap onetrade-external-app-configmap || true
+    # - !reference [ .scripts, flowable, undeploy ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall $OTF_HELM_NAME || true
+
+# Scheduled undeploy of the test environment
+scheduled-undeploy-k8s-test:
+  image: dtzar/helm-kubectl:3.5.4
+  stage: deploy
+  # To re-enable this job, remove the 'when: manual' and uncomment the 'rules'
+  when: manual
+  #  rules:
+  #    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULED_ACTION == "shutdown"'
+  script:
+    # - !reference [ .scripts, external_app_test, undeploy ]
+    - kubectl  --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-tests-external-app || true
+    - kubectl  --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete service onetrade-external-app-tests || true
+    - kubectl  --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete deployment onetrade-external-app-tests || true
+    - kubectl  --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete configmap onetrade-external-app-configmap-tests || true
+    # - !reference [ .scripts, flowable_test, undeploy ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall $OTF_HELM_TEST_NAME || true
+    # - !reference [ .scripts, pg_admin, undeploy ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-tests-pga-pgadmin4 || true
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall onetrade-tests-pga || true
+
+# Scheduled backup of the dev environment application models
+scheduled-application-backup-k8s-dev:
+  stage: deploy
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULED_ACTION == "application-backup"'
+  image: alpine/git:${GIT_VERSION}
+  variables:
+    GIT_VERSION: v2.34.2
+    AUTH_STRING: "${CI_REGISTRY_USER}:${OTF_REPOSITORY_TOKEN}"
+    PROJECT_URL: "https://${AUTH_STRING}@code.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance.git"
+    BACKUPS_AUTH_STRING: "${CI_REGISTRY_USER}:${OTF_BACKUPS_REPOSITORY_TOKEN}"
+    BACKUPS_PROJECT_URL: "https://${BACKUPS_AUTH_STRING}@code.flowable.com/mmc-ibe/pagonxt-onetradefinance/one-trade-finance-backups.git"
+    COMMIT_TEXT: "Automatic scheduled backup"
+    TEMPORAL_FOLDER: "pgn_downloaded_project_source"
+  before_script:
+    - !reference [ .scripts, app-models, prepare-backup ]
+  script:
+    - !reference [ .scripts, app-models, backup ]
+
+# Manual destruction of the dev environment
+Ι☠Ι-clean-k8s-dev:
+  image: dtzar/helm-kubectl:3.5.4
+  stage: deploy
+  when: manual
+  only:
+    - master
+    - tags
+    - branches
+  script:
+    # - !reference [ .scripts, external_app, undeploy ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete service onetrade-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete deployment onetrade-external-app || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete configmap onetrade-external-app-configmap || true
+    # - !reference [ .scripts, external_app, delete_ingress_secret ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret external-app-onetrade-auth-pagonxt-onetradefinance-gallant-maxwell-projects.flowable.io || true
+    # - !reference [ .scripts, flowable, undeploy ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall $OTF_HELM_NAME || true
+    # - !reference [ .scripts, flowable, delete_pvcs ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc $OTF_HELM_NAME-elasticsearch-$OTF_HELM_NAME-elasticsearch-0 || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc $OTF_HELM_NAME-postgres-$OTF_HELM_NAME-postgres-0 || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc $OTF_HELM_NAME-work-content-storage-nfs || true
+    # - !reference [ .scripts, flowable, delete_secrets ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_NAME-flowable-regcred || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_NAME-flowable-license || true
+    # - !reference [ .scripts, flowable, delete_ingress_secret ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_NAME-pagonxt-onetradefinance-gallant-maxwell-projects.flowable.io || true
+
+# Manual destruction of the test environment
+Ι☠Ι-clean-k8s-test:
+  image: dtzar/helm-kubectl:3.5.4
+  stage: deploy
+  when: manual
+  only:
+    - master
+    - tags
+    - branches
+  script:
+    # - !reference [ .scripts, external_app_test, undeploy ]
+    - kubectl  --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-tests-external-app || true
+    - kubectl  --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete service onetrade-external-app-tests || true
+    - kubectl  --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete deployment onetrade-external-app-tests || true
+    - kubectl  --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete configmap onetrade-external-app-configmap-tests || true
+    # - !reference [ .scripts, external_app_test, delete_ingress_secret ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret external-app-onetrade-tests-pagonxt-onetradefinance-gallant-maxwell-projects.flowable.io || true
+    # - !reference [ .scripts, flowable_test, undeploy ]
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall $OTF_HELM_TEST_NAME || true
+    # - !reference [ .scripts, flowable_test, delete_pvcs ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc $OTF_HELM_TEST_NAME-elasticsearch-$OTF_HELM_TEST_NAME-elasticsearch-0 || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc $OTF_HELM_TEST_NAME-postgres-$OTF_HELM_TEST_NAME-postgres-0 || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc $OTF_HELM_TEST_NAME-work-content-storage-nfs || true
+    # - !reference [ .scripts, flowable_test, delete_secrets ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_TEST_NAME-flowable-regcred || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_TEST_NAME-flowable-license || true
+    # - !reference [ .scripts, flowable_test, delete_ingress_secret ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret $OTF_HELM_TEST_NAME-pagonxt-onetradefinance-gallant-maxwell-projects.flowable.io || true
+    # - !reference [ .scripts, pg_admin, undeploy ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete ingress onetrade-tests-pga-pgadmin4 || true
+    - helm --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE uninstall onetrade-tests-pga || true
+    # - !reference [ .scripts, pg_admin, delete_pvcs ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete pvc onetrade-tests-pga-pgadmin4 || true
+    # - !reference [ .scripts, pg_admin, delete_secrets ]
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret pgadmin4-password || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret pgadmin4-pgpassfile || true
+    - kubectl --kubeconfig $KUBECONF_K8S_PROJECTS_PAGONXT_ONETRADEFINANCE_GALLANT_MAXWELL -n $OTF_K8S_NAMESPACE delete secret pgadmin4-servers || true

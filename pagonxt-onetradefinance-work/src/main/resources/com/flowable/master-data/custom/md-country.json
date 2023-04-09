@@ -1,0 +1,95 @@
+{
+  "dataObjectDefinitionKey": "md-country",
+  "masterData": [
+    {
+      "name": "Spain",
+      "alpha2Code": "ES",
+      "alpha3Code": "ESP",
+      "translations": {
+        "es_es": {
+          "name": "España"
+        }
+      }
+    },
+    {
+      "name": "Chile",
+      "alpha2Code": "CL",
+      "alpha3Code": "CHL",
+      "translations": {
+        "es_es": {
+          "name": "Chile"
+        }
+      }
+    },
+    {
+      "name": "Mexico",
+      "alpha2Code": "MX",
+      "alpha3Code": "MEX",
+      "translations": {
+        "es_es": {
+          "name": "México"
+        }
+      }
+    },
+    {
+      "name": "Colombia",
+      "alpha2Code": "CO",
+      "alpha3Code": "COL",
+      "translations": {
+        "es_es": {
+          "name": "Colombia"
+        }
+      }
+    },
+    {
+      "name": "United Kingdom",
+      "alpha2Code": "GB",
+      "alpha3Code": "GBR",
+      "translations": {
+        "es_es": {
+          "name": "Reino Unido"
+        }
+      }
+    },
+    {
+      "name": "Germany",
+      "alpha2Code": "DE",
+      "alpha3Code": "DEU",
+      "translations": {
+        "es_es": {
+          "name": "Alemania"
+        }
+      }
+    },
+    {
+      "name": "Poland",
+      "alpha2Code": "PL",
+      "alpha3Code": "POL",
+      "translations": {
+        "es_es": {
+          "name": "Polonia"
+        }
+      }
+    },
+    {
+      "name": "Argentina",
+      "alpha2Code": "AR",
+      "alpha3Code": "ARG",
+      "translations": {
+        "es_es": {
+          "name": "Argentina"
+        }
+      }
+    },
+    {
+      "name": "Portugal",
+      "alpha2Code": "PT",
+      "alpha3Code": "PRT",
+      "translations": {
+        "es_es": {
+          "name": "Portugal"
+        }
+      }
+    }
+  ]
+}

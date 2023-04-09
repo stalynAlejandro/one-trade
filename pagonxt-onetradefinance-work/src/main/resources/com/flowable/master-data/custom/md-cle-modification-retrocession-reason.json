@@ -1,0 +1,45 @@
+{
+  "dataObjectDefinitionKey": "md-cle-modification-retrocession-reason",
+  "masterData": [    
+    {
+      "retrocessionReason": "Amount/currency",
+      "retrocessionReasonId": "amountCurrency",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Importe/divisa"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Payment method/Date",
+      "retrocessionReasonId": "paymentMethodDate",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Forma de pago/Fecha"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Fees/expenses",
+      "retrocessionReasonId": "feesExpenses",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Comisiones/gastos"
+        }
+      }
+    },    
+    {
+      "retrocessionReason": "Others",
+      "retrocessionReasonId": "others",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Otros"
+        }
+      }
+    }
+  ]
+}

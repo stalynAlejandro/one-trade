@@ -1,0 +1,47 @@
+{
+  "key": "tasks-active-assigned-query",
+  "name": "Tasks active assigned query",
+  "sourceIndex": "tasks",
+  "type": "query",
+  "version": 1,
+  "parameters": {
+    "groups": "stringList"
+  },
+  "sortParameters": {
+  },
+  "customFilter": {
+    "bool": {
+      "must": [
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "terms": {
+                      "variables.textValueKeyword": [
+                        "{groups}"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "bool": {
+            "must_not": [
+              {
+                "exists": {
+                  "field": "endTime"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

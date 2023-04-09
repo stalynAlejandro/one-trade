@@ -1,0 +1,26 @@
+{
+  "requester": {
+    "user": {}
+  },
+  "documents": [
+    {
+      "uploadedDate": 1653627293741
+    }
+  ],
+  "exportCollection": {
+    "customer": {},
+    "creationDate": 1653927293741,
+    "nominalAccount": {}
+  },
+  "exchangeInsurances": [
+    {
+      "useDate": 1659304800000
+    }
+  ],
+  "exchangeInsuranceUseDate" : 1659804800000,
+  "expiration": 1659650400000,
+  "riskLine": {
+    "expires": 1591394400000
+  },
+  "customer": {}
+}

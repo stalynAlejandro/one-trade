@@ -1,0 +1,14 @@
+{
+  "rowId": "4d4d8ed7-4369-4b95-aaef-8a0fc22e92e2",
+  "taskId": "TSK-46e4ff3c-23a2-11ed-8c9e-f257a6c05b8e",
+  "operationId": "requestCodeValue",
+  "mercuryRef": "contractReferenceValue",
+  "issuanceDate": "2022-07-19T09:19:29.399Z",
+  "product": "productValue",
+  "event": "eventValue",
+  "client": "Coca Cola S.L.",
+  "task": "REVIEW",
+  "priority": "requestPriorityValue",
+  "status": "displayedStatusValue",
+  "requesterName": "backoffice"
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd" logicalFilePath="CLE_DOS006">
+    <property name="datetime.type" value="datetime2" dbms="mssql"/>
+    <property name="datetime.type" value="datetime"/>
+    <property name="varchar.type" value="nvarchar" dbms="mssql"/>
+    <property name="varchar.type" value="varchar"/>
+    <property name="serviceDefinitionReferences" value="CLE_S006"/>
+
+    <changeSet author="flowable" id="1">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="PGN_CLE_ADVANCE_MODIFICATION_PGN_CLE_ADVANCE"/>
+        </preConditions>
+        <dropTable tableName="PGN_CLE_ADVANCE_MODIFICATION_PGN_CLE_ADVANCE"/>
+    </changeSet>
+    <changeSet author="flowable" id="2">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="PGN_CLE_ADVANCE_MODIFICATION"/>
+        </preConditions>
+        <dropTable tableName="PGN_CLE_ADVANCE_MODIFICATION"/>
+    </changeSet>
+    <changeSet id="3" author="flowable">
+        <createTable tableName="PGN_CLE_ADVANCE_MODIFICATION">
+            <column name="CODE" type="${varchar.type}(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATION_DATE" type="${datetime.type}(6)"/>
+            <column name="DISPLAYED_STATUS" type="${varchar.type}(255)"/>
+            <column name="PRIORITY" type="${varchar.type}(255)"/>
+            <column name="COUNTRY" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_FULL_NAME" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_ID" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_CODE" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_SEGMENT" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_EMAIL" type="${varchar.type}(255)"/>
+            <column name="REQUESTER_TYPE" type="${varchar.type}(255)"/>
+            <column name="REQUESTER_DISPLAYED_NAME" type="${varchar.type}(255)"/>
+            <column name="REQUESTER_ID" type="${varchar.type}(255)"/>
+            <column name="OFFICE" type="${varchar.type}(255)"/>
+            <column name="MIDDLE_OFFICE" type="${varchar.type}(255)"/>
+            <column name="COMMENT" type="${varchar.type}(500)"/>
+            <column name="ADVANCE_RISK_LINE_ID" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_RISK_LINE_IBAN" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_RISK_LINE_CURRENCY" type="${varchar.type}(255)"/>
+            <column name="ADVANCE_RISK_LINE_AVAILABLE_AMOUNT" type="double"/>
+            <column name="ADVANCE_RISK_LINE_EXPIRATION_DATE" type="date"/>
+            <column name="RESOLUTION" type="${varchar.type}(255)"/>
+            <column name="RESOLUTION_REASON" type="${varchar.type}(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="flowable">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="PGN_CLE_ADVANCE_MODIFICATION_PGN_CLE_ADVANCE"></tableExists>
+            </not>
+        </preConditions>
+        <createTable tableName="PGN_CLE_ADVANCE_MODIFICATION_PGN_CLE_ADVANCE">
+            <column name="CLE_ADVANCE_MODIFICATION_CODE" type="${varchar.type}(255)"/>
+            <column name="CLE_ADVANCE_CODE" type="${varchar.type}(255)"/>
+        </createTable>
+        <createIndex tableName="PGN_CLE_ADVANCE_MODIFICATION_PGN_CLE_ADVANCE" indexName="FLW_IDX_PGN_CLE_ADVANCE_MODIFICATION_PGN_CLE_ADVANCE1">
+            <column name="CLE_ADVANCE_MODIFICATION_CODE"></column>
+        </createIndex>
+        <createIndex tableName="PGN_CLE_ADVANCE_MODIFICATION_PGN_CLE_ADVANCE" indexName="FLW_IDX_PGN_CLE_ADVANCE_MODIFICATION_PGN_CLE_ADVANCE2">
+            <column name="CLE_ADVANCE_CODE"></column>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,23 @@
+{
+  "dataObjectDefinitionKey": "md-priority",
+  "masterData": [
+    {
+      "priorityId": "normal",
+      "priority": "Normal",
+      "translations": {
+        "es_es": {
+          "priority": "Normal"
+        }
+      }
+    },
+    {
+      "priorityId": "urgent",
+      "priority": "Urgent",
+      "translations": {
+        "es_es": {
+          "priority": "Urgente"
+        }
+      }
+    }
+  ]
+}

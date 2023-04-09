@@ -1,0 +1,26 @@
+{
+  "dataObjectDefinitionKey": "md-cle-other-operations-queries-retrocession-reason",
+  "overwrite": true,
+  "masterData": [
+    {
+      "retrocessionReason": "Misrecorded data",
+      "retrocessionReasonId": "misrecordedData",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Datos mal grabados"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Lack of payment of expenses",
+      "retrocessionReasonId": "lackOfPaymentOfExpenses",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Falta pago de gastos"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "from": 0,
+  "size": 5,
+  "sort" : [
+      { "field-mapping" : "asc" }
+  ]
+,
+  "query": {}
+}

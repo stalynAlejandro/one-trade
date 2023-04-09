@@ -1,0 +1,26 @@
+[
+  {
+    "documentId": "001",
+    "filename": "Un documento.pdf",
+    "mimeType": "application/pdf",
+	"data": "File contents pdf"
+  },
+  {
+    "documentId": "002",
+    "filename": "miercoles.jpg",
+    "mimeType": "image/jpeg",
+    "data": "File contents jpg"
+  },
+  {
+    "documentId": "003",
+    "filename": "css.gif",
+    "mimeType": "image/gif",
+    "data": "File contents gif"
+  },
+  {
+    "documentId": "004",
+    "filename": "web design.jpg",
+    "mimeType": "image/jpeg",
+	"data": "File contents jpg"
+  }
+]

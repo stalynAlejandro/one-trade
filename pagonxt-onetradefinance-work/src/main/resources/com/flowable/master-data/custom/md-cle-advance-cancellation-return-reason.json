@@ -1,0 +1,86 @@
+{
+  "dataObjectDefinitionKey": "md-cle-advance-cancellation-return-reason",
+  "overwrite": true,
+  "masterData": [
+    {
+      "returnReason": "Missing documentation",
+      "returnReasonId": "missingDocumentation",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "returnReason": "Documentación en falta"
+        }
+      }
+    },
+    {
+      "returnReason": "Wrong documentation",
+      "returnReasonId": "wrongDocumentation",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "returnReason": "Documentación errónea"
+        }
+      }
+    },
+    {
+      "returnReason": "Unreadable documentation",
+      "returnReasonId": "unreadableDocumentation",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "returnReason": "Documentación ilegible"
+        }
+      }
+    },
+    {
+      "returnReason": "Account with warnings",
+      "returnReasonId": "accountWithWarnings",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "returnReason": "Cuenta con avisos"
+        }
+      }
+    },
+    {
+      "returnReason": "Account has no balance",
+      "returnReasonId": "accountHasNoBalance",
+      "sortOrder": 5,
+      "translations": {
+        "es_es": {
+          "returnReason": "Cuenta sin saldo"
+        }
+      }
+    },
+    {
+      "returnReason": "Account wrong",
+      "returnReasonId": "accountWrong",
+      "sortOrder": 6,
+      "translations": {
+        "es_es": {
+          "returnReason": "Cuenta errónea"
+        }
+      }
+    },
+    {
+      "returnReason": "Insurance Exchange",
+      "returnReasonId": "insuranceExchange",
+      "sortOrder": 7,
+      "translations": {
+        "es_es": {
+          "returnReason": "Seguro de cambio"
+        }
+      }
+    },
+    {
+      "returnReason": "Others",
+      "returnReasonId": "others",
+      "sortOrder": 99,
+      "translations": {
+        "es_es": {
+          "returnReason": "Otros"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "key": "cmmn-manual-activated-planitem",
+  "name": "Start plan item",
+  "botKey": "cmmn-manual-activated-planitem-bot",
+  "description": "",
+  "ignoreConfirmationMessage": true,
+  "icon": "play",
+  "scopeType": "cmmn",
+  "mappedStates": [],
+  "mappedSubTypes": [],
+  "channels": [
+    "menu",
+    "quick-actions"
+  ]
+}

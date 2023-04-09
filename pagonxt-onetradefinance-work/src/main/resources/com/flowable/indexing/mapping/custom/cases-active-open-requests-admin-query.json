@@ -1,0 +1,45 @@
+{
+  "key": "cases-active-open-requests-admin-query",
+  "name": "Active open requests for admin users",
+  "sourceIndex": "case-instances",
+  "type": "query",
+  "version": 1,
+  "parameters": {
+    "operationCode": "string"
+  },
+  "sortParameters": {
+  },
+  "customFilter": {
+    "bool": {
+      "must": [
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "wildcard": {
+                      "variables.textValueKeyword": "*{operationCode}*"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "bool": {
+            "must_not": [
+              {
+                "exists": {
+                  "field": "endTime"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

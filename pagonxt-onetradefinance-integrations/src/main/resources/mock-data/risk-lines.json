@@ -1,0 +1,63 @@
+[
+  {
+    "riskLineId": "001",
+    "client": "BUC-1234567",
+    "iban": "0049 3295 2020 15792",
+    "status": "approved",
+    "limitAmount": "1020",
+    "availableAmount": "1020",
+    "expires": "26/06/2020",
+    "currency": "EUR"
+  },
+  {
+    "riskLineId": "002",
+    "client": "BUC-1234567",
+    "iban": "0049 3295 2020 28222",
+    "status": "waiting",
+    "limitAmount": "2120",
+    "availableAmount": "1980",
+    "expires": "22/02/2020",
+    "currency": "EUR"
+  },
+  {
+    "riskLineId": "003",
+    "client": "BUC-1234568",
+    "iban": "0049 3295 2020 15793",
+    "status": "approved",
+    "limitAmount": "1020",
+    "availableAmount": "1020",
+    "expires": "26/06/2020",
+    "currency": "EUR"
+  },
+  {
+    "riskLineId": "004",
+    "client": "BUC-1234568",
+    "iban": "0049 3295 2020 28333",
+    "status": "waiting",
+    "limitAmount": "2120",
+    "availableAmount": "1980",
+    "expires": "22/02/2020",
+    "currency": "EUR"
+  },
+  {
+    "riskLineId": "005",
+    "client": "J101684201",
+    "iban": "0049 3295 2020 15793",
+    "status": "approved",
+    "limitAmount": "1020",
+    "availableAmount": "1020",
+    "expires": "26/06/2020",
+    "currency": "EUR"
+  },
+  {
+    "riskLineId": "006",
+    "client": "J101684201",
+    "iban": "0049 3295 2020 28333",
+    "status": "waiting",
+    "limitAmount": "2120",
+    "availableAmount": "1980",
+    "expires": "22/02/2020",
+    "currency": "EUR"
+  }
+]
+

@@ -1,0 +1,69 @@
+{
+  "from": 0,
+  "size": 10,
+  "sort" : [
+    {
+      "variables.textValueKeyword" : {
+        "order" : "desc",
+        "nested": {
+          "path": "variables",
+          "filter": {
+            "term": {
+              "variables.name": "operationCode"
+            }
+          }
+        }
+      }
+    }
+  ]
+,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "bool": {
+            "must_not": [
+              {
+                "nested": {
+                  "path": "variables",
+                  "query": {
+                    "bool": {
+                      "must": [
+                        {
+                          "term": {
+                            "variables.name": "registrationCancelled"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "operationMiddleOffice"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.textValueKeyword": "MO1234"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

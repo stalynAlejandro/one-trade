@@ -1,0 +1,27 @@
+        {
+          "bool": {
+            "must_not": [
+              {
+                "nested": {
+                  "path": "variables",
+                  "query": {
+                    "bool": {
+                      "must": [
+                        {
+                          "term": {
+                            "variables.name": "null"
+                          }
+                        },
+                        {
+                          "term": {
+                            "variables.scopeHierarchyType": "root"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }

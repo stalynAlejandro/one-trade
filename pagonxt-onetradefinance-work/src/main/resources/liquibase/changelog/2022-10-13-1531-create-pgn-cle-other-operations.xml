@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd" logicalFilePath="CLE_DOS008">
+    <property name="datetime.type" value="datetime2" dbms="mssql"/>
+    <property name="datetime.type" value="datetime"/>
+    <property name="varchar.type" value="nvarchar" dbms="mssql"/>
+    <property name="varchar.type" value="varchar"/>
+    <property name="serviceDefinitionReferences" value="CLE_S008"/>
+
+    <changeSet author="flowable" id="1">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="PGN_CLE_OTHER_OPERATIONS_PGN_CLE"/>
+        </preConditions>
+        <dropTable tableName="PGN_CLE_OTHER_OPERATIONS_PGN_CLE"/>
+    </changeSet>
+    <changeSet author="flowable" id="2">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="PGN_CLE_OTHER_OPERATIONS"/>
+        </preConditions>
+        <dropTable tableName="PGN_CLE_OTHER_OPERATIONS"/>
+    </changeSet>
+    <changeSet id="3" author="flowable">
+        <createTable tableName="PGN_CLE_OTHER_OPERATIONS">
+            <column name="CODE" type="${varchar.type}(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="CREATION_DATE" type="${datetime.type}(6)"/>
+            <column name="DISPLAYED_STATUS" type="${varchar.type}(255)"/>
+            <column name="PRIORITY" type="${varchar.type}(255)"/>
+            <column name="COUNTRY" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_FULL_NAME" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_ID" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_CODE" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_SEGMENT" type="${varchar.type}(255)"/>
+            <column name="CUSTOMER_EMAIL" type="${varchar.type}(255)"/>
+            <column name="REQUESTER_TYPE" type="${varchar.type}(255)"/>
+            <column name="REQUESTER_DISPLAYED_NAME" type="${varchar.type}(255)"/>
+            <column name="REQUESTER_ID" type="${varchar.type}(255)"/>
+            <column name="OFFICE" type="${varchar.type}(255)"/>
+            <column name="MIDDLE_OFFICE" type="${varchar.type}(255)"/>
+            <column name="COMMENT" type="${varchar.type}(500)"/>
+            <column name="RESOLUTION" type="${varchar.type}(255)"/>
+            <column name="RESOLUTION_REASON" type="${varchar.type}(255)"/>
+            <column name="OPERATION_TYPE" type="${varchar.type}(255)"/>
+            <column name="RELIQUIDATION_TYPE" type="${varchar.type}(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="flowable">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="PGN_CLE_OTHER_OPERATIONS_PGN_CLE"></tableExists>
+            </not>
+        </preConditions>
+        <createTable tableName="PGN_CLE_OTHER_OPERATIONS_PGN_CLE">
+            <column name="CLE_OTHER_OPERATIONS_CODE" type="${varchar.type}(255)"/>
+            <column name="CLE_CODE" type="${varchar.type}(255)"/>
+        </createTable>
+        <createIndex tableName="PGN_CLE_OTHER_OPERATIONS_PGN_CLE" indexName="FLW_IDX_PGN_CLE_OTHER_OPERATIONS_PGN_CLE1">
+            <column name="CLE_OTHER_OPERATIONS_CODE"></column>
+        </createIndex>
+        <createIndex tableName="PGN_CLE_OTHER_OPERATIONS_PGN_CLE" indexName="FLW_IDX_PGN_CLE_OTHER_OPERATIONS_PGN_CLE2">
+            <column name="CLE_CODE"></column>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

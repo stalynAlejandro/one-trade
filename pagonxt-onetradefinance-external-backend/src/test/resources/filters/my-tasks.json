@@ -1,0 +1,133 @@
+{
+  "code": {
+    "type": "text"
+  },
+  "customerName": {
+    "type": "text"
+  },
+  "customerPersonNumber": {
+    "type": "text"
+  },
+  "customerTaxId": {
+    "type": "text"
+  },
+  "requesterName": {
+    "type": "text"
+  },
+  "ownerName": {
+    "type": "text"
+  },
+  "productId": {
+    "type": "select",
+    "options": [
+      {
+        "description": "Export Collection",
+        "code": "CLE"
+      },
+      {
+        "description": "Import Collection",
+        "code": "CLI"
+      }
+    ]
+  },
+  "eventId": {
+    "type": "select",
+    "options": [
+      {
+        "description": "Request",
+        "code": "REQUEST"
+      },
+      {
+        "description": "Modification",
+        "code": "MODIFICATION"
+      }
+    ]
+  },
+  "taskId": {
+    "type": "select",
+    "options": [
+      {
+        "description": "External Request Draft",
+        "code": "EXTERNAL_REQUEST_DRAFT"
+      },
+      {
+        "description": "Review",
+        "code": "REVIEW"
+      },
+      {
+        "description": "Referred Review",
+        "code": "REFERED_REVIEW"
+      },
+      {
+        "description": "Manage",
+        "code": "MANAGE"
+      },
+      {
+        "description": "Release",
+        "code": "RELEASE"
+      },
+      {
+        "description": "Referred Release",
+        "code": "REFERED_RELEASE"
+      },
+      {
+        "description": "Refine",
+        "code": "REFINE"
+      },
+      {
+        "description": "Sanction AML 1A",
+        "code": "SANCTION_AML_1A"
+      },
+      {
+        "description": "Sanction AML 1B",
+        "code": "SANCTION_AML_1B"
+      },
+      {
+        "description": "Sanction AML 2",
+        "code": "SANCTION_AML_2"
+      },
+      {
+        "description": "Review Cancellation",
+        "code": "REVIEW_CANCELATION"
+      }
+    ]
+  },
+  "priority": {
+    "type": "select",
+    "options": [
+      {
+        "description": "Normal",
+        "code": "normal"
+      },
+      {
+        "description": "Urgent",
+        "code": "urgent"
+      }
+    ]
+  },
+  "currency": {
+    "type": "select",
+    "options": [
+      {
+        "description": "currency_EUR",
+        "code": "EUR"
+      },
+      {
+        "description": "currency_GBP",
+        "code": "GBP"
+      }
+    ]
+  },
+  "fromDate": {
+    "type": "date"
+  },
+  "toDate": {
+    "type": "date"
+  },
+  "fromAmount": {
+    "type": "number"
+  },
+  "toAmount": {
+    "type": "number"
+  }
+}

@@ -1,0 +1,13 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: onetrade-control
+spec:
+  host: onetrade-control-default.apps-crc.testing
+  to:
+    kind: Service
+    name: onetrade-control
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None

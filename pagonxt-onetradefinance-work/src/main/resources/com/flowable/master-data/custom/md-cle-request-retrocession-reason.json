@@ -1,0 +1,85 @@
+{
+  "dataObjectDefinitionKey": "md-cle-request-retrocession-reason",
+  "masterData": [
+    {
+      "retrocessionReason": "Payer bank data",
+      "retrocessionReasonId": "payerBankData",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Datos banco pagador"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Data released",
+      "retrocessionReasonId": "dataReleased",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Datos liberados"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Amount/currency",
+      "retrocessionReasonId": "amountCurrency",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Importe/divisa"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Payment method/Date",
+      "retrocessionReasonId": "paymentMethodDate",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Forma de pago/Fecha"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Fees/expenses",
+      "retrocessionReasonId": "feesExpenses",
+      "sortOrder": 5,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Comisiones/gastos"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Document counting",
+      "retrocessionReasonId": "documentCounting",
+      "sortOrder": 6,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Conteo de documentos"
+        }
+      }
+    },
+    {
+      "retrocessionReason": "Reference",
+      "retrocessionReasonId": "reference",
+      "sortOrder": 7,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Referencia"
+        }
+      }
+    },    
+    {
+      "retrocessionReason": "Others",
+      "retrocessionReasonId": "others",
+      "sortOrder": 8,
+      "translations": {
+        "es_es": {
+          "retrocessionReason": "Otros"
+        }
+      }
+    }
+  ]
+}

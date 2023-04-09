@@ -1,0 +1,273 @@
+{
+  "dataObjectDefinitionKey": "md-resolution-group",
+  "overwrite": true,
+  "masterData": [
+    {
+      "product": "CLE",
+      "event": "REQUEST",
+      "typology": "BOI",
+      "resolutionGroup": "CLE_REQUEST_BOI_01",
+      "tasks": "Review, Cancel, Defer, Manage, Release",
+      "sortOrder": 100,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLE_REQUEST_BOI_01",
+          "tasks": "Revisar, Anular, Diferir, Gestionar, Liberar"
+        }
+      }
+    },
+    {
+      "product": "CLE",
+      "event": "REQUEST",
+      "typology": "BOI",
+      "resolutionGroup": "CLE_REQUEST_BOI_02",
+      "tasks": "Refine request",
+      "sortOrder": 101,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLE_REQUEST_BOI_02",
+          "tasks": "Refinar solicitud"
+        }
+      }
+    },
+    {
+      "product": "CLE",
+      "event": "REQUEST",
+      "typology": "FC",
+      "resolutionGroup": "CLE_REQUEST_FC_01",
+      "tasks": "Sanction AML 1A",
+      "sortOrder": 102,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLE_REQUEST_FC_01",
+          "tasks": "Sancionar AML 1A"
+        }
+      }
+    },
+    {
+      "product": "CLE",
+      "event": "REQUEST",
+      "typology": "FC",
+      "resolutionGroup": "CLE_REQUEST_FC_02",
+      "tasks": "Sanction AML 1B, Sanction AML 2",
+      "sortOrder": 103,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLE_REQUEST_FC_02",
+          "tasks": "Sancionar AML 1B, Sancionar AML 2"
+        }
+      }
+    },
+    {
+      "product": "CLE",
+      "event": "MODIFICATION",
+      "typology": "BOI",
+      "resolutionGroup": "CLE_MODIFICATION_BOI_01",
+      "tasks": "Review, Cancel, Defer, Manage, Release",
+      "sortOrder": 200,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLE_MODIFICATION_BOI_01",
+          "tasks": "Revisar, Anular, Diferir, Gestionar, Liberar"
+        }
+      }
+    },
+    {
+      "product": "CLE",
+      "event": "MODIFICATION",
+      "typology": "BOI",
+      "resolutionGroup": "CLE_MODIFICATION_BOI_02",
+      "tasks": "Refine modification",
+      "sortOrder": 201,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLE_MODIFICATION_BOI_02",
+          "tasks": "Refinar modificación"
+        }
+      }
+    },
+    {
+      "product": "CLE",
+      "event": "MODIFICATION",
+      "typology": "FC",
+      "resolutionGroup": "CLE_MODIFICATION_FC_01",
+      "tasks": "Sanction AML 1A",
+      "sortOrder": 202,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLE_MODIFICATION_FC_01",
+          "tasks": "Sancionar AML 1A"
+        }
+      }
+    },
+    {
+      "product": "CLE",
+      "event": "MODIFICATION",
+      "typology": "FC",
+      "resolutionGroup": "CLE_MODIFICATION_FC_02",
+      "tasks": "Sanction AML 1B, Sanction AML 2",
+      "sortOrder": 203,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLE_MODIFICATION_FC_02",
+          "tasks": "Sancionar AML 1B, Sancionar AML 2"
+        }
+      }
+    },
+    {
+      "product": "CLE",
+      "event": "ADVANCE",
+      "typology": "BOI",
+      "resolutionGroup": "CLE_ADVANCE_BOI_01",
+      "tasks": "Review, Cancel, Defer, Manage, Release",
+      "sortOrder": 300,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLE_ADVANCE_BOI_01",
+          "tasks": "Revisar, Anular, Diferir, Gestionar, Liberar"
+        }
+      }
+    },
+
+    {
+      "product": "CLE",
+      "event": "ADVANCE_MODIFICATION",
+      "typology": "BOI",
+      "resolutionGroup": "CLE_ADVANCE_MODIFICATION_BOI_01",
+      "tasks": "Review, Cancel, Defer, Manage, Release",
+      "sortOrder": 400,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLE_ADVANCE_MODIFICATION_BOI_01",
+          "tasks": "Revisar, Anular, Diferir, Gestionar, Liberar"
+        }
+      }
+    },
+    {
+      "product": "CLE",
+      "event": "ADVANCE_CANCELLATION",
+      "typology": "BOI",
+      "resolutionGroup": "CLE_ADVANCE_CANCELLATION_BOI_01",
+      "tasks": "Review, Cancel, Defer, Manage, Release",
+      "sortOrder": 500,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLE_ADVANCE_CANCELLATION_BOI_01",
+          "tasks": "Revisar, Anular, Diferir, Gestionar, Liberar"
+        }
+      }
+    },
+    {
+      "product": "CLE",
+      "event": "OTHER_OPERATIONS",
+      "typology": "BOI",
+      "resolutionGroup": "CLE_OTHER_OPERATIONS_BOI_01",
+      "tasks": "Review, Cancel, Defer, Manage, Release",
+      "sortOrder": 600,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLE_OTHER_OPERATIONS_BOI_01",
+          "tasks": "Revisar, Anular, Diferir, Gestionar, Liberar"
+        }
+      }
+    },
+    {
+      "product": "CLI",
+      "event": "REQUEST",
+      "typology": "BOI",
+      "resolutionGroup": "CLI_REQUEST_BOI_01",
+      "tasks": "Manage, Request for Information, Finalize",
+      "sortOrder": 700,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLI_REQUEST_BOI_01",
+          "tasks": "Gestionar, Solicitar Información, Finalizar"
+        }
+      }
+    },
+    {
+      "product": "CLI",
+      "event": "MODIFICATION",
+      "typology": "BOI",
+      "resolutionGroup": "CLI_MODIFICATION_BOI_01",
+      "tasks": "Manage, Request for Information, Finalize",
+      "sortOrder": 800,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLI_MODIFICATION_BOI_01",
+          "tasks": "Gestionar, Solicitar Información, Finalizar"
+        }
+      }
+    },
+    {
+      "product": "CLI",
+      "event": "PAYMENT",
+      "typology": "BOI",
+      "resolutionGroup": "CLI_PAYMENT_BOI_01",
+      "tasks": "Manage, Request for Information, Finalize",
+      "sortOrder": 900,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLI_PAYMENT_BOI_01",
+          "tasks": "Gestionar, Solicitar Información, Finalizar"
+        }
+      }
+    },
+    {
+      "product": "CLI",
+      "event": "FINANCING",
+      "typology": "BOI",
+      "resolutionGroup": "CLI_FINANCING_BOI_01",
+      "tasks": "Manage, Request for Information, Finalize",
+      "sortOrder": 1000,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLI_FINANCING_BOI_01",
+          "tasks": "Gestionar, Solicitar Información, Finalizar"
+        }
+      }
+    },
+    {
+      "product": "CLI",
+      "event": "FINANCING_MODIFICATION",
+      "typology": "BOI",
+      "resolutionGroup": "CLI_FINANCING_MODIFICATION_BOI_01",
+      "tasks": "Manage, Request for Information, Finalize",
+      "sortOrder": 1100,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLI_FINANCING_MODIFICATION_BOI_01",
+          "tasks": "Gestionar, Solicitar Información, Finalizar"
+        }
+      }
+    },
+    {
+      "product": "CLI",
+      "event": "FINANCING_CANCELLATION",
+      "typology": "BOI",
+      "resolutionGroup": "CLI_FINANCING_CANCELLATION_BOI_01",
+      "tasks": "Manage, Request for Information, Finalize",
+      "sortOrder": 1200,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLI_FINANCING_CANCELLATION_BOI_01",
+          "tasks": "Gestionar, Solicitar Información, Finalizar"
+        }
+      }
+    },
+    {
+      "product": "CLI",
+      "event": "OTHER_OPERATIONS",
+      "typology": "BOI",
+      "resolutionGroup": "CLI_OTHER_OPERATIONS_BOI_01",
+      "tasks": "Manage, Request for Information, Finalize",
+      "sortOrder": 1300,
+      "translations": {
+        "es_es": {
+          "resolutionGroup": "CLI_OTHER_OPERATIONS_BOI_01",
+          "tasks": "Gestionar, Solicitar Información, Finalizar"
+        }
+      }
+    }
+  ]
+}

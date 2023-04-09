@@ -1,0 +1,21 @@
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "var"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.textValueKeyword": "exact-text"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }

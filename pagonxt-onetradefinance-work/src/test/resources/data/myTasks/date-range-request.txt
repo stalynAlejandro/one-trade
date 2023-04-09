@@ -1,0 +1,173 @@
+{
+  "from": 0,
+  "size": 10,
+  "sort" : [
+    {
+      "variables.textValueKeyword" : {
+        "order" : "desc",
+        "nested": {
+          "path": "variables",
+          "filter": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "variables.name": "operationCode"
+                  }
+                },
+                {
+                  "term": {
+                    "variables.scopeHierarchyType": "root"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "bool": {
+            "must_not": [
+              {
+                "nested": {
+                  "path": "variables",
+                  "query": {
+                    "bool": {
+                      "must": [
+                        {
+                          "term": {
+                            "variables.name": "registrationCancelled"
+                          }
+                        },
+                        {
+                          "term": {
+                            "variables.scopeHierarchyType": "root"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+,        {
+          "bool": {
+            "must_not": {
+              "exists": {
+                "field": "endTime"
+              }
+            }
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "isExternalTask"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.textValueKeyword": "true"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "operationRequesterId"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.textValueKeyword": null
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "operationCreationDate"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.scopeHierarchyType": "root"
+                    }
+                  },
+                  {
+                    "range": {
+                      "variables.dateValue": {
+                        "gte": "20220719T000000.000+0200",
+                        "format": "basic_date_time"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+,        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "operationCreationDate"
+                    }
+                  },
+                  {
+                    "term": {
+                      "variables.scopeHierarchyType": "root"
+                    }
+                  },
+                  {
+                    "range": {
+                      "variables.dateValue": {
+                        "lte": "20220721T235959.999+0200",
+                        "format": "basic_date_time"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

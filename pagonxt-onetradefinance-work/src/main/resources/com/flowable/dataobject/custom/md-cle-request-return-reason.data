@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-request-return-reason",
+  "name": "Export Collection Request Return reason",
+  "description": "CLE Request Return reasons",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "return reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "returnReasonId",
+  "idField": "returnReasonId",
+  "nameField": "returnReason"
+}

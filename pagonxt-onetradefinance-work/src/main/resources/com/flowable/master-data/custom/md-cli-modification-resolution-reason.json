@@ -1,0 +1,81 @@
+{
+  "dataObjectDefinitionKey": "md-cli-modification-resolution-reason",
+  "masterData": [
+    {
+      "resolutionReason": "Approved",
+      "resolutionReasonId": "approved",
+      "resolutionType": "APPROVED",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "resolutionReason": "Aprobado"
+        }
+      }
+    },
+    {
+      "resolutionReason": "Rejected",
+      "resolutionReasonId": "rejected",
+      "resolutionType": "REJECTED",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "resolutionReason": "Rechazado"
+        }
+      }
+    },
+    {
+      "resolutionReason": "Duplicated",
+      "resolutionReasonId": "duplicated",
+      "resolutionType": "CANCELED",
+      "sortOrder": 11,
+      "translations": {
+        "es_es": {
+          "resolutionReason": "Duplicado"
+        }
+      }
+    }, {
+      "resolutionReason": "Management does not correspond",
+      "resolutionReasonId": "managementDoesNotCorrespond",
+      "resolutionType": "CANCELED",
+      "sortOrder": 12,
+      "translations": {
+        "es_es": {
+          "resolutionReason": "Gestion no corresponde"
+        }
+      }
+    },
+    {
+      "resolutionReason": "Office instructions",
+      "resolutionReasonId": "officeInstructions",
+      "resolutionType": "CANCELED",
+      "sortOrder": 13,
+      "translations": {
+        "es_es": {
+          "resolutionReason": "Instrucciones de la oficina"
+        }
+      }
+    },
+    {
+      "resolutionReason": "AML",
+      "resolutionReasonId": "aml",
+      "resolutionType": "CANCELED",
+      "sortOrder": 14,
+      "translations": {
+        "es_es": {
+          "resolutionReason": "AML"
+        }
+      }
+    },
+    {
+      "resolutionReason": "Others",
+      "resolutionReasonId": "others",
+      "resolutionType": "CANCELED",
+      "sortOrder": 99,
+      "translations": {
+        "es_es": {
+          "resolutionReason": "Otros"
+        }
+      }
+    }
+  ]
+}

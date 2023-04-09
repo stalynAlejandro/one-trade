@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-other-operations-queries-retrocession-reason",
+  "name": "Export Collection Other Operations Queries Retrocession reason",
+  "description": "CLE Advance other operations queries retrocession reason",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "retrocession reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "retrocessionReasonId",
+  "idField": "retrocessionReasonId",
+  "nameField": "retrocessionReason"
+}

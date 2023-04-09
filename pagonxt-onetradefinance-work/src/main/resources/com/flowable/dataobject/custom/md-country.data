@@ -1,0 +1,22 @@
+{
+  "key": "md-country",
+  "name": "Country",
+  "description": "Countries.",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "country",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "alpha2Code",
+  "idField": "alpha2Code",
+  "nameField": "name",
+
+  "variables": {
+    "product": "string",
+    "event": "string",
+    "typology": "string"
+  }
+}

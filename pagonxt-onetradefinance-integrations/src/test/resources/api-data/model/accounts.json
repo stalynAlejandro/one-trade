@@ -1,0 +1,37 @@
+[
+  {
+    "accountId": "00491500051234567892",
+    "customerId": "BUC-1234567",
+    "iban": "ES6000491500051234567892",
+    "costCenter": "00490001",
+    "currency": "EUR"
+  },
+  {
+    "accountId": "00490001562016259685",
+    "customerId": "BUC-1234567",
+    "iban": "ES8500490001562016259685",
+    "costCenter": "00490001",
+    "currency": "EUR"
+  },
+  {
+    "accountId": "00490001582916259693",
+    "customerId": "BUC-1234567",
+    "iban": "ES4400490001582916259693",
+    "costCenter": "00490001",
+    "currency": "EUR"
+  },
+  {
+    "accountId": "00750014920606584546",
+    "customerId": "BUC-1234567",
+    "iban": "ES7900750014920606584546",
+    "costCenter": "00490001",
+    "currency": "EUR"
+  },
+  {
+    "accountId": "00490001552116259723",
+    "customerId": "BUC-1234567",
+    "iban": "ES3800490001552116259723",
+    "costCenter": "00490001",
+    "currency": "USD"
+  }
+]

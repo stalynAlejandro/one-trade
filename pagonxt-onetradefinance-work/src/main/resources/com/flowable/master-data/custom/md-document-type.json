@@ -1,0 +1,335 @@
+{
+  "dataObjectDefinitionKey": "md-document-type",
+  "masterData": [
+    {
+      "documentTypeId": "letter",
+      "documentType": "Letter",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "documentType": "Carta"
+        }
+      }
+    },
+    {
+      "documentTypeId": "commercialInvoice",
+      "documentType": "Commercial invoice",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "documentType": "Factura Comercial"
+        }
+      }
+    },
+    {
+      "documentTypeId": "packagingList",
+      "documentType": "Packaging List",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "documentType": "Lista de Empaquetado"
+        }
+      }
+    },
+    {
+      "documentTypeId": "weightList",
+      "documentType": "Weight List",
+      "sortOrder": 4,
+      "translations": {
+        "es_es": {
+          "documentType": "Lista de Pesos"
+        }
+      }
+    },
+    {
+      "documentTypeId": "quantityCertificate",
+      "documentType": "Quantity Certificate",
+      "sortOrder": 5,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado de cantidad"
+        }
+      }
+    },
+    {
+      "documentTypeId": "seaShippingDocument",
+      "documentType": "Sea shipping document",
+      "sortOrder": 6,
+      "translations": {
+        "es_es": {
+          "documentType": "Doc. de embarque marítimo"
+        }
+      }
+    },
+    {
+      "documentTypeId": "airBoardingDocument",
+      "documentType": "Air boarding document",
+      "sortOrder": 7,
+      "translations": {
+        "es_es": {
+          "documentType": "Doc. de embarque aéreo"
+        }
+      }
+    },
+    {
+      "documentTypeId": "roadShippingDocument",
+      "documentType": "Road shipping document",
+      "sortOrder": 8,
+      "translations": {
+        "es_es": {
+          "documentType": "Doc. de embarque por carretera"
+        }
+      }
+    },
+    {
+      "documentTypeId": "freightForwarderReceipt",
+      "documentType": "Freight forwarder's receipt",
+      "sortOrder": 9,
+      "translations": {
+        "es_es": {
+          "documentType": "Recibo de carga del transitario"
+        }
+      }
+    },
+    {
+      "documentTypeId": "cargoReceipt",
+      "documentType": "Cargo Rec0eipt",
+      "sortOrder": 10,
+      "translations": {
+        "es_es": {
+          "documentType": "Recibo de Carga"
+        }
+      }
+    },
+    {
+      "documentTypeId": "carrierCertificate",
+      "documentType": "Carrier's Certificate",
+      "sortOrder": 11,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado del Transportista"
+        }
+      }
+    },
+    {
+      "documentTypeId": "deliveryNote",
+      "documentType": "Delivery Note",
+      "sortOrder": 12,
+      "translations": {
+        "es_es": {
+          "documentType": "Nota de Entrega/ Albarán"
+        }
+      }
+    },
+    {
+      "documentTypeId": "certificateInsurancePolicy",
+      "documentType": "Certificate / Insurance Policy",
+      "sortOrder": 13,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado/ Póliza de Seguro"
+        }
+      }
+    },
+    {
+      "documentTypeId": "certificateOfOrigin",
+      "documentType": "Certificate of Origin",
+      "sortOrder": 14,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado de Origen"
+        }
+      }
+    },
+    {
+      "documentTypeId": "certificateOfOriginFormA",
+      "documentType": "Certificate of Origin Form A",
+      "sortOrder": 15,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado de Origen Formulario A"
+        }
+      }
+    },
+    {
+      "documentTypeId": "eur1",
+      "documentType": "EUR 1",
+      "sortOrder": 16,
+      "translations": {
+        "es_es": {
+          "documentType": "EUR 1"
+        }
+      }
+    },
+    {
+      "documentTypeId": "atr",
+      "documentType": "ATR",
+      "sortOrder": 17,
+      "translations": {
+        "es_es": {
+          "documentType": "ATR"
+        }
+      }
+    },
+    {
+      "documentTypeId": "sanitaryCertificate",
+      "documentType": "Sanitary Certificate",
+      "sortOrder": 18,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado Sanitario"
+        }
+      }
+    },
+    {
+      "documentTypeId": "catchCertificate",
+      "documentType": "Catch Certificate",
+      "sortOrder": 19,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado de Captura"
+        }
+      }
+    },
+    {
+      "documentTypeId": "phytosanitaryCertificate",
+      "documentType": "Phytosanitary Certificate",
+      "sortOrder": 20,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado Fitosanitario"
+        }
+      }
+    },
+    {
+      "documentTypeId": "analysisCertificate",
+      "documentType": "Analysis Certificate",
+      "sortOrder": 21,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado de Análisis"
+        }
+      }
+    },
+    {
+      "documentTypeId": "certificateOfInspection",
+      "documentType": "Certificate of Inspection",
+      "sortOrder": 22,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado de Inspección"
+        }
+      }
+    },
+    {
+      "documentTypeId": "qualityCertificate",
+      "documentType": "Quality certificate",
+      "sortOrder": 23,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado de Calidad"
+        }
+      }
+    },
+    {
+      "documentTypeId": "fumigationCertificate",
+      "documentType": "Fumigation certificate",
+      "sortOrder": 24,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado de Fumigación"
+        }
+      }
+    },
+    {
+      "documentTypeId": "beneficiaryCertificate",
+      "documentType": "Beneficiary Certificate",
+      "sortOrder": 25,
+      "translations": {
+        "es_es": {
+          "documentType": "Certificado del Beneficiario"
+        }
+      }
+    },
+    {
+      "documentTypeId": "shipmentNotice",
+      "documentType": "Shipment Notice",
+      "sortOrder": 26,
+      "translations": {
+        "es_es": {
+          "documentType": "Aviso de Embarque"
+        }
+      }
+    },
+    {
+      "documentTypeId": "millsTest",
+      "documentType": "Mills Test",
+      "sortOrder": 27,
+      "translations": {
+        "es_es": {
+          "documentType": "Mills Test"
+        }
+      }
+    },
+    {
+      "documentTypeId": "courierReceipt",
+      "documentType": "Courier receipt",
+      "sortOrder": 28,
+      "translations": {
+        "es_es": {
+          "documentType": "Recibo de mensajería"
+        }
+      }
+    },
+    {
+      "documentTypeId": "mail",
+      "documentType": "Mail",
+      "sortOrder": 29,
+      "translations": {
+        "es_es": {
+          "documentType": "Correo"
+        }
+      }
+    },
+    {
+      "documentTypeId": "fax",
+      "documentType": "Fax",
+      "sortOrder": 30,
+      "translations": {
+        "es_es": {
+          "documentType": "Fax"
+        }
+      }
+    },
+    {
+      "documentTypeId": "faxReport",
+      "documentType": "Fax Report",
+      "sortOrder": 31,
+      "translations": {
+        "es_es": {
+          "documentType": "Reporte de Fax"
+        }
+      }
+    },
+    {
+      "documentTypeId": "otherCertificates",
+      "documentType": "Other certificates",
+      "sortOrder": 32,
+      "translations": {
+        "es_es": {
+          "documentType": "Otros certificados"
+        }
+      }
+    },
+    {
+      "documentTypeId": "priceChart",
+      "documentType": "Price Chart",
+      "sortOrder": 33,
+      "translations": {
+        "es_es": {
+          "documentType": "Carta de Precios"
+        }
+      }
+    }
+  ]
+}

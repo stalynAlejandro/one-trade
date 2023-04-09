@@ -1,0 +1,35 @@
+{
+  "dataObjectDefinitionKey": "md-pgn-common-deferral-reason",
+  "masterData": [
+    {
+      "deferralReason": "Pending correspondent",
+      "deferralReasonId": "pendingCorrespondent",
+      "sortOrder": 1,
+      "translations": {
+        "es_es": {
+          "deferralReason": "Pendiente corresponsal"
+        }
+      }
+    },
+    {
+      "deferralReason": "Pending other teams",
+      "deferralReasonId": "pendingOtherTeams",
+      "sortOrder": 2,
+      "translations": {
+        "es_es": {
+          "deferralReason": "Pendiente de otros equipos"
+        }
+      }
+    },
+    {
+      "deferralReason": "Pending execution date",
+      "deferralReasonId": "pendingExecutionDate",
+      "sortOrder": 3,
+      "translations": {
+        "es_es": {
+          "deferralReason": "Pendiente fecha ejecución"
+        }
+      }
+    }    
+  ]
+}

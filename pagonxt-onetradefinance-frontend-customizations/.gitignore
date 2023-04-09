@@ -1,0 +1,10 @@
+#output of frontend build
+/src/main/resources/public/js/flowable-forms-custom/
+
+src/main/resources/static/ext/custom*
+
+### MAVEN-DOWNLOADED NODE ###
+/src/main/frontend/node/
+
+### YARN ERROR LOG FILE ###
+/src/main/frontend/yarn-error.log

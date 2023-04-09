@@ -1,0 +1,18 @@
+[
+  {
+    "customerId": "001",
+    "name": "Coca Cola S.L.",
+    "taxId": "B1234567",
+    "office": "1234",
+    "personNumber": "BUC-1234567",
+    "segment": "SME"
+  },
+  {
+    "customerId": "002",
+    "name": "Coca Cola Spain",
+    "taxId": "c1234568",
+    "office": "1234",
+    "personNumber": "BUC-1234568",
+    "segment": "SME"
+  }
+]

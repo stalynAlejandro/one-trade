@@ -1,0 +1,600 @@
+{
+  "name": "Pagonxt strict security policy",
+  "key": "pagonxt-strict-security-policy",
+  "type": "security",
+  "validateReadPermissionInParent": true,
+  "validateWritePermissionInParent": false,
+  "validateDeletePermissionInParent": false,
+  "permissionMappings": {
+    "case.view": {
+      "label": "View case instance",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "case.identitylink.view": {
+      "label": "View case instance identity link",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "case.identitylink.create": {
+      "label": "Create case instance identity link",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "case.identitylink.edit": {
+      "label": "Edit case instance identity link",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "case.identitylink.delete": {
+      "label": "Delete case instance identity link",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "case.document.view": {
+      "label": "View case instance document",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "case.document.create": {
+      "label": "Create case instance document",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "case.document.edit": {
+      "label": "Edit case instance document",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "case.document.delete": {
+      "label": "Delete case instance document",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "case.comment.view": {
+      "label": "View case instance comment",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "case.comment.create": {
+      "label": "Create case instance comment",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "case.comment.edit": {
+      "label": "Edit case instance comment",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "case.comment.delete": {
+      "label": "Delete case instance comment",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "case.audittrail.view": {
+      "label": "View case instance audittrail",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "case.sub-items.view": {
+      "label": "View case instance sub items",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "case.history.view": {
+      "label": "View case instance history",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "case.edit": {
+      "label": "Edit case instance",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "case.delete": {
+      "label": "Delete case instance",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "case.change-assignee": {
+      "label": "Change case assignee",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "process.view": {
+      "label": "View process instance",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "process.audittrail.view": {
+      "label": "View process instance audittrail",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "process.sub-items.view": {
+      "label": "View process instance sub items",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "process.history.view": {
+      "label": "View process instance history",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "process.edit": {
+      "label": "Edit process instance",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "process.delete": {
+      "label": "Delete process instance",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "process.change-assignee": {
+      "label": "Change process assignee",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "process.identitylink.view": {
+      "label": "View process instance identity link",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "process.identitylink.create": {
+      "label": "Create process instance identity link",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "process.identitylink.edit": {
+      "label": "Edit process instance identity link",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "process.identitylink.delete": {
+      "label": "Delete process instance identity link",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "process.document.view": {
+      "label": "View process instance document",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "process.document.create": {
+      "label": "Create process instance document",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "process.document.edit": {
+      "label": "Edit process instance document",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "process.document.delete": {
+      "label": "Delete process instance document",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "process.comment.view": {
+      "label": "View process instance comment",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "process.comment.create": {
+      "label": "Create process instance comment",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "process.comment.edit": {
+      "label": "Edit process instance comment",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "process.comment.delete": {
+      "label": "Delete process instance comment",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.view": {
+      "label": "View task instance",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "task.edit": {
+      "label": "Edit task instance",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "task.delete": {
+      "label": "Delete task instance",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.change-assignee": {
+      "label": "Change task assignee",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.claim": {
+      "label": "Claim an unassigned task",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": true,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.complete": {
+      "label": "Complete a task",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.name.edit": {
+      "label": "Edit task name",
+      "permissionValues": {
+        "owner": false,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.propagate-to-parent": {
+      "label": "Propagate the identity links to the parent",
+      "permissionValues": {
+        "owner": false,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.propagate-to-parent-on-complete-task": {
+      "label": "Propagate the authenticated user to the parent on complete task",
+      "permissionValues": {
+        "owner": false,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.identitylink.view": {
+      "label": "View task identity link",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "task.identitylink.create": {
+      "label": "Create task identity link",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "task.identitylink.edit": {
+      "label": "Edit task identity link",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.identitylink.delete": {
+      "label": "Delete task identity link",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.document.view": {
+      "label": "View task document",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "task.document.create": {
+      "label": "Create task document",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "task.document.edit": {
+      "label": "Edit task document",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.document.delete": {
+      "label": "Delete task document",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.comment.view": {
+      "label": "View task comment",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": true,
+        "participant": true,
+        "watcher": true
+      }
+    },
+    "task.comment.create": {
+      "label": "Create task comment",
+      "permissionValues": {
+        "owner": true,
+        "assignee": true,
+        "candidate": false,
+        "participant": true,
+        "watcher": false
+      }
+    },
+    "task.comment.edit": {
+      "label": "Edit task comment",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    },
+    "task.comment.delete": {
+      "label": "Delete task comment",
+      "permissionValues": {
+        "owner": true,
+        "assignee": false,
+        "candidate": false,
+        "participant": false,
+        "watcher": false
+      }
+    }
+  }
+}

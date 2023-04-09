@@ -1,0 +1,16 @@
+{
+  "key": "md-resolution-group-type",
+  "name": "Resolution group type",
+  "description": "Type of resolution group in Santanter. In some screens they call this 'tipology'. In the bpmn models of the clients, they are the lanes",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "permissions",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "resolutionGroupTypeId",
+  "idField": "resolutionGroupTypeId",
+  "nameField": "resolutionGroupType"
+}

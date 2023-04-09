@@ -1,0 +1,16 @@
+{
+  "key": "md-cle-advance-modification-cancel-reason",
+  "name": "Export Collection Advance Modification Cancel reason",
+  "description": "CLE Advance Modification cancel reasons",
+
+  "dataObjectType": "masterData",
+  "type": "internal",
+  "subType": "cancel reason",
+
+  "sourceId": "JSON",
+  "supportsNameFiltering": true,
+
+  "keyField": "cancelReasonId",
+  "idField": "cancelReasonId",
+  "nameField": "cancelReason"
+}

@@ -1,0 +1,22 @@
+{
+  "code" : "code exportCollection",
+  "customer": {
+    "customerId": "customerId1",
+    "name": "Coca Cola S.L.",
+    "taxId": "B1234567",
+    "office": 2345,
+    "personNumber": "BUC-1234567",
+    "segment": "SME",
+    "email": "mock email"
+  },
+  "creationDate" : 1653927293741,
+  "approvalDate" : 1653927293741,
+  "contractReference": "ref1",
+  "amount": 123.45,
+  "currency": "EUR",
+  "nominalAccount": {
+    "accountId": "account-id-1",
+    "iban": "PT50 0002 0123 5678 9015 1",
+    "currency": "EUR"
+  }
+}

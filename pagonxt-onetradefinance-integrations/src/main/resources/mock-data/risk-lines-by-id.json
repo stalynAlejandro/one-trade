@@ -1,0 +1,22 @@
+[
+  {
+    "riskLineId": "004910010809809889093434312312",
+    "customerId": "J000067890",
+    "product": "656601",
+    "lineAmount": {
+      "amount": 10000000.12345,
+      "currency": "EUR"
+    },
+    "availableAmount": {
+      "amount": 9937828.12345,
+      "currency": "EUR"
+    },
+    "usedAmount": {
+      "amount": 62171.12345,
+      "currency": "EUR"
+    },
+    "openingDate": "2019-01-01",
+    "maturityDate": "2019-12-01",
+    "riskLineStatus": "active"
+  }
+]
